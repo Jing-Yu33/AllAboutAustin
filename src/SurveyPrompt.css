@@ -1,0 +1,10 @@
+.surveyPrompt {
+    height: 100vh;
+    margin-bottom: 0;
+    margin-top: 0;
+    background-color: darkblue;
+    color: #C97D0F;
+    font-size: 48px;
+    text-align: center;
+    font-family: Laksaman;
+}

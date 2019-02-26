@@ -1,0 +1,15 @@
+.basicControls {
+    min-height: 48px;
+    font-family: Laksaman;
+    color: #C97D0F;
+    font-size: 24px;
+    text-align: right;
+    position: absolute;
+    right: 25px;
+    background-color: #4F76B8;
+}
+
+a {
+    color: #C97D0F;
+    text-decoration: none;
+}
