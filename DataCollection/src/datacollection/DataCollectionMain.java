@@ -1,5 +1,7 @@
 package datacollection;
 
+import java.io.IOException;
+
 /**
  * Head of the data collection program. This calls all other classes.
  */
@@ -7,8 +9,15 @@ package datacollection;
 public class DataCollectionMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		demoSodaCollector();
 	}
 
+	private static void demoSodaCollector() {
+		SodaCollector demo = new SodaCollector();
+		try {
+			demo.getNewData();
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		}
+	}
 }
