@@ -32,7 +32,7 @@ class GithubInfo extends React.Component {
                 <div className="row">
                     <GithubUser name="John" img="https://source.unsplash.com/150x150" desc="blahblahblah" info={this.state.statistics.Iucundus}/>
                     <GithubUser name="Zach" img="https://source.unsplash.com/150x150" desc="blahblahblah" info={this.state.statistics.zdwempe}/>
-                    <GithubUser name="Yixing" img="https://source.unsplash.com/150x150" desc="blahblahblah" info={this.state.statistics.zdwempe}/>
+                    <GithubUser name="Yixing" img="https://source.unsplash.com/150x150" desc="blahblahblah" info={this.state.statistics.AlienEdith}/>
                     <GithubUser name="Canyon" img="https://source.unsplash.com/150x150" desc="blahblahblah" info={this.state.statistics.zdwempe}/>
                     <GithubUser name="Justin" img="https://source.unsplash.com/150x150" desc="blahblahblah" info={this.state.statistics.Iucundus}/>
                     <GithubUser name="Grayson" img="https://source.unsplash.com/150x150" desc="blahblahblah" info={this.state.statistics.Iucundus}/>
