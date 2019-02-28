@@ -10,15 +10,24 @@ class GithubInfo extends React.Component {
         const response = 
                     await axios.get("https://api.github.com/repos/Iucundus/AustinData/stats/contributors", {});
         
-        var mapStat = {};
-        response.data.map((user) => {
-            var username = user.author.login;
-            mapStat[username] = {
+        var mapRes = response.data.map((user) => {
+            return({
+                username: user.author.login,
                 url: user.author.html_url,
                 commits: user.total
-                }
-            });
-            this.setState({statistics: mapStat});
+            })
+        });
+        
+        var mapStat = {};
+        for(var i=0; i<mapRes.length; i++){
+            var user = mapRes[i];
+            mapStat[user.username] = {
+                url: user.url,
+                commits: user.commits
+            }
+        }
+
+        this.setState({statistics: mapStat});
     };
 
 
