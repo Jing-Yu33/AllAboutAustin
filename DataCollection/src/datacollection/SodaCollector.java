@@ -1,6 +1,11 @@
 package datacollection;
 
 import java.io.IOException;
+import java.util.HashMap;
+
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.ws.rs.core.Response;
 import com.socrata.api.*;
@@ -39,9 +44,50 @@ public class SodaCollector implements Collector {
 		}
 
 		String payload = response.readEntity(String.class);
-		System.out.println(payload);
+		JSONArray jsonPayload;
+		try {
+			jsonPayload = (JSONArray) (new JSONParser()).parse(payload);
+		} catch (ParseException e) {
+			throw new IOException(e.toString());
+		}
 		
-		return null;
+		DataSet ds = new DataSet();
+		
+		for (Object o : jsonPayload.toArray()) {
+			JSONObject jo = ((JSONObject) o);
+			System.out.println(jo.toJSONString());
+			int zipcode = getZipCode(jo.get("int_id"));
+			HashMap<String, Double> data = new HashMap<String, Double>();
+			for (Object key : jo.keySet())
+				data.put((String)key, getRankedValue(key, jo.get(key)));
+			ds.addZipcodeData(zipcode, data);
+		}
+		
+		return ds;
+	}
+	
+	/**
+	 * Convert a field into a zipcode. Possibly look up other databases.
+	 * @param field
+	 * @return
+	 */
+	private Integer getZipCode(Object field) {
+		//TODO: overwrite this placeholder code
+		return Integer.parseInt((String) field);
 	}
 
+	/**
+	 * Return a 0.0-10.0 float value ranking for a given key's value in the original JSON data
+	 * @param set
+	 * @param key
+	 * @return
+	 */
+	private double getRankedValue(Object key, Object value) {
+		//TODO: Make an actual ranking, dependent on which key this is
+		try {
+			return Double.parseDouble((String) value);
+		} catch (Exception e) {
+			return 5.0;
+		}
+	}
 }

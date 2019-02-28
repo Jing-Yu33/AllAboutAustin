@@ -15,7 +15,7 @@ public class DataCollectionMain {
 	private static void demoSodaCollector() {
 		SodaCollector demo = new SodaCollector();
 		try {
-			demo.getNewData();
+			demo.getNewData().printDataSet();;
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
