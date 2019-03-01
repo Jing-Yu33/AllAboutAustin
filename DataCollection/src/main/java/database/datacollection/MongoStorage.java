@@ -22,6 +22,8 @@ public class MongoStorage {
 	static Morphia morphia;
 	static Datastore datastore;
 	
+	enum DataTypes {TRAFFIC_DATA, EDUCATION_DATA, FOOD_DATA};
+	
 	public static void setUp() {
 		
 		// Connect to Mongo DB
@@ -41,7 +43,7 @@ public class MongoStorage {
 	
 	
 	// Recieve List<DataSet> from Collectors	
-	public static void saveData(List<DataSet> list) {
+	public static void saveData(DataSet list, DataTypes datatype) {
 //		Zipcode zipcode = new Zipcode("78731", 5.2, 6.3, 8.5);
 //		datastore.save(zipcode);
 //		zipcode = new Zipcode("78705", 10.3, 7.8, 4.9);

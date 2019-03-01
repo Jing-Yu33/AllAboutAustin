@@ -9,7 +9,8 @@ import java.io.IOException;
 public class DataCollectionMain {
 
 	public static void main(String[] args) {
-		//demoSodaCollector();
+		MongoStorage.setUp();
+		demoSodaCollector();
 		//demoZomatoCollector();
 		//demoSchoolCollector();
 	}
@@ -17,7 +18,9 @@ public class DataCollectionMain {
 	private static void demoSodaCollector() {
 		SodaCollector demo = new SodaCollector();
 		try {
-			demo.getNewData().printDataSet();
+			DataSet ds = demo.getNewData();
+			ds.printDataSet();
+			MongoStorage.saveData(ds, MongoStorage.DataTypes.TRAFFIC_DATA);
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
@@ -26,7 +29,9 @@ public class DataCollectionMain {
 	private static void demoZomatoCollector() {
 		ZomatoCollector demo = new ZomatoCollector();
 		try {
-			demo.getNewData().printDataSet();
+			DataSet ds = demo.getNewData();
+			ds.printDataSet();
+			MongoStorage.saveData(ds, MongoStorage.DataTypes.FOOD_DATA);
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
@@ -35,7 +40,9 @@ public class DataCollectionMain {
 	private static void demoSchoolCollector() {
 		SchoolCollector demo = new SchoolCollector();
 		try {
-			demo.getNewData().printDataSet();
+			DataSet ds = demo.getNewData();
+			ds.printDataSet();
+			MongoStorage.saveData(ds, MongoStorage.DataTypes.EDUCATION_DATA);
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
