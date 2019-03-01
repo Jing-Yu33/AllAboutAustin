@@ -5,7 +5,7 @@ import SortDropdown from '../searchAndSort/SortDropdown';
 import HeatMap from '../heatmap/HeatMap';
 import RankingList from '../rankingList/RankingList';
 
-class Food extends Component {
+class Traffic extends Component {
     state = ({
         term: ""
     })
@@ -34,7 +34,7 @@ class Food extends Component {
                 <div className="container">
                     <div>
                         <div style={{marginTop: '30px'}}>
-                            <h1>Food</h1>
+                            <h1>Traffic</h1>
                         </div>
                         <div className='container'>
                             <div className="row">
@@ -64,9 +64,10 @@ class Food extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>           
+
         );
     }
 }
 
-export default Food;
+export default Traffic;
