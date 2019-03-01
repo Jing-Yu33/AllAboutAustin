@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 
 public class DataSet {
-	HashMap <Integer, HashMap<String, Double>> zipData; //zipData maps zip codes (Integer) to key-value sets (HashMap<String, Float>). Each key-value set is the actual data.
+	public HashMap <Integer, HashMap<String, Double>> zipData; //zipData maps zip codes (Integer) to key-value sets (HashMap<String, Float>). Each key-value set is the actual data.
 
 	public DataSet() {
 		zipData = new HashMap<Integer, HashMap<String, Double>>();
@@ -20,7 +20,7 @@ public class DataSet {
 	public void deleteZipcodeData(Integer zipCode) {
 		zipData.remove(zipCode);
 	}
-	
+		
 	public void printDataSet() {
 		for (Integer n : zipData.keySet()) {
 			System.out.println(n.toString() + ": " + zipData.get(n).toString());
