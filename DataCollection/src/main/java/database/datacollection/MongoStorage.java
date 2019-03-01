@@ -28,7 +28,7 @@ public class MongoStorage {
 	public static void setUp() {
 		
 		// Connect to Mongo DB
-		MongoClientURI uri = new MongoClientURI("mongodb://wyx:wangyixing@personal-shard-00-00-fxnjy.mongodb.net:27017,personal-shard-00-01-fxnjy.mongodb.net:27017,personal-shard-00-02-fxnjy.mongodb.net:27017/AustinData?ssl=true&replicaSet=personal-shard-0&authSource=admin&retryWrites=true");
+		MongoClientURI uri = new MongoClientURI("mongodb://amber:austindata@personal-shard-00-00-fxnjy.mongodb.net:27017,personal-shard-00-01-fxnjy.mongodb.net:27017,personal-shard-00-02-fxnjy.mongodb.net:27017/AustinData?ssl=true&replicaSet=personal-shard-0&authSource=admin&retryWrites=true");
 		mongoClient = new MongoClient(uri);
 		
 		// Set up Morphia connect to database and collection
@@ -61,10 +61,9 @@ public class MongoStorage {
 		  case EDUCATION_DATA:{
 			  for(Integer zipcode: ds.zipData.keySet()) {
 					HashMap<String, Double> properties = ds.zipData.get(zipcode);
-					FoodData data = new SchoolData(zipcode.toString(), 
-												properties.get("aggregate_rating"));
-					
-					datastore.save(data);		
+					SchoolData data = new SchoolData(zipcode.toString(),
+													 properties.get("_2016_graduated"), properties.get("_2016_rate"), properties.get("_2016_class_size"));
+					datastore.save(data);								 		
 			   }
 			  break;
 		  }
