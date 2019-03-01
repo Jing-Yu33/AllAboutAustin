@@ -37,6 +37,10 @@ class Food extends Component {
                             <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
                         </div>
                         <div>
+                            <h1>Food</h1>
+                        </div>
+
+                        <div>
                             <SortDropdown name="category" options={category}/>
                         </div>
                         <div>

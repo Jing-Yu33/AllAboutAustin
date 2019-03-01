@@ -35,12 +35,12 @@ class GithubInfo extends React.Component {
     render() {
 
         var memberInfo = {
-            John: {name: "John Koelling", img:"https://source.unsplash.com/100x100", desc:"bio, major, responsibilities", unittests: 0},
-            Yixing: {name: "Yixing Wang", img:"https://source.unsplash.com/100x100", desc:"bio, major, responsibilities", unittests: 0},
-            Zach: {name: "Zach Wempe", img:"https://source.unsplash.com/100x100", desc:"bio, major, responsibilities", unittests: 0},
-            Canyon : {name: "Canyon Evenson", img:"https://source.unsplash.com/100x100", desc:"bio, major, responsibilities", unittests: 0},
-            Grayson: {name: "Grayson Watkins", img:"https://source.unsplash.com/100x100", desc:"bio, major, responsibilities", unittests: 0},
-            Justin : {name: "Justin DuPont", img:"https://source.unsplash.com/100x100", desc:"bio, major, responsibilities", unittests: 0},
+            John: {name: "John Koelling", img:"https://i.groupme.com/386x386.png.eb31e67ea3f341d380e5533ada8a8e2f", desc:"bio, major, responsibilities", unittests: 0},
+            Yixing: {name: "Yixing Wang", img:"https://i.groupme.com/1024x1023.jpeg.f149852036b94fc19f95c164aa24617d", desc:"bio, major, responsibilities", unittests: 0},
+            Zach: {name: "Zach Wempe", img:"https://i.groupme.com/1600x1200.jpeg.7bf9bdf02dde4972b0d110ae50b78c81", desc:"bio, major, responsibilities", unittests: 0},
+            Canyon : {name: "Canyon Evenson", img:"https://scontent.fftw1-1.fna.fbcdn.net/v/t1.0-9/21032517_1553099121380179_5886108116509517626_n.jpg?_nc_cat=102&_nc_ht=scontent.fftw1-1.fna&oh=21307b39088dd22e0d25ac1063485b17&oe=5D21447F", desc:"bio, major, responsibilities", unittests: 0},
+            Grayson: {name: "Grayson Watkins", img:"https://i.groupme.com/750x750.jpeg.eb60b11994674894a2d9bc0f8a20feb8", desc:"bio, major, responsibilities", unittests: 0},
+            Justin : {name: "Justin DuPont", img:"https://i.groupme.com/731x731.jpeg.7b6d5ab070554ed1b7c6d81d1bdb71fb", desc:"bio, major, responsibilities", unittests: 0},
         }
         console.log(this.state);
         return (

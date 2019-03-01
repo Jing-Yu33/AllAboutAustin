@@ -10,10 +10,17 @@ class WebsiteDesc extends Component {
         return(
             <div className="jumbotron">
                 <h1 className="display-4">All About Austin</h1>
-                <h3 className="display-6">Team Amber <a className="btn btn-success btn-sm" href="https://github.com/Iucundus/AustinData" role="button">Github Repo</a> </h3>
-                <p className="lead">Purpose in one sentence.</p>
+                <h3 className="display-6">Team Amber </h3>
+                <a className="btn btn-success btn-sm" href="https://github.com/Iucundus/AustinData" role="button">Github Repo</a> 
                 <hr className="my-4" />
-                <p>Detailed Purpose and Intended User</p>
+                <p className="lead">
+                    <strong>Goal: </strong>
+                </p>
+                <p className="lead">Give insight to Austinites and travelers alike in regards to food, education, and traffic</p>
+                <hr className="my-4" />
+                <p>
+                    Austin has been names by US News as the number one city to live in the United States for two years in a row.  With a diverse cultural environment, expanding business opportunity, and quirky charm, Austin has come into sights for companies, homeowners, and travelers alike.  All About Austin seeks to provide meaningful data to these users in the form of Food, Education, and Traffic by ranking areas and zip codes according to user preferences towards each of these metrics.
+                </p>
             </div>
         )
     }
