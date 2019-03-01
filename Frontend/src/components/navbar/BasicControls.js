@@ -13,10 +13,8 @@ class BasicControls extends Component {
                     <a className="nav-link" href="/about">About</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Profile</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">Login</a>
+                    <GoogleLogin onSuccess={responseGoogle} onFailure={responseGoogle} clientId={"280689795193-ubapinqcg16ah7vlskd1oimoisf82bsm.apps.googleusercontent.com"}/>
+                    {/* <a className="nav-link" href="#">Login</a> */}
                 </li>
                 {/* <li><GoogleLogin onSuccess={responseGoogle} onFailure={responseGoogle} clientId={"280689795193-ubapinqcg16ah7vlskd1oimoisf82bsm.apps.googleusercontent.com"}/></li> */}
             </ul>
