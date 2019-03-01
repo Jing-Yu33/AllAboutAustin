@@ -16,7 +16,8 @@ import com.socrata.model.soql.SoqlQuery;
 
 /**
  * Collects education data: high school graduation rates.
- * 
+ *
+ * If I make a change here can I commit
  */
 
 public class SchoolCollector implements Collector {
@@ -81,8 +82,8 @@ public class SchoolCollector implements Collector {
 
 	/**
 	 * Return a 0.0-10.0 float value ranking for a given key's value in the original JSON data
-	 * @param set
-	 * @param key
+	 * //@param set
+	 * //@param key
 	 * @return
 	 */
 	private double getRankedValue(Object key, Object value) {
