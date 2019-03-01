@@ -11,7 +11,7 @@ public class DataCollectionMain {
 	public static void main(String[] args) {
 		//demoSodaCollector();
 		//demoZomatoCollector();
-		demoSchoolCollector();
+		//demoSchoolCollector();
 	}
 
 	private static void demoSodaCollector() {
