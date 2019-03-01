@@ -54,7 +54,6 @@ public class SodaCollector implements Collector {
 		
 		for (Object o : jsonPayload.toArray()) {
 			JSONObject jo = ((JSONObject) o);
-			System.out.println(jo.toJSONString());
 			int zipcode = getZipCode(jo.get("int_id"));
 			HashMap<String, Double> data = new HashMap<String, Double>();
 			for (Object key : jo.keySet())
