@@ -4,9 +4,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Landing from './components/landing/Landing'
 import About from './components/about/About'
 import Survey from './components/survey/Survey'
+import Food from './components/food/Food'
 import './App.css';
-
-
 
 class App extends Component {
 
@@ -21,6 +20,9 @@ class App extends Component {
         </BrowserRouter>
         <BrowserRouter>
             <Route path="/survey" exact component={Survey} />
+        </BrowserRouter>
+        <BrowserRouter>
+            <Route path="/food" exact component={Food} />
         </BrowserRouter>
       </div>
     );
