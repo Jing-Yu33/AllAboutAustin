@@ -58,8 +58,11 @@ public class SchoolCollector implements Collector {
 			JSONObject jo = ((JSONObject) o);
 			int zipcode = getZipCode(jo.get("school"));
 			HashMap<String, Double> data = new HashMap<String, Double>();
-			for (Object key : jo.keySet())
-				data.put((String)key, getRankedValue(key, jo.get(key)));
+			for (Object key : jo.keySet()) {
+				if (((String) key).contains("2016")) {
+					data.put((String)key, getRankedValue(key, jo.get(key)));
+				}
+			}
 			ds.addZipcodeData(zipcode, data);
 		}
 		
