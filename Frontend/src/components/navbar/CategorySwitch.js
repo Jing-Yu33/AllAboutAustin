@@ -5,7 +5,7 @@ class CategorySwitch extends Component {
         return(
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Food</a>
+                    <a className="nav-link" href="/food">Food</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="#">Education</a>
