@@ -6,9 +6,8 @@ class RankingList extends Component {
     render() {
         return(
             <div className="jumbotron">
-                <h1>Should be a RankingList</h1>
+                <h1>Ranking List</h1>
             </div>
-
         )
   }
 }

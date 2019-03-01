@@ -33,25 +33,35 @@ class Food extends Component {
                 <TopBar />
                 <div className="container">
                     <div>
-                        <div>
-                            <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
-                        </div>
-                        <div>
+                        <div style={{marginTop: '30px'}}>
                             <h1>Food</h1>
                         </div>
-
-                        <div>
-                            <SortDropdown name="category" options={category}/>
-                        </div>
-                        <div>
-                            <SortDropdown name="order" options={order}/>
+                        <div className='container'>
+                            <div className="row">
+                                <div className="col-3">
+                                    <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+                                </div>
+                                <div className="col-5"></div>
+                                <div className="col-4">
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <SortDropdown name="Category" options={category}/>
+                                        </div>
+                                        <div className="col-6">
+                                            <SortDropdown name="Order" options={order}/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <HeatMap />
-                    </div>
-                    <div>
-                        <RankingList />
+                    <div className="row">
+                        <div className="col-lg-8">
+                            <HeatMap />
+                        </div>
+                        <div className="col-lg-4">
+                            <RankingList />
+                        </div>
                     </div>
                 </div>
             </div>
