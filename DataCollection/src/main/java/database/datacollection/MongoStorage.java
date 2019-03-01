@@ -41,11 +41,11 @@ public class MongoStorage {
 	
 	
 	// Recieve List<DataSet> from Collectors	
-	public static void saveData() {
-		Zipcode zipcode = new Zipcode("78731", 5.2, 6.3, 8.5);
-		datastore.save(zipcode);
-		zipcode = new Zipcode("78705", 10.3, 7.8, 4.9);
-		datastore.save(zipcode);
+	public static void saveData(List<DataSet> list) {
+//		Zipcode zipcode = new Zipcode("78731", 5.2, 6.3, 8.5);
+//		datastore.save(zipcode);
+//		zipcode = new Zipcode("78705", 10.3, 7.8, 4.9);
+//		datastore.save(zipcode);
 	}
 	
 	public static void updateData() {
@@ -60,9 +60,9 @@ public class MongoStorage {
 //		}
 //	}
 	
-	public static void main(String[] args) {
-		setUp();
-		saveData();
+//	public static void main(String[] args) {
+//		setUp();
+//		saveData();
 //		queryData();
-	}
+//	}
 }
