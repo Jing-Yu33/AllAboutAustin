@@ -5,6 +5,8 @@ import Landing from './components/landing/Landing'
 import About from './components/about/About'
 import Survey from './components/survey/Survey'
 import Food from './components/food/Food'
+import Education from './components/education/Education'
+import Traffic from './components/traffic/Traffic'
 import './App.css';
 
 class App extends Component {
@@ -23,6 +25,12 @@ class App extends Component {
         </BrowserRouter>
         <BrowserRouter>
             <Route path="/food" exact component={Food} />
+        </BrowserRouter>
+        <BrowserRouter>
+            <Route path="/education" exact component={Education} />
+        </BrowserRouter>
+        <BrowserRouter>
+            <Route path="/traffic" exact component={Traffic} />
         </BrowserRouter>
       </div>
     );
