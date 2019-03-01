@@ -10,7 +10,8 @@ public class DataCollectionMain {
 
 	public static void main(String[] args) {
 		//demoSodaCollector();
-		demoZomatoCollector();
+		//demoZomatoCollector();
+		demoSchoolCollector();
 	}
 
 	private static void demoSodaCollector() {
@@ -24,6 +25,15 @@ public class DataCollectionMain {
 	
 	private static void demoZomatoCollector() {
 		ZomatoCollector demo = new ZomatoCollector();
+		try {
+			demo.getNewData().printDataSet();
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		}
+	}
+
+	private static void demoSchoolCollector() {
+		SchoolCollector demo = new SchoolCollector();
 		try {
 			demo.getNewData().printDataSet();
 		} catch (IOException e) {
