@@ -38,11 +38,11 @@ class Food extends Component {
                         </div>
                         <div className='container'>
                             <div className="row">
-                                <div className="col-3">
+                                <div className="col-lg-3">
                                     <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
                                 </div>
-                                <div className="col-5"></div>
-                                <div className="col-4">
+                                <div className="col-lg-5"></div>
+                                <div className="col-lg-4">
                                     <div className="row">
                                         <div className="col-6">
                                             <SortDropdown name="Category" options={category}/>

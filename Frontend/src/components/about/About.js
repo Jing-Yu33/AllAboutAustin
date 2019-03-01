@@ -23,10 +23,10 @@ class About extends Component {
                         <GithubInfo />
                     </div>
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-md-4 my-sm-3">
                             <GithubStats />
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-8 my-sm-3">
                             <Datasource />
                         </div>
                     </div>
