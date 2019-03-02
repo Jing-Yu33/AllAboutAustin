@@ -12,15 +12,13 @@ class GithubInfo extends React.Component {
         cpe342:     {commits: 0, issues: 0},
         justindpnt: {commits: 0, issues: 0} 
     };
-    // https://source.unsplash.com/100x100
+    
     getGithubData = async () => {
         var members = new Array("Iucundus", "AlienEdith", "zdwempe", "Graysless", "cpe342", "justindpnt");
         for(var i in members){
-            console.log();
-            const username = members[i];
-            const commits =  await axios.get("https://api.github.com/repos/Iucundus/AustinData/commits?author="+members[i]);
-            const issues = await axios.get("https://api.github.com/repos/Iucundus/AustinData/issues?creator="+members[i]);
-            console.log(commits);
+            var username = members[i];
+            var commits =  await axios.get("https://api.github.com/repos/Iucundus/AustinData/commits?author="+members[i]);
+            var issues = await axios.get("https://api.github.com/repos/Iucundus/AustinData/issues?creator="+members[i]);
             this.setState({[username]: {
                 commits: commits.data.length,
                 issues: issues.data.length
@@ -42,7 +40,6 @@ class GithubInfo extends React.Component {
             Grayson: {name: "Grayson Watkins", img:"https://i.groupme.com/750x750.jpeg.eb60b11994674894a2d9bc0f8a20feb8", desc:"bio, major, responsibilities", unittests: 0},
             Justin : {name: "Justin DuPont", img:"https://i.groupme.com/731x731.jpeg.7b6d5ab070554ed1b7c6d81d1bdb71fb", desc:"test", unittests: 0},
         }
-        console.log(this.state);
         return (
             <div className="githubInfo">
                 <div className="row">
