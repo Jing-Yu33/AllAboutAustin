@@ -9,7 +9,7 @@ class Stack extends React.Component {
                 <div className="row">
                     <div className="col-lg-6 my-sm-3">
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item active">FrontEnd</li>
+                            <li className="list-group-item active">Front End</li>
                             <li className="list-group-item"><b>React</b>: JavaScript Library for design UI</li>
                             <li className="list-group-item"><b>Bootstrap</b>: CSS Library for styling</li>
                             <li className="list-group-item"><b>Mocha</b>: A testing tool for JavaScript</li>
