@@ -1,5 +1,6 @@
 package database.datacollection;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mongodb.morphia.Datastore;
@@ -27,27 +28,60 @@ public class MongoStorage {
 	public static void setUp() {
 		
 		// Connect to Mongo DB
-		MongoClientURI uri = new MongoClientURI("mongodb://wyx:wangyixing@personal-shard-00-00-fxnjy.mongodb.net:27017,personal-shard-00-01-fxnjy.mongodb.net:27017,personal-shard-00-02-fxnjy.mongodb.net:27017/test?ssl=true&replicaSet=personal-shard-0&authSource=admin&retryWrites=true");
+		MongoClientURI uri = new MongoClientURI("mongodb://amber:austindata@personal-shard-00-00-fxnjy.mongodb.net:27017,personal-shard-00-01-fxnjy.mongodb.net:27017,personal-shard-00-02-fxnjy.mongodb.net:27017/AustinData?ssl=true&replicaSet=personal-shard-0&authSource=admin&retryWrites=true");
 		mongoClient = new MongoClient(uri);
 		
 		// Set up Morphia connect to database and collection
 		morphia = new Morphia();
-		morphia.mapPackage("mongoDB");
-		datastore = morphia.createDatastore(mongoClient, "testDB");
+		morphia.mapPackage("database.datacollection");
+		datastore = morphia.createDatastore(mongoClient, "AustinData");
 		datastore.ensureIndexes();
-		
-		// Get Particular Database and Collections
-		//db = mongoClient.getDatabase("testDB");
-		//MongoCollection<Document> collection = db.getCollection("zipcode");
 	}
 	
 	
 	// Recieve List<DataSet> from Collectors	
-	public static void saveData(DataSet list, DataTypes datatype) {
-//		Zipcode zipcode = new Zipcode("78731", 5.2, 6.3, 8.5);
-//		datastore.save(zipcode);
-//		zipcode = new Zipcode("78705", 10.3, 7.8, 4.9);
-//		datastore.save(zipcode);
+	public static void saveData(DataSet ds, DataTypes datatype) {
+		
+		switch(datatype) {
+			case TRAFFIC_DATA:{
+				for(Integer zipcode: ds.zipData.keySet()) {
+					HashMap<String, Double> properties = ds.zipData.get(zipcode);
+					TrafficData data = new TrafficData(zipcode.toString(), 
+													   properties.get("detname"), properties.get("intname"), properties.get("occupancy"), properties.get("year"),
+													   properties.get("speed"), properties.get("minute"), properties.get("volume"), properties.get("hour"),
+													   properties.get("month"), properties.get("timebin"), properties.get("int_id"), properties.get("row_id"),
+													   properties.get("day"), properties.get("detid"), properties.get("curdatetime"), properties.get("day_of_week"),
+													   properties.get("direction"));
+					
+					datastore.save(data);		
+				}
+				break;
+			}
+		    
+		  case EDUCATION_DATA:{
+			  for(Integer zipcode: ds.zipData.keySet()) {
+					HashMap<String, Double> properties = ds.zipData.get(zipcode);
+					SchoolData data = new SchoolData(zipcode.toString(),
+													 properties.get("_2016_graduated"), properties.get("_2016_rate"), properties.get("_2016_class_size"));
+					datastore.save(data);								 		
+			   }
+			  break;
+		  }
+		    // code block
+		    
+		  case FOOD_DATA:{
+			  for(Integer zipcode: ds.zipData.keySet()) {
+					HashMap<String, Double> properties = ds.zipData.get(zipcode);
+					FoodData data = new FoodData(zipcode.toString(), 
+												properties.get("aggregate_rating"));
+					
+					datastore.save(data);		
+			   }
+		  }
+		    // code block
+		}
+
+		
 	}
 	
 	public static void updateData() {

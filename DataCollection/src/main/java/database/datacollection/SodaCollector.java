@@ -56,8 +56,9 @@ public class SodaCollector implements Collector {
 			JSONObject jo = ((JSONObject) o);
 			int zipcode = getZipCode(jo.get("int_id"));
 			HashMap<String, Double> data = new HashMap<String, Double>();
-			for (Object key : jo.keySet())
+			for (Object key : jo.keySet()) {
 				data.put((String)key, getRankedValue(key, jo.get(key)));
+			}
 			ds.addZipcodeData(zipcode, data);
 		}
 		
