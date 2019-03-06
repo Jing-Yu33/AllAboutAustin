@@ -7,7 +7,7 @@ class Stack extends React.Component {
             <div className="jumbotron">
                 <h3 className="display-4">Tools</h3>
                 <div className="row">
-                    <div className="col-lg-6 my-sm-3">
+                    <div className="col-lg-6 my-3">
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item active">Front End</li>
                             <li className="list-group-item"><b>React</b>: JavaScript Library for design UI</li>
@@ -26,7 +26,7 @@ class Stack extends React.Component {
                         </ul>
                     </div>
 */}
-                    <div className="col-lg-6 my-sm-3">
+                    <div className="col-lg-6 my-3">
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item active">Back End / Database</li>
                             <li className="list-group-item"><b>MongoDB</b>: NoSQL Database</li>

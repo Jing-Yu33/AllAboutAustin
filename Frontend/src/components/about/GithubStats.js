@@ -8,10 +8,6 @@ class GithubStats extends React.Component {
         Unittests:  null
     }
 
-    getGithubData = async () => {
-
-    }
-
     getData = async () => {
         // var commits = await axios.get("https://api.github.com/repos/Iucundus/AustinData/commits");
         var members = new Array("Iucundus", "AlienEdith", "zdwempe", "Graysless", "cpe342", "justindpnt");
@@ -23,7 +19,7 @@ class GithubStats extends React.Component {
         }
         var issues = await axios.get("https://api.github.com/repos/Iucundus/AustinData/issues");
         this.setState({
-            commits:  commitsNum,
+            commits: commitsNum,
             issues:  issues.data.length,
             unittests:  0
         })
