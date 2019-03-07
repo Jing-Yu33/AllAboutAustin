@@ -10,7 +10,6 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        <TopBar className="topBar"/>
         <SurveyPrompt className="surveyPrompt"/>
       </div>
     );

@@ -14,25 +14,22 @@ class About extends Component {
     render() {
         return(
             <div>
-                <TopBar className="topBar"/>
-                <div className="container">
-                    <div id="website-desc">
-                        <WebsiteDesc />
+                <div id="website-desc">
+                    <WebsiteDesc />
+                </div>
+                <div id="GithubInfo">
+                    <GithubInfo />
+                </div>
+                <div className="row">
+                    <div className="col-md-4 my-3">
+                        <GithubStats />
                     </div>
-                    <div id="GithubInfo">
-                        <GithubInfo />
+                    <div className="col-md-8 my-3">
+                        <Datasource />
                     </div>
-                    <div className="row">
-                        <div className="col-md-4 my-3">
-                            <GithubStats />
-                        </div>
-                        <div className="col-md-8 my-3">
-                            <Datasource />
-                        </div>
-                    </div>
-                    <div id="stack">
+                </div>
+                <div id="stack">
                         <Stack />                   
-                    </div>
                 </div>
             </div>
         )

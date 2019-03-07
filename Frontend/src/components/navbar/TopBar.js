@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import CategorySwitch from "./CategorySwitch";
 import BasicControls from "./BasicControls";
-import './TopBar.css';
-
 
 class TopBar extends Component {
 
     render() {
         return(
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{zIndex: 1}}>
                 <div className="container">
-                    <a className="navbar-brand" href="/"><i className="fas fa-city"></i> AAA</a>
+                    <Link className="navbar-brand" to="/"><i className="fas fa-city"></i> AAA</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
                     </button>

@@ -30,8 +30,7 @@ class Traffic extends Component {
         var order = new Array("From Low to High", "From High to Low");
         return(
             <div>
-                <TopBar />
-                <div className="container">
+                
                     <div>
                         <div style={{marginTop: '30px'}}>
                             <h1>Traffic</h1>
@@ -63,7 +62,7 @@ class Traffic extends Component {
                             <RankingList />
                         </div>
                     </div>
-                </div>
+                
             </div>           
 
         );
