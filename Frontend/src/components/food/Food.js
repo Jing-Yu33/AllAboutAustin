@@ -29,30 +29,21 @@ class Food extends Component {
         var category = new Array("Food", "Traffic", "Education");
         var order = new Array("From Low to High", "From High to Low");
         return(
-            <div>
-                <div>
-                    <div style={{marginTop: '30px'}}>
-                        <h1>Food</h1>
+            <div style={{marginTop: '20px'}}>
+                <h1>Food</h1>
+                <div className="row mt-4">
+                    <div className="col-lg-3">
+                        <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
                     </div>
-                    <div className='container'>
-                        <div className="row">
-                            <div className="col-lg-3">
-                                <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
-                            </div>
-                            <div className="col-lg-5"></div>
-                            <div className="col-lg-4">
-                                <div className="row">
-                                    <div className="col-6">
-                                        <SortDropdown name="Category" options={category}/>
-                                    </div>
-                                    <div className="col-6">
-                                        <SortDropdown name="Order" options={order}/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="col-lg-5"></div>
+                    <div className="col-lg-2 mb-sm-1">
+                        <SortDropdown name="Category" options={category}/>
                     </div>
+                    <div className="col-lg-2">
+                        <SortDropdown name="Order" options={order}/>
+                     </div>
                 </div>
+                
                 <div className="row">
                     <div className="col-lg-8">
                         <HeatMap />

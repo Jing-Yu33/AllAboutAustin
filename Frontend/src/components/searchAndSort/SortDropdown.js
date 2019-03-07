@@ -17,20 +17,13 @@ class SortDropdown extends Component {
 
         return (
                 <form>
-                    <div className="form-group" style={{marginTop: '20px'}}>
-                        <div className="form-group">
-                            <select className="custom-select" name={this.props.name}>
-                                <option defaultValue>By {this.props.name}</option>
+                    <div className="input-group" >
+                        <select className="custom-select" name={this.props.name}>
+                            <option defaultValue>By {this.props.name}</option>
                                 {OptionList}
-                            </select>
-                        </div>
+                        </select>
                     </div>
                 </form>
-                
-                
-
-                
-           
         );
   }
 }
