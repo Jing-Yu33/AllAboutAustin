@@ -2,50 +2,31 @@ package info.allaboutaustin.RestfulApi.models;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Getter;
+
+@Getter
 @Document(collection = "Zipcodes")
 public class Zipcode {
 	@Id
-	private ObjectId _id;
+//	private ObjectId _id;
 	private String zipcode;
-	private String food;
-	private String traffic;
-	private String education;
+	private String foodScore;
+	private String trafficScore;
+	private String educationScore;
 	private String desc;
-	
+	private Food foodData;
 	protected Zipcode() {}
 
-	public Zipcode(String zipcode, String food, String traffic, String education, String desc) {
+	public Zipcode(String zipcode, String foodScore, String trafficScore, String educationScore, String desc, Food foodData) {
 		super();
 		this.zipcode = zipcode;
-		this.food = food;
-		this.traffic = traffic;
-		this.education = education;
+		this.foodScore = foodScore;
+		this.trafficScore = trafficScore;
+		this.educationScore = educationScore;
 		this.desc = desc;
-	}
-
-	public String getZipcode() {
-		return zipcode;
-	}
-
-	public String getFood() {
-		return food;
-	}
-
-	public String getTraffic() {
-		return traffic;
-	}
-
-	public String getEducation() {
-		return education;
-	}
-
-	public String getDesc() {
-		return desc;
-	}
-	
-	
-	
-	
+		this.foodData = foodData;
+	}	
 }
