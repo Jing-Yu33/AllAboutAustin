@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './WebsiteDesc.css'
 
 class WebsiteDesc extends Component {
     state = {

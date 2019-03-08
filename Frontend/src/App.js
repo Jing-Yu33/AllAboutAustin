@@ -8,7 +8,6 @@ import Survey from './components/survey/Survey'
 import Food from './components/food/Food'
 import Education from './components/education/Education'
 import Traffic from './components/traffic/Traffic'
-import './App.css';
 
 class App extends Component {
 

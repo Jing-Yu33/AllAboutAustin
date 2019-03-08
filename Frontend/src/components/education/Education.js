@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TopBar from "../navbar/TopBar";
 import SearchBar from '../searchAndSort/SearchBar';
 import SortDropdown from '../searchAndSort/SortDropdown';
 import HeatMap from '../heatmap/HeatMap';
@@ -26,10 +25,10 @@ class Education extends Component {
     }
 
     render(){
-        var category = new Array("Food", "Traffic", "Education");
-        var order = new Array("From Low to High", "From High to Low");
+        var category = ["Food", "Traffic", "Education"];
+        var order = ["From Low to High", "From High to Low"];
         return(
-            <div style={{marginTop: '20px'}}>
+            <div style={{marginTop: '30px'}}>
             <h1>Education</h1>
             <div className="row mt-4">
                 <div className="col-lg-3">
@@ -44,7 +43,7 @@ class Education extends Component {
                  </div>
             </div>
             
-            <div className="row">
+            <div className="row mt-5">
                 <div className="col-lg-8">
                     <HeatMap />
                 </div>

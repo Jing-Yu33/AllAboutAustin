@@ -9,10 +9,10 @@ import java.io.IOException;
 public class DataCollectionMain {
 
 	public static void main(String[] args) {
-		MongoStorage.setUp();
+//		MongoStorage.setUp();
 		//demoSodaCollector();
 		//demoZomatoCollector();
-		demoSchoolCollector();
+//		demoSchoolCollector();
 	}
 
 	private static void demoSodaCollector() {

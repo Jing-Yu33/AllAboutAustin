@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import TopBar from "../navbar/TopBar";
-import Carousel from './Carousel';
 import SliderBar from './SliderBar'
 
-import './Survey.css'
 class Survey extends Component {
 
     state = {
@@ -22,7 +19,7 @@ class Survey extends Component {
     render() {
         console.log(this.state);
         return(
-            <div>
+            <div style={{marginTop: '20vh'}}>
                 <form id="survey-form" action="" method="GET">
                     <SliderBar category="Food" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
                     <SliderBar category="Education" onSliderBarFocusOut={this.onSliderBarFocusOut}/>                        <SliderBar category="Traffic" onSliderBarFocusOut={this.onSliderBarFocusOut}/>

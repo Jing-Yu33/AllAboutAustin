@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import GithubUser from './GithubUser'
 
-import './GithubInfo.css'
 class GithubInfo extends React.Component {
     state = {
         Iucundus:   {commits: 0, issues: 0},
@@ -14,7 +13,7 @@ class GithubInfo extends React.Component {
     };
     
     getGithubData = async () => {
-        var members = new Array("Iucundus", "AlienEdith", "zdwempe", "Graysless", "cpe342", "justindpnt");
+        var members = ["Iucundus", "AlienEdith", "zdwempe", "Graysless", "cpe342", "justindpnt"];
         for(var i in members){
             var username = members[i];
             var commits =  await axios.get("https://api.github.com/repos/Iucundus/AustinData/commits?author="+members[i]);

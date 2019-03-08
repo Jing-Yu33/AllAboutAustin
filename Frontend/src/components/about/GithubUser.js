@@ -1,6 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import './GithubUser.css'
+
 class GithubUser extends React.Component{
         
     render(){
