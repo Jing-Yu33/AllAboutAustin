@@ -48,7 +48,7 @@ class Traffic extends Component {
                     <HeatMap />
                 </div>
                 <div className="col-lg-4">
-                    <RankingList />
+                    <RankingList sortByDefault="traffic" sortByOption=""/>
                 </div>
             </div>
         </div>         

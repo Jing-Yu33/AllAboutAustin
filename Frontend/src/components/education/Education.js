@@ -48,7 +48,7 @@ class Education extends Component {
                     <HeatMap />
                 </div>
                 <div className="col-lg-4">
-                    <RankingList />
+                    <RankingList sortByDefault="education" sortByOption=""/>
                 </div>
             </div>
         </div>

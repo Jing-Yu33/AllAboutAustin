@@ -27,6 +27,13 @@ class Food extends Component {
     render(){
         var category = ["Food", "Traffic", "Education"];
         var order = ["From Low to High", "From High to Low"];
+
+        var data = [
+            {zipcode: 78705, food: 5.2, traffic: 6.5, education: 6.3},
+            {zipcode: 78731, food: 6.2, traffic: 5.5, education: 8.3},
+            {zipcode: 78712, food: 7.2, traffic: 4.5, education: 7.3}
+        ];
+
         return(
             <div style={{marginTop: '30px'}}>
                 <h1>Food</h1>
@@ -48,7 +55,7 @@ class Food extends Component {
                         <HeatMap />
                     </div>
                     <div className="col-lg-4">
-                        <RankingList />
+                        <RankingList data={data} sortByDefault="Food" sortByOption=""/>
                     </div>
                 </div>
             </div>
