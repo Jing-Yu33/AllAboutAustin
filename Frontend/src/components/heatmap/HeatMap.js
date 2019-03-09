@@ -7,6 +7,7 @@ class HeatMap extends Component {
         return(
             <div className="jumbotron">
                 <h1>Should be an Interactive HeatMap</h1>
+                <p>Reference: https://kepler.gl/</p>
             </div>
         )
   }

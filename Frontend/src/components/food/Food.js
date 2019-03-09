@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import SearchBar from '../searchAndSort/SearchBar';
 import SortDropdown from '../searchAndSort/SortDropdown';
 import HeatMap from '../heatmap/HeatMap';
 import RankingList from '../rankingList/RankingList';
+
+import { sortCategory, sortOrder } from '../../actions'
+
 
 class Food extends Component {
     state = ({
@@ -18,20 +23,17 @@ class Food extends Component {
       };
 
     componentDidUpdate(){
-        // STATE updated,
-        // redirect new page?? or hide heatmap, show new component??
-
-        // What's the meaning of search here???
     }
 
     render(){
         var category = ["Food", "Traffic", "Education"];
-        var order = ["From Low to High", "From High to Low"];
+        var order = ["Ascending", "Descending"];
 
+        // Top 10 food data retrieve from our database API, should be already sorted by FOOD
         var data = [
-            {zipcode: 78705, food: 5.2, traffic: 6.5, education: 6.3},
+            {zipcode: 78712, food: 7.2, traffic: 4.5, education: 7.3},
             {zipcode: 78731, food: 6.2, traffic: 5.5, education: 8.3},
-            {zipcode: 78712, food: 7.2, traffic: 4.5, education: 7.3}
+            {zipcode: 78705, food: 5.2, traffic: 6.5, education: 6.3}
         ];
 
         return(
@@ -43,10 +45,10 @@ class Food extends Component {
                     </div>
                     <div className="col-lg-5"></div>
                     <div className="col-lg-2 mb-sm-1">
-                        <SortDropdown name="Category" options={category}/>
+                        <SortDropdown name="Category" default="Food" options={category} sortBy={this.props.sortCategory}/>
                     </div>
                     <div className="col-lg-2">
-                        <SortDropdown name="Order" options={order}/>
+                        <SortDropdown name="Order" default="Descending" options={order} sortBy={this.props.sortOrder}/>
                      </div>
                 </div>
                 
@@ -55,7 +57,7 @@ class Food extends Component {
                         <HeatMap />
                     </div>
                     <div className="col-lg-4">
-                        <RankingList data={data} sortByDefault="Food" sortByOption=""/>
+                        <RankingList data={data} category={this.props.category} order={this.props.order}/>
                     </div>
                 </div>
             </div>
@@ -63,4 +65,14 @@ class Food extends Component {
     }
 }
 
-export default Food;
+const mapStateToProps = (state) => {
+    return {
+        category: state.category,
+        order: state.order
+    }
+}
+
+export default connect(mapStateToProps, {
+    sortCategory: sortCategory,
+    sortOrder: sortOrder
+})(Food);

@@ -1,5 +1,5 @@
-export const ASC = 'ascending';
-export const DSC = 'descending';
+const ASC = 'Ascending';
+const DSC = 'Descending';
 
 export const sortByTraffic = (a, b, order=DSC) => {
     const diff = a.traffic - b.traffic;
