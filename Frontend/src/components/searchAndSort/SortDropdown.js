@@ -4,9 +4,6 @@ class SortDropdown extends Component {
     
     render() {
         const OptionList = this.props.options.map((option) => {
-            if(this.props.default === option){
-                return <option key={option} value={option}>{option}</option>
-            }
             return  <option key={option} value={option}>{option}</option>
         })
 

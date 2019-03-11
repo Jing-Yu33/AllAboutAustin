@@ -1,7 +1,4 @@
 import { combineReducers } from 'redux';
-
-
-
 const sortCategoryReducer = (state=null, action) => {
     switch(action.type){
         case "SORT_CATEGORY":
