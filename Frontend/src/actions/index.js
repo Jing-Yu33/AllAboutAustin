@@ -11,3 +11,24 @@ export const sortOrder = (order) => {
         payload: order
     }
 }
+
+export const foodWeight = (weight) => {
+    return {
+        type: "FOOD_WEIGHT",
+        payload: weight
+    }
+}
+
+export const trafficWeight = (weight) => {
+    return {
+        type: "TRAFFIC_WEIGHT",
+        payload: weight
+    }
+} 
+
+export const educationWeight = (weight) => {
+    return {
+        type: "EDUCATION_WEIGHT",
+        payload: weight
+    }
+} 

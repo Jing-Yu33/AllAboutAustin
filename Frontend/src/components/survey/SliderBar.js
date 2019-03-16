@@ -14,7 +14,7 @@ class SliderBar extends Component {
                         type="range" className="form-control-range" id="formControlRange" 
                         value={this.state.value}
                         onChange={(e)=>this.setState({value: e.target.value})}
-                        onBlur ={(e)=>{this.props.onSliderBarFocusOut([this.props.category], this.state.value)}}        
+                        onBlur ={(e)=>{this.props.onSliderBarFocusOut(this.props.category, this.state.value)}}        
                     />
                 </div>
         )

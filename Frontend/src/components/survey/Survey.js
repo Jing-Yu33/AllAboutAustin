@@ -1,35 +1,38 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import SliderBar from './SliderBar'
+import { foodWeight, trafficWeight, educationWeight } from '../../actions';
 
 class Survey extends Component {
 
-    state = {
-            Food: 50,
-            Traffic: 50,
-            Education: 50
+    onFormSubmit = () => {
+        this.props.history.push("/recommendation");
     }
 
     onSliderBarFocusOut = (category, value) => {
-        console.log(category+ " "+ value);
-        this.setState({
-                [category]: value
-        })
+        switch(category){
+            case "Food": this.props.foodWeight(value); break;
+            case "Traffic": this.props.trafficWeight(value); break;
+            case "Education": this.props.educationWeight(value); break;
+            default: ;
+        }
     }
 
     render() {
-        console.log(this.state);
         return(
             <div style={{marginTop: '20vh'}}>
-                <form id="survey-form" action="" method="GET">
+                <p>TODO: change the range to 0 to 10 integer (now 0 to 100), show exactly number when slides (requir JS)</p>
+                <form id="survey-form">
                     <SliderBar category="Food" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
-                    <SliderBar category="Education" onSliderBarFocusOut={this.onSliderBarFocusOut}/>                        <SliderBar category="Traffic" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
-                    <button type="button" className="btn btn-outline-success btn-lg btn-block">Submit</button>
-                    <p>Selected Value stored in this.state</p>
-                    <p>Food: {this.state.Food}, Education: {this.state.Education}, Traffic: {this.state.Traffic}</p>
+                    <SliderBar category="Education" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
+                    <SliderBar category="Traffic" onSliderBarFocusOut={this.onSliderBarFocusOut}/>                    
+                    <button onClick={() => this.onFormSubmit()} type="button" className="btn btn-outline-success btn-lg btn-block">Continue</button>
                 </form>
             </div>
         )
     }
 }
-export default Survey;
+export default connect(null, {
+    foodWeight, trafficWeight, educationWeight
+})(Survey);
 
