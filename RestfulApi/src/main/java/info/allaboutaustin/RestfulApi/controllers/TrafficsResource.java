@@ -1,4 +1,4 @@
-package info.allaboutaustin.RestfulApi;
+package info.allaboutaustin.RestfulApi.controllers;
 
 import java.util.List;
 
