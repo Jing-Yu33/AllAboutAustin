@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 
 import TopBar from "./components/navbar/TopBar";
 import Landing from './components/landing/Landing'
@@ -11,12 +11,14 @@ import Traffic from './components/traffic/Traffic'
 import RecomPage from './components/recompage/RecomPage';
 import ZipcodesPage from './components/ZipcodesPage/ZipcodesPage';
 
+import history from './history';
+
 class App extends Component {
 
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <Router history={history}>
         
           <div>
             <TopBar />
@@ -33,7 +35,8 @@ class App extends Component {
               </Switch>
             </div>
           </div>
-        </BrowserRouter>
+
+        </Router>
       </div>
     );
   }

@@ -1,63 +1,101 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import React from 'react';
 import { connect } from 'react-redux';
 
-import Sidebar from './Sidebar';
-import { DataBase } from '../../apis/DataBase';
+import SurveyModal from '../modals/SurveyModal';
+import fetchResult from './fetchResult'
 
-class RecomPage extends Component {
+const RecomPageTest = (props) => {
 
-    state = {
-        zipcodes: []
-    }
+    const result = fetchResult(props.weight);
 
-    async componentDidMount(){
-        const response = 
-            await DataBase.get('/zipcodes/ranking', {
-                crossdomain: true,
-                params: {
-                    food: this.props.weight.food,
-                    traffic: this.props.weight.traffic, 
-                    education: this.props.weight.education
-                }
-            })
-        this.setState({
-            zipcodes: response.data
-        })
-    }
+    return (
+        <div>
+            Recommendation Page
+            <SurveyModal />
+            <ul>
+                <li>Food Weight: {props.weight.Food}</li>
+                <li>Traffic Weight: {props.weight.Traffic}</li>
+                <li>Education Weight: {props.weight.Education}</li>
+            </ul>
+            {result}
+        </div>
+    )
 
-    renderZipcodeList = () => {
-        if(this.state.zipcodes){
-            return this.state.zipcodes.map( (zipcode) => {
-                const link = `/zipcodes/${zipcode.zipcode}`
-                return (
-                    <div key={zipcode.zipcode}>
-                        <Link to={`/zipcodes/${zipcode.zipcode}`}>{zipcode.zipcode}</Link>
-                    </div>
-                )
-            });
-        }
-
-    }
-
-    render(){
-        if(!this.props.weight){
-            return <div>Loading</div>
-        }
-        return(
-            <div>
-                Recommendation Page
-                <Sidebar />
-                <ul>
-                    <li>Food Weight: {this.props.weight.food}</li>
-                    <li>Traffic Weight: {this.props.weight.traffic}</li>
-                    <li>Education Weight: {this.props.weight.education}</li>
-                </ul>
-                {this.renderZipcodeList()}
-            </div>
-        );
-    }
 }
+
+
+
+// Class Based Implementation
+// class RecomPage extends Component {
+//     state = {
+//         zipcodes: []
+//     }
+
+//     async componentDidMount(){
+//         const response = 
+//             await DataBase.get('/zipcodes/ranking', {
+//                 crossdomain: true,
+//                 params: {
+//                     food: this.props.weight.Food,
+//                     traffic: this.props.weight.Traffic, 
+//                     education: this.props.weight.Education
+//                 }
+//             })
+//         this.setState({
+//             zipcodes: response.data
+//         })
+//     }
+
+//     async componentDidUpdate(prevProps){
+//         if(prevProps.weight != this.props.weight){
+//             console.log("here")
+//             const response = 
+//             await DataBase.get('/zipcodes/ranking', {
+//                 crossdomain: true,
+//                 params: {
+//                     food: this.props.weight.Food,
+//                     traffic: this.props.weight.Traffic, 
+//                     education: this.props.weight.Education
+//                 }
+//             })
+//             this.setState({
+//                 zipcodes: response.data
+//             })
+//         }
+
+//     }
+
+//     renderZipcodeList = () => {
+//         if(this.state.zipcodes){
+//             return this.state.zipcodes.map( (zipcode) => {
+//                 return (
+//                     <div key={zipcode.zipcode}>
+//                         <Link to={`/zipcodes/${zipcode.zipcode}`}>{zipcode.zipcode}</Link>
+//                     </div>
+//                 )
+//             });
+//         }
+
+//     }
+
+//     render(){
+//         if(!this.props.weight){
+//             return <div>Loading</div>
+//         }
+//         return(
+//             <div>
+//                 Recommendation Page
+//                 <SurveyModal />
+//                 <ul>
+//                     <li>Food Weight: {this.props.weight.Food}</li>
+//                     <li>Traffic Weight: {this.props.weight.Traffic}</li>
+//                     <li>Education Weight: {this.props.weight.Education}</li>
+//                 </ul>
+//                 {this.renderZipcodeList()}
+//             </div>
+//         );
+//     }
+// }
 
 const mapStateToProps = (state) => {
     return {
@@ -65,4 +103,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(RecomPage)
+export default connect(mapStateToProps)(RecomPageTest)
