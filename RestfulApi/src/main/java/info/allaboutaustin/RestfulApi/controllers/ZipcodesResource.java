@@ -35,15 +35,30 @@ public class ZipcodesResource {
 	ZipcodeEducationComparator ec = new ZipcodeEducationComparator();
 	ZipcodeTrafficComparator tc = new ZipcodeTrafficComparator();
 	
-	// Return All zipcodes information
+	// Return All zipcodes information based on category order
 	@GetMapping("")
-	public List<Zipcode> getAllZipcodes(@RequestParam(name="sortBy", required=false, defaultValue="") String sortBy){
+	public List<Zipcode> getAllZipcodes(@RequestParam(name="sortBy", required=false, defaultValue="") String sortBy,
+										@RequestParam(name="order", required=false, defaultValue="desc") String order,
+										@RequestParam(name="amount", required=false, defaultValue="") String amount){
+		
 		List<Zipcode> list = ZipcodeRepo.findAll();
 		switch(sortBy) {
 			case "food": Collections.sort(list, fc);		break;
 			case "traffic": Collections.sort(list, tc);		break;
 			case "education": Collections.sort(list, ec);	break;
+			default: ;
 		}
+		
+		if(order.equals("asc"))	Collections.reverse(list);
+		
+//		try {
+//			int number = Integer.valueOf(amount);
+//			List newList = list.subList(0, number);
+//			return newList;
+//		}catch(Exception e){
+//			throw e;	//TODOs: change to paramter error exception
+//		}
+//		
 		return list;
 	}
 	
@@ -63,6 +78,7 @@ public class ZipcodesResource {
 			@RequestParam(name="food", required=false, defaultValue="0") String food,
 			@RequestParam(name="education", required=false, defaultValue="0") String education,
 			@RequestParam(name="traffic", required=false, defaultValue="0") String traffic) {
+		
 		List<Zipcode> zipcodes = ZipcodeRepo.findAll();
 		for(Zipcode zc: zipcodes) {
 			Double totalScore = zc.getFoodScore() * Double.parseDouble(food) +
