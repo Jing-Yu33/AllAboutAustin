@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { GetAllZipcodes } from '../../actions/index';
-
-class IndividualZipcodePage extends Component {
+import SortForm from '../searchAndSort/SortForm'
+import { GetAllZipcodes } from '../../actions';
+class ZipcodesPage extends Component {
 
     async componentDidMount(){
-        this.props.GetAllZipcodes("");
+        this.props.GetAllZipcodes();
+    }
+
+    onSubmit = (value) => {
+        this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
     }
 
     renderList = () => {
@@ -29,6 +33,17 @@ class IndividualZipcodePage extends Component {
 
         return(
             <div>
+                <p>TODOs:
+                    <ul>
+                        <li>Sort Function: determine a default sorting category => new data field - average score?</li>
+                        <li>set different pages: 10 item / page</li>
+                        <li>search function</li>
+                        <li>Optional: add more filter checkbox?</li>
+                        <li>interactive map</li>
+                        <li>Layout</li>
+                    </ul>
+                </p>
+                <SortForm onSubmit={this.onSubmit}/>
                 {this.renderList()}
             </div>
         );
@@ -43,4 +58,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     GetAllZipcodes
-})(IndividualZipcodePage)
+})(ZipcodesPage)

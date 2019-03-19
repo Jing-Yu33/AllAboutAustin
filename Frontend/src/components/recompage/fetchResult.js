@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom'
 const fetchResult = (weight) => {
     const [result, setResult] = useState([])
 
-    const fetchResult = async () => {
+    const fetchData= async () => {
         const response = 
             await DataBase.get('/zipcodes/ranking', {
                 crossdomain: true,
                 params: {
-                    food: weight.Food,
-                    traffic: weight.Traffic, 
-                    education: weight.Education
+                    food: weight.food,
+                    traffic: weight.traffic, 
+                    education: weight.education
                 }
             })
         const resultList = response.data.map((zipcode) => {
@@ -26,8 +26,8 @@ const fetchResult = (weight) => {
     }
 
     useEffect(() => {
-        fetchResult();
-    }, [weight]);
+        fetchData();
+    }, [weight.food, weight.traffic, weight.education]);
 
     return result;
 }

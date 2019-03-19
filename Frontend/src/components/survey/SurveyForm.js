@@ -7,7 +7,8 @@ import history from '../../history';
 class SurveyFrom extends Component {
 
     onFormSubmit = () => {
-        history.push("/recommendation");
+        history.push(
+            `/recommendation?food=${this.props.weight.Food}&traffic=${this.props.weight.Traffic}&education=${this.props.weight.Education}`);
     }
 
     onSliderBarFocusOut = (category, value) => {
@@ -26,14 +27,21 @@ class SurveyFrom extends Component {
                 <form id="survey-form">
                     <SliderBar category="Food" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
                     <SliderBar category="Education" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
-                    <SliderBar category="Traffic" onSliderBarFocusOut={this.onSliderBarFocusOut}/>                    
+                    <SliderBar category="Traffic" onSliderBarFocusOut={this.onSliderBarFocusOut}/>                   
                     <button onClick={() => this.onFormSubmit()} type="button" className="btn btn-outline-success btn-lg btn-block" data-dismiss="modal">Continue</button>
                 </form>
             </div>
         )
     }
 }
-export default connect(null, {
+
+const mapStateToProps = (state) => {
+    return {
+        weight: state.weight
+    }
+}
+
+export default connect(mapStateToProps, {
     foodWeight, trafficWeight, educationWeight
 })(SurveyFrom);
 

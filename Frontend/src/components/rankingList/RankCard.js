@@ -7,12 +7,18 @@ class RankingCard extends Component {
         return(
             <div className="card" style={{width: '18rem'}}>
             <div className="card-body">
-                <h5 className="card-title">{this.props.zipcode}</h5>
+                <h5 className="card-title">
+                    <Link to={`/zipcodes/${this.props.data.zipcode}`} className="card-link">
+                        {this.props.data.zipcode}
+                    </Link>
+                </h5>
                 <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p className="card-text">Food: {this.props.food}</p>
-                <p className="card-text">Education: {this.props.education}</p>
-                <p className="card-text">Traffic: {this.props.traffic}</p>
-                <Link to="#" className="card-link">Link</Link>
+                <p className="card-text">
+                    Food: {this.props.data.foodScore}
+                    Education: {this.props.data.educationScore}
+                    Traffic: {this.props.data.trafficScore}
+                </p>
+                
             </div>
             </div>
         )

@@ -1,21 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 
 import SurveyModal from '../modals/SurveyModal';
 import fetchResult from './fetchResult'
 
-const RecomPageTest = (props) => {
+const RecomPage = (props) => {
 
-    const result = fetchResult(props.weight);
+    const query = queryString.parse(props.location.search);
+    const result = fetchResult(query)
 
     return (
         <div>
             Recommendation Page
             <SurveyModal />
             <ul>
-                <li>Food Weight: {props.weight.Food}</li>
-                <li>Traffic Weight: {props.weight.Traffic}</li>
-                <li>Education Weight: {props.weight.Education}</li>
+                <li>Food Weight: {query.food || "50"}</li>
+                <li>Traffic Weight: {query.traffic || "50"}</li>
+                <li>Education Weight: {query.education || "50"}</li>
             </ul>
             {result}
         </div>
@@ -32,13 +34,14 @@ const RecomPageTest = (props) => {
 //     }
 
 //     async componentDidMount(){
+//         const values = queryString.parse(this.props.location.search)
 //         const response = 
 //             await DataBase.get('/zipcodes/ranking', {
 //                 crossdomain: true,
 //                 params: {
-//                     food: this.props.weight.Food,
-//                     traffic: this.props.weight.Traffic, 
-//                     education: this.props.weight.Education
+//                     food: values.food,
+//                     traffic: values.traffic, 
+//                     education: values.education
 //                 }
 //             })
 //         this.setState({
@@ -103,4 +106,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(RecomPageTest)
+export default connect(mapStateToProps)(RecomPage)

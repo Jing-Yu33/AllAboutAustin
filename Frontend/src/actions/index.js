@@ -1,19 +1,5 @@
 import { DataBase } from '../apis/DataBase';
 
-export const sortCategory = (category) => {
-    return {
-        type: "SORT_CATEGORY",
-        payload: category
-    }
-}
-
-export const sortOrder = (order) => {
-    return {
-        type: "SORT_ORDER",
-        payload: order
-    }
-}
-
 export const foodWeight = (weight) => {
     return {
         type: "FOOD_WEIGHT",
@@ -35,11 +21,12 @@ export const educationWeight = (weight) => {
     }
 }
 
-export const GetAllZipcodes = (sortBy) => {
+export const GetAllZipcodes = (sortBy, order) => {
     return async (dispatch) => {
         const response = await DataBase.get("/zipcodes",{
             params: {
-                sortBy
+                sortBy,
+                order
             }
         });
         dispatch({
