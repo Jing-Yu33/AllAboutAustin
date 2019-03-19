@@ -14,6 +14,9 @@ class CategorySwitch extends Component {
                 <li className="nav-item">
                     <Link className="nav-link" to="/traffic">Traffic</Link>
                 </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/zipcodes">Zipcodes</Link>
+                </li>
             </ul>
         )
     }

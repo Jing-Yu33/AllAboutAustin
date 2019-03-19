@@ -1,44 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { DataBase } from '../../apis/DataBase';
+import { GetAllZipcodes } from '../../actions/index';
 
-class ZipcodesPage extends Component {
-
-    state = {
-        zipcode: null
-    }
+class IndividualZipcodePage extends Component {
 
     async componentDidMount(){
-        const response = 
-            await DataBase.get(`/zipcodes/${this.props.match.params.zipcode}`, {
-                crossdomain: true
-            })
-        this.setState({
-            zipcode: response.data
+        this.props.GetAllZipcodes("");
+    }
+
+    renderList = () => {
+        return this.props.zipcodes.map(zipcode => {
+            return (
+                <div key={zipcode.zipcode}>
+                    <h4>{zipcode.zipcode}</h4>
+                    <p>Should be a card contains corresponding information<br/>
+                        The title of the card should be a link to IndividualZipcodePage
+                    </p>
+                </div>
+            )
         })
     }
 
-
     render(){
-        console.log(this.state.zipcode)
-        if(!this.state.zipcode){
+        if(!this.props.zipcodes){
             return <div>Loading...</div>
         }
 
         return(
             <div>
-                <h3>{this.state.zipcode.zipcode}</h3>
-                <p>{this.state.zipcode.desc}</p>
+                {this.renderList()}
             </div>
         );
     }
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         weight: state.weight
-//     }
-// }
+const mapStateToProps = (state) => {
+    return {
+        zipcodes: Object.values(state.zipcodes)
+    }
+}
 
-export default connect(null)(ZipcodesPage)
+export default connect(mapStateToProps, {
+    GetAllZipcodes
+})(IndividualZipcodePage)

@@ -9,7 +9,8 @@ import Food from './components/food/Food'
 import Education from './components/education/Education'
 import Traffic from './components/traffic/Traffic'
 import RecomPage from './components/recompage/RecomPage';
-import ZipcodesPage from './components/ZipcodesPage/ZipcodesPage';
+import ZipcodePage from './components/ZipcodesPage/ZipcodesPage';
+import IndividualZipcodePage from './components/ZipcodesPage/IndividualZipcodePage';
 
 import history from './history';
 
@@ -31,7 +32,8 @@ class App extends Component {
               <Route path="/education" exact component={Education} />
               <Route path="/traffic" exact component={Traffic} />
               <Route path="/recommendation" exact component={RecomPage} />
-              <Route path="/zipcodes/:zipcode" exact component={ZipcodesPage} />
+              <Route path="/zipcodes" exact component={ZipcodePage} />
+              <Route path="/zipcodes/:zipcode" exact component={IndividualZipcodePage} />
               </Switch>
             </div>
           </div>
