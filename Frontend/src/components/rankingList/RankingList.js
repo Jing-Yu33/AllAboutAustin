@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RankingCard from './RankCard'
-import { sortByFood, sortByTraffic, sortByEducation } from '../../sortFunction'
 
 class RankingList extends Component {
 

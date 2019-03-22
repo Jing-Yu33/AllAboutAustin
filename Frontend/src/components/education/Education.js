@@ -21,7 +21,7 @@ class Education extends Component {
     render(){
         return(
             <div style={{marginTop: '30px'}}>
-                <h1>Food</h1>
+                <h1>Education</h1>
                 <div className="row mt-4">
                     <div className="col-lg-3">
                         <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>

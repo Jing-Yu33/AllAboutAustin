@@ -47,7 +47,7 @@ class GoogleAuth extends Component{
                 <GoogleLogin 
                     onSuccess={(response) => this.onSuccessResponse(response)}
                     onFailure={(response) => this.onFailureResponse(response)}
-                    clientId={"280689795193-ubapinqcg16ah7vlskd1oimoisf82bsm.apps.googleusercontent.com"}
+                    clientId={process.env.REACT_APP_LOCAL_GOOGLE_AUTH_CLIENT_ID}
                     buttonText="Login"
                 />
 
