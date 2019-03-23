@@ -9,10 +9,10 @@ import java.io.IOException;
 public class DataCollectionMain {
 
 	public static void main(String[] args) {
-//		MongoStorage.setUp();
+		MongoStorage.setUp();
 		//demoSodaCollector();
-		//demoZomatoCollector();
-//		demoSchoolCollector();
+		demoZomatoCollector();
+		//demoSchoolCollector();
 	}
 
 	private static void demoSodaCollector() {
@@ -29,7 +29,7 @@ public class DataCollectionMain {
 	private static void demoZomatoCollector() {
 		ZomatoCollector demo = new ZomatoCollector();
 		try {
-			DataSet ds = demo.getNewData();
+			DataSet ds = demo.getNewData(160);
 			ds.printDataSet();
 			MongoStorage.saveData(ds, MongoStorage.DataTypes.FOOD_DATA);
 		} catch (IOException e) {
