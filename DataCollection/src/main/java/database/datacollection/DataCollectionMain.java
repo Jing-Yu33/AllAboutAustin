@@ -11,15 +11,16 @@ public class DataCollectionMain {
 	public static void main(String[] args) {
 		MongoStorage.setUp();
 		//demoSodaCollector();
-		demoZomatoCollector();
+		//demoZomatoCollector();
 		//demoSchoolCollector();
+		demoSensorDataCollector();
 	}
 
 	private static void demoSodaCollector() {
 		SodaCollector demo = new SodaCollector();
 		try {
 			DataSet ds = demo.getNewData();
-//			ds.printDataSet();
+			ds.printDataSet();
 			MongoStorage.saveData(ds, MongoStorage.DataTypes.TRAFFIC_DATA);
 		} catch (IOException e) {
 			System.out.println(e.toString());
@@ -43,6 +44,17 @@ public class DataCollectionMain {
 			DataSet ds = demo.getNewData();
 			ds.printDataSet();
 			MongoStorage.saveData(ds, MongoStorage.DataTypes.EDUCATION_DATA);
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		}
+	}
+	
+	private static void demoSensorDataCollector() {
+		SodaCollector demo = new SodaCollector();
+		try {
+			DataSet ds = demo.getSensorInfoData();
+			ds.printDataSet();
+			MongoStorage.saveData(ds, MongoStorage.DataTypes.TRAFFIC_SENSOR_DATA);
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}

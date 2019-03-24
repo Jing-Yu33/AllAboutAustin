@@ -23,7 +23,7 @@ public class MongoStorage {
 	static Morphia morphia;
 	static Datastore datastore;
 	
-	enum DataTypes {TRAFFIC_DATA, EDUCATION_DATA, FOOD_DATA};
+	enum DataTypes {TRAFFIC_DATA, EDUCATION_DATA, FOOD_DATA, TRAFFIC_SENSOR_DATA};
 	
 	public static void setUp() {
 		
@@ -77,8 +77,20 @@ public class MongoStorage {
 					
 					datastore.save(data);		
 			   }
+			  break;
 		  }
 		    // code block
+		  
+		  case TRAFFIC_SENSOR_DATA:{
+				for(Integer id: ds.zipData.keySet()) {
+					HashMap<String, Double> properties = ds.zipData.get(id);
+					TrafficSensorData data = new TrafficSensorData(id.toString(), 
+													   properties.get("location_latitude"), properties.get("location_longitude"));
+					
+					datastore.save(data);
+				}
+				break;
+	  		}
 		}
 
 		
