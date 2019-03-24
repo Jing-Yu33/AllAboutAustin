@@ -9,11 +9,12 @@ import java.io.IOException;
 public class DataCollectionMain {
 
 	public static void main(String[] args) {
-		MongoStorage.setUp();
+		//MongoStorage.setUp();
 		//demoSodaCollector();
 		//demoZomatoCollector();
 		//demoSchoolCollector();
-		demoSensorDataCollector();
+		//demoSensorDataCollector();
+		System.out.println((new SodaCollector()).getZipCode(42.43,-71.62));
 	}
 
 	private static void demoSodaCollector() {
