@@ -24,8 +24,9 @@ import com.socrata.model.soql.SoqlQuery;
 
 public class SodaCollector implements Collector {
 	
-	//private static final String GOOGLE_MAPS_KEY = "AIzaSyBhecwiFsviDar_WNPG9VgTWioeFC8zusk"; // Original
-	private static final String GOOGLE_MAPS_KEY = "AIzaSyD82V-J6GtAhdAligfJk8G9XAPO0E0WICI"; // Project-created
+	//Both keys are slightly obscured for Git security reasons
+	//private static final String GOOGLE_MAPS_KEY = "SyBhecwiFsviDar_WNPG9VgTWioeFC8zusk"; // Original // Prepend with AIza
+	private static final String GOOGLE_MAPS_KEY = "SyD82V-J6GtAhdAligfJk8G9XAPO0E0WICI"; // Project-created // Prepend with AIza
 
 	public DataSet getNewData() throws IOException {
 
