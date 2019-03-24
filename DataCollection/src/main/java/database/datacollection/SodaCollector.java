@@ -24,7 +24,9 @@ import com.socrata.model.soql.SoqlQuery;
 
 public class SodaCollector implements Collector {
 	
-	private static final String GOOGLE_MAPS_KEY = "erererere";
+	//Both keys are slightly obscured for Git security reasons
+	//private static final String GOOGLE_MAPS_KEY = "SyBhecwiFsviDar_WNPG9VgTWioeFC8zusk"; // Original // Prepend with AIza
+	private static final String GOOGLE_MAPS_KEY = "SyD82V-J6GtAhdAligfJk8G9XAPO0E0WICI"; // Project-created // Prepend with AIza
 
 	public DataSet getNewData() throws IOException {
 
@@ -63,7 +65,9 @@ public class SodaCollector implements Collector {
 		for (Object o : jsonPayload.toArray()) {
 			JSONObject jo = ((JSONObject) o);
 			//TODO: get lat / lon from MongoDB sensor data
+			// int zipcode = getZipCode( double lat, double lon);
 			int zipcode = getZipCode(jo.get("int_id"));
+			
 			HashMap<String, Double> data = new HashMap<String, Double>();
 			for (Object key : jo.keySet()) {
 				data.put((String)key, getRankedValue(key, jo.get(key)));
@@ -79,10 +83,12 @@ public class SodaCollector implements Collector {
 	 * @param field
 	 * @return
 	 */
-	private Integer getZipCode(double lat, double lon) {
-		//TODO: overwrite this placeholder code
-		return 99;
-		
+	private Integer getZipCode(Object field) {
+		return 0;
+	}
+	
+	public String getZipCode(double lat, double lon) {
+
 		//Use Google Maps to find zip code for the coordinates
 		Client client = ClientBuilder.newClient();
 		WebTarget resource = client.target("https://maps.googleapis.com/maps/api/geocode/json");
@@ -95,7 +101,7 @@ public class SodaCollector implements Collector {
 		Response response = request.get();
 
 		if (response.getStatusInfo().getFamily() != Family.SUCCESSFUL) {
-			throw new IOException(new Integer (response.getStatus()).toString());
+			return "N/A";
 		}
 
 		String payload = response.readEntity(String.class);
@@ -103,20 +109,24 @@ public class SodaCollector implements Collector {
 		try {
 			jsonPayload = (JSONObject) (new JSONParser()).parse(payload);
 		} catch (ParseException e) {
-			throw new IOException(e.toString());
+			return "N/A";
 		}
 
-		/*
-		for (Object o : (JSONArray) jsonPayload.get("restaurants")) {
-			JSONObject restaurant = (JSONObject) o;
-			int zipcode = Integer.parseInt(JSONfind(restaurant, new String [] {"restaurant", "location", "zipcode"}).toString());
-			
-			HashMap<String, Double> data = new HashMap<String, Double>();
-			data.put("aggregate_rating", makeRankedValue(restaurant)); // Only one data point
-			
-			ds.addZipcodeData(zipcode, data);
+		try {
+			JSONArray results = (JSONArray) jsonPayload.get("results");
+			JSONObject result = (JSONObject) results.get(0);
+			JSONArray addrComponents = (JSONArray) result.get("address_components");
+			for (Object o : addrComponents) {
+				JSONObject jo = (JSONObject) o;
+				if (((JSONArray) jo.get("types")).get(0).equals("postal_code")) {
+					return jo.get("short_name").toString();
+				}
+			}
+		} catch (Exception e) {
+			return "N/A";
 		}
-		*/
+		
+		return "N/A";
 	}
 
 	/**
