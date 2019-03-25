@@ -13,20 +13,21 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class GoogleZipFinder {
-	//Both keys are slightly obscured for Git security reasons
-	//private static final String GOOGLE_MAPS_KEY = "SyBhecwiFsviDar_WNPG9VgTWioeFC8zusk"; // Original // Prepend with AIza
-	private static final String GOOGLE_MAPS_KEY = "SyD82V-J6GtAhdAligfJk8G9XAPO0E0WICI"; // Project-created // Prepend with AIza
+	//Key is slightly obscured for Git security reasons
+	private static final String GOOGLE_MAPS_KEY = "SyA1Kk6GzjZDS0FhojVc0LJqTc4YcwSBE8w"; // Prepend with AIza
+	private static final int BAD_RESULT = 0; // Zipcode to return for failed query
 	
-	public static String getZipCode(String search) {
+	public static int getZipCode(String search) {
 		Client client = ClientBuilder.newClient();
 		WebTarget resource = client.target("https://maps.googleapis.com/maps/api/geocode/json");
 		resource = resource.queryParam("address", search);
+		resource = resource.queryParam("bounds", "30.112439,-98.100491|30.518747,-97.366567");
 		resource = resource.queryParam("key", GOOGLE_MAPS_KEY);
 
 		return doQuery(resource);
 	}
 	
-	public static String getZipCode(double lat, double lon) {
+	public static int getZipCode(double lat, double lon) {
 		Client client = ClientBuilder.newClient();
 		WebTarget resource = client.target("https://maps.googleapis.com/maps/api/geocode/json");
 		resource = resource.queryParam("latlng", Double.toString(lat) + "," + Double.toString(lon));
@@ -35,14 +36,14 @@ public class GoogleZipFinder {
 		return doQuery(resource);
 	}
 	
-	private static String doQuery(WebTarget resource) {
+	private static int doQuery(WebTarget resource) {
 		Builder request = resource.request();
 		request.accept(MediaType.APPLICATION_JSON);
 
 		Response response = request.get();
 
 		if (response.getStatusInfo().getFamily() != Family.SUCCESSFUL) {
-			return "N/A";
+			return BAD_RESULT;
 		}
 
 		String payload = response.readEntity(String.class);
@@ -50,12 +51,12 @@ public class GoogleZipFinder {
 		try {
 			jsonPayload = (JSONObject) (new JSONParser()).parse(payload);
 		} catch (ParseException e) {
-			return "N/A";
+			return BAD_RESULT;
 		}
 		
 		if (!jsonPayload.get("status").toString().equals("OK")) {
 			System.out.println("Google query return status: " + jsonPayload.get("status").toString());
-			return "N/A";
+			return BAD_RESULT;
 		}
 
 		try {
@@ -65,14 +66,21 @@ public class GoogleZipFinder {
 			for (Object o : addrComponents) {
 				JSONObject jo = (JSONObject) o;
 				if (((JSONArray) jo.get("types")).get(0).equals("postal_code")) {
-					return jo.get("short_name").toString();
+					return parseZip(jo.get("short_name"));
 				}
 			}
 		} catch (Exception e) {
-			return "N/A";
+			return BAD_RESULT;
 		}
 		
-		return "N/A";
+		return BAD_RESULT;
 	}
 
+	private static int parseZip(Object arg) {
+		try {
+			return Integer.parseInt(arg.toString());
+		} catch (Exception e) {
+			return BAD_RESULT;
+		}
+	}
 }

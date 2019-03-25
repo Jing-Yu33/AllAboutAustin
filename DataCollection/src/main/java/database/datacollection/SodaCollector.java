@@ -5,15 +5,7 @@ import java.util.HashMap;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.client.Invocation.Builder;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status.Family;
-
 import com.socrata.api.*;
 import com.socrata.model.soql.SoqlQuery;
 
@@ -60,10 +52,11 @@ public class SodaCollector implements Collector {
 		
 		for (Object o : jsonPayload.toArray()) {
 			JSONObject jo = ((JSONObject) o);
-			//TODO: get lat / lon from MongoDB sensor data
-			// int zipcode = getZipCode( double lat, double lon);
-			int zipcode = getZipCode(jo.get("int_id"));
-			
+			Object kits_id = jo.get("int_id");
+			if (kits_id == null)
+				continue;
+			int zipcode = getZipCode(kits_id.toString());
+
 			HashMap<String, Double> data = new HashMap<String, Double>();
 			for (Object key : jo.keySet()) {
 				data.put((String)key, getRankedValue(key, jo.get(key)));
@@ -80,7 +73,21 @@ public class SodaCollector implements Collector {
 	 * @return
 	 */
 	private Integer getZipCode(Object field) {
-		return 0;
+		return Integer.parseInt(field.toString());
+	}
+	
+	
+	/**
+	 * Given KITS ID, look up MongoDB lat / lon coordinates, and use Google Maps class to convert that to zip code
+	 * @param id	KITS ID from the traffic sensor database
+	 * @return
+	 */
+	// TODO: Write this function
+	private Integer getZipCode(String id, String extraparam) { // extraparam added to avoid calling this function for now.		
+		double lat = 0;
+		double lon = 0;
+		
+		return GoogleZipFinder.getZipCode(lat, lon);
 	}
 
 	/**

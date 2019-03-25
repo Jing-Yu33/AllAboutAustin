@@ -18,6 +18,7 @@ import com.socrata.model.soql.SoqlQuery;
  * Collects education data: high school graduation rates.
  *
  * If I make a change here can I commit
+ * 			Yes!
  */
 
 public class SchoolCollector implements Collector {
@@ -57,7 +58,7 @@ public class SchoolCollector implements Collector {
 		
 		for (Object o : jsonPayload.toArray()) {
 			JSONObject jo = ((JSONObject) o);
-			int zipcode = getZipCode(jo.get("school"));
+			int zipcode = getZipCode(jo.get("school").toString());
 			HashMap<String, Double> data = new HashMap<String, Double>();
 			for (Object key : jo.keySet()) {
 				if (((String) key).contains("2016")) {
@@ -71,13 +72,14 @@ public class SchoolCollector implements Collector {
 	}
 	
 	/**
-	 * Convert a field into a zipcode. Possibly look up other databases.
+	 * Convert a field into a zipcode
 	 * @param field
 	 * @return
 	 */
 	private Integer getZipCode(Object field) {
-		//TODO: overwrite this placeholder code
-		return ((String) field).length();
+		String name = field.toString();
+		name = name.replaceAll(" HS", " High School");
+		return GoogleZipFinder.getZipCode(name);
 	}
 
 	/**
