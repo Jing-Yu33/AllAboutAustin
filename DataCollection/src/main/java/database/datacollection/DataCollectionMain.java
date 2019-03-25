@@ -14,7 +14,7 @@ public class DataCollectionMain {
 		//demoZomatoCollector();
 		//demoSchoolCollector();
 		//demoSensorDataCollector();
-		System.out.println((new SodaCollector()).getZipCode(42.43,-71.62));
+		System.out.println(GoogleZipFinder.getZipCode("Atkins High School"));
 	}
 
 	private static void demoSodaCollector() {

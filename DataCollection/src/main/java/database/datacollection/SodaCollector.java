@@ -24,10 +24,6 @@ import com.socrata.model.soql.SoqlQuery;
 
 public class SodaCollector implements Collector {
 	
-	//Both keys are slightly obscured for Git security reasons
-	//private static final String GOOGLE_MAPS_KEY = "SyBhecwiFsviDar_WNPG9VgTWioeFC8zusk"; // Original // Prepend with AIza
-	private static final String GOOGLE_MAPS_KEY = "SyD82V-J6GtAhdAligfJk8G9XAPO0E0WICI"; // Project-created // Prepend with AIza
-
 	public DataSet getNewData() throws IOException {
 
 		Soda2Consumer consumer = Soda2Consumer.newConsumer("https://data.austintexas.gov/");
@@ -79,54 +75,12 @@ public class SodaCollector implements Collector {
 	}
 	
 	/**
-	 * Convert a field into a zipcode. Possibly look up other databases.
+	 * Placeholder for zipcode function. Change to use Google Maps class.
 	 * @param field
 	 * @return
 	 */
 	private Integer getZipCode(Object field) {
 		return 0;
-	}
-	
-	public String getZipCode(double lat, double lon) {
-
-		//Use Google Maps to find zip code for the coordinates
-		Client client = ClientBuilder.newClient();
-		WebTarget resource = client.target("https://maps.googleapis.com/maps/api/geocode/json");
-		resource = resource.queryParam("latlng", Double.toString(lat) + "," + Double.toString(lon));
-		resource = resource.queryParam("key", GOOGLE_MAPS_KEY);
-
-		Builder request = resource.request();
-		request.accept(MediaType.APPLICATION_JSON);
-
-		Response response = request.get();
-
-		if (response.getStatusInfo().getFamily() != Family.SUCCESSFUL) {
-			return "N/A";
-		}
-
-		String payload = response.readEntity(String.class);
-		JSONObject jsonPayload;
-		try {
-			jsonPayload = (JSONObject) (new JSONParser()).parse(payload);
-		} catch (ParseException e) {
-			return "N/A";
-		}
-
-		try {
-			JSONArray results = (JSONArray) jsonPayload.get("results");
-			JSONObject result = (JSONObject) results.get(0);
-			JSONArray addrComponents = (JSONArray) result.get("address_components");
-			for (Object o : addrComponents) {
-				JSONObject jo = (JSONObject) o;
-				if (((JSONArray) jo.get("types")).get(0).equals("postal_code")) {
-					return jo.get("short_name").toString();
-				}
-			}
-		} catch (Exception e) {
-			return "N/A";
-		}
-		
-		return "N/A";
 	}
 
 	/**
