@@ -14,7 +14,7 @@ import org.json.simple.parser.ParseException;
 
 public class GoogleZipFinder {
 	//Key is slightly obscured for Git security reasons
-	private static final String GOOGLE_MAPS_KEY = "SyA1Kk6GzjZDS0FhojVc0LJqTc4YcwSBE8w"; // Prepend with AIza
+	private static final String GOOGLE_MAPS_KEY = "AIzaSyA1Kk6GzjZDS0FhojVc0LJqTc4YcwSBE8w"; // Prepend with AIza
 	private static final int BAD_RESULT = 0; // Zipcode to return for failed query
 	
 	public static int getZipCode(String search) {

@@ -1,5 +1,7 @@
 package database.datacollection;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -99,7 +101,25 @@ public class MongoStorage {
 	public static void updateData() {
 		
 	}
-	
+
+	public static ArrayList<FoodData> getFoodData()
+	{
+		//helper function for mongoDB interfacing to get access to data
+		return new ArrayList<FoodData>();
+	}
+
+	public static ArrayList<FoodData> getTrafficData()
+	{
+		//helper function for mongoDB interfacing to get access to data
+		return new ArrayList<FoodData>();
+	}
+
+	public static ArrayList<FoodData> getSchoolData()
+	{
+		//helper function for mongoDB interfacing to get access to data
+		return new ArrayList<FoodData>();
+	}
+
 //	public static void queryData() {
 //		Query<Zipcode> query = datastore.createQuery(Zipcode.class);
 //		List<Zipcode> zipcodes = query.asList();
