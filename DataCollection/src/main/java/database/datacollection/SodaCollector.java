@@ -1,6 +1,7 @@
 package database.datacollection;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
@@ -68,26 +69,18 @@ public class SodaCollector implements Collector {
 	}
 	
 	/**
-	 * Placeholder for zipcode function. Change to use Google Maps class.
-	 * @param field
-	 * @return
-	 */
-	private Integer getZipCode(Object field) {
-		return Integer.parseInt(field.toString());
-	}
-	
-	
-	/**
 	 * Given KITS ID, look up MongoDB lat / lon coordinates, and use Google Maps class to convert that to zip code
 	 * @param id	KITS ID from the traffic sensor database
 	 * @return
 	 */
-	// TODO: Write this function
-	private Integer getZipCode(String id, String extraparam) { // extraparam added to avoid calling this function for now.		
-		double lat = 0;
-		double lon = 0;
-		
-		return GoogleZipFinder.getZipCode(lat, lon);
+	private Integer getZipCode(String id) {
+		TrafficSensorData match = MongoStorage.getSensorData(id);
+		if (match == null) {
+			System.out.println("No match for ID " + id);
+			return 0;
+		}
+		System.out.println("ID " + id + " is at " + match.getLat() + ", " + match.getLon());
+		return GoogleZipFinder.getZipCode(match.getLat(), match.getLon());
 	}
 
 	/**

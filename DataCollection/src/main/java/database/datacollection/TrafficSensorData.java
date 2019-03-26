@@ -23,4 +23,15 @@ public class TrafficSensorData {
 		this.lon = lon;		
 	}
 
+	public String getKitsId() {
+		return kits_id;
+	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public double getLon() {
+		return lon;
+	}
 }

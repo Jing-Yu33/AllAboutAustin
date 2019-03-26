@@ -10,8 +10,8 @@ public class DataCollectionMain {
 
 	public static void main(String[] args) {
 		MongoStorage.setUp();
-		//demoSodaCollector();
-		demoZomatoCollector();
+		demoSodaCollector();
+		//demoZomatoCollector();
 		//demoSchoolCollector();
 		//demoSensorDataCollector();
 	}
