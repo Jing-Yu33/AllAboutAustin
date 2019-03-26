@@ -26,5 +26,12 @@ public class SchoolData {
 		this._2016_class_size = _2016_class_size;
 	}
 
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public Double getAggregate_rating() {
+		return _2016_graduated;
+	}
 }
 

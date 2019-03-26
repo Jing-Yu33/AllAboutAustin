@@ -57,7 +57,15 @@ public class TrafficData {
 		this.direction = direction;
 		
 	}
-	
 
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public Double getAggregate_rating(){
+
+		return speed;
+	}
 }
 

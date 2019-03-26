@@ -18,12 +18,17 @@ public class ZomatoCollector implements Collector {
 	private static final String ZOMATO_KEY = "94d75c51c21ca2fce1a0413c617f9394";
 
 	public DataSet getNewData() throws IOException {
+		return getNewData(0);
+	}
+	
+	public DataSet getNewData(int offset) throws IOException {
 		DataSet ds = new DataSet();
 		Client client = ClientBuilder.newClient();
 
 		WebTarget resource = client.target("https://developers.zomato.com/api/v2.1/search");
 		resource = resource.queryParam("entity_id", "278"); // 278 is Austin
 		resource = resource.queryParam("entity_type", "city");
+		resource = resource.queryParam("start", Integer.toString(offset));
 
 		Builder request = resource.request();
 		request.header("user-key", ZOMATO_KEY);
@@ -64,6 +69,8 @@ public class ZomatoCollector implements Collector {
 	private double makeRankedValue(JSONObject restaurant) {
 		// TODO: Accomodate multiple restaurants in the same zip code. This overwrites each with the newest.
 		// * 2 to adjust for 5 star ratings
+
+		// TODO: Lookup mongoDB current ranking and adjust accordingly
 		return 2 * Double.parseDouble(JSONfind(restaurant, new String[] {"restaurant", "user_rating", "aggregate_rating"}).toString());
 	}
 	

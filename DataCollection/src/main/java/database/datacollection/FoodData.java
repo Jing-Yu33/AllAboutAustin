@@ -20,5 +20,13 @@ public class FoodData {
 		this.zipcode = zipcode;
 		this.aggregate_rating = aggregate_rating;
 	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public Double getAggregate_rating() {
+		return aggregate_rating;
+	}
 }
 

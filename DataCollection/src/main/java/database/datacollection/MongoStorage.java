@@ -1,5 +1,7 @@
 package database.datacollection;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class MongoStorage {
 	static Morphia morphia;
 	static Datastore datastore;
 	
-	enum DataTypes {TRAFFIC_DATA, EDUCATION_DATA, FOOD_DATA};
+	enum DataTypes {TRAFFIC_DATA, EDUCATION_DATA, FOOD_DATA, TRAFFIC_SENSOR_DATA};
 	
 	public static void setUp() {
 		
@@ -77,8 +79,20 @@ public class MongoStorage {
 					
 					datastore.save(data);		
 			   }
+			  break;
 		  }
 		    // code block
+		  
+		  case TRAFFIC_SENSOR_DATA:{
+				for(Integer id: ds.zipData.keySet()) {
+					HashMap<String, Double> properties = ds.zipData.get(id);
+					TrafficSensorData data = new TrafficSensorData(id.toString(), 
+													   properties.get("location_latitude"), properties.get("location_longitude"));
+					
+					datastore.save(data);
+				}
+				break;
+	  		}
 		}
 
 		
@@ -87,18 +101,42 @@ public class MongoStorage {
 	public static void updateData() {
 		
 	}
+
+	public static ArrayList<FoodData> getFoodData()
+	{
+		Query<FoodData> query = datastore.createQuery(FoodData.class);
+		List<FoodData> datapoints = query.asList();
+		return new ArrayList<FoodData>(datapoints);
+	}
+
+	public static ArrayList<TrafficData> getTrafficData()
+	{
+		Query<TrafficData> query = datastore.createQuery(TrafficData.class);
+		List<TrafficData> datapoints = query.asList();
+		return new ArrayList<TrafficData>(datapoints);
+	}
+
+	public static ArrayList<SchoolData> getSchoolData()
+	{
+		Query<SchoolData> query = datastore.createQuery(SchoolData.class);
+		List<SchoolData> datapoints = query.asList();
+		return new ArrayList<SchoolData>(datapoints);
+	}
 	
-//	public static void queryData() {
-//		Query<Zipcode> query = datastore.createQuery(Zipcode.class);
-//		List<Zipcode> zipcodes = query.asList();
-//		for(Zipcode zipcode : zipcodes) {
-//			System.out.println(zipcode);
-//		}
-//	}
+	public static ArrayList<TrafficSensorData> getSensorData() {
+		Query<TrafficSensorData> query = datastore.createQuery(TrafficSensorData.class);
+		List<TrafficSensorData> datapoints = query.asList();
+		return new ArrayList<TrafficSensorData>(datapoints);
+	}
 	
-//	public static void main(String[] args) {
-//		setUp();
-//		saveData();
-//		queryData();
-//	}
+	public static TrafficSensorData getSensorData(String id) {
+		Query<TrafficSensorData> query = datastore.createQuery(TrafficSensorData.class).field("kits_id").equal(id);
+		List<TrafficSensorData> datapoints = query.asList();
+		
+		if (datapoints.size() < 1)
+			return null;
+		else
+			return datapoints.get(0);
+	}
+	
 }

@@ -1,12 +1,11 @@
 package database.datacollection;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import javax.ws.rs.core.Response;
 import com.socrata.api.*;
 import com.socrata.model.soql.SoqlQuery;
@@ -17,7 +16,7 @@ import com.socrata.model.soql.SoqlQuery;
  */
 
 public class SodaCollector implements Collector {
-
+	
 	public DataSet getNewData() throws IOException {
 
 		Soda2Consumer consumer = Soda2Consumer.newConsumer("https://data.austintexas.gov/");
@@ -54,7 +53,11 @@ public class SodaCollector implements Collector {
 		
 		for (Object o : jsonPayload.toArray()) {
 			JSONObject jo = ((JSONObject) o);
-			int zipcode = getZipCode(jo.get("int_id"));
+			Object kits_id = jo.get("int_id");
+			if (kits_id == null)
+				continue;
+			int zipcode = getZipCode(kits_id.toString());
+
 			HashMap<String, Double> data = new HashMap<String, Double>();
 			for (Object key : jo.keySet()) {
 				data.put((String)key, getRankedValue(key, jo.get(key)));
@@ -66,13 +69,18 @@ public class SodaCollector implements Collector {
 	}
 	
 	/**
-	 * Convert a field into a zipcode. Possibly look up other databases.
-	 * @param field
+	 * Given KITS ID, look up MongoDB lat / lon coordinates, and use Google Maps class to convert that to zip code
+	 * @param id	KITS ID from the traffic sensor database
 	 * @return
 	 */
-	private Integer getZipCode(Object field) {
-		//TODO: overwrite this placeholder code
-		return Integer.parseInt((String) field);
+	private Integer getZipCode(String id) {
+		TrafficSensorData match = MongoStorage.getSensorData(id);
+		if (match == null) {
+			System.out.println("No match for ID " + id);
+			return 0;
+		}
+		System.out.println("ID " + id + " is at " + match.getLat() + ", " + match.getLon());
+		return GoogleZipFinder.getZipCode(match.getLat(), match.getLon());
 	}
 
 	/**
@@ -88,5 +96,45 @@ public class SodaCollector implements Collector {
 		} catch (Exception e) {
 			return 5.0;
 		}
+	}
+	
+	public DataSet getSensorInfoData() throws IOException {
+
+		Soda2Consumer consumer = Soda2Consumer.newConsumer("https://data.austintexas.gov/");
+
+		// To get a raw String of the results
+		Response response;
+		try {
+			response = consumer.query("wakh-bdjq", HttpLowLevel.JSON_TYPE, SoqlQuery.SELECT_ALL);
+		} catch (Exception e) {
+			throw new IOException(e.toString());
+		}
+
+		String payload = response.readEntity(String.class);
+		JSONArray jsonPayload;
+		try {
+			jsonPayload = (JSONArray) (new JSONParser()).parse(payload);
+		} catch (ParseException e) {
+			throw new IOException(e.toString());
+		}
+		
+		DataSet ds = new DataSet();
+		
+		for (Object o : jsonPayload.toArray()) {
+			JSONObject jo = ((JSONObject) o);
+			
+			if (jo.get("kits_id") == null)
+				continue;
+			int zipcode = Integer.parseInt(jo.get("kits_id").toString()); // Use KITS id as primary key
+			
+			HashMap<String, Double> data = new HashMap<String, Double>();
+			for (Object key : jo.keySet()) {
+				if (key.equals("location_latitude") || key.equals("location_longitude"))
+						data.put((String)key, getRankedValue(key, jo.get(key)));
+			}
+			ds.addZipcodeData(zipcode, data);
+		}
+		
+		return ds;
 	}
 }
