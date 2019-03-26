@@ -69,6 +69,8 @@ public class ZomatoCollector implements Collector {
 	private double makeRankedValue(JSONObject restaurant) {
 		// TODO: Accomodate multiple restaurants in the same zip code. This overwrites each with the newest.
 		// * 2 to adjust for 5 star ratings
+
+		// TODO: Lookup mongoDB current ranking and adjust accordingly
 		return 2 * Double.parseDouble(JSONfind(restaurant, new String[] {"restaurant", "user_rating", "aggregate_rating"}).toString());
 	}
 	

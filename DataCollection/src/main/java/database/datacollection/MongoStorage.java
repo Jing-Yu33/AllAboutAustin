@@ -108,16 +108,16 @@ public class MongoStorage {
 		return new ArrayList<FoodData>();
 	}
 
-	public static ArrayList<FoodData> getTrafficData()
+	public static ArrayList<TrafficData> getTrafficData()
 	{
 		//helper function for mongoDB interfacing to get access to data
-		return new ArrayList<FoodData>();
+		return new ArrayList<TrafficData>();
 	}
 
-	public static ArrayList<FoodData> getSchoolData()
+	public static ArrayList<SchoolData> getSchoolData()
 	{
 		//helper function for mongoDB interfacing to get access to data
-		return new ArrayList<FoodData>();
+		return new ArrayList<SchoolData>();
 	}
 
 //	public static void queryData() {
