@@ -4,34 +4,50 @@ import java.util.ArrayList;
 
 public class Averaging {
     public double getFoodAverage(String zip){
-        int numZips=74;
         ArrayList<FoodData> foodData= MongoStorage.getFoodData();
+        double runningSum = 0;
+        double count = 0;
         for(int i=0;i<foodData.size();i++)
         {
-            //0 if no schools are in this zip code
-            //Psudocode for collection
-           // if(foodData.get(i).getZip().equals(zip))
-           //return foodData.get(i).getAggregate
+             if(foodData.get(i).getZipcode().equals(zip)) {
+                 count++;
+                 runningSum += foodData.get(i).getAggregate_rating();
+             }
         }
-        return 0.0;
+        if(count > 0)
+            return runningSum/count;
+        else return 0.0;
     }
 
-    public double getTrafficAverage(){
+    public double getTrafficAverage(String zip){
         ArrayList<TrafficData> trafficData = MongoStorage.getTrafficData();
-        //100 ranking if no data is found
-        //Psudocode for collection
-        // if(trafficData.get(i).getZip().equals(zip))
-        //return trafficData.get(i).getAggregate
-        return 0.0;
+        double runningSum = 0;
+        double count = 0;
+        for(int i=0;i<trafficData.size();i++)
+        {
+            if(trafficData.get(i).getZipcode().equals(zip)) {
+                count++;
+                runningSum += trafficData.get(i).getAggregate_rating();
+            }
+        }
+        if(count > 0)
+            return runningSum/count;
+        else return 100.0;
     }
 
-    public double getSchoolAverage(){
+    public double getSchoolAverage(String zip){
         ArrayList<SchoolData> schoolData= MongoStorage.getSchoolData();
-        //0 if no schools are in this zip code
-        //Psudocode for collection
-        // if(trafficData.get(i).getZip().equals(zip))
-        //return trafficData.get(i).getAggregate
-
-        return 0.0;
+        double runningSum = 0;
+        double count = 0;
+        for(int i=0;i<schoolData.size();i++)
+        {
+            if(schoolData.get(i).getZipcode().equals(zip)) {
+                count++;
+                runningSum += schoolData.get(i).getAggregate_rating();
+            }
+        }
+        if(count > 0)
+            return runningSum/count;
+        else return 0.0;
     }
 }
