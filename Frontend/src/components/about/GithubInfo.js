@@ -16,7 +16,7 @@ class GithubInfo extends React.Component {
         var members = ["Iucundus", "AlienEdith", "zdwempe", "Graysless", "cpe342", "justindpnt"];
         for(var i in members){
             var username = members[i];
-            var commits =  await axios.get("https://api.github.com/repos/Iucundus/AustinData/commits?author="+members[i]);
+            var commits =  await axios.get("https://api.github.com/repos/Iucundus/AustinData/commits?author="+members[i]+"&per_page=500");
             var issues = await axios.get("https://api.github.com/repos/Iucundus/AustinData/issues?creator="+members[i]);
             this.setState({[username]: {
                 commits: commits.data.length,
