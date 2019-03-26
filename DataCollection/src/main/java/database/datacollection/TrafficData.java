@@ -64,8 +64,8 @@ public class TrafficData {
 	}
 
 	public Double getAggregate_rating(){
-		// TODO: calculate and return aggregate_rating
-		return 0.0;
+
+		return speed;
 	}
 }
 

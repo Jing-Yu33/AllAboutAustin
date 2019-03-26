@@ -31,8 +31,7 @@ public class SchoolData {
 	}
 
 	public Double getAggregate_rating() {
-		// TODO: calculate and return Aggregate rating
-		return 0.0;
+		return _2016_graduated;
 	}
 }
 

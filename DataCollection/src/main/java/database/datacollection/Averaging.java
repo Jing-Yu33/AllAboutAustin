@@ -15,7 +15,7 @@ public class Averaging {
              }
         }
         if(count > 0)
-            return runningSum/count;
+            return 10*runningSum/count;
         else return 0.0;
     }
 
@@ -47,7 +47,7 @@ public class Averaging {
             }
         }
         if(count > 0)
-            return runningSum/count;
+            return 100*runningSum/count;
         else return 0.0;
     }
 }
