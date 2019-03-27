@@ -1,4 +1,4 @@
-package database.datacollection;
+package database.datacollection.models;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
@@ -10,6 +10,7 @@ import org.mongodb.morphia.annotations.*;
 public class TrafficData {
 	@Id @Property
 	private String zipcode;
+	
 	private Double detname;
 	private Double intname;
 	private Double occupancy;

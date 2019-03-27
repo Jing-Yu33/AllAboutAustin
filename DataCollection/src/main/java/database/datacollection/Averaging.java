@@ -2,6 +2,10 @@ package database.datacollection;
 
 import java.util.ArrayList;
 
+import database.datacollection.models.FoodData;
+import database.datacollection.models.SchoolData;
+import database.datacollection.models.TrafficData;
+
 public class Averaging {
     public double getFoodAverage(String zip){
         ArrayList<FoodData> foodData= MongoStorage.getFoodData();

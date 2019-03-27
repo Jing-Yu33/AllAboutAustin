@@ -14,7 +14,7 @@ public class DataCollectionMain {
 		//demoZomatoCollector();
 		//demoSchoolCollector();
 		//demoSensorDataCollector();
-		MongoStorage.saveCombinedZipcodeData();
+//		MongoStorage.saveCombinedZipcodeData();
 	}
 
 	private static void demoSodaCollector() {

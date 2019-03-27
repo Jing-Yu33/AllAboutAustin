@@ -1,4 +1,4 @@
-package database.datacollection;
+package database.datacollection.models;
 import java.util.ArrayList;
 
 import org.bson.types.ObjectId;

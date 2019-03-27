@@ -14,6 +14,11 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 
+import database.datacollection.models.FoodData;
+import database.datacollection.models.SchoolData;
+import database.datacollection.models.TrafficData;
+import database.datacollection.models.Zipcode;
+
 /**
  * Handles all data collection interactions with the MongoDB database.
  * This should implement the MongoDB Java framework. 
@@ -31,12 +36,12 @@ public class MongoStorage {
 	public static void setUp() {
 		
 		// Connect to Mongo DB
-		MongoClientURI uri = new MongoClientURI("mongodb://amber:austindata@personal-shard-00-00-fxnjy.mongodb.net:27017,personal-shard-00-01-fxnjy.mongodb.net:27017,personal-shard-00-02-fxnjy.mongodb.net:27017/AustinData?ssl=true&replicaSet=personal-shard-0&authSource=admin&retryWrites=true");
+		MongoClientURI uri = new MongoClientURI("mongodb://aaa:allaboutaustin@allaboutaustin-shard-00-00-9ffdy.mongodb.net:27017,allaboutaustin-shard-00-01-9ffdy.mongodb.net:27017,allaboutaustin-shard-00-02-9ffdy.mongodb.net:27017/test?ssl=true&replicaSet=AllAboutAustin-shard-0&authSource=admin&retryWrites=true");
 		mongoClient = new MongoClient(uri);
 		
 		// Set up Morphia connect to database and collection
 		morphia = new Morphia();
-		morphia.mapPackage("database.datacollection");
+		morphia.mapPackage("database.datacollection.models");
 		datastore = morphia.createDatastore(mongoClient, "AustinData");
 		datastore.ensureIndexes();
 	}
