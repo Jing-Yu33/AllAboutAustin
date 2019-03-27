@@ -17,6 +17,7 @@ import com.mongodb.client.MongoDatabase;
 import database.datacollection.models.FoodData;
 import database.datacollection.models.SchoolData;
 import database.datacollection.models.TrafficData;
+import database.datacollection.models.TrafficSensorData;
 import database.datacollection.models.Zipcode;
 
 /**
@@ -144,7 +145,6 @@ public class MongoStorage {
 	
 	
 	public static void saveCombinedZipcodeData() throws IOException {
-		ArrayList<Zipcode> list = new ArrayList<Zipcode>();
 		
 		for(String zipcode: ZipcodeCollector.getZipcodes()) {
 			
@@ -155,15 +155,18 @@ public class MongoStorage {
 			Double as = 0.0;  
 			
 			Query<FoodData> query_food = datastore.createQuery(FoodData.class).field("zipcode").contains(zipcode);
-			FoodData fd = query_food.field("zipcode").contains("78704").asList().get(0);
+			FoodData fd = query_food.asList().get(0);
 
-			Query<TrafficData> query_traffic = datastore.createQuery(TrafficData.class).field("zipcode").contains(zipcode);;
+			Query<TrafficData> query_traffic = datastore.createQuery(TrafficData.class).field("zipcode").contains(zipcode);
 			TrafficData td = query_traffic.asList().get(0);
 			
-			Query<SchoolData> query_education = datastore.createQuery(SchoolData.class).field("zipcode").contains(zipcode);;
+			Query<SchoolData> query_education = datastore.createQuery(SchoolData.class).field("zipcode").contains(zipcode);
 			SchoolData ed = query_education.asList().get(0);
 			
 			Zipcode zc = new Zipcode(zipcode, fs, ts, es, as, fd, td, ed);
+			datastore.save(zc);
 		}
+		
+		
 	}
 }

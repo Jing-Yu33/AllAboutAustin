@@ -1,4 +1,4 @@
-package database.datacollection;
+package database.datacollection.models;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
