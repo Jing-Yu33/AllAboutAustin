@@ -15,11 +15,23 @@ class GithubInfo extends React.Component {
     getGithubData = async () => {
         var members = ["Iucundus", "AlienEdith", "zdwempe", "Graysless", "cpe342", "justindpnt"];
         for(var i in members){
+            var commitsNum = 0;
             var username = members[i];
-            var commits =  await axios.get("https://api.github.com/repos/Iucundus/AustinData/commits?author="+members[i]+"&per_page=500");
-            var issues = await axios.get("https://api.github.com/repos/Iucundus/AustinData/issues?creator="+members[i]);
+            //access_token=29141c907671b2c7b85ae8bfa45b1c16f7e864a7
+            for(var j=1; j<3; j++){
+                var commits = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/commits`, {
+                    params:{
+                        per_page: 100,
+                        page: j,
+                        author:members[i],
+                        access_token: process.env.REACT_APP_LOCAL_GITHUB_ACCESS_TOKEN
+                    }
+                });
+                commitsNum += commits.data.length;
+            }
+            var issues = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/issues?creator=${members[i]}&access_token=${process.env.REACT_APP_LOCAL_GITHUB_ACCESS_TOKEN}`);
             this.setState({[username]: {
-                commits: commits.data.length,
+                commits: commitsNum,
                 issues: issues.data.length
             }})
         }
