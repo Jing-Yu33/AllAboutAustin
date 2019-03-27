@@ -8,8 +8,7 @@ import org.mongodb.morphia.annotations.*;
 	    @Index(value = "zipcode", fields = @Field("zipcode"))
 )
 public class TrafficData {
-	@Id
-	private ObjectId id;
+	@Id @Property
 	private String zipcode;
 	private Double detname;
 	private Double intname;

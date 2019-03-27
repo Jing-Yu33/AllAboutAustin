@@ -1,5 +1,6 @@
 package database.datacollection;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,9 +99,6 @@ public class MongoStorage {
 		
 	}
 	
-	public static void updateData() {
-		
-	}
 
 	public static ArrayList<FoodData> getFoodData()
 	{
@@ -139,4 +137,28 @@ public class MongoStorage {
 			return datapoints.get(0);
 	}
 	
+	
+	public static void saveCombinedZipcodeData() throws IOException {
+		ArrayList<Zipcode> list = new ArrayList<Zipcode>();
+		
+		for(String zipcode: ZipcodeCollector.getZipcodes()) {
+			
+			//TODO: score calculation
+			Double fs = 0.0;  
+			Double ts = 0.0;  
+			Double es = 0.0;  
+			Double as = 0.0;  
+			
+			Query<FoodData> query_food = datastore.createQuery(FoodData.class).field("zipcode").contains(zipcode);
+			FoodData fd = query_food.field("zipcode").contains("78704").asList().get(0);
+
+			Query<TrafficData> query_traffic = datastore.createQuery(TrafficData.class).field("zipcode").contains(zipcode);;
+			TrafficData td = query_traffic.asList().get(0);
+			
+			Query<SchoolData> query_education = datastore.createQuery(SchoolData.class).field("zipcode").contains(zipcode);;
+			SchoolData ed = query_education.asList().get(0);
+			
+			Zipcode zc = new Zipcode(zipcode, fs, ts, es, as, fd, td, ed);
+		}
+	}
 }

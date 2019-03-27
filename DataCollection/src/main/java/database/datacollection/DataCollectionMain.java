@@ -8,12 +8,13 @@ import java.io.IOException;
 
 public class DataCollectionMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		MongoStorage.setUp();
-		demoSodaCollector();
+//		demoSodaCollector();
 		//demoZomatoCollector();
 		//demoSchoolCollector();
 		//demoSensorDataCollector();
+		MongoStorage.saveCombinedZipcodeData();
 	}
 
 	private static void demoSodaCollector() {

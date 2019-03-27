@@ -8,8 +8,7 @@ import org.mongodb.morphia.annotations.*;
 	    @Index(value = "zipcode", fields = @Field("zipcode"))
 )
 public class FoodData {
-	@Id
-	private ObjectId id;
+	@Id @Property
 	private String zipcode;
 	private Double aggregate_rating;
 	
@@ -27,6 +26,10 @@ public class FoodData {
 
 	public Double getAggregate_rating() {
 		return aggregate_rating;
+	}
+	
+	public String toString() {
+		return "zipcode: "+zipcode+" rating: "+aggregate_rating;
 	}
 }
 

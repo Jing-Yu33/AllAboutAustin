@@ -8,8 +8,7 @@ import org.mongodb.morphia.annotations.*;
 	    @Index(value = "zipcode", fields = @Field("zipcode"))
 )
 public class SchoolData {
-	@Id
-	private ObjectId id;
+	@Id @Property
 	private String zipcode;
 	
 	private Double _2016_graduated;
