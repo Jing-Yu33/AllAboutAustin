@@ -10,12 +10,6 @@ class GithubStats extends React.Component {
 
     getData = async () => {
         var commits = await axios.get("https://api.github.com/repos/Iucundus/AustinData/commits?per_page=500");
-        // var members = ["Iucundus", "AlienEdith", "zdwempe", "Graysless", "cpe342", "justindpnt"];
-        // var commitsNum = 0;
-        // for(var i in members){
-        //     var commits =  await axios.get("https://api.github.com/repos/Iucundus/AustinData/commits?per_page=500&author="+members[i]);
-        //     commitsNum += commits.data.length;
-        // }
         var issues = await axios.get("https://api.github.com/repos/Iucundus/AustinData/issues");
         this.setState({
             commits: commits.data.length,
