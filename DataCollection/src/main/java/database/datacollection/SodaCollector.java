@@ -10,6 +10,8 @@ import javax.ws.rs.core.Response;
 import com.socrata.api.*;
 import com.socrata.model.soql.SoqlQuery;
 
+import database.datacollection.models.TrafficSensorData;
+
 /**
  * Collects SODA data, used for Austin Government sources.
  *
