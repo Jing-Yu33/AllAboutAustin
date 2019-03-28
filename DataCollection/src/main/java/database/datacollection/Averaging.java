@@ -5,19 +5,19 @@ import java.util.HashMap;
 import database.datacollection.models.*;
 
 public class Averaging {
-    public double getFoodAverage(String zip){
+    public static double getFoodAverage(String zip){
         FoodRawData foodFullData = MongoStorage.getFoodRawData(zip);
         HashMap<String, Double> foodData = foodFullData.getPoints();
         return runKeys(foodData);
     }
 
-    public double getTrafficAverage(String zip) {
+    public static double getTrafficAverage(String zip) {
         TrafficRawData trafficFullData = MongoStorage.getTrafficRawData(zip);
         HashMap<String, Double> trafficData = trafficFullData.getPoints();
         return runKeys(trafficData);
     }
 
-    public double getSchoolAverage(String zip) {
+    public static double getSchoolAverage(String zip) {
         SchoolRawData schoolFullData = MongoStorage.getSchoolRawData(zip);
         HashMap<String, Double> trafficData = schoolFullData.getPoints();
         return runKeys(trafficData);
@@ -28,7 +28,7 @@ public class Averaging {
      * @param dataset
      * @return
      */
-    private double runKeys(HashMap<String, Double> dataset) {
+    private static double runKeys(HashMap<String, Double> dataset) {
         double runningSum = 0;
         double count = 0;
         for(String item : dataset.keySet())

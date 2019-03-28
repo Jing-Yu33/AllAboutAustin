@@ -10,11 +10,12 @@ public class DataCollectionMain {
 
 	public static void main(String[] args) throws IOException {
 		MongoStorage.setUp();
-		//demoSodaCollector();
+		demoSodaCollector();
 		//demoZomatoCollector();
 		//demoSchoolCollector();
-		demoSensorDataCollector();
+		//demoSensorDataCollector();
 //		MongoStorage.saveCombinedZipcodeData();
+		//System.out.println(Averaging.getFoodAverage("78756"));
 	}
 
 	private static void demoSodaCollector() {

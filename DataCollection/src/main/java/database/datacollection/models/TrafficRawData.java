@@ -8,6 +8,10 @@ import org.mongodb.morphia.annotations.*;
 
 public class TrafficRawData extends GenericRawData {
 	
+	public TrafficRawData() {
+		super();
+	}
+	
 	public TrafficRawData(String str, HashMap<String, Double> props) {
 		super(str, props);
 	}

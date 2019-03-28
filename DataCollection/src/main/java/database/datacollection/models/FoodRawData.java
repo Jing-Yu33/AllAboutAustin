@@ -8,6 +8,10 @@ import org.mongodb.morphia.annotations.*;
 
 public class FoodRawData extends GenericRawData {
 	
+	public FoodRawData() {
+		super();
+	}
+	
 	public FoodRawData(String str, HashMap<String, Double> props) {
 		super(str, props);
 	}
