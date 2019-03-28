@@ -1,5 +1,7 @@
 package info.allaboutaustin.RestfulApi.models;
 
+import java.util.HashMap;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,8 +12,8 @@ import lombok.Getter;
 public class SchoolData {
 	@Id
 	private String zipcode;
+	private Double _2016_rate;
+	private HashMap<String, Double> schools;
 	
-	public SchoolData(String zipcode) {
-		this.zipcode = zipcode;
-	}
+	private SchoolData() {}
 }

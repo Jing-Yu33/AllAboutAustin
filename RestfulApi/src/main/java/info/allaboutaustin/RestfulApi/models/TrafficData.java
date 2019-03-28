@@ -1,5 +1,7 @@
 package info.allaboutaustin.RestfulApi.models;
 
+import java.util.HashMap;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,8 +12,8 @@ import lombok.Getter;
 public class TrafficData {
 	@Id
 	private String zipcode;
+	private Double speed;
+	private HashMap<String, Double> sensors;
 	
-	public TrafficData(String zipcode) {
-		this.zipcode = zipcode;
-	}
+	private TrafficData() {}
 }

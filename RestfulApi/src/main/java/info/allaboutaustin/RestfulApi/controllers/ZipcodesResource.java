@@ -42,8 +42,7 @@ public class ZipcodesResource {
 	// Return All zipcodes information based on category order
 	@GetMapping("")
 	public List<Zipcode> getAllZipcodes(@RequestParam(name="sortBy", required=false, defaultValue="average") String sortBy,
-										@RequestParam(name="order", required=false, defaultValue="desc") String order,
-										@RequestParam(name="amount", required=false, defaultValue="") String amount){
+										@RequestParam(name="order", required=false, defaultValue="desc") String order){
 		
 		List<Zipcode> list = ZipcodeRepo.findAll();
 		switch(sortBy) {
@@ -55,15 +54,7 @@ public class ZipcodesResource {
 		}
 		
 		if(order.equals("asc"))	Collections.reverse(list);
-		
-//		try {
-//			int number = Integer.valueOf(amount);
-//			List newList = list.subList(0, number);
-//			return newList;
-//		}catch(Exception e){
-//			throw e;	//TODOs: change to paramter error exception
-//		}
-//		
+
 		return list;
 	}
 	
@@ -96,24 +87,4 @@ public class ZipcodesResource {
 		return zipcodes;
 	}
 	
-	// Only for create fake data
-	@PostMapping("/save")
-	public void createZipCode() {
-		ZipcodeRepo.deleteAll();
-		FoodData food = new FoodData("78731", 5.2);
-		TrafficData traffic = new TrafficData("78731");
-		SchoolData school = new SchoolData("78731");
-		Zipcode zc = new Zipcode("78705", "7.2", "8.4", "6.7","7.3", food, traffic, school);
-		ZipcodeRepo.save(zc);
-		zc = new Zipcode("78706", "6.3", "7.2", "4.3", "6.9", food, traffic, school);
-		ZipcodeRepo.save(zc);
-		zc = new Zipcode("78707", "8.9", "4.5", "7.5", "7.5", food, traffic, school);
-		ZipcodeRepo.save(zc);
-		zc = new Zipcode("78708", "7.8", "3.5", "9.2", "5.3", food, traffic, school);
-		ZipcodeRepo.save(zc);
-		zc = new Zipcode("78709", "5.3", "6.4", "7.3", "4.5", food, traffic, school);
-		ZipcodeRepo.save(zc);
-	}
-	
-
 }
