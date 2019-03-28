@@ -11,18 +11,14 @@ public class SchoolData {
 	@Id @Property
 	private String zipcode;
 	
-	private Double _2016_graduated;
 	private Double _2016_rate;
-	private Double _2016_class_size;
 	
 	// Required	
 	private SchoolData() {};
 	
-	public SchoolData(String zipcode, Double _2016_graduated, Double _2016_rate, Double _2016_class_size) {
+	public SchoolData(String zipcode,  Double _2016_rate) {
 		this.zipcode = zipcode;
-		this._2016_graduated = _2016_graduated;
 		this._2016_rate = _2016_rate;
-		this._2016_class_size = _2016_class_size;
 	}
 
 	public String getZipcode() {
@@ -30,7 +26,7 @@ public class SchoolData {
 	}
 
 	public Double getAggregate_rating() {
-		return _2016_graduated;
+		return _2016_rate;
 	}
 }
 

@@ -51,12 +51,8 @@ public class MongoStorage {
 			case TRAFFIC_DATA:{
 				for(Integer zipcode: ds.zipData.keySet()) {
 					HashMap<String, Double> properties = ds.zipData.get(zipcode);
-					TrafficData data = new TrafficData(zipcode.toString(), 
-													   properties.get("detname"), properties.get("intname"), properties.get("occupancy"), properties.get("year"),
-													   properties.get("speed"), properties.get("minute"), properties.get("volume"), properties.get("hour"),
-													   properties.get("month"), properties.get("timebin"), properties.get("int_id"), properties.get("row_id"),
-													   properties.get("day"), properties.get("detid"), properties.get("curdatetime"), properties.get("day_of_week"),
-													   properties.get("direction"));
+					TrafficData data = new TrafficData(zipcode.toString(),
+													   properties.get("speed"));
 					
 					datastore.save(data);		
 				}
@@ -67,7 +63,7 @@ public class MongoStorage {
 			  for(Integer zipcode: ds.zipData.keySet()) {
 					HashMap<String, Double> properties = ds.zipData.get(zipcode);
 					SchoolData data = new SchoolData(zipcode.toString(),
-													 properties.get("_2016_graduated"), properties.get("_2016_rate"), properties.get("_2016_class_size"));
+													  properties.get("_2016_rate"));
 					datastore.save(data);								 		
 			   }
 			  break;
@@ -78,7 +74,8 @@ public class MongoStorage {
 			  for(Integer zipcode: ds.zipData.keySet()) {
 					HashMap<String, Double> properties = ds.zipData.get(zipcode);
 					FoodData data = new FoodData(zipcode.toString(), 
-												properties.get("aggregate_rating"));
+												properties.get("aggregate_rating"), new HashMap<String, Double>());
+					// TODO: Add the hashmap part, if necessary, if not, we can just delete all this?
 					
 					datastore.save(data);
 			   }
@@ -208,14 +205,18 @@ public class MongoStorage {
 			Double es = Averaging.getSchoolAverage(zipcode);
 			Double as = (fs + ts + es)/3;
 			
-			Query<FoodData> query_food = datastore.createQuery(FoodData.class).field("zipcode").contains(zipcode);
-			FoodData fd = query_food.asList().get(0);
+			Query<FoodRawData> query_food = datastore.createQuery(FoodRawData.class).field("zipcode").contains(zipcode);
+			FoodRawData frd = query_food.asList().get(0);
+			FoodData fd = new FoodData(zipcode, fs, frd.getPoints());
 
-			Query<TrafficData> query_traffic = datastore.createQuery(TrafficData.class).field("zipcode").contains(zipcode);
-			TrafficData td = query_traffic.asList().get(0);
+			Query<TrafficRawData> query_traffic = datastore.createQuery(TrafficRawData.class).field("zipcode").contains(zipcode);
+			TrafficRawData trd = query_traffic.asList().get(0);
+			TrafficData td = new TrafficData(zipcode, ts);
 			
-			Query<SchoolData> query_education = datastore.createQuery(SchoolData.class).field("zipcode").contains(zipcode);
-			SchoolData ed = query_education.asList().get(0);
+			Query<SchoolRawData> query_education = datastore.createQuery(SchoolRawData.class).field("zipcode").contains(zipcode);
+			SchoolRawData erd = query_education.asList().get(0);
+			SchoolData ed = new SchoolData(zipcode, es);
+
 			
 			Zipcode zc = new Zipcode(zipcode, fs, ts, es, as, fd, td, ed);
 			datastore.save(zc);

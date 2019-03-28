@@ -2,6 +2,8 @@ package database.datacollection.models;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
+import java.util.HashMap;
+
 
 @Entity("Food_Data")
 @Indexes(
@@ -11,13 +13,15 @@ public class FoodData {
 	@Id @Property
 	private String zipcode;
 	private Double aggregate_rating;
+	private HashMap<String, Double> resturaunts;
 	
 	// Required	
 	private FoodData() {};
 	
-	public FoodData(String zipcode, Double aggregate_rating) {
+	public FoodData(String zipcode, Double aggregate_rating, HashMap<String, Double> resturaunts) {
 		this.zipcode = zipcode;
 		this.aggregate_rating = aggregate_rating;
+		this.resturaunts = resturaunts;
 	}
 
 	public String getZipcode() {
