@@ -6,10 +6,11 @@ import { GetOneZipcode } from '../../actions/index';
 class IndividualZipcodePage extends Component {
 
     async componentDidMount(){
-        this.props.GetOneZipcode(this.props.match.params.zipcode);
+        this.props.GetOneZipcode(this.props.match.params.zipcode); 
     }
 
     render(){
+        console.log(this.props.zipcode);
         if(!this.props.zipcode){
             return <div>Loading... / No such zipcode, please check</div>
         }
