@@ -11,11 +11,11 @@ import SortForm from '../searchAndSort/SortForm'
 class Education extends Component {
 
     componentDidMount() {
-        this.props.GetAllZipcodes("education");
+        this.props.GetAllZipcodes("education", "education", "", "10");
     }
 
     onSubmit = (value) => {
-        this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
+        this.props.GetAllZipcodes("education", value.sortByCategory, value.sortByOrder, "10");
     }
 
     render(){

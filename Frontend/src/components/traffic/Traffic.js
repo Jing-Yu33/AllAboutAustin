@@ -11,11 +11,11 @@ import SortForm from '../searchAndSort/SortForm'
 class Traffic extends Component {
 
     componentDidMount() {
-        this.props.GetAllZipcodes("traffic");
+        this.props.GetAllZipcodes("traffic", "traffic", "", "10");
     }
 
     onSubmit = (value) => {
-        this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
+        this.props.GetAllZipcodes("traffic", value.sortByCategory, value.sortByOrder, "10");
     }
 
     render(){

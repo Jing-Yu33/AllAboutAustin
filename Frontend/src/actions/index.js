@@ -21,12 +21,14 @@ export const educationWeight = (weight) => {
     }
 }
 
-export const GetAllZipcodes = (sortBy, order) => {
+export const GetAllZipcodes = (category, sortBy, order, amount) => {
     return async (dispatch) => {
         const response = await DataBase.get("/zipcodes",{
             params: {
+                category,
                 sortBy,
-                order
+                order,
+                amount
             }
         });
         dispatch({
