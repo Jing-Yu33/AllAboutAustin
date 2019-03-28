@@ -41,7 +41,7 @@ public class ZipcodesResource {
 	
 	// Return All zipcodes information based on category order
 	@GetMapping("")
-	public List<Zipcode> getAllZipcodes(@RequestParam(name="sortBy", required=false, defaultValue="") String sortBy,
+	public List<Zipcode> getAllZipcodes(@RequestParam(name="sortBy", required=false, defaultValue="average") String sortBy,
 										@RequestParam(name="order", required=false, defaultValue="desc") String order,
 										@RequestParam(name="amount", required=false, defaultValue="") String amount){
 		
@@ -50,6 +50,7 @@ public class ZipcodesResource {
 			case "food": Collections.sort(list, fc);		break;
 			case "traffic": Collections.sort(list, tc);		break;
 			case "education": Collections.sort(list, ec);	break;
+			case "average": Collections.sort(list, ac);		break;
 			default: Collections.sort(list, ac);
 		}
 		

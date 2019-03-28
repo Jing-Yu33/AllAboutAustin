@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Document(collection = "Zipcodes")
+@Document(collection = "zipcodes")
 public class Zipcode {
 	@Id
 	private String zipcode;
