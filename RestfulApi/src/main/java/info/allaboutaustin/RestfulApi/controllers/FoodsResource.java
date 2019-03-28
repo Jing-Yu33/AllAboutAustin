@@ -35,10 +35,5 @@ public class FoodsResource {
 		return FoodRepo.findByZipcode(zipcode);
 	}
 	
-	@PostMapping("/save")
-	public void createZipCode() {
-		FoodRepo.deleteAll();
-		FoodData food = new FoodData("78705", 5.2);
-		FoodRepo.save(food);
-	}
+
 }

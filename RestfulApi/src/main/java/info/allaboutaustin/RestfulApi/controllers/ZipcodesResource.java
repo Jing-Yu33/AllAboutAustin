@@ -39,24 +39,53 @@ public class ZipcodesResource {
 	ZipcodeEducationComparator ec = new ZipcodeEducationComparator();
 	ZipcodeTrafficComparator tc = new ZipcodeTrafficComparator();
 	
-	// Return All zipcodes information based on category order
-	@GetMapping("")
-	public List<Zipcode> getAllZipcodes(@RequestParam(name="sortBy", required=false, defaultValue="average") String sortBy,
-										@RequestParam(name="order", required=false, defaultValue="desc") String order){
-		
-		List<Zipcode> list = ZipcodeRepo.findAll();
-		switch(sortBy) {
+	//Helper Method: sorting list by specific category order
+	private void sortByCategory(List<Zipcode> list, String category){
+		switch(category) {
 			case "food": Collections.sort(list, fc);		break;
 			case "traffic": Collections.sort(list, tc);		break;
 			case "education": Collections.sort(list, ec);	break;
 			case "average": Collections.sort(list, ac);		break;
 			default: Collections.sort(list, ac);
 		}
+	}
+	
+	
+	/*	Return zipcodes information
+	 *  category: the initial sorting
+	 *  sortBy: sorting by specific category
+	 * 	amount: the number of zipcodes
+	 *  order: ascending order or descending order
+	 */
+	@GetMapping("")
+	public List<Zipcode> getAllZipcodes(
+			@RequestParam(name="category", required=false, defaultValue="") String category,
+			@RequestParam(name="sortBy", required=false, defaultValue="average") String sortBy,
+			@RequestParam(name="order", required=false, defaultValue="desc") String order,
+			@RequestParam(name="amount", required=false, defaultValue="") String amount){
+		
+		List<Zipcode> list = ZipcodeRepo.findAll();
+		
+		if(!category.equals("")) {
+			sortByCategory(list, category);
+		}
+		
+		if(!amount.equals("")) {
+			try {
+				int num = Integer.parseInt(amount);
+				list = list.subList(0, num);
+			} catch (Exception e) {
+				throw e;	// TODO: change to parameter not match exception
+			}
+		}
+		
+		sortByCategory(list, sortBy);
 		
 		if(order.equals("asc"))	Collections.reverse(list);
-
+				
 		return list;
 	}
+	
 	
 	// Return a specific zipcode information by 5-digits zipcode
 	@GetMapping("/{zipcode}")
@@ -68,12 +97,12 @@ public class ZipcodesResource {
 		return zc;
 	}
 	
-	// Return a ranking list of zipcodes based on user-assigned weight
+	// Return a ranking list of 10 top zipcodes based on user-assigned weight
 	@GetMapping("/ranking")
 	public List<Zipcode> searchZipcodeByParameters(
-			@RequestParam(name="food", required=false, defaultValue="0") String food,
-			@RequestParam(name="education", required=false, defaultValue="0") String education,
-			@RequestParam(name="traffic", required=false, defaultValue="0") String traffic) {
+			@RequestParam(name="food", required=false, defaultValue="50") String food,
+			@RequestParam(name="education", required=false, defaultValue="50") String education,
+			@RequestParam(name="traffic", required=false, defaultValue="50") String traffic) {
 		
 		List<Zipcode> zipcodes = ZipcodeRepo.findAll();
 		for(Zipcode zc: zipcodes) {
@@ -83,8 +112,13 @@ public class ZipcodesResource {
 			zc.setTotalScore(totalScore);
 		}
 		Collections.sort(zipcodes, tsc);
-		//TODO: only return top 10 results
+		zipcodes = zipcodes.subList(0, 10);
 		return zipcodes;
 	}
+	
+	
+
+	
+	
 	
 }
