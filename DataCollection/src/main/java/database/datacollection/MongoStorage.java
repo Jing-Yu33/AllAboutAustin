@@ -37,7 +37,7 @@ public class MongoStorage {
 	public static void setUp() {
 		
 		// Connect to Mongo DB
-		MongoClientURI uri = new MongoClientURI("mongodb://aaa:allaboutaustin@allaboutaustin-shard-00-00-9ffdy.mongodb.net:27017,allaboutaustin-shard-00-01-9ffdy.mongodb.net:27017,allaboutaustin-shard-00-02-9ffdy.mongodb.net:27017/test?ssl=true&replicaSet=AllAboutAustin-shard-0&authSource=admin&retryWrites=true");
+		MongoClientURI uri = new MongoClientURI("mongodb://aaa:allaboutaustin@allaboutaustin-shard-00-00-hptoi.mongodb.net:27017,allaboutaustin-shard-00-01-hptoi.mongodb.net:27017,allaboutaustin-shard-00-02-hptoi.mongodb.net:27017/test?ssl=true&replicaSet=AllAboutAustin-shard-0&authSource=admin&retryWrites=true");
 		mongoClient = new MongoClient(uri);
 		
 		// Set up Morphia connect to database and collection

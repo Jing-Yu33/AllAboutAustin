@@ -11,9 +11,9 @@ public class DataCollectionMain {
 	public static void main(String[] args) throws IOException {
 		MongoStorage.setUp();
 //		demoSodaCollector();
-		//demoZomatoCollector();
-		//demoSchoolCollector();
-		//demoSensorDataCollector();
+//		demoZomatoCollector();
+//		demoSchoolCollector();
+//		demoSensorDataCollector();
 //		MongoStorage.saveCombinedZipcodeData();
 	}
 
