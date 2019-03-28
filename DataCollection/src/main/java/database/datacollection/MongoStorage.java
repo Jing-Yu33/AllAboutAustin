@@ -203,10 +203,10 @@ public class MongoStorage {
 		for(String zipcode: ZipcodeCollector.getZipcodes()) {
 			
 			//TODO: score calculation
-			Double fs = 0.0;  
-			Double ts = 0.0;  
-			Double es = 0.0;  
-			Double as = 0.0;  
+			Double fs = Averaging.getFoodAverage(zipcode);
+			Double ts = Averaging.getTrafficAverage(zipcode);
+			Double es = Averaging.getSchoolAverage(zipcode);
+			Double as = (fs + ts + es)/3;
 			
 			Query<FoodData> query_food = datastore.createQuery(FoodData.class).field("zipcode").contains(zipcode);
 			FoodData fd = query_food.asList().get(0);
