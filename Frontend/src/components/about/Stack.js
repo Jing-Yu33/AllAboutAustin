@@ -7,7 +7,7 @@ class Stack extends React.Component {
             <div className="jumbotron">
                 <h3 className="display-4">Tools</h3>
                 <div className="row">
-                    <div className="col-lg-6 my-3">
+                    <div className="col-lg-4 my-sm-3">
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item active">Front End</li>
                             <li className="list-group-item"><b>React</b>: JavaScript Library for design UI</li>
@@ -16,17 +16,16 @@ class Stack extends React.Component {
                             <li className="list-group-item"><b>NPM</b>: Node Package Manager for JavaScript (React)</li>
                         </ul>
                     </div>
-{/*
+
                     <div class="col-lg-4 my-sm-3">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item active">BackEnd</li>
-                            <li class="list-group-item"><b>...</b>: ...</li>
-                            <li class="list-group-item"><b>...</b>: ...</li>
-                            <li class="list-group-item"><b>...</b>: ...</li>
+                            <li class="list-group-item"><b>Springboot</b>: A Java Framework for building RESTful API</li>
+                            <li class="list-group-item"><b>Postman</b>: Testing and documentation tool for API</li>
                         </ul>
                     </div>
-*/}
-                    <div className="col-lg-6 my-3">
+
+                    <div className="col-lg-4 my-sm-3">
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item active">Back End / Database</li>
                             <li className="list-group-item"><b>MongoDB</b>: NoSQL Database</li>
