@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import info.allaboutaustin.RestfulApi.models.Food;
+import info.allaboutaustin.RestfulApi.models.FoodData;
 import info.allaboutaustin.RestfulApi.models.Zipcode;
 import info.allaboutaustin.RestfulApi.repositories.FoodsRepository;
 
@@ -24,21 +24,21 @@ public class FoodsResource {
 	
 	// Return All Food info in JSON format
 	@GetMapping("")
-	public List<Food> getAllFoods(){
-		List<Food> list = FoodRepo.findAll();
+	public List<FoodData> getAllFoods(){
+		List<FoodData> list = FoodRepo.findAll();
 		return FoodRepo.findAll();
 	}
 	
 	// Return Food info of a specific zipcode
 	@GetMapping("/{zipcode}")
-	public Food getFoodsByZipcode(@PathVariable String zipcode){
+	public FoodData getFoodsByZipcode(@PathVariable String zipcode){
 		return FoodRepo.findByZipcode(zipcode);
 	}
 	
 	@PostMapping("/save")
 	public void createZipCode() {
 		FoodRepo.deleteAll();
-		Food food = new Food("78705", 5.2);
+		FoodData food = new FoodData("78705", 5.2);
 		FoodRepo.save(food);
 	}
 }

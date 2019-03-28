@@ -1,5 +1,7 @@
 package info.allaboutaustin.RestfulApi.models;
 
+import java.util.ArrayList;
+
 import javax.validation.constraints.Size;
 
 import org.bson.types.ObjectId;
@@ -9,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,14 +19,23 @@ import lombok.Setter;
 @Document(collection = "Zipcodes")
 public class Zipcode {
 	@Id
-//	private ObjectId _id;
 	private String zipcode;
-	private Double foodScore;
-	private Double trafficScore;
-	private Double educationScore;
-	private String desc;
+	
+	// calculated result entry	
+	private Double FoodScore;
+	private Double EducationScore;
+	private Double TrafficScore;
+	private Double AverageScore;
+	
+	// already existed data collections
+	private FoodData FoodData;
+	private TrafficData TrafficData;
+	private SchoolData EducationData;
+	
+	// manually added entry, may need more
+	private ArrayList<String> images;
+	private String description;
 	private String region;
-	private Food foodData;
 	
 	@Setter
 	@JsonIgnore
@@ -31,15 +43,23 @@ public class Zipcode {
 	
 	protected Zipcode() {}
 
-	public Zipcode(String zipcode, String foodScore, String trafficScore, String educationScore, String desc, String region, Food foodData) {
-		super();
+	public Zipcode(String zipcode, String FoodScore, String TrafficScore, String EducationScore, String AverageScore,
+			FoodData FoodData, TrafficData TrafficData, SchoolData EducationData) {
 		this.zipcode = zipcode;
-		this.foodScore = Double.parseDouble(foodScore);
-		this.trafficScore = Double.parseDouble(trafficScore);
-		this.educationScore = Double.parseDouble(educationScore);
-		this.desc = desc;
-		this.region = region;
-		this.foodData = foodData;
+		this.FoodScore = Double.parseDouble(FoodScore);
+		this.TrafficScore = Double.parseDouble(TrafficScore);
+		this.EducationScore = Double.parseDouble(EducationScore);
+		this.AverageScore = Double.parseDouble(AverageScore);
+		this.FoodData = FoodData;
+		this.TrafficData = TrafficData;
+		this.EducationData = EducationData;
+		this.images = new ArrayList<String>();
+		this.description = "desc";
+		this.region = "west";
+	}
+
+	public String toString() {
+	return "ZipCode: "+zipcode+" FoodScore: "+FoodScore+" EducationIndex: "+EducationScore+" TrafficIndex: "+TrafficScore;
 	}
 
 }
