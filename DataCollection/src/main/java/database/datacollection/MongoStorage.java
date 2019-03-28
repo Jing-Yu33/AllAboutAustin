@@ -1,7 +1,6 @@
 package database.datacollection;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +13,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 
-import database.datacollection.models.FoodData;
-import database.datacollection.models.SchoolData;
-import database.datacollection.models.TrafficData;
-import database.datacollection.models.TrafficSensorData;
-import database.datacollection.models.Zipcode;
+import database.datacollection.models.*;
 
 /**
  * Handles all data collection interactions with the MongoDB database.
@@ -32,7 +27,8 @@ public class MongoStorage {
 	static Morphia morphia;
 	static Datastore datastore;
 	
-	enum DataTypes {TRAFFIC_DATA, EDUCATION_DATA, FOOD_DATA, TRAFFIC_SENSOR_DATA};
+	enum DataTypes {TRAFFIC_DATA, EDUCATION_DATA, FOOD_DATA, TRAFFIC_SENSOR_DATA,
+						TRAFFIC_RAW_DATA, EDUCATION_RAW_DATA, FOOD_RAW_DATA};
 	
 	public static void setUp() {
 		
@@ -100,9 +96,37 @@ public class MongoStorage {
 				}
 				break;
 	  		}
-		}
 
-		
+		  
+		// Raw Data Types
+			
+			case TRAFFIC_RAW_DATA: {
+				for(Integer zipcode: ds.zipData.keySet()) {
+						HashMap<String, Double> properties = ds.zipData.get(zipcode);
+						TrafficRawData data = new TrafficRawData(zipcode.toString(), properties);
+						datastore.save(data);								 		
+				}
+				break;
+			}
+
+			case EDUCATION_RAW_DATA: {
+				for(Integer zipcode: ds.zipData.keySet()) {
+						HashMap<String, Double> properties = ds.zipData.get(zipcode);
+						SchoolRawData data = new SchoolRawData(zipcode.toString(), properties);
+						datastore.save(data);								 		
+				}
+				break;
+			}
+			
+			case FOOD_RAW_DATA: {
+				for(Integer zipcode: ds.zipData.keySet()) {
+					HashMap<String, Double> properties = ds.zipData.get(zipcode);
+					FoodRawData data = new FoodRawData(zipcode.toString(), properties);
+					datastore.save(data);								 		
+			}
+			break;
+		}
+		}
 	}
 	
 
