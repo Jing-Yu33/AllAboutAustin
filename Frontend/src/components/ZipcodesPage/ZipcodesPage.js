@@ -134,8 +134,6 @@ class ZipcodesPage extends Component {
     render(){
         const { currentPage } = this.state;
         const zipcodes = _.chunk(this.props.zipcodes, limit);
-
-        console.log(zipcodes);
         if(zipcodes.length === 0){
             return <div>Loading...</div>
         }
@@ -145,7 +143,7 @@ class ZipcodesPage extends Component {
                 TODOs:
                 <ul>
                     <li>Sort Function: determine a default sorting category => new data field - average score?</li>
-                    <li>set different pages: 10 item / page</li>
+                    <li> <strike>set different pages: 8 item / page </strike></li>
                     <li>search function</li>
                     <li>Optional: add more filter checkbox?</li>
                     <li>interactive map</li>
