@@ -7,18 +7,24 @@ import database.datacollection.models.*;
 public class Averaging {
     public static double getFoodAverage(String zip){
         FoodRawData foodFullData = MongoStorage.getFoodRawData(zip);
+        if (foodFullData == null)
+            return 0;
         HashMap<String, Double> foodData = foodFullData.getPoints();
         return runKeys(foodData);
     }
 
     public static double getTrafficAverage(String zip) {
         TrafficRawData trafficFullData = MongoStorage.getTrafficRawData(zip);
+        if (trafficFullData == null)
+            return 0;
         HashMap<String, Double> trafficData = trafficFullData.getPoints();
         return runKeys(trafficData);
     }
 
     public static double getSchoolAverage(String zip) {
         SchoolRawData schoolFullData = MongoStorage.getSchoolRawData(zip);
+        if (schoolFullData == null)
+            return 0;
         HashMap<String, Double> trafficData = schoolFullData.getPoints();
         return runKeys(trafficData);
     }

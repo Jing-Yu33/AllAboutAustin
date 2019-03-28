@@ -46,8 +46,9 @@ public class MongoStorage {
 	
 	// Recieve List<DataSet> from Collectors	
 	public static void saveData(DataSet ds, DataTypes datatype) {
-		
+
 		switch(datatype) {
+		    /*
 			case TRAFFIC_DATA:{
 				for(Integer zipcode: ds.zipData.keySet()) {
 					HashMap<String, Double> properties = ds.zipData.get(zipcode);
@@ -80,7 +81,7 @@ public class MongoStorage {
 					datastore.save(data);
 			   }
 			  break;
-		  }
+		  }*/
 		    // code block
 		  
 		  case TRAFFIC_SENSOR_DATA:{
@@ -94,7 +95,7 @@ public class MongoStorage {
 				break;
 	  		}
 
-		  
+
 		// Raw Data Types
 			
 			case TRAFFIC_RAW_DATA: {
@@ -204,22 +205,38 @@ public class MongoStorage {
 			Double ts = Averaging.getTrafficAverage(zipcode);
 			Double es = Averaging.getSchoolAverage(zipcode);
 			Double as = (fs + ts + es)/3;
+			FoodData fd;
+			TrafficData td;
+			SchoolData ed;
 			
 			Query<FoodRawData> query_food = datastore.createQuery(FoodRawData.class).field("zipcode").contains(zipcode);
-			FoodRawData frd = query_food.asList().get(0);
-			FoodData fd = new FoodData(zipcode, fs, frd.getPoints());
+			if(query_food.asList().size() > 0) {
+                FoodRawData frd = query_food.asList().get(0);
+                fd = new FoodData(zipcode, fs, frd.getPoints());
+            }else{
+			    fd = new FoodData(zipcode, fs, new HashMap<String, Double>());
+            }
 
 			Query<TrafficRawData> query_traffic = datastore.createQuery(TrafficRawData.class).field("zipcode").contains(zipcode);
-			TrafficRawData trd = query_traffic.asList().get(0);
-			TrafficData td = new TrafficData(zipcode, ts);
+			if(query_traffic.asList().size() >0) {
+                TrafficRawData trd = query_traffic.asList().get(0);
+                td = new TrafficData(zipcode, ts, trd.getPoints());
+            }else{
+                td = new TrafficData(zipcode, ts, new HashMap<String, Double>());
+            }
 			
 			Query<SchoolRawData> query_education = datastore.createQuery(SchoolRawData.class).field("zipcode").contains(zipcode);
-			SchoolRawData erd = query_education.asList().get(0);
-			SchoolData ed = new SchoolData(zipcode, es);
+			if(query_education.asList().size() > 0) {
+                SchoolRawData erd = query_education.asList().get(0);
+                ed = new SchoolData(zipcode, es, erd.getPoints());
+            }else{
+                ed = new SchoolData(zipcode, es, new HashMap<String, Double>());
+            }
 
 			
 			Zipcode zc = new Zipcode(zipcode, fs, ts, es, as, fd, td, ed);
 			datastore.save(zc);
+			System.out.println(zc.toString());
 		}
 		
 		

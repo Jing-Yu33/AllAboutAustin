@@ -28,7 +28,7 @@ public class ZipcodeCollector {
 		ArrayList<String> zipcodes = new ArrayList<String>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget resource = client.target("https://www.zipcodeapi.com/rest/7BDsFaWA2IZvuppFYgEH0dvRUooc5yE5ELGUSG6SEF8ej4m9GM7NyI8Z4IvyOmih/city-zips.json/Austin/TX");
+		WebTarget resource = client.target("https://www.zipcodeapi.com/rest/UR8RH5qWgfSbCp5Q2PLXaEFhwf8CGZFPcKePSjoVlrst1BydtKymbW2HiYCo5ZiW/city-zips.json/Austin/TX");
 
 		Builder request = resource.request();
 		request.accept(MediaType.APPLICATION_JSON);
