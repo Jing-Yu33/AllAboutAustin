@@ -61,9 +61,10 @@ public class SodaCollector implements Collector {
 			int zipcode = getZipCode(kits_id.toString());
 
 			HashMap<String, Double> data = new HashMap<String, Double>();
-			for (Object key : jo.keySet()) {
-				data.put((String)key, getRankedValue(key, jo.get(key)));
-			}
+			String name = jo.get("intname").toString();
+			Double value = getRankedValue("speed", jo.get("speed"));
+			data.put(name, value);
+
 			ds.addZipcodeData(zipcode, data);
 		}
 		
@@ -92,9 +93,8 @@ public class SodaCollector implements Collector {
 	 * @return
 	 */
 	private double getRankedValue(Object key, Object value) {
-		//TODO: Make an actual ranking, dependent on which key this is
 		try {
-			return Double.parseDouble((String) value);
+			return 10 - Double.parseDouble((String) value);
 		} catch (Exception e) {
 			return 5.0;
 		}

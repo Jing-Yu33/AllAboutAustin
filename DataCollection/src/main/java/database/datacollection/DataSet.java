@@ -14,7 +14,10 @@ public class DataSet {
 	}
 
 	public void addZipcodeData(Integer zipCode, HashMap<String, Double> data) {
-		zipData.put(zipCode, data);
+		if (zipData.keySet().contains(zipCode))
+			zipData.get(zipCode).putAll(data);
+		else
+			zipData.put(zipCode, data);
 	}
 	
 	public void deleteZipcodeData(Integer zipCode) {

@@ -51,10 +51,9 @@ public class ZomatoCollector implements Collector {
 		for (Object o : (JSONArray) jsonPayload.get("restaurants")) {
 			JSONObject restaurant = (JSONObject) o;
 			int zipcode = Integer.parseInt(JSONfind(restaurant, new String [] {"restaurant", "location", "zipcode"}).toString());
-			
+			String name = JSONfind(restaurant, new String [] {"restaurant", "name"}).toString();
 			HashMap<String, Double> data = new HashMap<String, Double>();
-			data.put("aggregate_rating", makeRankedValue(restaurant)); // Only one data point
-			
+			data.put(name, makeRankedValue(restaurant)); // Only one data point
 			ds.addZipcodeData(zipcode, data);
 		}
 		
@@ -67,10 +66,7 @@ public class ZomatoCollector implements Collector {
 	 * @return
 	 */
 	private double makeRankedValue(JSONObject restaurant) {
-		// TODO: Accomodate multiple restaurants in the same zip code. This overwrites each with the newest.
 		// * 2 to adjust for 5 star ratings
-
-		// TODO: Lookup mongoDB current ranking and adjust accordingly
 		return 2 * Double.parseDouble(JSONfind(restaurant, new String[] {"restaurant", "user_rating", "aggregate_rating"}).toString());
 	}
 	

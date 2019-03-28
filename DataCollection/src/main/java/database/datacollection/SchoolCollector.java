@@ -17,8 +17,6 @@ import com.socrata.model.soql.SoqlQuery;
 /**
  * Collects education data: high school graduation rates.
  *
- * If I make a change here can I commit
- * 			Yes!
  */
 
 public class SchoolCollector implements Collector {
@@ -59,12 +57,12 @@ public class SchoolCollector implements Collector {
 		for (Object o : jsonPayload.toArray()) {
 			JSONObject jo = ((JSONObject) o);
 			int zipcode = getZipCode(jo.get("school").toString());
+
 			HashMap<String, Double> data = new HashMap<String, Double>();
-			for (Object key : jo.keySet()) {
-				if (((String) key).contains("2016")) {
-					data.put((String)key, getRankedValue(key, jo.get(key)));
-				}
-			}
+			String name = jo.get("school").toString();
+			Double value = getRankedValue("_2016_rate", jo.get("_2016_rate"));
+			data.put(name, value);
+			
 			ds.addZipcodeData(zipcode, data);
 		}
 		
@@ -91,7 +89,7 @@ public class SchoolCollector implements Collector {
 	private double getRankedValue(Object key, Object value) {
 		//TODO: Make an actual ranking, dependent on which key this is
 		try {
-			return Double.parseDouble((String) value);
+			return 10 * Double.parseDouble((String) value);
 		} catch (Exception e) {
 			return 5.0;
 		}
