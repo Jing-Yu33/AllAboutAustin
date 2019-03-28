@@ -94,7 +94,7 @@ public class SodaCollector implements Collector {
 	 */
 	private double getRankedValue(Object key, Object value) {
 		try {
-			return (100 - Double.parseDouble((String) value))/10;
+			return Math.max((100 - Double.parseDouble((String) value))/10, 0);
 		} catch (Exception e) {
 			return 5.0;
 		}
