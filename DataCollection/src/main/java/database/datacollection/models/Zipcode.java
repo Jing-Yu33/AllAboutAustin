@@ -11,7 +11,6 @@ import org.mongodb.morphia.annotations.*;
 )
 public class Zipcode {
 	@Id
-//	private ObjectId id;
 	private String zipcode;
 	
 	// calculated result entry	
