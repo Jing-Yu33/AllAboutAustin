@@ -1,57 +1,43 @@
 package database.datacollection;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-import database.datacollection.models.FoodData;
-import database.datacollection.models.SchoolData;
-import database.datacollection.models.TrafficData;
+import database.datacollection.models.*;
 
 public class Averaging {
     public double getFoodAverage(String zip){
-        ArrayList<FoodData> foodData= MongoStorage.getFoodData();
-        double runningSum = 0;
-        double count = 0;
-        for(int i=0;i<foodData.size();i++)
-        {
-             if(foodData.get(i).getZipcode().equals(zip)) {
-                 count++;
-                 runningSum += foodData.get(i).getAggregate_rating();
-             }
-        }
-        if(count > 0)
-            return 10*runningSum/count;
-        else return 0.0;
+        FoodRawData foodFullData = MongoStorage.getFoodRawData(zip);
+        HashMap<String, Double> foodData = foodFullData.getPoints();
+        return runKeys(foodData);
     }
 
-    public double getTrafficAverage(String zip){
-        ArrayList<TrafficData> trafficData = MongoStorage.getTrafficData();
+    public double getTrafficAverage(String zip) {
+        TrafficRawData trafficFullData = MongoStorage.getTrafficRawData(zip);
+        HashMap<String, Double> trafficData = trafficFullData.getPoints();
+        return runKeys(trafficData);
+    }
+
+    public double getSchoolAverage(String zip) {
+        SchoolRawData schoolFullData = MongoStorage.getSchoolRawData(zip);
+        HashMap<String, Double> trafficData = schoolFullData.getPoints();
+        return runKeys(trafficData);
+    }
+    
+    /**
+     * Given a points set, run through all of them and return the double average of all the doubles therein.
+     * @param dataset
+     * @return
+     */
+    private double runKeys(HashMap<String, Double> dataset) {
         double runningSum = 0;
         double count = 0;
-        for(int i=0;i<trafficData.size();i++)
+        for(String item : dataset.keySet())
         {
-            if(trafficData.get(i).getZipcode().equals(zip)) {
-                count++;
-                runningSum += trafficData.get(i).getAggregate_rating();
-            }
+             count++;
+             runningSum += dataset.get(item);
         }
         if(count > 0)
             return runningSum/count;
-        else return 100.0;
-    }
-
-    public double getSchoolAverage(String zip){
-        ArrayList<SchoolData> schoolData= MongoStorage.getSchoolData();
-        double runningSum = 0;
-        double count = 0;
-        for(int i=0;i<schoolData.size();i++)
-        {
-            if(schoolData.get(i).getZipcode().equals(zip)) {
-                count++;
-                runningSum += schoolData.get(i).getAggregate_rating();
-            }
-        }
-        if(count > 0)
-            return 100*runningSum/count;
         else return 0.0;
     }
 }

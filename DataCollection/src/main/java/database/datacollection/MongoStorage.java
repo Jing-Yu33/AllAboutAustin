@@ -80,7 +80,7 @@ public class MongoStorage {
 					FoodData data = new FoodData(zipcode.toString(), 
 												properties.get("aggregate_rating"));
 					
-					datastore.save(data);		
+					datastore.save(data);
 			   }
 			  break;
 		  }
@@ -137,6 +137,16 @@ public class MongoStorage {
 		return new ArrayList<FoodData>(datapoints);
 	}
 
+	public static FoodRawData getFoodRawData(String zipcode)
+	{
+		Query<FoodRawData> query = datastore.createQuery(FoodRawData.class).field("zipcode").equal(zipcode);
+		List<FoodRawData> datapoints = query.asList();
+		if (datapoints.size() > 0)
+			return datapoints.get(0);
+		else
+			return null;
+	}
+
 	public static ArrayList<TrafficData> getTrafficData()
 	{
 		Query<TrafficData> query = datastore.createQuery(TrafficData.class);
@@ -144,11 +154,31 @@ public class MongoStorage {
 		return new ArrayList<TrafficData>(datapoints);
 	}
 
+	public static TrafficRawData getTrafficRawData(String zipcode)
+	{
+		Query<TrafficRawData> query = datastore.createQuery(TrafficRawData.class).field("zipcode").equal(zipcode);
+		List<TrafficRawData> datapoints = query.asList();
+		if (datapoints.size() > 0)
+			return datapoints.get(0);
+		else
+			return null;
+	}
+
 	public static ArrayList<SchoolData> getSchoolData()
 	{
 		Query<SchoolData> query = datastore.createQuery(SchoolData.class);
 		List<SchoolData> datapoints = query.asList();
 		return new ArrayList<SchoolData>(datapoints);
+	}
+
+	public static SchoolRawData getSchoolRawData(String zipcode)
+	{
+		Query<SchoolRawData> query = datastore.createQuery(SchoolRawData.class).field("zipcode").equal(zipcode);
+		List<SchoolRawData> datapoints = query.asList();
+		if (datapoints.size() > 0)
+			return datapoints.get(0);
+		else
+			return null;
 	}
 	
 	public static ArrayList<TrafficSensorData> getSensorData() {

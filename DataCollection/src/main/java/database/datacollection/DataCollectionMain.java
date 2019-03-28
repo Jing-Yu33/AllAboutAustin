@@ -13,7 +13,7 @@ public class DataCollectionMain {
 		//demoSodaCollector();
 		//demoZomatoCollector();
 		//demoSchoolCollector();
-		//demoSensorDataCollector();
+		demoSensorDataCollector();
 //		MongoStorage.saveCombinedZipcodeData();
 	}
 
