@@ -14,7 +14,7 @@ class Food extends Component {
         this.props.GetAllZipcodes("food");
     }
 
-    onSubmit = (value) => {
+    onSortDownSubmit = (value) => {
         this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
     }
 
@@ -28,7 +28,7 @@ class Food extends Component {
                     </div>
                     <div className="col-lg-5"></div>
                     <div className="col-lg-4">
-                        <SortForm defaultCategory="food" onSubmit={this.onSubmit}/>
+                        <SortForm defaultCategory="food" onSubmit={this.onSortDownSubmit}/>
                     </div>
                 </div>
                 

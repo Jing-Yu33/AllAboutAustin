@@ -14,6 +14,7 @@ class RankingCard extends Component {
                 </h5>
                 <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
                 <p className="card-text">
+                    Average: {this.props.data.averageScore}
                     Food: {this.props.data.foodScore}
                     Education: {this.props.data.educationScore}
                     Traffic: {this.props.data.trafficScore}

@@ -8,14 +8,14 @@ import lombok.Getter;
 
 @Getter
 @Document(collection = "Foods")
-public class Food {
+public class FoodData {
 	@Id
 	private String zipcode;
 	private Double aggregate_rating;
 	// Required	
-	private Food() {};
+	private FoodData() {};
 	
-	public Food(String zipcode, Double aggregate_rating) {
+	public FoodData(String zipcode, Double aggregate_rating) {
 		this.zipcode = zipcode;
 		this.aggregate_rating = aggregate_rating;
 	}

@@ -11,7 +11,9 @@ public interface ZipcodesRepository extends MongoRepository<Zipcode, String>{
 //	Zipcode findFirstByZipcode(String zipcode);
 	Zipcode findByZipcode(String zipcode);
 	
-	// Todo: change to regular expression, ignore letter case, whitespace....
+	// TODO: change to regular expression, ignore letter case, whitespace....
 	@Query("{region : ?0}")
 	List<Zipcode> findByRegionQuery(String region);
+	
+	// TODO: search by keyword, zipcode.descrption.contains, region.contains, .....
 }

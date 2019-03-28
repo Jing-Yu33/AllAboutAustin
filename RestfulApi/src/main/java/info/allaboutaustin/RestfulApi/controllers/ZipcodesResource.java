@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import info.allaboutaustin.RestfulApi.exception.ZipcodeNotFoundException;
-import info.allaboutaustin.RestfulApi.models.Food;
+import info.allaboutaustin.RestfulApi.models.FoodData;
+import info.allaboutaustin.RestfulApi.models.SchoolData;
+import info.allaboutaustin.RestfulApi.models.TrafficData;
 import info.allaboutaustin.RestfulApi.models.Zipcode;
+import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeAverageScoreComparator;
 import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeEducationComparator;
 import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeFoodComparator;
 import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeTotalScoreComparator;
@@ -31,13 +34,14 @@ public class ZipcodesResource {
 	ZipcodesRepository ZipcodeRepo;
 
 	ZipcodeTotalScoreComparator tsc = new ZipcodeTotalScoreComparator();
+	ZipcodeAverageScoreComparator ac = new ZipcodeAverageScoreComparator();
 	ZipcodeFoodComparator fc = new ZipcodeFoodComparator();
 	ZipcodeEducationComparator ec = new ZipcodeEducationComparator();
 	ZipcodeTrafficComparator tc = new ZipcodeTrafficComparator();
 	
 	// Return All zipcodes information based on category order
 	@GetMapping("")
-	public List<Zipcode> getAllZipcodes(@RequestParam(name="sortBy", required=false, defaultValue="") String sortBy,
+	public List<Zipcode> getAllZipcodes(@RequestParam(name="sortBy", required=false, defaultValue="average") String sortBy,
 										@RequestParam(name="order", required=false, defaultValue="desc") String order,
 										@RequestParam(name="amount", required=false, defaultValue="") String amount){
 		
@@ -46,7 +50,8 @@ public class ZipcodesResource {
 			case "food": Collections.sort(list, fc);		break;
 			case "traffic": Collections.sort(list, tc);		break;
 			case "education": Collections.sort(list, ec);	break;
-			default: ;
+			case "average": Collections.sort(list, ac);		break;
+			default: Collections.sort(list, ac);
 		}
 		
 		if(order.equals("asc"))	Collections.reverse(list);
@@ -95,16 +100,18 @@ public class ZipcodesResource {
 	@PostMapping("/save")
 	public void createZipCode() {
 		ZipcodeRepo.deleteAll();
-		Food food = new Food("78731", 5.2);
-		Zipcode zc = new Zipcode("78705", "7.2", "8.4", "6.7", "desc", "middle", food);
+		FoodData food = new FoodData("78731", 5.2);
+		TrafficData traffic = new TrafficData("78731");
+		SchoolData school = new SchoolData("78731");
+		Zipcode zc = new Zipcode("78705", "7.2", "8.4", "6.7","7.3", food, traffic, school);
 		ZipcodeRepo.save(zc);
-		zc = new Zipcode("78706", "6.3", "7.2", "4.3", "desc", "middle", food);
+		zc = new Zipcode("78706", "6.3", "7.2", "4.3", "6.9", food, traffic, school);
 		ZipcodeRepo.save(zc);
-		zc = new Zipcode("78707", "8.9", "4.5", "7.5", "desc", "middle", food);
+		zc = new Zipcode("78707", "8.9", "4.5", "7.5", "7.5", food, traffic, school);
 		ZipcodeRepo.save(zc);
-		zc = new Zipcode("78708", "7.8", "3.5", "9.2", "desc", "middle", food);
+		zc = new Zipcode("78708", "7.8", "3.5", "9.2", "5.3", food, traffic, school);
 		ZipcodeRepo.save(zc);
-		zc = new Zipcode("78709", "5.3", "6.4", "7.3", "desc", "middle", food);
+		zc = new Zipcode("78709", "5.3", "6.4", "7.3", "4.5", food, traffic, school);
 		ZipcodeRepo.save(zc);
 	}
 	

@@ -6,12 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Getter;
 
 @Getter
-@Document(collection = "Educations")
-public class Education {
+@Document(collection = "Traffics")
+public class TrafficData {
 	@Id
 	private String zipcode;
 	
-	public Education(String zipcode) {
+	public TrafficData(String zipcode) {
 		this.zipcode = zipcode;
 	}
 }
