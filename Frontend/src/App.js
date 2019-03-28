@@ -12,6 +12,8 @@ import RecomPage from './components/recompage/RecomPage';
 import ZipcodePage from './components/ZipcodesPage/ZipcodesPage';
 import IndividualZipcodePage from './components/ZipcodesPage/IndividualZipcodePage';
 
+import PageNotExists from './components/PageNotExists'
+
 import history from './history';
 
 class App extends Component {
@@ -34,6 +36,7 @@ class App extends Component {
               <Route path="/recommendation" exact component={RecomPage} />
               <Route path="/zipcodes" exact component={ZipcodePage} />
               <Route path="/zipcodes/:zipcode" exact component={IndividualZipcodePage} />
+              <Route path="/*" component={PageNotExists} />
               </Switch>
             </div>
           </div>

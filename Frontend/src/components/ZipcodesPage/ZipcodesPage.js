@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SortForm from '../searchAndSort/SortForm'
+import SearchBar from '../searchAndSort/SearchBar';
+import SortForm from '../searchAndSort/SortForm';
 import { GetAllZipcodes } from '../../actions';
 class ZipcodesPage extends Component {
 
@@ -9,7 +10,7 @@ class ZipcodesPage extends Component {
         this.props.GetAllZipcodes();
     }
 
-    onSubmit = (value) => {
+    onSortDownSubmit = (value) => {
         this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
     }
 
@@ -33,17 +34,17 @@ class ZipcodesPage extends Component {
 
         return(
             <div>
-                <p>TODOs:
-                    <ul>
-                        <li>Sort Function: determine a default sorting category => new data field - average score?</li>
-                        <li>set different pages: 10 item / page</li>
-                        <li>search function</li>
-                        <li>Optional: add more filter checkbox?</li>
-                        <li>interactive map</li>
-                        <li>Layout</li>
-                    </ul>
-                </p>
-                <SortForm onSubmit={this.onSubmit}/>
+                TODOs:
+                <ul>
+                    <li>Sort Function: determine a default sorting category => new data field - average score?</li>
+                    <li>set different pages: 10 item / page</li>
+                    <li>search function</li>
+                    <li>Optional: add more filter checkbox?</li>
+                    <li>interactive map</li>
+                    <li>Layout</li>
+                </ul>
+                <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+                <SortForm onSubmit={this.onSortDownSubmit} defaultCategory="average"/>
                 {this.renderList()}
             </div>
         );

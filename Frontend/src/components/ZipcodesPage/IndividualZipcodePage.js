@@ -11,13 +11,18 @@ class IndividualZipcodePage extends Component {
 
     render(){
         if(!this.props.zipcode){
-            return <div>Loading...</div>
+            return <div>Loading... / No such zipcode, please check</div>
         }
 
         return(
             <div>
                 <h3>{this.props.zipcode.zipcode}</h3>
-                <p>{this.props.zipcode.desc}</p>
+                <p>{this.props.zipcode.description}</p>
+                <p>{this.props.zipcode.averageScore}</p>
+                <p>{this.props.zipcode.foodScore}</p>
+                <p>{this.props.zipcode.trafficScore}</p>
+                <p>{this.props.zipcode.educationScore}</p>
+                <p> ... images...layout</p>
             </div>
         );
     }

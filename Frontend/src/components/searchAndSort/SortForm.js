@@ -25,6 +25,7 @@ class SortForm extends Component {
                       }}
                     defaultValue={this.props.defaultCategory}
                   >
+                    <option value="average">Average</option>
                     <option value="food">Food</option>
                     <option value="traffic">Traffic</option>
                     <option value="education">Education</option>
