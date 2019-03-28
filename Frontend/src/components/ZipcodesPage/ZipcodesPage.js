@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Pagination from "react-paginating";
+import _ from 'lodash';
 
 import SearchBar from '../searchAndSort/SearchBar';
 import SortForm from '../searchAndSort/SortForm';
 import { GetAllZipcodes } from '../../actions';
+
+const limit = 8;
+const pageCount = 11;
+const total = 81;
+
 class ZipcodesPage extends Component {
+    state = {
+        currentPage: 1
+    }
 
     async componentDidMount(){
         this.props.GetAllZipcodes();
@@ -14,21 +25,118 @@ class ZipcodesPage extends Component {
         this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
     }
 
-    renderList = () => {
-        return this.props.zipcodes.map(zipcode => {
-            return (
-                <div key={zipcode.zipcode}>
-                    <h4>{zipcode.zipcode}</h4>
-                    <p>Should be a card contains corresponding information<br/>
-                        The title of the card should be a link to IndividualZipcodePage
-                    </p>
-                </div>
-            )
+    renderList = (zipcodes) => {
+        return zipcodes[this.state.currentPage-1].map(zipcode => {
+                return (
+                    <div key={zipcode.zipcode}>
+                        <h4><Link to={`/zipcodes/${zipcode.zipcode}`}>{zipcode.zipcode}</Link></h4>
+                        <p>
+                        Should be a card contains more information 
+                        </p>
+                    </div>
+                )
         })
     }
 
+    handlePageChange = (page) => {
+        this.setState({
+          currentPage: page
+        });
+    };
+
+    renderPageButton = (currentPage) => {
+        return (
+            <Pagination
+            total={total}
+            limit={limit}
+            pageCount={pageCount}
+            currentPage={currentPage}
+          >
+            {({
+              pages,
+              currentPage,
+              hasNextPage,
+              hasPreviousPage,
+              previousPage,
+              nextPage,
+              totalPages,
+              getPageItemProps
+            }) => (
+              
+              <div className="btn-group">
+                <button className="btn btn-outline-primary"
+                  {...getPageItemProps({
+                    pageValue: 1,
+                    onPageChange: this.handlePageChange
+                  })}
+                >
+                  first
+                </button>
+  
+                {hasPreviousPage && (
+                  <button className="btn btn-outline-primary"
+                    {...getPageItemProps({
+                      pageValue: previousPage,
+                      onPageChange: this.handlePageChange
+                    })}
+                  >
+                    {"<"}
+                  </button>
+                )}
+  
+                {pages.map(page => {
+                  let activePage = null;
+                  if (currentPage === page) {
+                    activePage = { backgroundColor: "#fdce09" };
+                  }
+                  return (
+                    <button className="btn btn-outline-primary"
+                      {...getPageItemProps({
+                        pageValue: page,
+                        key: page,
+                        style: activePage,
+                        onPageChange: this.handlePageChange
+                      })}
+                    >
+                      {page}
+                    </button>
+                  );
+                })}
+  
+                {hasNextPage && (
+                  <button className="btn btn-outline-primary"
+                    {...getPageItemProps({
+                      pageValue: nextPage,
+                      onPageChange: this.handlePageChange
+                    })}
+                  >
+                    {">"}
+                  </button>
+                )}
+  
+                <button className="btn btn-outline-primary"
+                  {...getPageItemProps({
+                    pageValue: totalPages,
+                    onPageChange: this.handlePageChange
+                  })}
+                >
+                  last
+                </button>
+              </div>
+              
+            )}
+            
+          </Pagination>
+        )
+    }
+
+
     render(){
-        if(!this.props.zipcodes){
+        const { currentPage } = this.state;
+        const zipcodes = _.chunk(this.props.zipcodes, limit);
+
+        console.log(zipcodes);
+        if(zipcodes.length === 0){
             return <div>Loading...</div>
         }
 
@@ -45,7 +153,8 @@ class ZipcodesPage extends Component {
                 </ul>
                 <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
                 <SortForm onSubmit={this.onSortDownSubmit} defaultCategory="average"/>
-                {this.renderList()}
+                {this.renderList(zipcodes)}
+                {this.renderPageButton(currentPage)}
             </div>
         );
     }
