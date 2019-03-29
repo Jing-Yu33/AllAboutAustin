@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import './IndividualZipcodePage.css';
 import CarouselComponent from './CarouselComponent'
+import RowCards from './RowCards'
 
 import { GetOneZipcode } from '../../actions/index';
 
@@ -19,7 +20,7 @@ class IndividualZipcodePage extends Component {
         }
 
         return(
-            <React.Fragment>
+
 
     <div className="jumbotron jumbotron-fluid my-3">
   <div className="container">
@@ -34,51 +35,10 @@ class IndividualZipcodePage extends Component {
 
     <CarouselComponent/>
 
-<div className="row">
-  <div className="col-sm-4 d-flex align-items-stretch">
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">Food</h5>
-        <p className="card-text">Placeholder, future will have list of food establishments in zip code</p>
-        
-      </div>
-    </div>
-  </div>
-  <div className="col-sm-4 d-flex align-items-stretch">
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">Traffic</h5>
-        <p className="card-text">Placeholder, future will have indicator for traffic congestion in zip code</p>
-      </div>
-    </div>
-  </div>
-  <div className="col-sm-4 d-flex align-items-stretch">
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">Education</h5>
-        <p className="card-text">Placeholder, future will have list of schools in zip code</p>
-
-      </div>
-    </div>
+    <RowCards/>
+    
   </div>
 </div>
-
-  </div>
-
-  
-
-  
-</div>
- 
-
-
-
-
-
-
-
-
-            </React.Fragment>
         );
     }
 }
