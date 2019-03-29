@@ -200,11 +200,10 @@ public class MongoStorage {
 		
 		for(String zipcode: ZipcodeCollector.getZipcodes()) {
 			
-			//TODO: score calculation
-			Double fs = Averaging.getFoodAverage(zipcode);
-			Double ts = Averaging.getTrafficAverage(zipcode);
-			Double es = Averaging.getSchoolAverage(zipcode);
-			Double as = (fs + ts + es)/3;
+			Double fs = truncateDecimal(Averaging.getFoodAverage(zipcode));
+			Double ts = truncateDecimal(Averaging.getTrafficAverage(zipcode));
+			Double es = truncateDecimal(Averaging.getSchoolAverage(zipcode));
+			Double as = truncateDecimal((fs + ts + es)/3);
 			FoodData fd;
 			TrafficData td;
 			SchoolData ed;
@@ -240,5 +239,9 @@ public class MongoStorage {
 		}
 		
 		
+	}
+	
+	private static Double truncateDecimal(Double arg) {
+		return ((float) Math.round(arg * 100.0)) / 100.0;
 	}
 }

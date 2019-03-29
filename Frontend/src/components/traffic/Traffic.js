@@ -34,10 +34,10 @@ class Traffic extends Component {
                 
                 <div className="row mt-5">
                     <div className="col-lg-8">
-                        <HeatMap />
+                        <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
                     </div>
                     <div className="col-lg-4">
-                        <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
+                        <HeatMap />
                     </div>
                 </div>
             </div>
