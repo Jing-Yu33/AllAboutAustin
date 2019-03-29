@@ -36,18 +36,18 @@ class IndividualZipcodePage extends Component {
 
 commented out old card
 
-<div class="container py-3">
-    <div class="card">
-      <div class="row ">
-        <div class="col-md-4">
-            <img src="https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400" class="w-100"/>
+<div className="container py-3">
+    <div className="card">
+      <div className="row ">
+        <div className="col-md-4">
+            <img src="https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400" className="w-100"/>
           </div>
-          <div class="col-md-8 px-3">
-            <div class="card-block px-3">
-              <h4 class="card-title">{this.props.zipcode.zipcode}</h4>
-              <p class="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-              <p class="card-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a href="#" class="btn btn-primary">Read More</a>
+          <div className="col-md-8 px-3">
+            <div className="card-block px-3">
+              <h4 className="card-title">{this.props.zipcode.zipcode}</h4>
+              <p className="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+              <p className="card-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <a href="#" className="btn btn-primary">Read More</a>
             </div>
           </div>
 
@@ -61,10 +61,10 @@ commented out old card
 
 <br></br>
 
-    <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
-    {/*<p class="lead">{this.props.zipcode.description}</p>*/}
+    <div className="jumbotron jumbotron-fluid">
+  <div className="container">
+    <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
+    {/*<p className="lead">{this.props.zipcode.description}</p>*/}
 
     <p>{this.props.zipcode.description}</p>
     <p>Wholisic Score : {this.props.zipcode.averageScore}</p>
@@ -73,71 +73,71 @@ commented out old card
     <p>Education Score : {this.props.zipcode.educationScore}</p>
     <br></br>
 
-<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="carousel-example-1z" className="carousel slide carousel-fade" data-ride="carousel">
   
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+  <ol className="carousel-indicators">
+    <li data-target="#carousel-example-1z" data-slide-to="0" className="active"></li>
     <li data-target="#carousel-example-1z" data-slide-to="1"></li>
     <li data-target="#carousel-example-1z" data-slide-to="2"></li>
   </ol>
   
   
-  <div class="carousel-inner" role="listbox">
+  <div className="carousel-inner" role="listbox">
     
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="First slide"/>
+    <div className="carousel-item active">
+      <img className="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="First slide"/>
     </div>
     
     
-    <div class="carousel-item">
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg" alt="Second slide"/>
+    <div className="carousel-item">
+      <img className="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg" alt="Second slide"/>
     </div>
     
     
-    <div class="carousel-item">
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide"/>
+    <div className="carousel-item">
+      <img className="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide"/>
     </div>
     <br></br>
   </div>
   
   
-  <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
+  <a className="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span className="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
+  <a className="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+    <span className="sr-only">Next</span>
   </a>
   
 </div>
 
 
-<div class="row">
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Food</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+<div className="row">
+  <div className="col-sm-4">
+    <div className="card">
+      <div className="card-body">
+        <h5 className="card-title">Food</h5>
+        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" className="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Traffic</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div className="col-sm-4">
+    <div className="card">
+      <div className="card-body">
+        <h5 className="card-title">Traffic</h5>
+        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" className="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Education</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div className="col-sm-4">
+    <div className="card">
+      <div className="card-body">
+        <h5 className="card-title">Education</h5>
+        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" className="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
