@@ -13,7 +13,7 @@ class ZipCodeComponent extends Component {
       <div className="card-body" >
         <div className="row align-items-center">
           <div className="col-lg-4">
-            <img className="img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="image for zipcode"/>
+            <img className="img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/>
           </div>
           <div>
             <h5 className="card-title">Region/description: manaully added later</h5>
