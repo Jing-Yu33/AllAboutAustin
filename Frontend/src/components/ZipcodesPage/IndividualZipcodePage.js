@@ -29,14 +29,18 @@ class IndividualZipcodePage extends Component {
 
     <p>{this.props.zipcode.description}</p>
     <p>Wholisic Score : {this.props.zipcode.averageScore}</p>
+    <hr/>
     <p>Food Sore : {this.props.zipcode.foodScore}</p>
+    <hr/>
     <p>Traffic Score : {this.props.zipcode.trafficScore}</p>
+    <hr/>
     <p>Education Score : {this.props.zipcode.educationScore}</p>
+
 
     <CarouselComponent/>
 
     <RowCards/>
-    
+
   </div>
 </div>
         );
