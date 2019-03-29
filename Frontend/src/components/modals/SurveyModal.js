@@ -5,7 +5,7 @@ import SurveyForm from '../survey/SurveyForm';
 
 class SurveyModal extends React.Component {
     render() {
-        return ReactDOM.createPortal(
+        return (
             <div>
                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Change Priority
@@ -21,14 +21,13 @@ class SurveyModal extends React.Component {
                         </button>
                         </div>
                         <div className="modal-body">
-                        <SurveyForm />
+                            <SurveyForm />
                         </div>
                     </div>
                     </div>
                 </div>
             </div>
-            ,
-            document.querySelector("#modal")
+            
         );
     }
 }

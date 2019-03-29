@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataBase } from '../../apis/DataBase';
+import ZipCodeComponent from '../zipcode/ZipCodeComponent'
 import { Link } from 'react-router-dom'
 
 const fetchResult = (weight) => {
@@ -18,9 +19,7 @@ const fetchResult = (weight) => {
         const resultList = response.data.map((zipcode) => {
             return(
                 <div key={zipcode.zipcode}>
-                <br></br>
-                    <Link className="btn btn-primary" to={`/zipcodes/${zipcode.zipcode}`}>{zipcode.zipcode}</Link>
-
+                    <ZipCodeComponent zipcode={zipcode}/>
                 </div>
             )
         })

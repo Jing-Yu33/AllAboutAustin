@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 
 import SurveyModal from '../modals/SurveyModal';
@@ -12,30 +13,20 @@ const RecomPage = (props) => {
 
     return (
         <React.Fragment>
-        <div>
-            Recommendation Page
-            <SurveyModal />
-            <ul>
-                <li>Food Weight: {query.food || "50"}</li>
-                <li>Traffic Weight: {query.traffic || "50"}</li>
-                <li>Education Weight: {query.education || "50"}</li>
-
-            </ul>
-            
-        </div>
-
-        <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Reccomendations Page</h1>
-    <p class="lead">Your rankings were as follows:</p>
-    <p class="lead">Food Weight: {query.food || "50"}</p>
-    <p class="lead">Traffic Weight: {query.traffic || "50"}</p>
-    <p class="lead">Education Weight: {query.education || "50"}</p>
-    <h3>Top 5 Zip Codes</h3>
-    {result}
-
-  </div>
-</div>
+            <div className="jumbotron jumbotron-fluid mt-5">
+                <div className="container">
+                    <h1 className="display-4">Reccomendations</h1>
+                    <SurveyModal />
+                    <ul className="list-group lead">
+                        <div className="row">
+                            <div className="col-lg-4">Food Weight: {query.food || "50"}</div>
+                            <div className="col-lg-4">Traffic Weight: {query.traffic || "50"}</div>
+                            <div className="col-lg-4">Education Weight: {query.education || "50"}</div>
+                        </div>
+                    </ul>
+                    {result}
+                </div>
+            </div>
         </React.Fragment>
     )
 
