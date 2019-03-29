@@ -59,35 +59,34 @@ public class ZipcodesResource {
 	 */
 	@GetMapping("")
 	public List<Zipcode> getAllZipcodes(
-			@RequestParam(name="category", required=false, defaultValue="") String category,
 			@RequestParam(name="sortBy", required=false, defaultValue="average") String sortBy,
-			@RequestParam(name="order", required=false, defaultValue="desc") String order,
-			@RequestParam(name="amount", required=false, defaultValue="") String amount){
+			@RequestParam(name="order", required=false, defaultValue="desc") String order){
 		
 		List<Zipcode> list = ZipcodeRepo.findAll();
-		
-		if(!category.equals("")) {
-			sortByCategory(list, category);
-		}
-		
-		if(!amount.equals("")) {
-			try {
-				int num = Integer.parseInt(amount);
-				list = list.subList(0, num);
-			} catch (Exception e) {
-				throw e;	// TODO: change to parameter not match exception
-			}
-		}
-		
 		sortByCategory(list, sortBy);
-		
 		if(order.equals("asc"))	Collections.reverse(list);
 				
 		return list;
 	}
 	
+	// should be a private api
+	@GetMapping("/top10")
+	public List<Zipcode> getTop10ZipcodesByCategory(
+			@RequestParam(name="category") String category,
+			@RequestParam(name="sortBy") String sortBy,
+			@RequestParam(name="order", required=false, defaultValue="desc") String order){
+		
+		List<Zipcode> list = ZipcodeRepo.findAll();
+		
+		sortByCategory(list, category);
+		list = list.subList(0, 10);
+		sortByCategory(list, sortBy);
+		if(order.equals("asc"))	Collections.reverse(list);
+				
+		return list;
+	}
 	
-	// Return a specific zipcode information by 5-digits zipcode
+	// /{zipcode}: Return a specific zipcode information by 5-digits zipcode
 	@GetMapping("/{zipcode}")
 	public Zipcode getZipcode(@PathVariable String zipcode) {
 		Zipcode zc = ZipcodeRepo.findByZipcode(zipcode);
@@ -97,7 +96,7 @@ public class ZipcodesResource {
 		return zc;
 	}
 	
-	// Return a ranking list of 10 top zipcodes based on user-assigned weight
+	// ?food=&traffic=&education=: Return a ranking list of 10 top zipcodes based on user-assigned weight
 	@GetMapping("/ranking")
 	public List<Zipcode> searchZipcodeByParameters(
 			@RequestParam(name="food", required=false, defaultValue="50") String food,
