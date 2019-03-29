@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Pagination from "react-paginating";
 import _ from 'lodash';
@@ -30,7 +29,7 @@ class ZipcodesPage extends Component {
     renderList = (zipcodes) => {
         return zipcodes[this.state.currentPage-1].map(zipcode => {
                 return (
-                    <ZipcodeComponent zipcode={zipcode}/> 
+                    <ZipcodeComponent zipcode={zipcode} key={zipcode.zipcode}/> 
                 )
         })
     }
@@ -60,7 +59,7 @@ class ZipcodesPage extends Component {
               getPageItemProps
             }) => (
               
-              <div className="btn-group">
+              <div className="btn-group mx-auto">
                 <button className="btn btn-outline-primary"
                   {...getPageItemProps({
                     pageValue: 1,
@@ -139,17 +138,26 @@ class ZipcodesPage extends Component {
             <div>
                 TODOs:
                 <ul>
-                    <li>Sort Function: determine a default sorting category => new data field - average score?</li>
-                    <li> <strike>set different pages: 8 item / page </strike></li>
+                    <li><strike>Sort Function: determine a default sorting category => new data field - average score?</strike></li>
+                    <li><strike>set different pages: 8 item / page</strike></li>
                     <li>search function</li>
                     <li>Optional: add more filter checkbox?</li>
                     <li>interactive map</li>
                     <li>Layout</li>
                 </ul>
-                <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
-                <SortForm onSubmit={this.onSortDownSubmit} defaultCategory="average"/>
+                <div className="row mt-4">
+                    <div className="col-lg-4">
+                        <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+                    </div>
+                    <div className="col-lg-4"></div>
+                    <div className="col-lg-4">
+                      <SortForm onSubmit={this.onSortDownSubmit} defaultCategory="average"/>
+                    </div>
+                </div>
                 {this.renderList(zipcodes)}
-                {this.renderPageButton(currentPage)}
+                <div className="row justify-content-center mt-3 mb-3">
+                  {this.renderPageButton(currentPage)}
+                </div>
             </div>
         );
     }
