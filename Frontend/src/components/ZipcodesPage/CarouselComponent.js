@@ -6,7 +6,7 @@ class CarouselComponent extends Component {
 
     render() {
         return(
-        	<div id="carousel-example-1z" className="carousel slide carousel-fade my-3" data-ride="carousel">
+<div id="carousel-example-1z" className="carousel slide carousel-fade my-3" data-ride="carousel">
   
   <ol className="carousel-indicators">
     <li data-target="#carousel-example-1z" data-slide-to="0" className="active"></li>
