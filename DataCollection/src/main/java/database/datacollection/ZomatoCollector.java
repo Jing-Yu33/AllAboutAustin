@@ -53,7 +53,7 @@ public class ZomatoCollector implements Collector {
 			int zipcode = Integer.parseInt(JSONfind(restaurant, new String [] {"restaurant", "location", "zipcode"}).toString());
 			String name = JSONfind(restaurant, new String [] {"restaurant", "name"}).toString();
 			HashMap<String, Double> data = new HashMap<String, Double>();
-			data.put(name, makeRankedValue(restaurant)); // Only one data point
+			data.put(name.replace('.', '_'), makeRankedValue(restaurant)); // Only one data point
 			ds.addZipcodeData(zipcode, data);
 		}
 		
