@@ -48,40 +48,6 @@ public class MongoStorage {
 	public static void saveData(DataSet ds, DataTypes datatype) {
 
 		switch(datatype) {
-		    /*
-			case TRAFFIC_DATA:{
-				for(Integer zipcode: ds.zipData.keySet()) {
-					HashMap<String, Double> properties = ds.zipData.get(zipcode);
-					TrafficData data = new TrafficData(zipcode.toString(),
-													   properties.get("speed"));
-					
-					datastore.save(data);		
-				}
-				break;
-			}
-		    
-		  case EDUCATION_DATA:{
-			  for(Integer zipcode: ds.zipData.keySet()) {
-					HashMap<String, Double> properties = ds.zipData.get(zipcode);
-					SchoolData data = new SchoolData(zipcode.toString(),
-													  properties.get("_2016_rate"));
-					datastore.save(data);								 		
-			   }
-			  break;
-		  }
-		    // code block
-		    
-		  case FOOD_DATA:{
-			  for(Integer zipcode: ds.zipData.keySet()) {
-					HashMap<String, Double> properties = ds.zipData.get(zipcode);
-					FoodData data = new FoodData(zipcode.toString(), 
-												properties.get("aggregate_rating"), new HashMap<String, Double>());
-					// TODO: Add the hashmap part, if necessary, if not, we can just delete all this?
-					
-					datastore.save(data);
-			   }
-			  break;
-		  }*/
 		    // code block
 		  
 		  case TRAFFIC_SENSOR_DATA:{
