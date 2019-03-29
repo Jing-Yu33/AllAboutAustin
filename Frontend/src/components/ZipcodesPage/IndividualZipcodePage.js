@@ -20,29 +20,24 @@ class IndividualZipcodePage extends Component {
         }
 
         return(
+          <div className="jumbotron jumbotron-fluid my-3">
+            <div className="container">
+            <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
+            <p>{this.props.zipcode.description}</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Wholisic Score : {this.props.zipcode.averageScore}</li>
+              <li class="list-group-item">Food Score : {this.props.zipcode.foodScore}</li>
+              <li class="list-group-item">Traffic Score : {this.props.zipcode.trafficScore}</li>
+              <li class="list-group-item">Education Score : {this.props.zipcode.educationScore}</li>
+            </ul>
 
 
-    <div className="jumbotron jumbotron-fluid my-3">
-  <div className="container">
-    <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
-    <p className="lead">{this.props.zipcode.dd}</p>
+           <CarouselComponent/>
 
-    <p>{this.props.zipcode.description}</p>
-    <p>Wholisic Score : {this.props.zipcode.averageScore}</p>
-    <hr/>
-    <p>Food Sore : {this.props.zipcode.foodScore}</p>
-    <hr/>
-    <p>Traffic Score : {this.props.zipcode.trafficScore}</p>
-    <hr/>
-    <p>Education Score : {this.props.zipcode.educationScore}</p>
+          <RowCards/>
 
-
-    <CarouselComponent/>
-
-    <RowCards/>
-
-  </div>
-</div>
+          </div>
+          </div>
         );
     }
 }
