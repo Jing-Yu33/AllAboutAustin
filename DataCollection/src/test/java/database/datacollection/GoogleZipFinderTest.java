@@ -29,10 +29,16 @@ public class  GoogleZipFinderTest extends TestCase
     /**
      * Rigourous Test :-)
      */
-    public void testgetZipcode1()
+    public void testgetZipcodeWithAddress()
     {
         assertEquals(75110, GoogleZipFinder.getZipCode("1541 Princeton Drive Corsicana, Tx"));
     }
+    public void testgetZipcodeWithCoordinates(){
+        assertEquals(75110, GoogleZipFinder.getZipCode(32.102876, -96.489527));
+    }
+
+
+
 
 }
 
