@@ -6,14 +6,14 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class  MongoStorageTest extends TestCase
+public class  GoogleZipFinderTest extends TestCase
 {
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public MongoStorageTest( String testName )
+    public GoogleZipFinderTest( String testName )
     {
         super( testName );
     }
@@ -23,15 +23,16 @@ public class  MongoStorageTest extends TestCase
      */
     public static Test suite()
     {
-        return new TestSuite( MongoStorageTest.class );
+        return new TestSuite( GoogleZipFinder.class );
     }
 
     /**
      * Rigourous Test :-)
      */
-    public void test()
+    public void testgetZipcode1()
     {
-        assertTrue( true );
+        assertEquals(75110, GoogleZipFinder.getZipCode("1541 Princeton Drive Corsicana, Tx"));
     }
+
 }
 
