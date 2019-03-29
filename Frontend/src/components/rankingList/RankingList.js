@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import RankingCard from './RankCard'
-
+import ZipCodeComponent from '../zipcode/ZipCodeComponent'
 class RankingList extends Component {
 
-    getRankingCard = (data) => {
+    getRankingCard = () => {
         return this.props.data.map( (zipcode) => {
-            return <RankingCard key={zipcode.zipcode} data={zipcode}/>
+            return <ZipCodeComponent key={zipcode.zipcode} zipcode={zipcode}/>
         })
     }
     
     render() {
 
         return(
-            <div className="jumbotron">
-                <h1>Ranking List</h1>
+            <div>
+                <h4>ToP 10 zipcodes with Best Food/traffic/eduction In Austin</h4>
                 {this.getRankingCard()}
             </div>
         )

@@ -5,17 +5,17 @@ import SearchBar from '../searchAndSort/SearchBar';
 import HeatMap from '../heatmap/HeatMap';
 import RankingList from '../rankingList/RankingList';
 
-import { GetAllZipcodes } from '../../actions';
+import { GetTop10ZipcodeByCategory } from '../../actions';
 import SortForm from '../searchAndSort/SortForm'
 
 class Education extends Component {
 
     componentDidMount() {
-        this.props.GetAllZipcodes("education");
+        this.props.GetTop10ZipcodeByCategory("education", "education");
     }
 
     onSubmit = (value) => {
-        this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
+        this.props.GetTop10ZipcodeByCategory("education", value.sortByCategory, value.sortByOrder);
     }
 
     render(){
@@ -52,5 +52,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    GetAllZipcodes
+    GetTop10ZipcodeByCategory
 })(Education);

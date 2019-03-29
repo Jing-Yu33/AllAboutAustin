@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import SearchBar from '../searchAndSort/SearchBar';
 import SortForm from '../searchAndSort/SortForm';
-import ZipcodeComponent from './ZipCodeComponent'
+import ZipcodeComponent from '../zipcode/ZipCodeComponent'
 import { GetAllZipcodes } from '../../actions';
 
 
