@@ -18,6 +18,7 @@ class About extends Component {
                 <div className="mt-5">
                     <GithubInfo />
                 </div>
+
                 <div className="row">
                     <div className="col-md-4">
                         <GithubStats />
@@ -26,6 +27,7 @@ class About extends Component {
                         <Datasource />
                     </div>
                 </div>
+
                 <div className="mt-5">
                         <Stack />                   
                 </div>

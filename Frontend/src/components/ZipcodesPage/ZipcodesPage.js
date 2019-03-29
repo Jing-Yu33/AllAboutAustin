@@ -28,12 +28,26 @@ class ZipcodesPage extends Component {
     renderList = (zipcodes) => {
         return zipcodes[this.state.currentPage-1].map(zipcode => {
                 return (
-                    <div key={zipcode.zipcode}>
-                        <h4><Link to={`/zipcodes/${zipcode.zipcode}`}>{zipcode.zipcode}</Link></h4>
-                        <p>
-                        Should be a card contains more information 
-                        </p>
-                    </div>
+                    <React.Fragment>
+                    <br></br>
+
+                    <div class="card">
+  <div class="card-header">
+               
+                            <h4><Link to={`/zipcodes/${zipcode.zipcode}`}>{zipcode.zipcode}</Link></h4>
+  </div>
+
+  <div class="card-body" >
+    <h5 class="card-title">Placeholder for Region Associated with Zipcode</h5>
+
+
+
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="" class="btn btn-primary">Visit Zip Code</a>
+  </div>
+</div>
+    <br></br>
+                    </React.Fragment>
                 )
         })
     }

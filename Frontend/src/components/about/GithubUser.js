@@ -10,6 +10,8 @@ class GithubUser extends React.Component{
                     <div className="card-body">
                         <h5 className="card-title">{this.props.memberInfo.name}</h5>
                         <p className="card-text">{this.props.memberInfo.desc}</p>
+                        <p className="card-text">{this.props.memberInfo.techCores}</p>
+                        <p className="card-text">{this.props.memberInfo.responsibilities}</p>
                         <ul className="list-group">
                             <li className="list-group-item d-flex justify-content-between align-items-center card-text">
                                 Commits <span className="badge badge-success badge-pill">{this.props.githubData.commits}</span>

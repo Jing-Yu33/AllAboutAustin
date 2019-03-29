@@ -5,17 +5,17 @@ import SearchBar from '../searchAndSort/SearchBar';
 import HeatMap from '../heatmap/HeatMap';
 import RankingList from '../rankingList/RankingList';
 
-import { GetTop10ZipcodeByCategory } from '../../actions';
+import { GetAllZipcodes } from '../../actions';
 import SortForm from '../searchAndSort/SortForm'
 
 class Traffic extends Component {
 
     componentDidMount() {
-        this.props.GetTop10ZipcodeByCategory("traffic", "traffic");
+        this.props.GetAllZipcodes("traffic");
     }
 
     onSubmit = (value) => {
-        this.props.GetTop10ZipcodeByCategory("traffic", value.sortByCategory, value.sortByOrder);
+        this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
     }
 
     render(){
@@ -52,5 +52,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    GetTop10ZipcodeByCategory
+    GetAllZipcodes
 })(Traffic);

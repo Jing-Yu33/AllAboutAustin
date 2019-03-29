@@ -11,6 +11,7 @@ const RecomPage = (props) => {
     const result = fetchResult(query)
 
     return (
+        <React.Fragment>
         <div>
             Recommendation Page
             <SurveyModal />
@@ -18,9 +19,24 @@ const RecomPage = (props) => {
                 <li>Food Weight: {query.food || "50"}</li>
                 <li>Traffic Weight: {query.traffic || "50"}</li>
                 <li>Education Weight: {query.education || "50"}</li>
+
             </ul>
-            {result}
+            
         </div>
+
+        <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Reccomendations Page</h1>
+    <p class="lead">Your rankings were as follows:</p>
+    <p class="lead">Food Weight: {query.food || "50"}</p>
+    <p class="lead">Traffic Weight: {query.traffic || "50"}</p>
+    <p class="lead">Education Weight: {query.education || "50"}</p>
+    <h3>Top 5 Zip Codes</h3>
+    {result}
+
+  </div>
+</div>
+        </React.Fragment>
     )
 
 }
@@ -105,5 +121,7 @@ const mapStateToProps = (state) => {
         weight: state.weight
     }
 }
+
+
 
 export default connect(mapStateToProps)(RecomPage)

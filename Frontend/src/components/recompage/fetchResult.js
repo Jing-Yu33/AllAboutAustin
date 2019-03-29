@@ -18,7 +18,9 @@ const fetchResult = (weight) => {
         const resultList = response.data.map((zipcode) => {
             return(
                 <div key={zipcode.zipcode}>
-                    <Link to={`/zipcodes/${zipcode.zipcode}`}>{zipcode.zipcode}</Link>
+                <br></br>
+                    <Link className="btn btn-primary" to={`/zipcodes/${zipcode.zipcode}`}>{zipcode.zipcode}</Link>
+
                 </div>
             )
         })
