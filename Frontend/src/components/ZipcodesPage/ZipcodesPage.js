@@ -22,7 +22,7 @@ class ZipcodesPage extends Component {
     }
 
     onSortDownSubmit = (value) => {
-        this.props.GetAllZipcodes("", value.sortByCategory, value.sortByOrder, "");
+        this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
     }
 
     renderList = (zipcodes) => {

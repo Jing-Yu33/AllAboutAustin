@@ -5,17 +5,17 @@ import SearchBar from '../searchAndSort/SearchBar';
 import HeatMap from '../heatmap/HeatMap';
 import RankingList from '../rankingList/RankingList';
 
-import { GetAllZipcodes } from '../../actions';
+import { GetTop10ZipcodeByCategory } from '../../actions';
 import SortForm from '../searchAndSort/SortForm'
 
 class Food extends Component {
 
     componentDidMount() {
-        this.props.GetAllZipcodes("food", "food", "", "10");
+        this.props.GetTop10ZipcodeByCategory("food", "food");
     }
 
     onSortDownSubmit = (value) => {
-        this.props.GetAllZipcodes("food", value.sortByCategory, value.sortByOrder, "10");
+        this.props.GetTop10ZipcodeByCategory("food", value.sortByCategory, value.sortByOrder);
     }
 
     render(){
@@ -52,5 +52,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    GetAllZipcodes
+    GetTop10ZipcodeByCategory
 })(Food);

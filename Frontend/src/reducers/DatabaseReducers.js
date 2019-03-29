@@ -7,6 +7,9 @@ const DatabaseReducers = (state={}, action) => {
         case "GET_ONE_ZIPCODE":
             return {[action.payload.zipcode]: action.payload}
         
+        case "GET_TOP_ZIPCODES_BY_CATEGORY":
+            return {...action.payload}
+        
         default: return state;
     }
 }

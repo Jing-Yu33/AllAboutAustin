@@ -21,18 +21,32 @@ export const educationWeight = (weight) => {
     }
 }
 
-export const GetAllZipcodes = (category, sortBy, order, amount) => {
+export const GetAllZipcodes = (sortBy, order) => {
     return async (dispatch) => {
         const response = await DataBase.get("/zipcodes",{
             params: {
-                category,
                 sortBy,
-                order,
-                amount
+                order
             }
         });
         dispatch({
             type: "GET_ALL_ZIPCODES",
+            payload: response.data
+        })
+    }
+}
+
+export const GetTop10ZipcodeByCategory = (category, sortBy, order) => {
+    return async (dispatch) => {
+        const response = await DataBase.get("/zipcodes/top10",{
+            params: {
+                category,
+                sortBy,
+                order
+            }
+        });
+        dispatch({
+            type: "GET_TOP_ZIPCODES_BY_CATEGORY",
             payload: response.data
         })
     }
