@@ -25,10 +25,10 @@ class IndividualZipcodePage extends Component {
             <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
             <p>{this.props.zipcode.description}</p>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Wholistic Score : {this.props.zipcode.averageScore}</li>
-              <li class="list-group-item">Food Score : {this.props.zipcode.foodScore}</li>
-              <li class="list-group-item">Traffic Score : {this.props.zipcode.trafficScore}</li>
-              <li class="list-group-item">Education Score : {this.props.zipcode.educationScore}</li>
+              <li class="list-group-item">Wholistic Rate : {this.props.zipcode.averageScore}</li>
+              <li class="list-group-item">Food Rate : {this.props.zipcode.foodScore}</li>
+              <li class="list-group-item">Traffic Rate : {this.props.zipcode.trafficScore}</li>
+              <li class="list-group-item">Education Rate : {this.props.zipcode.educationScore}</li>
             </ul>
 
 
