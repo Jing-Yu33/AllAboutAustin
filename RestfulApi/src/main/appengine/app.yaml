@@ -14,3 +14,12 @@ readiness_check:
   success_threshold: 5
   app_start_timeout_sec: 2500
   
+resources:
+  cpu: 1
+  memory_gb: 2.3
+  disk_size_gb: 10
+  volumes:
+  - name: ramdisk1
+    volume_type: tmpfs
+    size_gb: 0.5
+  

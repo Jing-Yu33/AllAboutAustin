@@ -19,7 +19,7 @@ class Stack extends React.Component {
 
                     <div className="col-lg-4 my-sm-3">
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item active">BackEnd</li>
+                            <li className="list-group-item active">Back End</li>
                             <li className="list-group-item"><b>Springboot</b>: A Java Framework for building RESTful API</li>
                             <li className="list-group-item"><b>Postman</b>: Testing and documentation tool for API</li>
                         </ul>
@@ -27,7 +27,7 @@ class Stack extends React.Component {
 
                     <div className="col-lg-4 my-sm-3">
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item active">Back End / Database</li>
+                            <li className="list-group-item active">Database</li>
                             <li className="list-group-item"><b>MongoDB</b>: NoSQL Database</li>
                             <li className="list-group-item"><b>MongoDB Java Driver</b>: provide interaction between Java and MongoDB</li>
                             <li className="list-group-item"><b>SODA API</b>: Interacting with Austin Government databases</li>
