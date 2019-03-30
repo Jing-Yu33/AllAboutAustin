@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataBase } from '../../apis/DataBase';
 import ZipCodeComponent from '../zipcode/ZipCodeComponent'
-import { Link } from 'react-router-dom'
 
 const fetchResult = (weight) => {
     const [result, setResult] = useState([])

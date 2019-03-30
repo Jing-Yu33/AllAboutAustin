@@ -9,7 +9,6 @@ import Food from './components/food/Food'
 import Education from './components/education/Education'
 import Traffic from './components/traffic/Traffic'
 import RecomPage from './components/recompage/RecomPage';
-import SurveyModal from './components/modals/SurveyModal';
 
 import ZipcodePage from './components/ZipcodesPage/ZipcodesPage';
 import IndividualZipcodePage from './components/ZipcodesPage/IndividualZipcodePage';

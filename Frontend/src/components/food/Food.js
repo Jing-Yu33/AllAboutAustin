@@ -5,7 +5,6 @@ import SearchBar from '../searchAndSort/SearchBar';
 import HeatMap from '../heatmap/HeatMap';
 import RankingList from '../rankingList/RankingList';
 
-import history from '../../history';
 import { GetTop10ZipcodeByCategory } from '../../actions';
 import SortForm from '../searchAndSort/SortForm'
 

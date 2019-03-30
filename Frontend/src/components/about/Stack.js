@@ -17,11 +17,11 @@ class Stack extends React.Component {
                         </ul>
                     </div>
 
-                    <div class="col-lg-4 my-sm-3">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item active">BackEnd</li>
-                            <li class="list-group-item"><b>Springboot</b>: A Java Framework for building RESTful API</li>
-                            <li class="list-group-item"><b>Postman</b>: Testing and documentation tool for API</li>
+                    <div className="col-lg-4 my-sm-3">
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item active">BackEnd</li>
+                            <li className="list-group-item"><b>Springboot</b>: A Java Framework for building RESTful API</li>
+                            <li className="list-group-item"><b>Postman</b>: Testing and documentation tool for API</li>
                         </ul>
                     </div>
 
