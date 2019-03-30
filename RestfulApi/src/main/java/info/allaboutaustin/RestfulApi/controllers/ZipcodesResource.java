@@ -26,7 +26,7 @@ import info.allaboutaustin.RestfulApi.repositories.FoodsRepository;
 import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")	// change to host name
+@CrossOrigin(origins = "*")	// change to host name
 @RequestMapping("/api/zipcodes")
 public class ZipcodesResource {
 	
@@ -103,6 +103,7 @@ public class ZipcodesResource {
 			@RequestParam(name="education", required=false, defaultValue="50") String education,
 			@RequestParam(name="traffic", required=false, defaultValue="50") String traffic) {
 		
+		//TODO： check input parameter validation
 		List<Zipcode> zipcodes = ZipcodeRepo.findAll();
 		for(Zipcode zc: zipcodes) {
 			Double totalScore = zc.getFoodScore() * Double.parseDouble(food) +
