@@ -12,7 +12,7 @@ class RankingList extends Component {
 
         return(
             <div>
-                <h4>ToP 10 zipcodes with Best Food/traffic/eduction In Austin</h4>
+                <h4>Top 10 Zipcodes</h4>
                 {this.getRankingCard()}
             </div>
         )
