@@ -23,7 +23,7 @@ class About extends Component {
                     <div className="col-md-4">
                         <GithubStats />
                     </div>
-                    <div className="col-md-8 mt-sm-5">
+                    <div className="col-md-8">
                         <Datasource />
                     </div>
                 </div>

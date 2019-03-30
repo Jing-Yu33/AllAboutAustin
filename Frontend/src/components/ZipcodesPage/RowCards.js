@@ -17,13 +17,13 @@ class RowCards extends Component {
         )  
       }
       
-      return <div>No data</div>
+      return "No data"
     }
 
     render() {
         return(
           <div className="row">
-            <div className="col-lg-4 d-flex mt-3 align-items-stretch">
+            <div className="col-lg-4  mt-3 align-items-stretch">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Food</h5>
@@ -33,7 +33,7 @@ class RowCards extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 d-flex mt-3 align-items-stretch">
+            <div className="col-lg-4 mt-3 align-items-stretch">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Traffic</h5>
@@ -41,7 +41,7 @@ class RowCards extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 d-flex mt-3 align-items-stretch">
+            <div className="col-lg-4 mt-3 align-items-stretch">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Education</h5>
