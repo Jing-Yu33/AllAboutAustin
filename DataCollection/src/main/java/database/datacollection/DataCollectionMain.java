@@ -1,12 +1,15 @@
 package database.datacollection;
-
 import java.io.IOException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * Head of the data collection program. This calls all other classes.
  */
 
-public class DataCollectionMain {
+public class DataCollectionMain extends HttpServlet {
 
 	public static void main(String[] args) throws IOException {
 		MongoStorage.setUp();
@@ -17,6 +20,15 @@ public class DataCollectionMain {
 		MongoStorage.saveCombinedZipcodeData();
 		//System.out.println(Averaging.getFoodAverage("78756"));
 	}
+	
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		MongoStorage.setUp();
+		demoSodaCollector();
+		demoZomatoCollector();
+		demoSchoolCollector();
+		demoSensorDataCollector();
+		MongoStorage.saveCombinedZipcodeData();
+    }
 
 	private static void demoSodaCollector() {
 		SodaCollector demo = new SodaCollector();
