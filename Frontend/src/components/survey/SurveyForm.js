@@ -23,7 +23,6 @@ class SurveyFrom extends Component {
     render() {
         return(
             <div>
-                <p>TODO: change the range to 0 to 10 integer (now 0 to 100), show exactly number when slides (requir JS)</p>
                 <form id="survey-form">
                     <SliderBar category="Food" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
                     <SliderBar category="Education" onSliderBarFocusOut={this.onSliderBarFocusOut}/>

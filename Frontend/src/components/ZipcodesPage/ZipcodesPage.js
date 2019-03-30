@@ -136,15 +136,7 @@ class ZipcodesPage extends Component {
 
         return(
             <div>
-                TODOs:
-                <ul>
-                    <li><strike>Sort Function: determine a default sorting category => new data field - average score?</strike></li>
-                    <li><strike>set different pages: 8 item / page</strike></li>
-                    <li>search function</li>
-                    <li>Optional: add more filter checkbox?</li>
-                    <li>interactive map</li>
-                    <li>Layout</li>
-                </ul>
+                
                 <div className="row mt-4">
                     <div className="col-lg-4">
                         <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>

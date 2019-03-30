@@ -16,7 +16,7 @@ class ZipCodeComponent extends Component {
             <img className="img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/>
           </div>
           <div>
-            <h5 className="card-title">Region/description: manaully added later</h5>
+            <h5 className="card-title">Region/Description: Manually add in later phase</h5>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">Food Rate: {this.props.zipcode.foodScore}</li>
               <li className="list-group-item">Traffic Rate: {this.props.zipcode.trafficScore}</li>
