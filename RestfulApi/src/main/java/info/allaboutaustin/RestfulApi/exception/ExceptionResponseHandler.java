@@ -24,4 +24,11 @@ public class ExceptionResponseHandler extends ResponseEntityExceptionHandler{
 		ExceptionResponse ep = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false)); 
 		return new ResponseEntity(ep, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(ParameterNotValidException.class)
+	public ResponseEntity<Object> handleParameterNotValidException(
+			Exception ex, WebRequest request) {
+		ExceptionResponse ep = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false)); 
+		return new ResponseEntity(ep, HttpStatus.BAD_REQUEST);
+	}
 }

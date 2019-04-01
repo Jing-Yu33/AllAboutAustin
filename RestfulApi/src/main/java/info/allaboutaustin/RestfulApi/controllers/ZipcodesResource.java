@@ -12,6 +12,7 @@ import java.util.TreeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import info.allaboutaustin.RestfulApi.exception.ParameterNotValidException;
 import info.allaboutaustin.RestfulApi.exception.ZipcodeNotFoundException;
 import info.allaboutaustin.RestfulApi.models.FoodData;
 import info.allaboutaustin.RestfulApi.models.SchoolData;
@@ -46,15 +47,13 @@ public class ZipcodesResource {
 			case "traffic": Collections.sort(list, tc);		break;
 			case "education": Collections.sort(list, ec);	break;
 			case "average": Collections.sort(list, ac);		break;
-			default: Collections.sort(list, ac);
+			default: throw new ParameterNotValidException("Category should be food, traffic, eudcation, or average, please verify your input URL");
 		}
 	}
 	
 	
 	/*	Return zipcodes information
-	 *  category: the initial sorting
 	 *  sortBy: sorting by specific category
-	 * 	amount: the number of zipcodes
 	 *  order: ascending order or descending order
 	 */
 	@GetMapping("")
@@ -64,25 +63,13 @@ public class ZipcodesResource {
 		
 		List<Zipcode> list = ZipcodeRepo.findAll();
 		sortByCategory(list, sortBy);
-		if(order.equals("asc"))	Collections.reverse(list);
-				
-		return list;
-	}
-	
-	// should be a private api
-	@GetMapping("/top10")
-	public List<Zipcode> getTop10ZipcodesByCategory(
-			@RequestParam(name="category") String category,
-			@RequestParam(name="sortBy") String sortBy,
-			@RequestParam(name="order", required=false, defaultValue="desc") String order){
 		
-		List<Zipcode> list = ZipcodeRepo.findAll();
-		
-		sortByCategory(list, category);
-		list = list.subList(0, 10);
-		sortByCategory(list, sortBy);
+		if(!order.equals("asc") && !order.equals("desc")) {
+			throw new ParameterNotValidException("Order should be asc or desc, which represented ascending/descending order, please verify your input URL");
+		}
+			
 		if(order.equals("asc"))	Collections.reverse(list);
-				
+			
 		return list;
 	}
 	
@@ -103,12 +90,28 @@ public class ZipcodesResource {
 			@RequestParam(name="education", required=false, defaultValue="50") String education,
 			@RequestParam(name="traffic", required=false, defaultValue="50") String traffic) {
 		
-		//TODO： check input parameter validation
+		
+		Integer foodWeight = 0;
+		Integer trafficWeight = 0;
+		Integer educationWeight = 0;
+
+		try {
+			foodWeight = Integer.parseInt(food);
+			trafficWeight = Integer.parseInt(traffic);
+			educationWeight = Integer.parseInt(education);
+		}catch (Exception e) {
+			throw new ParameterNotValidException("Category Weight must be Integer Number between 0-100, please verify your input URL");
+		}
+		
+		if((foodWeight<0 || foodWeight>100) || (educationWeight<0 || educationWeight>100) || (trafficWeight<0 || trafficWeight>100)) {
+			throw new ParameterNotValidException("Category Weight must be Positive Integer Number between 0-100, please verify your input URL");
+		}
+		
 		List<Zipcode> zipcodes = ZipcodeRepo.findAll();
 		for(Zipcode zc: zipcodes) {
-			Double totalScore = zc.getFoodScore() * Double.parseDouble(food) +
-								zc.getEducationScore() * Double.parseDouble(education) +
-								zc.getTrafficScore() * Double.parseDouble(traffic);
+			Double totalScore = zc.getFoodScore() * foodWeight +
+								zc.getEducationScore() * educationWeight +
+								zc.getTrafficScore() * trafficWeight;
 			zc.setTotalScore(totalScore);
 		}
 		Collections.sort(zipcodes, tsc);
@@ -117,7 +120,22 @@ public class ZipcodesResource {
 	}
 	
 	
-
+	// should be a private api, not to public
+	@GetMapping("/top10")
+	public List<Zipcode> getTop10ZipcodesByCategory(
+			@RequestParam(name="category") String category,
+			@RequestParam(name="sortBy") String sortBy,
+			@RequestParam(name="order", required=false, defaultValue="desc") String order){
+		
+		List<Zipcode> list = ZipcodeRepo.findAll();
+		
+		sortByCategory(list, category);
+		list = list.subList(0, 10);
+		sortByCategory(list, sortBy);
+		if(order.equals("asc"))	Collections.reverse(list);
+				
+		return list;
+	}
 	
 	
 	
