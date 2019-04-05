@@ -1,5 +1,6 @@
 package info.allaboutaustin.RestfulApi.controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import info.allaboutaustin.RestfulApi.exception.ParameterNotValidException;
 import info.allaboutaustin.RestfulApi.exception.ZipcodeNotFoundException;
 import info.allaboutaustin.RestfulApi.models.Zipcode;
+import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeAverageScoreComparator;
+import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeEducationComparator;
+import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeFoodComparator;
+import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeTotalScoreComparator;
+import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeTrafficComparator;
 import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
@@ -25,13 +31,31 @@ public class FilterController {
 	@Autowired
 	ZipcodesRepository ZipcodeRepo;
 	
+	ZipcodeTotalScoreComparator tsc = new ZipcodeTotalScoreComparator();
+	ZipcodeAverageScoreComparator ac = new ZipcodeAverageScoreComparator();
+	ZipcodeFoodComparator fc = new ZipcodeFoodComparator();
+	ZipcodeEducationComparator ec = new ZipcodeEducationComparator();
+	ZipcodeTrafficComparator tc = new ZipcodeTrafficComparator();
+	
+	//Helper Method: sorting list by specific category order
+	private void sortByCategory(List<Zipcode> list, String category){
+		switch(category) {
+			case "food": Collections.sort(list, fc);		break;
+			case "traffic": Collections.sort(list, tc);		break;
+			case "education": Collections.sort(list, ec);	break;
+			case "average": Collections.sort(list, ac);		break;
+			default: throw new ParameterNotValidException("Category should be food, traffic, eudcation, or average, please verify your input URL");
+		}
+	}
 	
 	// private API
 	@GetMapping("")
 	public List<Zipcode> filterZipcodeByRating (
 							@RequestParam(name="foodGt", required=false, defaultValue="0") String foodGt,
 							@RequestParam(name="trafficGt", required=false, defaultValue="0") String trafficGt,
-							@RequestParam(name="educationGt", required=false, defaultValue="0") String educationGt) {
+							@RequestParam(name="educationGt", required=false, defaultValue="0") String educationGt,
+							@RequestParam(name="sortBy", required=false, defaultValue="average") String sortBy,
+							@RequestParam(name="order", required=false, defaultValue="desc") String order) {
 		
 		Integer foodGtNum = Integer.parseInt(foodGt);
 		Integer trafficGtNum = Integer.parseInt(trafficGt);
@@ -52,6 +76,14 @@ public class FilterController {
 		
 		
 		List<Zipcode> zipcodes = ZipcodeRepo.findByCategoryScoreGreaterThanQuery(foodGtNum, trafficGtNum, educationGtNum);
+		
+		sortByCategory(zipcodes, sortBy);
+		
+		if(!order.equals("asc") && !order.equals("desc")) {
+			throw new ParameterNotValidException("Order should be asc or desc, which represented ascending/descending order, please verify your input URL");
+		}
+			
+		if(order.equals("asc"))	Collections.reverse(zipcodes);
 		
 		return zipcodes;
 	}

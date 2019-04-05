@@ -11,41 +11,38 @@ import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
 
 class ZipcodesPage extends Component {
    
+    limit = 8; // # of zipcode components shown on a single page
+
     state = {
-        limit: 8,
-        total: 81,
-        pageCount: 11,
         currentPage: 1
     }
 
+    // Intitialize
     async componentDidMount(){
       this.props.GetAllZipcodes();
     }
 
-    onSortDownSubmit = async (value) => {
-        this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
-    }
-
-    handleSubmit = (event) => {
-      event.preventDefault();
-      const { foodGt, trafficGt, educationGt } = this.props.filterForm.values
-      this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt);  
-    }
-
+    // Render Zipcode Components List and Pagination Button
     renderList = () => {
-        const zipcodes = _.chunk(this.props.zipcodes, this.state.limit);
-        return zipcodes[this.state.currentPage-1].map(zipcode => {
-                return (
-                  <div className="col-lg-6" key={zipcode.zipcode}>
-                    <ZipcodeComponent zipcode={zipcode} /> 
-                  </div>
-                )
-        })
+      const zipcodes = _.chunk(this.props.zipcodes, this.limit);
+      return zipcodes[this.state.currentPage-1].map(zipcode => {
+              return (
+                <div className="col-lg-6" key={zipcode.zipcode}>
+                  <ZipcodeComponent zipcode={zipcode} /> 
+                </div>
+              )
+      })
     }
 
-    renderZipcodes = (total) => {
+    renderZipcodes = () => {
       if(this.props.zipcodes.length === 0){
         return <div>No Zipcodes</div>
+      }
+
+      var total = 0;
+
+      if(this.props.zipcodes){
+        total = this.props.zipcodes.length;
       }
 
       return (
@@ -69,30 +66,62 @@ class ZipcodesPage extends Component {
       )
     }
 
+    // Handle Page changes
     handlePageChange = (page) => {
-        this.setState({
-          currentPage: page
-        });
+      this.setState({
+        currentPage: page
+      });
     };
 
+
+
+    onSortDownSubmit = async (value) => {
+        // const { foodGt, trafficGt, educationGt } = this.props.filterForm.values
+        // this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt, value.sortByCategory, value.sortByOrder);
+        this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
+    }
+
+
+
+
+
+    handleReset = async () => {
+      this.props.GetAllZipcodes();
+    }
+
+    handleSubmit = (event) => {
+      event.preventDefault();
+      this.setState({
+        currentPage: 1
+      })
+      const { foodGt, trafficGt, educationGt} = this.props.filterForm.values
+      this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt);  
+    }
+
+
+
+
+
     render(){
-      // if(this.props.zipcodes.length === 0){
-      //   return <div>Loading...</div>
-      // }
-      var total = 0;
-
-      if(this.props.zipcodes){
-        total = this.props.zipcodes.length;
-      }
-
       return(
         <div>
+          TODOs: sort function will return all zipcode list, not based on the filter, may change that later
           <div className="row mt-4">
               <div className="col-lg-4">
                   <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
               </div>
               <div className="col-lg-4">
-                  <SortForm onSubmit={this.onSortDownSubmit} defaultCategory="average"/>
+                  <SortForm 
+                    // handleSubmit={this.handleSubmit} 
+                    onSubmit={this.onSortDownSubmit} 
+                    defaultCategory="average"
+                    // initialValues={
+                    //   {
+                    //     sortBy: "average",
+                    //     order: "desc"
+                    //   }
+                    // }
+                  />
               </div>
           </div>
 
@@ -100,11 +129,12 @@ class ZipcodesPage extends Component {
             <div className="col-lg-8">
                 <BasicFilters 
                   handleSubmit={this.handleSubmit}
+                  handleReset={this.handleReset}
                   initialValues={
                     {
                       foodGt: "0",
                       trafficGt: "0",
-                      educationGt: "0",
+                      educationGt: "0"
                     }
                   }
                   />
@@ -123,7 +153,7 @@ class ZipcodesPage extends Component {
             </div>
           </div>
 
-          {this.renderZipcodes(total)}        
+          {this.renderZipcodes()}        
 
         </div>
       )
@@ -133,7 +163,7 @@ class ZipcodesPage extends Component {
 const mapStateToProps = (state) => {
     return {
         zipcodes: Object.values(state.zipcodes),
-        filterForm: state.form.ZipcodesBasicFilter
+        filterForm: state.form.ZipcodesFilter
     }
 }
 

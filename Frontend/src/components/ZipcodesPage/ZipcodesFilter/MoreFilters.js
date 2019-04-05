@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-class BasicFilters extends Component {
+class MoreFilters extends Component {
 
     reset = () => {
         this.props.reset();
@@ -30,7 +30,7 @@ class BasicFilters extends Component {
 
 
     render() {
-        const { handleSubmit, pristine, submitting } = this.props
+        const { handleSubmit, pristine, reset, submitting } = this.props
         return(
             <form onSubmit={(e) => handleSubmit(e)}>
                 Need Styling! in one row and modify the text
@@ -56,8 +56,6 @@ class BasicFilters extends Component {
     }
 }
 export default reduxForm({
-    form: 'ZipcodesFilter', // a unique identifier for this form
-    // destroyOnUnmount: false,
-    // forceUnregisterOnUnmount: true
-  })(BasicFilters)
+    form: 'ZipcodesFilter' // a unique identifier for this form
+  })(MoreFilters)
 
