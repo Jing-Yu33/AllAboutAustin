@@ -4,7 +4,11 @@ class RankingList extends Component {
 
     getRankingCard = () => {
         return this.props.data.map( (zipcode) => {
-            return <ZipCodeComponent key={zipcode.zipcode} zipcode={zipcode}/>
+            return (
+                <div className="col-lg-4">
+                    <ZipCodeComponent key={zipcode.zipcode} zipcode={zipcode}/>
+                </div>
+            )
         })
     }
     
@@ -13,7 +17,12 @@ class RankingList extends Component {
         return(
             <div>
                 <h4>Top 10 Zipcodes</h4>
-                {this.getRankingCard()}
+                <div>
+                    Top 3 with special Styling? 
+                </div>
+                <div className="row">
+                    {this.getRankingCard()}
+                </div>
             </div>
         )
   }

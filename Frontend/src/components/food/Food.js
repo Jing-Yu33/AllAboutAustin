@@ -36,15 +36,10 @@ class Food extends Component {
                     </div>
                 </div>
                 
-                <div className="row mt-5">
-                    <div className="col-lg-8">
-                        <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
-                    </div>
-                    <div className="col-lg-4">
+                <div className="mt-3">
                         <HeatMap />
-                    </div>
-                    
                 </div>
+                <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
             </div>
         );
     }

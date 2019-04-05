@@ -12,35 +12,68 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import info.allaboutaustin.RestfulApi.exception.ParameterNotValidException;
 import info.allaboutaustin.RestfulApi.exception.ZipcodeNotFoundException;
 import info.allaboutaustin.RestfulApi.models.Zipcode;
 import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
 @CrossOrigin(origins = "*")	// change to host name
-@RequestMapping("/api/filter")
+@RequestMapping("/api/filter/zipcodes")
 public class FilterController {
 
 	@Autowired
 	ZipcodesRepository ZipcodeRepo;
 	
-	@GetMapping("/zipcodes/{word}")
+	
+	// private API
+	@GetMapping("")
+	public List<Zipcode> filterZipcodeByRating (
+							@RequestParam(name="foodGt", required=false, defaultValue="0") String foodGt,
+							@RequestParam(name="trafficGt", required=false, defaultValue="0") String trafficGt,
+							@RequestParam(name="educationGt", required=false, defaultValue="0") String educationGt) {
+		
+		Integer foodGtNum = Integer.parseInt(foodGt);
+		Integer trafficGtNum = Integer.parseInt(trafficGt);
+		Integer educationGtNum = Integer.parseInt(educationGt);
+
+		
+//		try {
+//			foodGtNum = Integer.parseInt(foodGt);
+////			trafficWeight = Integer.parseInt(traffic);
+////			educationWeight = Integer.parseInt(education);
+//		}catch (Exception e) {
+//			throw new ParameterNotValidException("Category Number must be Integer Number between 0-10, please verify your input URL");
+//		}
+//		
+//		if((foodGtNum<0 || foodGtNum>10)) {
+//			throw new ParameterNotValidException("Category Number must be Positive Integer Number between 0-10, please verify your input URL");
+//		}
+		
+		
+		List<Zipcode> zipcodes = ZipcodeRepo.findByCategoryScoreGreaterThanQuery(foodGtNum, trafficGtNum, educationGtNum);
+		
+		return zipcodes;
+	}
+	
+	
+	@GetMapping("/{word}")
 	public String searchZipcodeByKeyword(@PathVariable String word) {
 		return word;
 	}
 	
-	@GetMapping("/zipcodes")
-	public List<Zipcode> searchZipcodeByParameters(
-						@RequestParam(name="region") String region
-						/*@RequestParam(name="") String a*/) {
-		
-//		Query query = new Query();
-//		query.addCriteria(Criteria.where("region").is(region));
-//		List<Zipcode> zipcodes = ZipcodeRepo.findByRegionQuery(region);
-		List<Zipcode> zipcodes = ZipcodeRepo.findByRegion(region);
-		if(zipcodes.size() == 0) {
-			throw new ZipcodeNotFoundException("There is no zipcode in "+region+" region, please refer to our API documentation and verify your input URL");
-		}
-		return zipcodes;
-	}
+//	@GetMapping("")
+//	public List<Zipcode> searchZipcodeByParameters(
+//						@RequestParam(name="region") String region
+//						/*@RequestParam(name="") String a*/) {
+//		
+////		Query query = new Query();
+////		query.addCriteria(Criteria.where("region").is(region));
+////		List<Zipcode> zipcodes = ZipcodeRepo.findByRegionQuery(region);
+//		List<Zipcode> zipcodes = ZipcodeRepo.findByRegion(region);
+//		if(zipcodes.size() == 0) {
+//			throw new ZipcodeNotFoundException("There is no zipcode in "+region+" region, please refer to our API documentation and verify your input URL");
+//		}
+//		return zipcodes;
+//	}
 }

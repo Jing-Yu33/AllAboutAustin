@@ -27,7 +27,7 @@ import info.allaboutaustin.RestfulApi.repositories.FoodsRepository;
 import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
-@CrossOrigin(origins = "*")	// change to host name
+@CrossOrigin(origins = "*")	
 @RequestMapping("/api/zipcodes")
 public class ZipcodesResource {
 	
@@ -83,6 +83,9 @@ public class ZipcodesResource {
 		return zc;
 	}
 	
+	
+	// should be a private api, not open to public
+	
 	// ?food=&traffic=&education=: Return a ranking list of 10 top zipcodes based on user-assigned weight
 	@GetMapping("/ranking")
 	public List<Zipcode> searchZipcodeByParameters(
@@ -119,8 +122,6 @@ public class ZipcodesResource {
 		return zipcodes;
 	}
 	
-	
-	// should be a private api, not to public
 	@GetMapping("/top10")
 	public List<Zipcode> getTop10ZipcodesByCategory(
 			@RequestParam(name="category") String category,

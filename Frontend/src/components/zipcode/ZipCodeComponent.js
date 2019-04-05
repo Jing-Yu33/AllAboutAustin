@@ -12,8 +12,8 @@ class ZipCodeComponent extends Component {
         </div>
       <div className="card-body" >
         <div className="row align-items-center">
-          <div className="col-lg-4">
-            <img className="img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/>
+          <div >
+            <img className="card-img-top img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/>
           </div>
           <div>
             <h5 className="card-title">Region/Description: Manually add in later phase</h5>

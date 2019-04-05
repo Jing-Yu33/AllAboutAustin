@@ -16,6 +16,9 @@ const RecomPage = (props) => {
                 <div className="container">
                     <h1 className="display-4">Reccomendations</h1>
                     <SurveyModal />
+                    <div>
+                    Top 3 with special Styling? 
+                </div>
                     <ul className="list-group lead">
                         <div className="row">
                             <div className="col-lg-4">Food Weight: {query.food || "50"}</div>

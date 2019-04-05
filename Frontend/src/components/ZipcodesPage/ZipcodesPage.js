@@ -1,37 +1,72 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Pagination from "react-paginating";
 import _ from 'lodash';
 
 import SearchBar from '../searchAndSort/SearchBar';
 import SortForm from '../searchAndSort/SortForm';
-import ZipcodeComponent from '../zipcode/ZipCodeComponent'
-import { GetAllZipcodes } from '../../actions';
-
-
-const limit = 8;
-const pageCount = 11;
-const total = 81;
+import ZipcodeComponent from '../zipcode/ZipCodeComponent';
+import PaginationButton from './PaginationButton';
+import BasicFilters from './ZipcodesFilter/BasicFilters';
+import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
 
 class ZipcodesPage extends Component {
+   
     state = {
+        limit: 8,
+        total: 81,
+        pageCount: 11,
         currentPage: 1
     }
 
     async componentDidMount(){
-        this.props.GetAllZipcodes();
+      this.props.GetAllZipcodes();
     }
 
-    onSortDownSubmit = (value) => {
+    onSortDownSubmit = async (value) => {
         this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
     }
 
-    renderList = (zipcodes) => {
+    handleSubmit = (event) => {
+      event.preventDefault();
+      const { foodGt, trafficGt, educationGt } = this.props.filterForm.values
+      this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt);  
+    }
+
+    renderList = () => {
+        const zipcodes = _.chunk(this.props.zipcodes, this.state.limit);
         return zipcodes[this.state.currentPage-1].map(zipcode => {
                 return (
-                    <ZipcodeComponent zipcode={zipcode} key={zipcode.zipcode}/> 
+                  <div className="col-lg-6" key={zipcode.zipcode}>
+                    <ZipcodeComponent zipcode={zipcode} /> 
+                  </div>
                 )
         })
+    }
+
+    renderZipcodes = (total) => {
+      if(this.props.zipcodes.length === 0){
+        return <div>No Zipcodes</div>
+      }
+
+      return (
+        <div>
+          <div className="row">
+            <div className="col-lg-8">
+              <div className="row">
+                {this.renderList()}
+              </div>
+            </div>
+            <div className="col-lg-4">
+                Google Map Here??? Fixed? <br/>
+            </div>
+          </div>
+          <div className="row mt-3 mb-3">
+            <div className="col-lg-8 justify-content-center">
+              <PaginationButton total={total} currentPage={this.state.currentPage} handlePageChange={this.handlePageChange}/>
+            </div>
+          </div>
+        </div>
+      )
     }
 
     handlePageChange = (page) => {
@@ -40,127 +75,68 @@ class ZipcodesPage extends Component {
         });
     };
 
-    renderPageButton = (currentPage) => {
-        return (
-            <Pagination
-            total={total}
-            limit={limit}
-            pageCount={pageCount}
-            currentPage={currentPage}
-          >
-            {({
-              pages,
-              currentPage,
-              hasNextPage,
-              hasPreviousPage,
-              previousPage,
-              nextPage,
-              totalPages,
-              getPageItemProps
-            }) => (
-              
-              <div className="btn-group mx-auto">
-                <button className="btn btn-outline-primary"
-                  {...getPageItemProps({
-                    pageValue: 1,
-                    onPageChange: this.handlePageChange
-                  })}
-                >
-                  first
-                </button>
-  
-                {hasPreviousPage && (
-                  <button className="btn btn-outline-primary"
-                    {...getPageItemProps({
-                      pageValue: previousPage,
-                      onPageChange: this.handlePageChange
-                    })}
-                  >
-                    {"<"}
-                  </button>
-                )}
-  
-                {pages.map(page => {
-                  let activePage = null;
-                  if (currentPage === page) {
-                    activePage = { backgroundColor: "#fdce09" };
-                  }
-                  return (
-                    <button className="btn btn-outline-primary"
-                      {...getPageItemProps({
-                        pageValue: page,
-                        key: page,
-                        style: activePage,
-                        onPageChange: this.handlePageChange
-                      })}
-                    >
-                      {page}
-                    </button>
-                  );
-                })}
-  
-                {hasNextPage && (
-                  <button className="btn btn-outline-primary"
-                    {...getPageItemProps({
-                      pageValue: nextPage,
-                      onPageChange: this.handlePageChange
-                    })}
-                  >
-                    {">"}
-                  </button>
-                )}
-  
-                <button className="btn btn-outline-primary"
-                  {...getPageItemProps({
-                    pageValue: totalPages,
-                    onPageChange: this.handlePageChange
-                  })}
-                >
-                  last
-                </button>
-              </div>
-              
-            )}
-            
-          </Pagination>
-        )
-    }
-
-
     render(){
-        const { currentPage } = this.state;
-        const zipcodes = _.chunk(this.props.zipcodes, limit);
-        if(zipcodes.length === 0){
-            return <div>Loading...</div>
-        }
+      // if(this.props.zipcodes.length === 0){
+      //   return <div>Loading...</div>
+      // }
+      var total = 0;
 
-        return(
-            <div>
-                
-                <div className="row mt-4">
-                    <div className="col-lg-4">
-                        <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
-                    </div>
-                    <div className="col-lg-4"></div>
-                    <div className="col-lg-4">
-                      <SortForm onSubmit={this.onSortDownSubmit} defaultCategory="average"/>
-                    </div>
-                </div>
-                {this.renderList(zipcodes)}
-                <div className="row justify-content-center mt-3 mb-3">
-                  {this.renderPageButton(currentPage)}
-                </div>
+      if(this.props.zipcodes){
+        total = this.props.zipcodes.length;
+      }
+
+      return(
+        <div>
+          <div className="row mt-4">
+              <div className="col-lg-4">
+                  <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+              </div>
+              <div className="col-lg-4">
+                  <SortForm onSubmit={this.onSortDownSubmit} defaultCategory="average"/>
+              </div>
+          </div>
+
+          <div> 
+            <div className="col-lg-8">
+                <BasicFilters 
+                  handleSubmit={this.handleSubmit}
+                  initialValues={
+                    {
+                      foodGt: "0",
+                      trafficGt: "0",
+                      educationGt: "0",
+                    }
+                  }
+                  />
+                <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  More Options
+                </a>
+             
+              <div className="collapse" id="collapseExample">
+                More Options here: region in Austin? Whether has a Hospital? A cinema?
+                <ul> Region
+                  <li>North Austin</li>
+                  <li>South Austin</li>
+                  <li>...</li>
+                </ul>
+              </div>
             </div>
-        );
+          </div>
+
+          {this.renderZipcodes(total)}        
+
+        </div>
+      )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        zipcodes: Object.values(state.zipcodes)
+        zipcodes: Object.values(state.zipcodes),
+        filterForm: state.form.ZipcodesBasicFilter
     }
 }
 
 export default connect(mapStateToProps, {
-    GetAllZipcodes
+    GetAllZipcodes, GetFilteredZipcodes
 })(ZipcodesPage)

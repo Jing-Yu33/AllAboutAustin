@@ -11,9 +11,12 @@ public interface ZipcodesRepository extends MongoRepository<Zipcode, String>{
 //	Zipcode findFirstByZipcode(String zipcode);
 	Zipcode findByZipcode(String zipcode);
 	List<Zipcode> findByRegion(String region);
-	// TODO: change to regular expression, ignore letter case, whitespace....
+	
 	@Query("{region : ?0}")
 	List<Zipcode> findByRegionQuery(String region);
+	
+	@Query("{'$and' : [{'FoodScore' : {$gte : ?0}, 'TrafficScore' : {$gte : ?1}, 'EducationScore' : {$gte : ?2}}]}")
+    List<Zipcode> findByCategoryScoreGreaterThanQuery(int food, int traffic, int education);
 	
 	// TODO: search by keyword, zipcode.descrption.contains, region.contains, .....
 }

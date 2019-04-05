@@ -40,7 +40,7 @@ class SortForm extends Component {
                     }}
                     defaultValue="desc"
                   >
-                    <option defaultValue="desc">Descending</option>
+                    <option value="desc">Descending</option>
                     <option value="asc">Ascending</option>
                 </select>
               </div>
