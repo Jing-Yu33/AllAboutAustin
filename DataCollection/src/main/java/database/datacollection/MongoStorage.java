@@ -190,18 +190,11 @@ public class MongoStorage {
 
         // we are going to read data line by line
         while ((nextRecord = csvReader.readNext()) != null) {
-        	HashMap<String, String> data = new HashMap<String, String>();
+        	HashMap<String, String> data = new HashMap<String, String>(); // To be added as CSV properties for the zipcode object
         	String zipcode = nextRecord[0];
             for (int i = 1; i < keys.length; i++) {
             	data.put(keys[i], nextRecord[i]);
             }
-            System.out.println(zipcode + " is " + data.toString());
-        }
-        
-        csvReader.close();
-        if (CSV_FILENAME.equals(CSV_FILENAME)) return;
-		
-		for(String zipcode: ZipcodeCollector.getZipcodes()) {
 			
 			Double fs = truncateDecimal(Averaging.getFoodAverage(zipcode));
 			Double ts = truncateDecimal(Averaging.getTrafficAverage(zipcode));
@@ -237,10 +230,12 @@ public class MongoStorage {
 
 			
 			Zipcode zc = new Zipcode(zipcode, fs, ts, es, as, fd, td, ed);
+			zc.setCSVProperties(data);
 			datastore.save(zc);
 			System.out.println(zc.toString());
 		}
-		
+
+        csvReader.close();
 		
 	}
 	
