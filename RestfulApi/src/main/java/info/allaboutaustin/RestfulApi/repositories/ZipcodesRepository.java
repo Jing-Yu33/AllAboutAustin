@@ -18,5 +18,4 @@ public interface ZipcodesRepository extends MongoRepository<Zipcode, String>{
 	@Query("{'$and' : [{'FoodScore' : {$gte : ?0}, 'TrafficScore' : {$gte : ?1}, 'EducationScore' : {$gte : ?2}}]}")
     List<Zipcode> findByCategoryScoreGreaterThanQuery(int food, int traffic, int education);
 	
-	// TODO: search by keyword, zipcode.descrption.contains, region.contains, .....
 }

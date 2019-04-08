@@ -23,7 +23,6 @@ import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeEducation
 import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeFoodComparator;
 import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeTotalScoreComparator;
 import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeTrafficComparator;
-import info.allaboutaustin.RestfulApi.repositories.FoodsRepository;
 import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
