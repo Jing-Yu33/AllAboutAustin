@@ -26,7 +26,7 @@ class App extends Component {
         
           <div>
             <TopBar />
-            <div className="container">
+            <div className="container" style={{marginTop: '70px'}}>
               <Switch>
               <Route path="/" exact component={Landing} />
               <Route path="/about" exact component={About} />

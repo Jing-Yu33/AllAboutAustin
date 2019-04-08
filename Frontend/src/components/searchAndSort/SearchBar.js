@@ -15,7 +15,7 @@ class SearchBar extends Component {
             <form >
                 <div className="input-group mb-2">
                     <label htmlFor="search"></label>
-                    <input type="text" className="form-control" aria-describedby="search" placeholder="Search" 
+                    <input type="text" className="form-control" aria-describedby="search" placeholder="Search By Zipcode" 
                         name="term" value = {this.state.value} onChange = {(e) => this.setState({value: e.target.value})}
                     />
                     <div className="input-group-append">

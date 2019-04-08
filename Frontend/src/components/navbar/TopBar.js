@@ -7,7 +7,7 @@ class TopBar extends Component {
 
     render() {
         return(
-            <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{zIndex: 1}}>
+            <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light" style={{zIndex: 1}}>
                 <div className="container">
                     <Link className="navbar-brand" to="/"><i className="fas fa-city"></i> AAA</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

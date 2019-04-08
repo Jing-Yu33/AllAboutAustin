@@ -35,14 +35,6 @@ class BasicFilters extends Component {
             <form onSubmit={(e) => handleSubmit(e)}>
                 Need Styling! in one row and modify the text
                 <div>
-                    <label>Food Score</label>
-                    {this.renderRatingRatioOptions("foodGt")}
-                    <label>Traffic Score</label>
-                    {this.renderRatingRatioOptions("trafficGt")}
-                    <label>Education Score</label>
-                    {this.renderRatingRatioOptions("educationGt")}
-                </div>
-                <div>
                     <button type="submit" disabled={pristine || submitting}>
                         Submit
                     </button>
@@ -50,6 +42,15 @@ class BasicFilters extends Component {
                         Clear Values
                     </button>
                 </div>
+                <div>
+                    <label>Food Score</label>
+                    {this.renderRatingRatioOptions("foodGt")}
+                    <label>Traffic Score</label>
+                    {this.renderRatingRatioOptions("trafficGt")}
+                    <label>Education Score</label>
+                    {this.renderRatingRatioOptions("educationGt")}
+                </div>
+
             </form>
 
         )

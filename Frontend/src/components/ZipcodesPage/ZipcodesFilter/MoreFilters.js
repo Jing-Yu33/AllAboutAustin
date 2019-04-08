@@ -9,46 +9,46 @@ class MoreFilters extends Component {
     }
 
 
-    renderRatingRatioOptions = (name) => {
+    renderRegionCheckboxes = () => {
         return (
             <div>
-                <label>
-                    <Field name={name} value="8" component="input" type="radio"/>
-                    > 8
-                </label>
-                <label>
-                    <Field name={name} value="5" component="input" type="radio"/>
-                    >5
-                </label>
-                <label>
-                    <Field name={name} value="2" component="input" type="radio"/>
-                    >2
-                </label>
+                <Field name="Central Austin" value="Central Austin" component="input"type="checkbox"/> 
+                    Central Austin
+                <Field name="East Austin" value="East Austin" component="input"type="checkbox"/> 
+                    East Austin
+                <Field name="West Austin" value="West Austin" component="input"type="checkbox"/> 
+                    West Austin
+                <Field name="South Austin" value="South Austin" component="input" type="checkbox"/> 
+                    South Austin
+                <Field name="North Austin" value="North Austin" component="input" type="checkbox"/> 
+                    North Austin
+                <Field name="Northwest Austin" value="Northwest Austin" component="input" type="checkbox"/> 
+                    Northwest Austin
+                <Field name="Southeast Austin" value="Southeast Austin" component="input" type="checkbox"/> 
+                    Southeast Austin
+                <Field name="Southwest  Austin" value="Southwest  Austin" component="input" type="checkbox"/> 
+                    Southwest  Austin
             </div>
         )
     }
 
 
     render() {
-        const { handleSubmit, pristine, reset, submitting } = this.props
+        const { handleSubmit } = this.props
         return(
             <form onSubmit={(e) => handleSubmit(e)}>
-                Need Styling! in one row and modify the text
                 <div>
-                    <label>Food Score</label>
-                    {this.renderRatingRatioOptions("foodGt")}
-                    <label>Traffic Score</label>
-                    {this.renderRatingRatioOptions("trafficGt")}
-                    <label>Education Score</label>
-                    {this.renderRatingRatioOptions("educationGt")}
-                </div>
-                <div>
-                    <button type="submit" disabled={pristine || submitting}>
-                        Submit
-                    </button>
-                    <button type="button" disabled={pristine || submitting} onClick={this.reset}>
-                        Clear Values
-                    </button>
+                    <label>Region</label>
+                    {this.renderRegionCheckboxes()}
+                    <label>Facilities</label>
+                    <label>
+                    <Field name="hospitals" component="input" type="checkbox"/>
+                        Hospitals
+                    </label>
+                    <label>
+                    <Field name="cinemas" component="input" type="checkbox"/>
+                        Cinemas
+                    </label>
                 </div>
             </form>
 

@@ -7,6 +7,7 @@ import SortForm from '../searchAndSort/SortForm';
 import ZipcodeComponent from '../zipcode/ZipCodeComponent';
 import PaginationButton from './PaginationButton';
 import BasicFilters from './ZipcodesFilter/BasicFilters';
+import MoreFilters from './ZipcodesFilter/MoreFilters';
 import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
 
 class ZipcodesPage extends Component {
@@ -73,18 +74,12 @@ class ZipcodesPage extends Component {
       });
     };
 
-
-
+    //Sort Down Form
     onSortDownSubmit = async (value) => {
-        // const { foodGt, trafficGt, educationGt } = this.props.filterForm.values
-        // this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt, value.sortByCategory, value.sortByOrder);
         this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
     }
 
-
-
-
-
+    // Handle Radio and Checkbox Form
     handleReset = async () => {
       this.props.GetAllZipcodes();
     }
@@ -94,13 +89,18 @@ class ZipcodesPage extends Component {
       this.setState({
         currentPage: 1
       })
-      const { foodGt, trafficGt, educationGt} = this.props.filterForm.values
+      const { values } = this.props.filterForm;
+      const { foodGt, trafficGt, educationGt, hospitals, cinemas } = this.props.filterForm.values
+      
+      var regions = [];
+      for(var property in values){
+        if(property.includes("Austin") && values[property]){
+            regions.push(property);
+        }
+      }
+
       this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt);  
     }
-
-
-
-
 
     render(){
       return(
@@ -112,15 +112,8 @@ class ZipcodesPage extends Component {
               </div>
               <div className="col-lg-4">
                   <SortForm 
-                    // handleSubmit={this.handleSubmit} 
                     onSubmit={this.onSortDownSubmit} 
                     defaultCategory="average"
-                    // initialValues={
-                    //   {
-                    //     sortBy: "average",
-                    //     order: "desc"
-                    //   }
-                    // }
                   />
               </div>
           </div>
@@ -134,7 +127,9 @@ class ZipcodesPage extends Component {
                     {
                       foodGt: "0",
                       trafficGt: "0",
-                      educationGt: "0"
+                      educationGt: "0",
+                      hospitals: false,
+                      cinemas: false
                     }
                   }
                   />
@@ -143,12 +138,10 @@ class ZipcodesPage extends Component {
                 </a>
              
               <div className="collapse" id="collapseExample">
-                More Options here: region in Austin? Whether has a Hospital? A cinema?
-                <ul> Region
-                  <li>North Austin</li>
-                  <li>South Austin</li>
-                  <li>...</li>
-                </ul>
+                <MoreFilters 
+                  handleSubmit={this.handleSubmit}
+                  handleReset={this.handleReset}
+                />
               </div>
             </div>
           </div>

@@ -5,8 +5,8 @@ class RankingList extends Component {
     getRankingCard = () => {
         return this.props.data.map( (zipcode) => {
             return (
-                <div className="col-lg-4">
-                    <ZipCodeComponent key={zipcode.zipcode} zipcode={zipcode}/>
+                <div className="col-lg-4" key={zipcode.zipcode}>
+                    <ZipCodeComponent zipcode={zipcode}/>
                 </div>
             )
         })
