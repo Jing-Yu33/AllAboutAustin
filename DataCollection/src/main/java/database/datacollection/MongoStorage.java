@@ -1,5 +1,6 @@
 package database.datacollection;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 
+import au.com.bytecode.opencsv.CSVReader;
 import database.datacollection.models.*;
 
 /**
@@ -29,6 +31,8 @@ public class MongoStorage {
 	
 	enum DataTypes {TRAFFIC_DATA, EDUCATION_DATA, FOOD_DATA, TRAFFIC_SENSOR_DATA,
 						TRAFFIC_RAW_DATA, EDUCATION_RAW_DATA, FOOD_RAW_DATA};
+						
+	private static final String CSV_FILENAME = "manual_data.csv";
 	
 	public static void setUp() {
 		
@@ -163,6 +167,39 @@ public class MongoStorage {
 	
 	
 	public static void saveCombinedZipcodeData() throws IOException {
+		FileReader filereader;
+		CSVReader csvReader;
+        String[] nextRecord;
+        String[] keys;
+
+	    try {
+	        // Create an object of filereader
+	        // class with CSV file as a parameter.
+	        filereader = new FileReader(CSV_FILENAME);
+
+	        // create csvReader object passing 
+	        // file reader as a parameter
+	        csvReader = new CSVReader(filereader);
+	    } catch (Exception e) {
+	    	System.out.println("Manual data CSV not found; aborting zipcode data saving.");
+	        e.printStackTrace();
+	        return;
+	    }
+
+	    keys = csvReader.readNext();
+
+        // we are going to read data line by line
+        while ((nextRecord = csvReader.readNext()) != null) {
+        	HashMap<String, String> data = new HashMap<String, String>();
+        	String zipcode = nextRecord[0];
+            for (int i = 1; i < keys.length; i++) {
+            	data.put(keys[i], nextRecord[i]);
+            }
+            System.out.println(zipcode + " is " + data.toString());
+        }
+        
+        csvReader.close();
+        if (CSV_FILENAME.equals(CSV_FILENAME)) return;
 		
 		for(String zipcode: ZipcodeCollector.getZipcodes()) {
 			
