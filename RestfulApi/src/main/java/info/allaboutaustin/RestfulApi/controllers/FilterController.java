@@ -83,6 +83,7 @@ public class FilterController {
 
 		List<Zipcode> zipcodes = new ArrayList<Zipcode>(zipcodesSet);
 		
+		zipcodes.sort(ac);
 		
 		return zipcodes;
 	}
