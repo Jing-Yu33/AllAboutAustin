@@ -92,14 +92,15 @@ class ZipcodesPage extends Component {
       const { values } = this.props.filterForm;
       const { foodGt, trafficGt, educationGt, hospitals, cinemas } = this.props.filterForm.values
       
-      var regions = [];
+      var regions = "";
       for(var property in values){
         if(property.includes("Austin") && values[property]){
-            regions.push(property);
+            regions = regions.concat(property).concat(",")
         }
       }
-
-      this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt);  
+      regions = regions.substring(0, regions.length-1);
+      console.log(regions)
+      this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt, regions, hospitals, cinemas);  
     }
 
     render(){

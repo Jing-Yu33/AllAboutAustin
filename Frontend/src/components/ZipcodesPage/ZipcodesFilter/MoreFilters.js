@@ -26,8 +26,8 @@ class MoreFilters extends Component {
                     Northwest Austin
                 <Field name="Southeast Austin" value="Southeast Austin" component="input" type="checkbox"/> 
                     Southeast Austin
-                <Field name="Southwest  Austin" value="Southwest  Austin" component="input" type="checkbox"/> 
-                    Southwest  Austin
+                <Field name="Southwest Austin" value="Southwest  Austin" component="input" type="checkbox"/> 
+                    Southwest Austin
             </div>
         )
     }
