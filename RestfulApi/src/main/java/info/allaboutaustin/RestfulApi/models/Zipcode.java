@@ -1,6 +1,7 @@
 package info.allaboutaustin.RestfulApi.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.Size;
 
@@ -36,6 +37,10 @@ public class Zipcode {
 	private ArrayList<String> images;
 	private String description;
 	private String region;
+	private int NumOfHospitals;
+	private List<String> ListOfHospitals;
+	private int NumOfCinemas;
+	private List<String> ListOfCinemas;
 	
 	@Setter
 	@JsonIgnore
@@ -43,23 +48,44 @@ public class Zipcode {
 	
 	protected Zipcode() {}
 
-	public Zipcode(String zipcode, String FoodScore, String TrafficScore, String EducationScore, String AverageScore,
-			FoodData FoodData, TrafficData TrafficData, SchoolData EducationData) {
-		this.zipcode = zipcode;
-		this.FoodScore = Double.parseDouble(FoodScore);
-		this.TrafficScore = Double.parseDouble(TrafficScore);
-		this.EducationScore = Double.parseDouble(EducationScore);
-		this.AverageScore = Double.parseDouble(AverageScore);
-		this.FoodData = FoodData;
-		this.TrafficData = TrafficData;
-		this.EducationData = EducationData;
-		this.images = new ArrayList<String>();
-		this.description = "desc";
-		this.region = "west";
-	}
+//	public Zipcode(String zipcode, String FoodScore, String TrafficScore, String EducationScore, String AverageScore,
+//			FoodData FoodData, TrafficData TrafficData, SchoolData EducationData) {
+//		this.zipcode = zipcode;
+//		this.FoodScore = Double.parseDouble(FoodScore);
+//		this.TrafficScore = Double.parseDouble(TrafficScore);
+//		this.EducationScore = Double.parseDouble(EducationScore);
+//		this.AverageScore = Double.parseDouble(AverageScore);
+//		this.FoodData = FoodData;
+//		this.TrafficData = TrafficData;
+//		this.EducationData = EducationData;
+//		this.images = new ArrayList<String>();
+//		this.description = "desc";
+//		this.region = "west";
+//	}
 
+	@Override
+	public int hashCode() {
+		return Integer.parseInt(zipcode);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
+		Zipcode other = (Zipcode) obj;
+		if (!zipcode.equals(other.zipcode))
+			return false;
+
+		return true;
+	}
+	
 	public String toString() {
-	return "ZipCode: "+zipcode+" FoodScore: "+FoodScore+" EducationIndex: "+EducationScore+" TrafficIndex: "+TrafficScore;
+		return "ZipCode: "+zipcode;
 	}
 
 }

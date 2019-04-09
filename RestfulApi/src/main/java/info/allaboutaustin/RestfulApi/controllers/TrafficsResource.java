@@ -14,7 +14,6 @@ import info.allaboutaustin.RestfulApi.exception.ZipcodeNotFoundException;
 import info.allaboutaustin.RestfulApi.models.FoodData;
 import info.allaboutaustin.RestfulApi.models.TrafficData;
 import info.allaboutaustin.RestfulApi.models.Zipcode;
-import info.allaboutaustin.RestfulApi.repositories.TrafficsRepository;
 import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController

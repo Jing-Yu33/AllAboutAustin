@@ -15,6 +15,12 @@ public interface ZipcodesRepository extends MongoRepository<Zipcode, String>{
 	@Query("{region : ?0}")
 	List<Zipcode> findByRegionQuery(String region);
 	
+	@Query("{'NumOfHospitals' : {$gt : ?0} }")
+	List<Zipcode> findByNumOfHospitals(int num);
+
+	@Query("{'NumOfCinemas' : {$gt : ?0} }")
+	List<Zipcode> findByNumOfCinemas(int num);
+	
 	@Query("{'$and' : [{'FoodScore' : {$gte : ?0}, 'TrafficScore' : {$gte : ?1}, 'EducationScore' : {$gte : ?2}}]}")
     List<Zipcode> findByCategoryScoreGreaterThanQuery(int food, int traffic, int education);
 	

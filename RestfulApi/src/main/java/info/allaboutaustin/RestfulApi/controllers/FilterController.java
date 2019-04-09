@@ -1,7 +1,10 @@
 package info.allaboutaustin.RestfulApi.controllers;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -42,57 +45,47 @@ public class FilterController {
 	public List<Zipcode> filterZipcodeByRating (
 							@RequestParam(name="foodGt", required=false, defaultValue="0") String foodGt,
 							@RequestParam(name="trafficGt", required=false, defaultValue="0") String trafficGt,
-							@RequestParam(name="educationGt", required=false, defaultValue="0") String educationGt) {
+							@RequestParam(name="educationGt", required=false, defaultValue="0") String educationGt,
+							@RequestParam(name="regions", required=false, defaultValue="") String regions,
+							@RequestParam(name="hospitals") String hospitals,
+							@RequestParam(name="cinemas") String cinemas) {
+		
+		Set<Zipcode> zipcodesSet = new HashSet<Zipcode>(ZipcodeRepo.findAll());
 		
 		Integer foodGtNum = Integer.parseInt(foodGt);
 		Integer trafficGtNum = Integer.parseInt(trafficGt);
 		Integer educationGtNum = Integer.parseInt(educationGt);
+		Set<Zipcode> zipcodesByRating = new HashSet<Zipcode>(ZipcodeRepo.findByCategoryScoreGreaterThanQuery(foodGtNum, trafficGtNum, educationGtNum));
+		zipcodesSet.retainAll(zipcodesByRating);
+		
+		
+		String[] regionArr = regions.split(",");
+		if(regions.length() > 1) {
+			Set<Zipcode> zipcodesByRegion = new HashSet<Zipcode>();
+			for(String region: regionArr) {
+				List<Zipcode> list = ZipcodeRepo.findByRegionQuery(region);
+				zipcodesByRegion.addAll(new HashSet(list));
+			}
+			zipcodesSet.retainAll(zipcodesByRegion);
+		}
 
+		if(hospitals.equals("true")) {
+			Set<Zipcode> zipcodesByHospital = new HashSet<Zipcode>(ZipcodeRepo.findByNumOfHospitals(0));
+			zipcodesSet.retainAll(zipcodesByHospital);
+		}
 		
-//		try {
-//			foodGtNum = Integer.parseInt(foodGt);
-////			trafficWeight = Integer.parseInt(traffic);
-////			educationWeight = Integer.parseInt(education);
-//		}catch (Exception e) {
-//			throw new ParameterNotValidException("Category Number must be Integer Number between 0-10, please verify your input URL");
-//		}
-//		
-//		if((foodGtNum<0 || foodGtNum>10)) {
-//			throw new ParameterNotValidException("Category Number must be Positive Integer Number between 0-10, please verify your input URL");
-//		}
+		if(cinemas.equals("true")) {
+			Set<Zipcode> zipcodesByCinemas = new HashSet<Zipcode>(ZipcodeRepo.findByNumOfCinemas(0));
+			zipcodesSet.retainAll(zipcodesByCinemas);
+		}
 		
 		
-		List<Zipcode> zipcodes = ZipcodeRepo.findByCategoryScoreGreaterThanQuery(foodGtNum, trafficGtNum, educationGtNum);
+
+		List<Zipcode> zipcodes = new ArrayList<Zipcode>(zipcodesSet);
 		
-//		sortByCategory(zipcodes, sortBy);
-		
-//		if(!order.equals("asc") && !order.equals("desc")) {
-//			throw new ParameterNotValidException("Order should be asc or desc, which represented ascending/descending order, please verify your input URL");
-//		}
-//			
-//		if(order.equals("asc"))	Collections.reverse(zipcodes);
 		
 		return zipcodes;
 	}
 	
 	
-	@GetMapping("/{word}")
-	public String searchZipcodeByKeyword(@PathVariable String word) {
-		return word;
-	}
-	
-//	@GetMapping("")
-//	public List<Zipcode> searchZipcodeByParameters(
-//						@RequestParam(name="region") String region
-//						/*@RequestParam(name="") String a*/) {
-//		
-////		Query query = new Query();
-////		query.addCriteria(Criteria.where("region").is(region));
-////		List<Zipcode> zipcodes = ZipcodeRepo.findByRegionQuery(region);
-//		List<Zipcode> zipcodes = ZipcodeRepo.findByRegion(region);
-//		if(zipcodes.size() == 0) {
-//			throw new ZipcodeNotFoundException("There is no zipcode in "+region+" region, please refer to our API documentation and verify your input URL");
-//		}
-//		return zipcodes;
-//	}
 }
