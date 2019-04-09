@@ -8,7 +8,6 @@ class SortForm extends Component {
     }
 
     onSubmit = () => {
-        console.log("change")
         this.props.onSubmit(this.value);
     }
 
@@ -22,7 +21,6 @@ class SortForm extends Component {
                     className="custom-select"
                     onChange={(e) => {
                         this.value.sortByCategory = e.target.value;
-                        // this.onSubmit()
                       }}
                     defaultValue={this.props.defaultCategory}
                   >
@@ -37,7 +35,6 @@ class SortForm extends Component {
                     className="custom-select"
                     onChange={(e) => {
                         this.value.sortByOrder = e.target.value;
-                        // this.onSubmit()
                     }}
                     defaultValue="desc"
                   >

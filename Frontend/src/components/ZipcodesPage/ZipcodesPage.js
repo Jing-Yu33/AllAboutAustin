@@ -9,13 +9,15 @@ import PaginationButton from './PaginationButton';
 import BasicFilters from './ZipcodesFilter/BasicFilters';
 import MoreFilters from './ZipcodesFilter/MoreFilters';
 import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
+import { compareByFood, compareByTraffic, compareByEducation, compareByAverage } from './sortFunction';
 
 class ZipcodesPage extends Component {
    
     limit = 8; // # of zipcode components shown on a single page
 
     state = {
-        currentPage: 1
+        currentPage: 1,
+        sorted: [true]
     }
 
     // Intitialize
@@ -24,6 +26,25 @@ class ZipcodesPage extends Component {
     }
 
     // Render Zipcode Components List and Pagination Button
+    sortZipcodes = (value) => {
+      const category = value.sortByCategory;
+      const order = value.sortByOrder;
+      switch(category){
+        case "food":  this.props.zipcodes.sort(compareByFood); break;
+        case "traffic": this.props.zipcodes.sort(compareByTraffic); break;
+        case "education": this.props.zipcodes.sort(compareByEducation); break;
+        case "average": this.props.zipcodes.sort(compareByAverage); break;
+      }
+      
+      if(order === "asc"){
+        this.props.zipcodes.reverse();
+      }
+
+      this.setState({
+        sorted: [true]
+      })
+    }
+
     renderList = () => {
       const zipcodes = _.chunk(this.props.zipcodes, this.limit);
       return zipcodes[this.state.currentPage-1].map(zipcode => {
@@ -75,12 +96,14 @@ class ZipcodesPage extends Component {
     };
 
     //Sort Down Form
-    onSortDownSubmit = async (value) => {
-        this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
+    onSortDownSubmit = (value) => {
+      this.sortZipcodes(value);
+      // this.props.GetAllZipcodes(value.sortByCategory, value.sortByOrder);
     }
 
     // Handle Radio and Checkbox Form
     handleReset = async () => {
+
       this.props.GetAllZipcodes();
     }
 
@@ -106,7 +129,7 @@ class ZipcodesPage extends Component {
     render(){
       return(
         <div>
-          TODOs: sort function will return all zipcode list, not based on the filter, may change that later
+          TODOs: sort form change to Average, Descending when submit filter ??? (how???)
           <div className="row mt-4">
               <div className="col-lg-4">
                   <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>

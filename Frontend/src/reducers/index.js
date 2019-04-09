@@ -6,5 +6,5 @@ import DatabaseReducers from './DatabaseReducers';
 export default combineReducers({
     form: fromReducer,
     weight: userWeightReducers,
-    zipcodes: DatabaseReducers
+    zipcodes: DatabaseReducers,
 })

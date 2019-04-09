@@ -80,3 +80,10 @@ export const GetFilteredZipcodes = (foodGt, trafficGt, educationGt, regions, hos
         })
     }    
 }
+
+export const SortZipcodes = (sort) => {
+    return {
+        type: "SORT_ZIPCODES",
+        payload: sort
+    }
+}
