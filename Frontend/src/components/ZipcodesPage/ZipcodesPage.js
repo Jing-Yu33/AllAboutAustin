@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import SearchBar from '../searchAndSort/SearchBar';
 import SortForm from '../searchAndSort/SortForm';
+// import SortFormForZipcodesPage from '../searchAndSort/SortFormForZipcodesPage';
 import ZipcodeComponent from '../zipcode/ZipCodeComponent';
 import PaginationButton from './PaginationButton';
 import BasicFilters from './ZipcodesFilter/BasicFilters';
@@ -17,7 +18,8 @@ class ZipcodesPage extends Component {
 
     state = {
         currentPage: 1,
-        sorted: [true]
+        category: null,
+        order: null
     }
 
     // Intitialize
@@ -34,14 +36,14 @@ class ZipcodesPage extends Component {
         case "traffic": this.props.zipcodes.sort(compareByTraffic); break;
         case "education": this.props.zipcodes.sort(compareByEducation); break;
         case "average": this.props.zipcodes.sort(compareByAverage); break;
+        default: this.props.zipcodes.sort(compareByAverage); break;
       }
-      
       if(order === "asc"){
         this.props.zipcodes.reverse();
       }
 
       this.setState({
-        sorted: [true]
+        category, order
       })
     }
 
@@ -103,8 +105,7 @@ class ZipcodesPage extends Component {
 
     // Handle Radio and Checkbox Form
     handleReset = async () => {
-
-      this.props.GetAllZipcodes();
+      this.props.GetAllZipcodes(this.state.category, this.state.order);
     }
 
     handleSubmit = (event) => {
@@ -114,7 +115,7 @@ class ZipcodesPage extends Component {
       })
       const { values } = this.props.filterForm;
       const { foodGt, trafficGt, educationGt, hospitals, cinemas } = this.props.filterForm.values
-      
+      const { category, order } = this.state;
       var regions = "";
       for(var property in values){
         if(property.includes("Austin") && values[property]){
@@ -122,14 +123,15 @@ class ZipcodesPage extends Component {
         }
       }
       regions = regions.substring(0, regions.length-1);
-      console.log(regions)
-      this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt, regions, hospitals, cinemas);  
+      this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt, regions, hospitals, cinemas, category, order);  
     }
 
     render(){
       return(
         <div>
-          TODOs: sort form change to Average, Descending when submit filter ??? (how???)
+          Problems: 1. When user FIRST change filter form, the list will rerender with average order (even though already change the order category)
+          may caused by redux-form? => how to change that? 
+          2. Need more manually testing? => the implementation is messy, tbh
           <div className="row mt-4">
               <div className="col-lg-4">
                   <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
@@ -152,8 +154,8 @@ class ZipcodesPage extends Component {
                       foodGt: "0",
                       trafficGt: "0",
                       educationGt: "0",
-                      hospitals: false,
-                      cinemas: false
+                      // hospitals: false,
+                      // cinemas: false
                     }
                   }
                   />
@@ -180,7 +182,8 @@ class ZipcodesPage extends Component {
 const mapStateToProps = (state) => {
     return {
         zipcodes: Object.values(state.zipcodes),
-        filterForm: state.form.ZipcodesFilter
+        filterForm: state.form.ZipcodesFilter,
+        sortForm: state.form.ZipcodesSort
     }
 }
 

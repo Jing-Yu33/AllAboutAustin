@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
 
-class SortForm extends Component {
+class SortFormForZipcodesPage extends Component {
     constructor(props){
       super(props);
-      this.ElementRef = React.createRef();
     }
 
     value = {
@@ -12,39 +12,43 @@ class SortForm extends Component {
     }
 
     onSubmit = () => {
+        // console.log("here")
+        // this.props.onSubmit(this.value);
         this.props.onSubmit(this.value);
     }
 
     render() {
 
         return (
-          <form onChange={this.onSubmit}>
+          <form>
             <div className="input-group row">
               <div className="col-lg-6 mb-sm-2">
-                <select
+                <Field name="category" component="select"
                     className="custom-select"
-                    onChange={(e) => {
+                    onSelect={(e) => {
+                        console.log(e.target.value)
                         this.value.sortByCategory = e.target.value;
+                        // this.onSubmit();
                       }}
-                    defaultValue={this.props.defaultCategory}
+                    // defaultValue={this.props.defaultCategory}
                   >
                     <option value="average">Average</option>
                     <option value="food">Food</option>
                     <option value="traffic">Traffic</option>
                     <option value="education">Education</option>
-                </select>
+                </Field>
               </div>
               <div className="col-lg-6">
-                <select
+                <Field name="order" component="select"
                     className="custom-select"
                     onChange={(e) => {
                         this.value.sortByOrder = e.target.value;
                     }}
-                    defaultValue="desc"
+                    // defaultValue="desc"
                   >
                     <option value="desc">Descending</option>
                     <option value="asc">Ascending</option>
-                </select>
+                </Field>
               </div>
             </div>
           </form>
@@ -52,4 +56,8 @@ class SortForm extends Component {
   }
 }
 
-export default SortForm
+export default reduxForm({
+    form: 'ZipcodesSort', // a unique identifier for this form
+    // destroyOnUnmount: false,
+    // forceUnregisterOnUnmount: true
+  })(SortFormForZipcodesPage)

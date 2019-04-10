@@ -62,7 +62,7 @@ export const GetOneZipcode = (zipcode) => {
     }
 }
 
-export const GetFilteredZipcodes = (foodGt, trafficGt, educationGt, regions, hospitals, cinemas) => {
+export const GetFilteredZipcodes = (foodGt, trafficGt, educationGt, regions, hospitals, cinemas, sortBy, order) => {
     return async (dispatch) => {
         const response = await DataBase.get("/filter/zipcodes",{
             params: {
@@ -71,7 +71,9 @@ export const GetFilteredZipcodes = (foodGt, trafficGt, educationGt, regions, hos
                 educationGt,
                 regions,
                 hospitals, 
-                cinemas
+                cinemas,
+                sortBy,
+                order
             }
         });
         dispatch({

@@ -32,7 +32,7 @@ class BasicFilters extends Component {
     render() {
         const { handleSubmit, pristine, submitting } = this.props
         return(
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmit(e)} >
                 Need Styling! in one row and modify the text
                 <div>
                     <button type="submit" disabled={pristine || submitting}>
