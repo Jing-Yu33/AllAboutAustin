@@ -29,6 +29,7 @@ class ZipCodeComponent extends Component {
             {/* <h5 className="card-title">Region: </h5> */}
             <p>{this.props.zipcode.description.substring(0, Math.min(this.props.zipcode.description.length, 80))}...</p>
             <ul className="list-group list-group-flush">
+              <li className="list-group-item">Average Rate: {this.props.zipcode.averageScore}</li>
               <li className="list-group-item">Food Rate: {this.props.zipcode.foodScore}</li>
               <li className="list-group-item">Traffic Rate: {this.props.zipcode.trafficScore}</li>
               <li className="list-group-item">Education Rate: {this.props.zipcode.educationScore}</li>

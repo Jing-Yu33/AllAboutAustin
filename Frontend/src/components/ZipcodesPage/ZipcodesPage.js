@@ -10,7 +10,7 @@ import PaginationButton from './PaginationButton';
 import BasicFilters from './ZipcodesFilter/BasicFilters';
 import MoreFilters from './ZipcodesFilter/MoreFilters';
 import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
-import { compareByFood, compareByTraffic, compareByEducation, compareByAverage } from './sortFunction';
+import { compareByFood, compareByTraffic, compareByEducation, compareByAverage } from '../searchAndSort/sortFunction';
 
 class ZipcodesPage extends Component {
    
@@ -43,7 +43,8 @@ class ZipcodesPage extends Component {
       }
 
       this.setState({
-        category, order
+        category, order,
+        currentPage: 1
       })
     }
 

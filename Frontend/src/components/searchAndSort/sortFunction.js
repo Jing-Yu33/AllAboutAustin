@@ -1,26 +1,31 @@
-const ASC = 'Ascending';
-const DSC = 'Descending';
-
-export const sortByTraffic = (a, b, order=DSC) => {
-    const diff = a.traffic - b.traffic;
-    if (order === ASC) {
-        return diff;
+export const compareByFood = (a, b) => {
+    var diff = a.foodScore - b.foodScore;
+    if(diff === 0){
+        diff = a.averageScore - b.averageScore;
     }
     return -1 * diff;
 }
 
-export const sortByEducation = (a, b, order=DSC) => {
-    const diff = a.education - b.education;
-    if (order === ASC) {
-        return diff;
+export const compareByTraffic = (a, b) => {
+    var diff = a.trafficScore - b.trafficScore;
+    if(diff === 0){
+        diff = a.averageScore - b.averageScore;
     }
     return -1 * diff;
 }
 
-export const sortByFood = (a, b, order=DSC) => {
-    const diff = a.food - b.food;
-    if (order === ASC) {
-        return diff;
+export const compareByEducation = (a, b) => {
+    var diff = a.educationScore - b.educationScore;
+    if(diff === 0){
+        diff = a.averageScore - b.averageScore;
+    }
+    return -1 * diff;
+}
+
+export const compareByAverage = (a, b) => {
+    var diff = a.averageScore - b.averageScore;
+    if(diff === 0){
+        diff = a.averageScore - b.averageScore;
     }
     return -1 * diff;
 }
