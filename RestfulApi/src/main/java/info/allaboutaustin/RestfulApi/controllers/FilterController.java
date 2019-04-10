@@ -40,6 +40,18 @@ public class FilterController {
 	ZipcodeEducationComparator ec = new ZipcodeEducationComparator();
 	ZipcodeTrafficComparator tc = new ZipcodeTrafficComparator();
 		
+	
+	//Helper Method: sorting list by specific category order
+	private void sortByCategory(List<Zipcode> list, String category){
+		switch(category) {
+			case "food": Collections.sort(list, fc);		break;
+			case "traffic": Collections.sort(list, tc);		break;
+			case "education": Collections.sort(list, ec);	break;
+			case "average": Collections.sort(list, ac);		break;
+			default: Collections.sort(list, ac);
+		}
+	}
+	
 	// private API
 	@GetMapping("")
 	public List<Zipcode> filterZipcodeByRating (
@@ -47,8 +59,10 @@ public class FilterController {
 							@RequestParam(name="trafficGt", required=false, defaultValue="0") String trafficGt,
 							@RequestParam(name="educationGt", required=false, defaultValue="0") String educationGt,
 							@RequestParam(name="regions", required=false, defaultValue="") String regions,
-							@RequestParam(name="hospitals") String hospitals,
-							@RequestParam(name="cinemas") String cinemas) {
+							@RequestParam(name="hospitals", required=false, defaultValue="false") String hospitals,
+							@RequestParam(name="cinemas", required=false, defaultValue="false") String cinemas,
+							@RequestParam(name="sortBy", required=false, defaultValue="average") String sortBy,
+							@RequestParam(name="order", required=false, defaultValue="desc") String order) {
 		
 		Set<Zipcode> zipcodesSet = new HashSet<Zipcode>(ZipcodeRepo.findAll());
 		
@@ -79,11 +93,10 @@ public class FilterController {
 			zipcodesSet.retainAll(zipcodesByCinemas);
 		}
 		
-		
-
 		List<Zipcode> zipcodes = new ArrayList<Zipcode>(zipcodesSet);
 		
-		zipcodes.sort(ac);
+		sortByCategory(zipcodes, sortBy);
+		if(order.equals("asc"))	Collections.reverse(zipcodes);
 		
 		return zipcodes;
 	}
