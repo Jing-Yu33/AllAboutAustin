@@ -8,12 +8,8 @@ import org.springframework.data.mongodb.repository.Query;
 import info.allaboutaustin.RestfulApi.models.Zipcode;
 
 public interface ZipcodesRepository extends MongoRepository<Zipcode, String>{
-//	Zipcode findFirstByZipcode(String zipcode);
 	Zipcode findByZipcode(String zipcode);
 	List<Zipcode> findByRegion(String region);
-	
-	@Query("{region : ?0}")
-	List<Zipcode> findByRegionQuery(String region);
 	
 	@Query("{'NumOfHospitals' : {$gt : ?0} }")
 	List<Zipcode> findByNumOfHospitals(int num);

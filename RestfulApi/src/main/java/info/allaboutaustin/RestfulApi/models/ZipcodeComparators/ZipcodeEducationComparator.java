@@ -8,7 +8,9 @@ public class ZipcodeEducationComparator implements Comparator<Zipcode>{
 
 	@Override
 	public int compare(Zipcode z1, Zipcode z2) {
-		// TODO Auto-generated method stub
+		if(z2.getEducationScore().compareTo(z1.getEducationScore()) == 0) {
+			return z2.getAverageScore().compareTo(z1.getAverageScore());
+		}
 		return z2.getEducationScore().compareTo(z1.getEducationScore());
 	}
 

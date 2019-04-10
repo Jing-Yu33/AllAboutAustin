@@ -82,9 +82,7 @@ public class ZipcodesResource {
 		return zc;
 	}
 	
-	
-	// should be a private api, not open to public
-	
+		
 	// ?food=&traffic=&education=: Return a ranking list of 10 top zipcodes based on user-assigned weight
 	@GetMapping("/ranking")
 	public List<Zipcode> searchZipcodeByParameters(
@@ -102,7 +100,7 @@ public class ZipcodesResource {
 			trafficWeight = Integer.parseInt(traffic);
 			educationWeight = Integer.parseInt(education);
 		}catch (Exception e) {
-			throw new ParameterNotValidException("Category Weight must be Integer Number between 0-100, please verify your input URL");
+			throw new ParameterNotValidException("Category Weight must be Positive Integer Number between 0-100, please verify your input URL");
 		}
 		
 		if((foodWeight<0 || foodWeight>100) || (educationWeight<0 || educationWeight>100) || (trafficWeight<0 || trafficWeight>100)) {
@@ -121,6 +119,7 @@ public class ZipcodesResource {
 		return zipcodes;
 	}
 	
+	// Private API
 	@GetMapping("/top10")
 	public List<Zipcode> getTop10ZipcodesByCategory(
 			@RequestParam(name="category") String category,

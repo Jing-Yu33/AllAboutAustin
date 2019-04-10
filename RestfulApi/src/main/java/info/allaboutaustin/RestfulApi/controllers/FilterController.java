@@ -52,7 +52,7 @@ public class FilterController {
 		}
 	}
 	
-	// private API
+	// 
 	@GetMapping("")
 	public List<Zipcode> filterZipcodeByRating (
 							@RequestParam(name="foodGt", required=false, defaultValue="0") String foodGt,
@@ -66,9 +66,22 @@ public class FilterController {
 		
 		Set<Zipcode> zipcodesSet = new HashSet<Zipcode>(ZipcodeRepo.findAll());
 		
-		Integer foodGtNum = Integer.parseInt(foodGt);
-		Integer trafficGtNum = Integer.parseInt(trafficGt);
-		Integer educationGtNum = Integer.parseInt(educationGt);
+		Integer foodGtNum = 0;
+		Integer trafficGtNum = 0;
+		Integer educationGtNum = 0;
+		
+		try {
+			foodGtNum = Integer.parseInt(foodGt);
+			trafficGtNum = Integer.parseInt(trafficGt);
+			educationGtNum = Integer.parseInt(educationGt);
+		} catch (Exception e) {
+			throw new ParameterNotValidException("Category Limitation must be Positive Integer Number between 0-10, please verify your input URL");
+		}
+		
+		if((foodGtNum<0 || foodGtNum>10) || (trafficGtNum<0 || trafficGtNum>10) || (educationGtNum<0 || educationGtNum>10)) {
+			throw new ParameterNotValidException("Category Limitation must be Positive Integer Number between 0-10, please verify your input URL");
+		}
+		
 		Set<Zipcode> zipcodesByRating = new HashSet<Zipcode>(ZipcodeRepo.findByCategoryScoreGreaterThanQuery(foodGtNum, trafficGtNum, educationGtNum));
 		zipcodesSet.retainAll(zipcodesByRating);
 		
@@ -77,15 +90,23 @@ public class FilterController {
 		if(regions.length() > 1) {
 			Set<Zipcode> zipcodesByRegion = new HashSet<Zipcode>();
 			for(String region: regionArr) {
-				List<Zipcode> list = ZipcodeRepo.findByRegionQuery(region);
+				List<Zipcode> list = ZipcodeRepo.findByRegion(region);
 				zipcodesByRegion.addAll(new HashSet(list));
 			}
 			zipcodesSet.retainAll(zipcodesByRegion);
 		}
 
+		if(!hospitals.equals("true") && !hospitals.equals("false")) {
+			throw new ParameterNotValidException("Hospitals must be 'true' or 'false', please verify your input URL");
+		}
+		
 		if(hospitals.equals("true")) {
 			Set<Zipcode> zipcodesByHospital = new HashSet<Zipcode>(ZipcodeRepo.findByNumOfHospitals(0));
 			zipcodesSet.retainAll(zipcodesByHospital);
+		}
+		
+		if(!cinemas.equals("true") && !cinemas.equals("false")) {
+			throw new ParameterNotValidException("Cinemas must be 'true' or 'false', please verify your input URL");
 		}
 		
 		if(cinemas.equals("true")) {
