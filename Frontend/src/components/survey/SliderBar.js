@@ -11,7 +11,7 @@ class SliderBar extends Component {
     render() {
         return(
                 <div className="silder form-group">
-                    <label htmlFor="formControlRange" className="text-center"> {this.props.category} </label>
+                    <label htmlFor="formControlRange" className="text-center"> {this.props.category}: {this.state.value} </label>
                     <input 
                         type="range" className="form-control-range" id="formControlRange" 
                         value= { this.state.value }
