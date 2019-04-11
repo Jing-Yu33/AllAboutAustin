@@ -27,7 +27,7 @@ class IndividualZipcodePage extends Component {
             <div className="row">
                 <div className="col-lg-4">
                     <ul className="list-group list-group-flush">
-                    <li className="list-group-item">Wholisic Score : {this.props.zipcode.averageScore}</li>
+                    <li className="list-group-item">Holisic Score : {this.props.zipcode.averageScore}</li>
                     <li className="list-group-item">Food Score : {this.props.zipcode.foodScore}</li>
                     <li className="list-group-item">Traffic Score : {this.props.zipcode.trafficScore}</li>
                     <li className="list-group-item">Education Score : {this.props.zipcode.educationScore}</li>
