@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "81079bc5-e235-4ec2-83a2-021536ca0c06",
+		"name": "Austin Data RESTful API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Zipcodes Average",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2a06aa4-1348-40d5-9fc5-292d339efd1a",
+						"exec": [
+							"// example using pm.response.to.have",
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://allaboutaustin-api.appspot.com/api/zipcodes?sortBy=average",
+					"protocol": "https",
+					"host": [
+						"allaboutaustin-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"zipcodes"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "average"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zipcodes Food",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2a06aa4-1348-40d5-9fc5-292d339efd1a",
+						"exec": [
+							"// example using pm.response.to.have",
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://allaboutaustin-api.appspot.com/api/zipcodes?sortBy=average",
+					"protocol": "https",
+					"host": [
+						"allaboutaustin-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"zipcodes"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "average"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zipcodes Bad Sort",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2a06aa4-1348-40d5-9fc5-292d339efd1a",
+						"exec": [
+							"// example using pm.response.to.have",
+							"pm.test(\"response is bad\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://allaboutaustin-api.appspot.com/api/zipcodes?sortBy=badparam",
+					"protocol": "https",
+					"host": [
+						"allaboutaustin-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"zipcodes"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "badparam"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single Zipcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f80f2edc-f2d1-480c-acc7-da29a3b5875e",
+						"exec": [
+							"// example using pm.response.to.have",
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://allaboutaustin-api.appspot.com/api/zipcodes/78705",
+					"protocol": "https",
+					"host": [
+						"allaboutaustin-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"zipcodes",
+						"78705"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Traffic by Zipcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "df207462-b908-4197-8251-f5f5627912c6",
+						"exec": [
+							"// example using pm.response.to.have",
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://allaboutaustin-api.appspot.com/api/traffic/78704",
+					"protocol": "https",
+					"host": [
+						"allaboutaustin-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"traffic",
+						"78704"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zipcodes Filter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed45275d-f967-495e-ad59-4fd8847e8df3",
+						"exec": [
+							"// example using pm.response.to.have",
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://allaboutaustin-api.appspot.com/api/filter/zipcodes?foodGt=2&trafficGt=3",
+					"protocol": "https",
+					"host": [
+						"allaboutaustin-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"filter",
+						"zipcodes"
+					],
+					"query": [
+						{
+							"key": "foodGt",
+							"value": "2"
+						},
+						{
+							"key": "trafficGt",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zipcodes Filter Bad Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f96fda7-cf6c-4ec4-bd91-319e515baae5",
+						"exec": [
+							"// example using pm.response.to.have",
+							"pm.test(\"response is bad\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://allaboutaustin-api.appspot.com/api/filter/zipcodes?foodGt=2&trafficGt=3.1",
+					"protocol": "https",
+					"host": [
+						"allaboutaustin-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"filter",
+						"zipcodes"
+					],
+					"query": [
+						{
+							"key": "foodGt",
+							"value": "2"
+						},
+						{
+							"key": "trafficGt",
+							"value": "3.1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Education by Zipcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f4617fe-cc4d-4ea0-8f3f-3461c202871f",
+						"exec": [
+							"// example using pm.response.to.have",
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://allaboutaustin-api.appspot.com/api/traffic/78704",
+					"protocol": "https",
+					"host": [
+						"allaboutaustin-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"traffic",
+						"78704"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Food by Zipcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3abfd88-a22b-4a98-b49a-2014821ba4e0",
+						"exec": [
+							"// example using pm.response.to.have",
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://allaboutaustin-api.appspot.com/api/food/78701",
+					"protocol": "https",
+					"host": [
+						"allaboutaustin-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"food",
+						"78701"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
