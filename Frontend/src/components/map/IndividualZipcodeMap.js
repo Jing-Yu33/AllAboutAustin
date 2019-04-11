@@ -27,7 +27,7 @@ class IndividualZipcodeMap extends Component {
     const GoogleMapExample = withGoogleMap(props => (
         <GoogleMap 
           defaultCenter = { { lat: this.state.lat, lng: this.state.lng } }
-          defaultZoom = { 15 }
+          defaultZoom = { 11 }
         >
           <TrafficLayer autoUpdate />
           <KmlLayer
