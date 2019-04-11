@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './IndividualZipcodePage.css';
 import CarouselComponent from './CarouselComponent'
 import RowCards from './RowCards'
-
+import IndividualZipcodeMap from '../map/IndividualZipcodeMap';
 import { GetOneZipcode } from '../../actions/index';
 
 class IndividualZipcodePage extends Component {
@@ -34,7 +34,7 @@ class IndividualZipcodePage extends Component {
                     </ul>
                 </div>
                 <div className="col-lg-8">
-                    Google Map here
+                    <IndividualZipcodeMap zipcode={this.props.zipcode.zipcode}/>
                 </div>
             </div>
             <CarouselComponent/>
