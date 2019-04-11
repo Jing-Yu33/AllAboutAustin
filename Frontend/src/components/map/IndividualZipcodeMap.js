@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withGoogleMap, GoogleMap } from 'react-google-maps';
+import { withGoogleMap, GoogleMap, KmlLayer, TrafficLayer } from 'react-google-maps';
 import axios from 'axios';
 
 class IndividualZipcodeMap extends Component {
@@ -16,6 +16,8 @@ class IndividualZipcodeMap extends Component {
         lng: response.data.results[0].geometry.location.lng,
     })
   }
+  
+  url = `https://sites.google.com/site/allaboutaustinzipcodeskml/zipcodes/zip${this.props.zipcode}.kml`;
 
   componentDidMount() {
     this.getLocation();
@@ -27,6 +29,11 @@ class IndividualZipcodeMap extends Component {
           defaultCenter = { { lat: this.state.lat, lng: this.state.lng } }
           defaultZoom = { 15 }
         >
+          <TrafficLayer autoUpdate />
+          <KmlLayer
+            url = { this.url }
+            options = {{ preserveViewport: true, clickable: false }}
+          />
         </GoogleMap>
      ));
 
