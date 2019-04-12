@@ -10,7 +10,7 @@ class GithubStats extends React.Component {
 
     getData = async () => {
         var commitsNum = 0;
-        for(var i=1; i<3; i++){
+        for(var i=1; i<5; i++){
             var commits = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/commits?per_page=100&page=${i}&access_token=29141c907671b2c7b85ae8bfa45b1c16f7e864a7`);
             commitsNum += commits.data.length;
         }
