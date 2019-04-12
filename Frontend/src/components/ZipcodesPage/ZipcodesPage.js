@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import ZipcodesMap from '../map/ZipcodesMap';
 import SearchBar from '../searchAndSort/SearchBar';
 import SortForm from '../searchAndSort/SortForm';
 // import SortFormForZipcodesPage from '../searchAndSort/SortFormForZipcodesPage';
@@ -130,6 +131,9 @@ class ZipcodesPage extends Component {
     render(){
       return(
         <div>
+            <div className="mt-3">
+              <ZipcodesMap />
+            </div>
           Problems: 1. When user FIRST change filter form, the list will rerender with average order (even though already change the order category)
           may caused by redux-form? => how to change that? 
           2. Need more manually testing? => the implementation is messy, tbh
