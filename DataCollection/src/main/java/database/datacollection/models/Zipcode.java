@@ -37,11 +37,15 @@ public class Zipcode {
 	private int NumOfCinemas;
 	private List<String> ListOfCinemas;
 	
+	// location
+	private Double latitude;
+	private Double longtitude;
+	
 	// Required	
 	private Zipcode() {};
-	
+
 	public Zipcode(String zipcode, Double FoodScore, Double TrafficScore, Double EducationScore, Double AverageScore,
-					FoodData FoodData, TrafficData TrafficData, SchoolData EducationData) {
+					FoodData FoodData, TrafficData TrafficData, SchoolData EducationData, Double latitude, Double longitude) {
 		this.zipcode = zipcode;
 		this.FoodScore = FoodScore;
 		this.TrafficScore = TrafficScore;
@@ -53,7 +57,8 @@ public class Zipcode {
 		this.images = new ArrayList<String>();
 		this.description = "";
 		this.region = "";
-		
+		this.latitude = latitude;
+		this.longtitude = longitude;
 	}
 	
 	public void setCSVProperties(HashMap<String, String> data) {

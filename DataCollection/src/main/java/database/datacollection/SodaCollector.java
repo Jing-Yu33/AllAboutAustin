@@ -1,16 +1,14 @@
 package database.datacollection;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import javax.ws.rs.core.Response;
 import com.socrata.api.*;
+import com.socrata.builders.SoqlQueryBuilder;
 import com.socrata.model.soql.SoqlQuery;
-
-import database.datacollection.models.TrafficSensorData;
 
 /**
  * Collects SODA data, used for Austin Government sources.
@@ -38,7 +36,11 @@ public class SodaCollector implements Collector {
 		// To get a raw String of the results
 		Response response;
 		try {
-			response = consumer.query("vw6m-5i7b", HttpLowLevel.JSON_TYPE, SoqlQuery.SELECT_ALL);
+			SoqlQuery sq = SoqlQuery.SELECT_ALL;
+			SoqlQueryBuilder sqb = new SoqlQueryBuilder(sq);
+			sqb.setLimit(500);
+			sqb.setOffset(0);
+			response = consumer.query("cqdh-farx", HttpLowLevel.JSON_TYPE, sqb.build());
 		} catch (Exception e) {
 			throw new IOException(e.toString());
 		}
@@ -55,35 +57,33 @@ public class SodaCollector implements Collector {
 		
 		for (Object o : jsonPayload.toArray()) {
 			JSONObject jo = ((JSONObject) o);
-			Object kits_id = jo.get("int_id");
-			if (kits_id == null)
+			String name;
+			try {
+				name = jo.get("_24_hour_volume_count_locations").toString();
+				name = name.substring(0, name.indexOf(","));
+				if (name == null)
+					continue;
+				name = name.replace('.', '_');
+				
+				String date = jo.get("date").toString();
+				date = date.substring(0, 4);
+				if (Integer.parseInt(date) < 2010)
+					continue;
+			} catch (Exception e) {
+				System.out.println("SodaCollector JSON processing error: " + e.toString());
 				continue;
-			int zipcode = getZipCode(kits_id.toString());
+			}
+				
+			int zipcode = GoogleZipFinder.getZipCode(name);
 
 			HashMap<String, Double> data = new HashMap<String, Double>();
-			String name = jo.get("intname").toString();
-			Double value = getRankedValue("speed", jo.get("speed"));
+			Double value = getRankedValue("total_volume", jo.get("total_volume"));
 			data.put(name, value);
 
 			ds.addZipcodeData(zipcode, data);
 		}
 		
 		return ds;
-	}
-	
-	/**
-	 * Given KITS ID, look up MongoDB lat / lon coordinates, and use Google Maps class to convert that to zip code
-	 * @param id	KITS ID from the traffic sensor database
-	 * @return
-	 */
-	private Integer getZipCode(String id) {
-		TrafficSensorData match = MongoStorage.getSensorData(id);
-		if (match == null) {
-			System.out.println("No match for ID " + id);
-			return 0;
-		}
-		System.out.println("ID " + id + " is at " + match.getLat() + ", " + match.getLon());
-		return GoogleZipFinder.getZipCode(match.getLat(), match.getLon());
 	}
 
 	/**
@@ -93,11 +93,13 @@ public class SodaCollector implements Collector {
 	 * @return
 	 */
 	private double getRankedValue(Object key, Object value) {
+		return Math.max(0.0, 10 - 0.5 * Math.log(Double.parseDouble(value.toString())));
+		/*
 		try {
-			return Math.max((100 - Double.parseDouble((String) value))/10, 0);
+			return Math.max(0, 10 - 3.5 * Math.log(Double.parseDouble(value.toString())));
 		} catch (Exception e) {
 			return 5.0;
-		}
+		}*/
 	}
 	
 	public DataSet getSensorInfoData() throws IOException {

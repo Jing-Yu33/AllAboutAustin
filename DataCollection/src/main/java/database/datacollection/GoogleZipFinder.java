@@ -18,7 +18,8 @@ public class GoogleZipFinder {
 	public static String part2="Vc0LJqTc4YcwSBE8w";
 	private static final String GOOGLE_MAPS_KEY = part1+part2;
 
-	private static final int BAD_RESULT = 0; // Zipcode to return for failed query
+	private static final String BAD_RESULT = "0"; // Zipcode to return for failed query
+	private enum QueryType {ZIPCODE, COORDINATES};
 	
 	public static int getZipCode(String search) {
 		Client client = ClientBuilder.newClient();
@@ -27,7 +28,7 @@ public class GoogleZipFinder {
 		resource = resource.queryParam("bounds", "30.112439,-98.100491|30.518747,-97.366567");
 		resource = resource.queryParam("key", GOOGLE_MAPS_KEY);
 
-		return doQuery(resource);
+		return Integer.parseInt(doQuery(resource, QueryType.ZIPCODE)); //doQuery is written to protect against NumberFormatException.
 	}
 	
 	public static int getZipCode(double lat, double lon) {
@@ -36,10 +37,29 @@ public class GoogleZipFinder {
 		resource = resource.queryParam("latlng", Double.toString(lat) + "," + Double.toString(lon));
 		resource = resource.queryParam("key", GOOGLE_MAPS_KEY);
 
-		return doQuery(resource);
+		return Integer.parseInt(doQuery(resource, QueryType.ZIPCODE));
 	}
 	
-	private static int doQuery(WebTarget resource) {
+	public static Double[] getCoordinates(String zipcode) {
+		Client client = ClientBuilder.newClient();
+		WebTarget resource = client.target("https://maps.googleapis.com/maps/api/geocode/json");
+		resource = resource.queryParam("address", zipcode);
+		//resource = resource.queryParam("bounds", "30.112439,-98.100491|30.518747,-97.366567");
+		resource = resource.queryParam("key", GOOGLE_MAPS_KEY);
+		
+		Double[] coords = new Double[2];
+		String rval = doQuery(resource, QueryType.COORDINATES);
+		if (rval.equals(BAD_RESULT)) {
+			coords[0] = 0.0;
+			coords[1] = 0.0;
+		} else {
+			coords[0] = Double.parseDouble(rval.substring(0, rval.indexOf(",")));
+			coords[1] = Double.parseDouble(rval.substring(rval.indexOf(",") + 1, rval.length()));
+		}
+		return coords;
+	}
+	
+	private static String doQuery(WebTarget resource, QueryType type) {
 		Builder request = resource.request();
 		request.accept(MediaType.APPLICATION_JSON);
 
@@ -65,12 +85,18 @@ public class GoogleZipFinder {
 		try {
 			JSONArray results = (JSONArray) jsonPayload.get("results");
 			JSONObject result = (JSONObject) results.get(0);
-			JSONArray addrComponents = (JSONArray) result.get("address_components");
-			for (Object o : addrComponents) {
-				JSONObject jo = (JSONObject) o;
-				if (((JSONArray) jo.get("types")).get(0).equals("postal_code")) {
-					return parseZip(jo.get("short_name"));
-				}
+			if (type.equals(QueryType.ZIPCODE)) {
+				JSONArray addrComponents = (JSONArray) result.get("address_components");
+				for (Object o : addrComponents) {
+					JSONObject jo = (JSONObject) o;
+					if (((JSONArray) jo.get("types")).get(0).equals("postal_code")) {
+						return parseZip(jo.get("short_name"));
+					}
+				}	
+			} else {
+				JSONObject geoComponents = (JSONObject) result.get("geometry");
+				JSONObject coordinates = (JSONObject) geoComponents.get("location");
+				return coordinates.get("lat") + "," + coordinates.get("lng");
 			}
 		} catch (Exception e) {
 			return BAD_RESULT;
@@ -79,9 +105,9 @@ public class GoogleZipFinder {
 		return BAD_RESULT;
 	}
 
-	private static int parseZip(Object arg) {
+	private static String parseZip(Object arg) {
 		try {
-			return Integer.parseInt(arg.toString());
+			return Integer.toString(Integer.parseInt(arg.toString())); // Test if Integer can parse an int
 		} catch (Exception e) {
 			return BAD_RESULT;
 		}
