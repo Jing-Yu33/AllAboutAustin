@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import SearchBar from '../searchAndSort/SearchBar';
-import HeatMap from '../heatmap/HeatMap';
+import HeatMap from '../map/heatmap/HeatMap';
 import RankingList from '../rankingList/RankingList';
 
 import { GetTop10ZipcodeByCategory } from '../../actions';
