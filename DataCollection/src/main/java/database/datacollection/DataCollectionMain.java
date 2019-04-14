@@ -21,7 +21,6 @@ public class DataCollectionMain {
 		//demoSchoolCollector();
 		//demoSensorDataCollector();
 		MongoStorage.saveCombinedZipcodeData();
-		//System.out.println(Averaging.getFoodAverage("78756"));
 	}
 	
 	/*

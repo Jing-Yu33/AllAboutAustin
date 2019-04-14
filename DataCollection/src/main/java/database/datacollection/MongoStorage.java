@@ -228,8 +228,10 @@ public class MongoStorage {
                 ed = new SchoolData(zipcode, es, new HashMap<String, Double>());
             }
 
+			Double[] coords = new Double[2];
+			coords = GoogleZipFinder.getCoordinates(zipcode);
 			
-			Zipcode zc = new Zipcode(zipcode, fs, ts, es, as, fd, td, ed);
+			Zipcode zc = new Zipcode(zipcode, fs, ts, es, as, fd, td, ed, coords[0], coords[1]);
 			zc.setCSVProperties(data);
 			datastore.save(zc);
 			System.out.println(zc.toString());
