@@ -6,40 +6,22 @@ import ZipcodeMarker from './ZipcodeMarker';
 
 class ZipcodeMap extends Component {
   
-  // From database, get zipcode - lat, lng list
-  async componentDidMount(){
-
-  }
-
   url = "https://sites.google.com/site/allaboutaustinzipcodeskml/test/AustinZipcodes.kml"
 
-  renderMarkers = () =>{
-    // return(
-    //     this.props.ZipcodesLocation.map((zipcode) => {
-    //         return (
-    //             <ZipcodeMarker
-    //             key={zipcode}
-    //             zipcode={zipcode}
-    //             position={{ lat: 30.2672, lng: -97.7431 }}
-    //             // onClick={this.onMarkerClick}
-    //             />
-    //         )
-    //     })
-    // )
-    var zipcode = "78701"
+  renderMarkers = (zipcode) =>{
     return (
         <ZipcodeMarker
-            key={zipcode}
-            zipcode={zipcode}
-            position={{ lat: 30.2672, lng: -97.7431 }}
-            // onClick={this.onMarkerClick}
+            key={zipcode.zipcode}
+            zipcode={zipcode.zipcode}
+            position={{ lat: +zipcode.latitude, lng: zipcode.longtitude }}
         >
-        
         </ZipcodeMarker>
     )
   }
 
   render(){
+    
+
     const GoogleMapExample = withGoogleMap(props => (
         <GoogleMap 
           defaultCenter = { { lat: 30.2672, lng: -97.74306 } }
@@ -50,7 +32,10 @@ class ZipcodeMap extends Component {
             url = "https://sites.google.com/site/allaboutaustinzipcodeskml/zipcodes/AustinZipcodes.kml"
             options = {{ preserveViewport: true, clickable: false }}
           />
-          {this.renderMarkers()}
+          { this.props.zipcodes.map( zipcode => {
+                return this.renderMarkers(zipcode)
+            })
+            }
         </GoogleMap>
      ));
 

@@ -14,7 +14,6 @@ class IndividualZipcodePage extends Component {
     }
 
     render(){
-        // console.log(this.props.zipcode);
         if(!this.props.zipcode){
             return <div>Loading... / No such zipcode, please check</div>
         }
@@ -34,7 +33,7 @@ class IndividualZipcodePage extends Component {
                     </ul>
                 </div>
                 <div className="col-lg-8">
-                    <IndividualZipcodeMap zipcode={this.props.zipcode.zipcode}/>
+                    <IndividualZipcodeMap zipcode={this.props.zipcode.zipcode} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
                 </div>
             </div>
             <CarouselComponent/>
