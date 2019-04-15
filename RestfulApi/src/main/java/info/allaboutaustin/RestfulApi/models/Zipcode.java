@@ -42,6 +42,10 @@ public class Zipcode {
 	private int NumOfCinemas;
 	private List<String> ListOfCinemas;
 	
+	//location 
+	private Double latitude;
+	private Double longtitude;
+	
 	@Setter
 	@JsonIgnore
 	private Double totalScore;
