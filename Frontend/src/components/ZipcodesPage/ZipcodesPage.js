@@ -15,7 +15,7 @@ import { compareByFood, compareByTraffic, compareByEducation, compareByAverage }
 
 class ZipcodesPage extends Component {
    
-    limit = 8; // # of zipcode components shown on a single page
+    limit = 6; // # of zipcode components shown on a single page
 
     state = {
         currentPage: 1,
@@ -132,7 +132,7 @@ class ZipcodesPage extends Component {
       return(
         <div>
             <div className="mt-3">
-              <ZipcodesMap />
+              <ZipcodesMap zipcodes={this.props.zipcodes}/>
             </div>
           Problems: 1. When user FIRST change filter form, the list will rerender with average order (even though already change the order category)
           may caused by redux-form? => how to change that? 
