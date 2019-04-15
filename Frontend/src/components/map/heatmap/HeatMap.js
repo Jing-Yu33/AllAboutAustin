@@ -1,19 +1,16 @@
-/* global window, fetch */
 import React, {Component} from 'react';
-import {render} from 'react-dom';
 import MapGL from 'react-map-gl';
 
 import {defaultMapStyle, dataLayer} from './map-style.js';
 import {updatePercentiles} from './utils';
 import {fromJS} from 'immutable';
 import {json as requestJson} from 'd3-request';
-import { Link } from 'react-router-dom';
 
 import HeatMapGeojsonExample from './HeatMapGeojsonExample.geojson';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoieWl4aW5nd2FuZyIsImEiOiJjanVlbHloenMwMTBlNDRucTRrNDI2Z3VyIn0.uD87F_upW33Ev21qNWnqSQ'; // Set your mapbox token here
 
-export default class App extends Component {
+class HeatMap extends Component {
 
   state = {
     mapStyle: defaultMapStyle,
@@ -69,9 +66,6 @@ export default class App extends Component {
             </div>
         )
     }
-    // return hoveredFeature && (
-
-    // );
   }
 
   render() {
@@ -100,6 +94,4 @@ export default class App extends Component {
 
 }
 
-export function renderToDom(container) {
-  render(<App/>, container);
-}
+export default HeatMap;
