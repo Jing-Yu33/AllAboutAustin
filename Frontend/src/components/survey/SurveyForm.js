@@ -27,7 +27,7 @@ class SurveyFrom extends Component {
                     <SliderBar category="Food" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
                     <SliderBar category="Education" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
                     <SliderBar category="Traffic" onSliderBarFocusOut={this.onSliderBarFocusOut}/>                   
-                    <button onClick={() => this.onFormSubmit()} type="button" className="btn btn-outline-success btn-lg btn-block" data-dismiss="modal">Continue</button>
+                    <button onClick={() => this.onFormSubmit()} type="button" className="btn btn-outline-primary btn-lg btn-block" data-dismiss="modal">Continue</button>
                 </form>
             </div>
         )

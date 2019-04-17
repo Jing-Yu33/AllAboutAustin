@@ -47,7 +47,7 @@ input[type=range] {
     height: 23px;
     width: 24px;
     border-radius: 25px;
-    background: #d8ffff;
+    background: #4286f4;
     cursor: pointer;
   }
   input[type=range]::-ms-track {
