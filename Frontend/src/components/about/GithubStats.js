@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 class GithubStats extends React.Component {
+    GITHUB_ACCESS_TOKEN =  "29141c907671b2c7b85ae8bfa45b1c16f7e864a7";
     state={
         commits:    null,
         issues:     null,
@@ -11,10 +12,10 @@ class GithubStats extends React.Component {
     getData = async () => {
         var commitsNum = 0;
         for(var i=1; i<5; i++){
-            var commits = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/commits?per_page=100&page=${i}&access_token=29141c907671b2c7b85ae8bfa45b1c16f7e864a7`);
+            var commits = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/commits?per_page=100&page=${i}&${this.GITHUB_ACCESS_TOKEN}`);
             commitsNum += commits.data.length;
         }
-        var issues = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/issues?access_token=29141c907671b2c7b85ae8bfa45b1c16f7e864a7`);
+        var issues = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/issues?access_token=${this.GITHUB_ACCESS_TOKEN}`);
         this.setState({
             commits: commitsNum,
             issues:  issues.data.length,
