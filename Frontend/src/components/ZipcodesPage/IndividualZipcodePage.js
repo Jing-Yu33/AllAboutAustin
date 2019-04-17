@@ -10,12 +10,20 @@ import { GetOneZipcode } from '../../actions/index';
 class IndividualZipcodePage extends Component {
 
     async componentDidMount(){
-        this.props.GetOneZipcode(this.props.match.params.zipcode); 
+        this.props.GetOneZipcode(this.props.match.params.zipcode);
     }
 
     render(){
         if(!this.props.zipcode){
-            return <div>Loading... / No such zipcode, please check</div>
+            return (
+                <div>
+                    <div className="spinner">
+                        <div className="dot1"></div>
+                        <div className="dot2"></div>
+                    </div>
+                    <span className="d-flex justify-content-center">Loading... or No such zipcode</span>
+                </div>
+            )
         }
 
         return(

@@ -8,14 +8,15 @@ class ZipCodeComponent extends Component {
   
   state = {
     clicked: [],
-    unclicked: []
+    unclicked: [],
+    cardStyle: null
   }
 
   renderExistIcon = (num) => {
     if(num === 0){
-      return <i className="fas fa-times"></i>
+      return <i className="fas fa-times text-danger"></i>
     }else{
-      return <i className="fas fa-check"></i>
+      return <i className="fas fa-check text-success"></i>
     }
   }
 
@@ -39,47 +40,99 @@ class ZipCodeComponent extends Component {
     const { zipcode } = this.props.zipcode;
     if(this.props.isSignedIn){
       if(this.state.unclicked.includes(zipcode)){
-        return <button onClick={(e) => this.onHeartAddClick(this.props.zipcode.zipcode)}><i className="far fa-heart"></i></button>
+        return <div onClick={(e) => this.onHeartAddClick(this.props.zipcode.zipcode)}><i className="far fa-heart"></i></div>
       }
 
       if(this.props.userZipcodes.includes(zipcode) || this.state.clicked.includes(zipcode)){
-        return <button onClick={(e) => this.onHeartRemoveClick(zipcode)}><i className="fas fa-heart"></i></button>
+        return <div onClick={(e) => this.onHeartRemoveClick(zipcode)}><i className="fas fa-heart"></i></div>
       } else {
-        return <button onClick={(e) => this.onHeartAddClick(this.props.zipcode.zipcode)}><i className="far fa-heart"></i></button>
+        return <div onClick={(e) => this.onHeartAddClick(this.props.zipcode.zipcode)}><i className="far fa-heart"></i></div>
       }
     }
   }
 
+  onMouseEnter = () => {
+    this.setState({
+      cardStyle: {
+        boxShadow: "0 20px 10px rgba(8, 112, 184, 0.7)"
+      }
+    })
+  }
+
+  onMouseLeave = () => {
+    this.setState({
+      cardStyle: {
+        boxShadow: null
+      }
+    })
+  }
+
   render() {
     return(
-      <div className="my-3 card">
-        <div className="card-header">
-          <h4>{this.props.zipcode.region}: 
-            <Link to={`/zipcodes/${this.props.zipcode.zipcode}`}>
-              {this.props.zipcode.zipcode}
-            </Link>
-            {this.renderHeart()}
-          </h4>
-        </div>
-      <div className="card-body" >
-        <div className="row align-items-center">
-          <div >
-            <img className="card-img-top img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/>
+      <Link to={`/zipcodes/${this.props.zipcode.zipcode}`}  className="CardLink">
+        <div className="my-3 card" 
+            style={this.state.cardStyle} 
+            onMouseEnter={this.onMouseEnter}
+            onMouseLeave={this.onMouseLeave}>
+          <div className="card-header">
+            <h4>
+              <span className="text-secondary">
+                {this.props.zipcode.region}: 
+              </span>
+              <span className="text-primary">
+                  {this.props.zipcode.zipcode}
+                
+              </span>
+              <span className="btn text-danger">{this.renderHeart()}</span>
+            </h4>
           </div>
-          <div>
-            {/* <h5 className="card-title">Region: </h5> */}
-            <p>{this.props.zipcode.description.substring(0, Math.min(this.props.zipcode.description.length, 80))}...</p>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">Average Rate: {this.props.zipcode.averageScore}</li>
-              <li className="list-group-item">Food Rate: {this.props.zipcode.foodScore}</li>
-              <li className="list-group-item">Traffic Rate: {this.props.zipcode.trafficScore}</li>
-              <li className="list-group-item">Education Rate: {this.props.zipcode.educationScore}</li>
-              <li className="list-group-item">Hospitals: {this.renderExistIcon(this.props.zipcode.numOfHospitals)} Cinemas: {this.renderExistIcon(this.props.zipcode.numOfCinemas)}</li>
-            </ul>
+        <div className="card-body" >
+          <div className="row align-items-center">
+            <div>
+              {/* <img className="card-img-top img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/> */}
+              <img className="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/>
+            </div>
+            <div>
+              <div className="justify-content-center">
+                {this.props.zipcode.description.substring(0, Math.min(this.props.zipcode.description.length, 100))}...
+              </div>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
+                  <div className="row">
+                    <div className="col-6">
+                      Average Rate: <span className="text-info">{this.props.zipcode.averageScore}</span>
+                    </div>
+                    <div className="col-6">
+                      Food Rate: <span className="text-info">{this.props.zipcode.foodScore}</span>
+                    </div>
+                  </div>
+                </li>
+                <li className="list-group-item">
+                  <div className="row">
+                    <div className="col-6">
+                      Traffic Rate: <span className="text-info">{this.props.zipcode.trafficScore}</span>
+                    </div>
+                    <div className="col-6">
+                      Education Rate: <span className="text-info">{this.props.zipcode.educationScore}</span>
+                    </div>
+                  </div>
+                </li>
+                <li className="list-group-item">
+                  <div className="row">
+                    <div className="col-6">
+                      Hospitals: {this.renderExistIcon(this.props.zipcode.numOfHospitals)}
+                    </div>
+                    <div className="col-6">
+                      Cinemas: {this.renderExistIcon(this.props.zipcode.numOfCinemas)}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      </Link>
     )
   }
 }

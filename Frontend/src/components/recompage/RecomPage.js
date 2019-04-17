@@ -25,9 +25,9 @@ const RecomPage = (props) => {
                             <div className="col-lg-4">Education Weight: {query.education || "50"}</div>
                         </div>
                     </ul>
-                     <br></br>
-                    <SurveyModal />
-                    <br></br>
+                     <div>
+                        <SurveyModal />
+                    </div>
                     {result}
                 </div>
             </div>

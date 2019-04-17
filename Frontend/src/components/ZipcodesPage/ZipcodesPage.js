@@ -70,7 +70,11 @@ class ZipcodesPage extends Component {
 
     renderZipcodes = () => {
       if(this.props.zipcodes.length === 0){
-        return <div>No Zipcodes</div>
+        return (
+          <div className="d-flex justify-content-center display-5" style={{height: "200px"}}>
+            No Result.
+          </div>
+        )
       }
 
       var total = 0;
