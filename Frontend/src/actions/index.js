@@ -1,5 +1,4 @@
-import { DataBase } from '../apis/DataBase';
-import { UserDataBase } from '../apis/UserDataBase';
+import { DataBase, UserDataBase } from '../apis/DataBase';
 
 export const foodWeight = (weight) => {
     return {
