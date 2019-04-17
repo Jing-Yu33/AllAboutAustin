@@ -1,5 +1,7 @@
 package database.datacollection;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import database.datacollection.models.*;
@@ -28,6 +30,7 @@ public class Averaging {
         HashMap<String, Double> trafficData = schoolFullData.getPoints();
         return runKeys(trafficData);
     }
+    
     
     /**
      * Given a points set, run through all of them and return the double average of all the doubles therein.
