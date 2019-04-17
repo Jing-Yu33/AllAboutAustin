@@ -135,7 +135,5 @@ public class ZipcodesResource {
 				
 		return list;
 	}
-	
-	
-	
+		
 }
