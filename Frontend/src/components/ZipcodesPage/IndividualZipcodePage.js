@@ -29,10 +29,16 @@ class IndividualZipcodePage extends Component {
         return(
           <div className="jumbotron jumbotron-fluid my-3">
             <div className="container">
+
+           
+
             <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
-            <p>Other infomation here: region, description{this.props.zipcode.description}</p>
+            <span className="text-secondary">
+                Region : {this.props.zipcode.region} 
+            </span>
+            <p className="pt-2">{this.props.zipcode.description}</p>
             <div className="row">
-                <div className="col-lg-4">
+                <div className="col-lg">
                     <ul className="list-group list-group-flush">
                     <li className="list-group-item">Holisic Score : {this.props.zipcode.averageScore}</li>
                     <li className="list-group-item">Food Score : {this.props.zipcode.foodScore}</li>
@@ -40,7 +46,7 @@ class IndividualZipcodePage extends Component {
                     <li className="list-group-item">Education Score : {this.props.zipcode.educationScore}</li>
                     </ul>
                 </div>
-                <div className="col-lg-8">
+                <div className="col-lg-8-pt-2">
                     <IndividualZipcodeMap zipcode={this.props.zipcode.zipcode} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
                 </div>
             </div>
