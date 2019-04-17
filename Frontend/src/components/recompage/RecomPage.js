@@ -28,7 +28,9 @@ const RecomPage = (props) => {
                      <div>
                         <SurveyModal />
                     </div>
-                    {result}
+                    <div className="row">
+                        {result}
+                    </div>
                 </div>
             </div>
         </React.Fragment>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 
+import history from '../../history';
 import { AddZipcodesToUser, RemoveZipcodesFromUser } from '../../actions';
 
 class ZipCodeComponent extends Component {
@@ -20,7 +20,8 @@ class ZipCodeComponent extends Component {
     }
   }
 
-  onHeartAddClick = (zipcode) => {
+  onHeartAddClick = (e, zipcode) => {
+    e.stopPropagation();
     this.props.AddZipcodesToUser(this.props.userId, zipcode);
     this.setState(prevState =>({
       clicked: [...prevState.clicked, zipcode],
@@ -28,7 +29,8 @@ class ZipCodeComponent extends Component {
     }))
   }
 
-  onHeartRemoveClick = (zipcode) => {
+  onHeartRemoveClick = (e, zipcode) => {
+    e.stopPropagation();
     this.props.RemoveZipcodesFromUser(this.props.userId, zipcode);
     this.setState(prevState =>({
       unclicked: [...prevState.unclicked, zipcode],
@@ -40,13 +42,13 @@ class ZipCodeComponent extends Component {
     const { zipcode } = this.props.zipcode;
     if(this.props.isSignedIn){
       if(this.state.unclicked.includes(zipcode)){
-        return <div onClick={(e) => this.onHeartAddClick(this.props.zipcode.zipcode)}><i className="far fa-heart"></i></div>
+        return <div onClick={(e) => this.onHeartAddClick(e, this.props.zipcode.zipcode)}><i className="far fa-heart"></i></div>
       }
 
       if(this.props.userZipcodes.includes(zipcode) || this.state.clicked.includes(zipcode)){
-        return <div onClick={(e) => this.onHeartRemoveClick(zipcode)}><i className="fas fa-heart"></i></div>
+        return <div onClick={(e) => this.onHeartRemoveClick(e, zipcode)}><i className="fas fa-heart"></i></div>
       } else {
-        return <div onClick={(e) => this.onHeartAddClick(this.props.zipcode.zipcode)}><i className="far fa-heart"></i></div>
+        return <div onClick={(e) => this.onHeartAddClick(e, zipcode)}><i className="far fa-heart"></i></div>
       }
     }
   }
@@ -67,9 +69,13 @@ class ZipCodeComponent extends Component {
     })
   }
 
+  onCardClick = () => {
+    history.push(`/zipcodes/${this.props.zipcode.zipcode}`)
+  }
+
   render() {
     return(
-      <Link to={`/zipcodes/${this.props.zipcode.zipcode}`}  className="CardLink">
+      <div  onClick={this.onCardClick} className="CardLink">
         <div className="my-3 card" 
             style={this.state.cardStyle} 
             onMouseEnter={this.onMouseEnter}
@@ -132,7 +138,7 @@ class ZipCodeComponent extends Component {
           </div>
         </div>
       </div>
-      </Link>
+      </div>
     )
   }
 }

@@ -10,7 +10,6 @@ import SortForm from '../searchAndSort/SortForm'
 
 class Food extends Component {
 
-
     componentDidMount() {
         this.props.GetTop10ZipcodeByCategory("food", "food");
     }
