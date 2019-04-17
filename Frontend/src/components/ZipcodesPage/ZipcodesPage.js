@@ -134,6 +134,7 @@ class ZipcodesPage extends Component {
     }
 
     render(){
+      console.log("render")
       return(
         <div>
             <div className="mt-3">
