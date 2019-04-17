@@ -14,7 +14,7 @@ class Traffic extends Component {
         this.props.GetTop10ZipcodeByCategory("traffic", "traffic");
     }
 
-    onSubmit = (value) => {
+    onSortDownSubmit = (value) => {
         this.props.GetTop10ZipcodeByCategory("traffic", value.sortByCategory, value.sortByOrder);
     }
 

@@ -15,7 +15,7 @@ class Education extends Component {
         this.props.GetTop10ZipcodeByCategory("education", "education");
     }
 
-    onSubmit = (value) => {
+    onSortDownSubmit = (value) => {
         this.props.GetTop10ZipcodeByCategory("education", value.sortByCategory, value.sortByOrder);
     }
 
