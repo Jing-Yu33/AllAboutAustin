@@ -92,8 +92,8 @@ class ZipcodesPage extends Component {
               </div>
             </div>
           </div>
-          <div className="row mt-3 mb-3">
-            <div className="col-lg-8 justify-content-center">
+          <div className="mt-3 mb-3">
+            <div className="text-center">
               <PaginationButton total={total} currentPage={this.state.currentPage} handlePageChange={this.handlePageChange}/>
             </div>
           </div>
@@ -140,15 +140,14 @@ class ZipcodesPage extends Component {
     render(){
       return(
         <div>
-            <div className="mt-3">
-              <ZipcodesMap zipcodes={this.props.zipcodes}/>
-            </div>
-          Problems: 
-          1. Need more manually testing? => the implementation is messy, tbh
+          <div className="mt-3">
+            <ZipcodesMap zipcodes={this.props.zipcodes}/>
+          </div>
           <div className="row mt-4">
               <div className="col-lg-4">
                   <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
               </div>
+              <div className="col-lg-4"></div>
               <div className="col-lg-4">
                   <SortForm 
                     onSubmit={this.onSortDownSubmit} 
@@ -158,7 +157,7 @@ class ZipcodesPage extends Component {
           </div>
 
           <div> 
-            <div className="col-lg-8">
+            <div className="mt-2">
                 <BasicFilters 
                   handleSubmit={this.handleSubmit}
                   handleReset={this.handleReset}

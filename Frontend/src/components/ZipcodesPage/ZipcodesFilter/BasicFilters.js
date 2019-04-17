@@ -34,36 +34,31 @@ class BasicFilters extends Component {
     render() {
         const { handleSubmit, pristine, submitting } = this.props
         return(
-            <div>
             <form onSubmit={(e) => handleSubmit(e)}>
-                Need Styling! in one row and modify the text
                 <div>
-                    
-                </div>
-                <div>
-                    <label><strong>Food Score</strong></label>
-                    {this.renderRatingRatioOptions("foodGt")}
-                    <label><strong>Traffic Score</strong></label>
-                    {this.renderRatingRatioOptions("trafficGt")}
-                    <label><strong>Education Score</strong></label>
-                    {this.renderRatingRatioOptions("educationGt")}
-                </div>
-                    <br></br>
-                    <div>
                     <button class="btn btn-primary" type="submit" disabled={pristine || submitting}>
-                        Submit
+                        <i className="fas fa-filter"></i>
                     </button>
                     &nbsp;
                     <button class="btn btn-primary"type="button" disabled={pristine || submitting} onClick={this.reset}>
-                        Clear Values
+                        <i className="fas fa-redo"></i>
                     </button>
+                </div>
+                <div className="row">
+                    <div className="col-lg-4">
+                        <label><strong>Food Score</strong></label>
+                        <div>{this.renderRatingRatioOptions("foodGt")}</div>
                     </div>
+                    <div className="col-lg-4">
+                        <label><strong>Traffic Score</strong></label>
+                        <div>{this.renderRatingRatioOptions("trafficGt")}</div>
+                    </div>
+                    <div className="col-lg-4">
+                        <label><strong>Education Score</strong></label>
+                        <div>{this.renderRatingRatioOptions("educationGt")}</div>
+                    </div>
+                </div>
             </form>
-            <br></br>
-            </div>
-
-
-
         )
     }
 }

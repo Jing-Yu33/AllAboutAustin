@@ -42,7 +42,7 @@ class ZipcodeMap extends Component {
     return(
         <div>
             <GoogleMapExample
-                containerElement={ <div style={{ height: `500px`, width: '100%' }} /> }
+                containerElement={ <div style={{ height: `300px`, width: '100%' }} /> }
                 mapElement={ <div style={{ height: `100%` }} /> }
             />
         </div>
