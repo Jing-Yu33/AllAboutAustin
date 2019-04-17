@@ -22,8 +22,8 @@ class RowCards extends Component {
 
     render() {
         return(
-          <div className="row">
-            <div className="col-lg-4  mt-3 align-items-stretch">
+          <div className="card-deck">
+            <div className="card-deck col-lg-4  mt-3 align-items-stretch">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Food</h5>
@@ -33,7 +33,7 @@ class RowCards extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 mt-3 align-items-stretch">
+            <div className="card-deck col-lg-4 mt-3 align-items-stretch">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Traffic</h5>
@@ -41,7 +41,7 @@ class RowCards extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 mt-3 align-items-stretch">
+            <div className="card-deck col-lg-4 mt-3 align-items-stretch">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Education</h5>
