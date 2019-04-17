@@ -5,7 +5,6 @@ import _ from 'lodash';
 import ZipcodesMap from '../map/ZipcodesMap';
 import SearchBar from '../searchAndSort/SearchBar';
 import SortForm from '../searchAndSort/SortForm';
-// import SortFormForZipcodesPage from '../searchAndSort/SortFormForZipcodesPage';
 import ZipcodeComponent from '../zipcode/ZipCodeComponent';
 import PaginationButton from './PaginationButton';
 import BasicFilters from './ZipcodesFilter/BasicFilters';
@@ -26,6 +25,15 @@ class ZipcodesPage extends Component {
     // Intitialize
     async componentDidMount(){
       this.props.GetAllZipcodes();
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+      var formChange = JSON.stringify(nextProps.filterForm) !== JSON.stringify(this.props.filterForm)
+      var zipcodesChange = JSON.stringify(nextProps.zipcodes) !== JSON.stringify(this.props.zipcodes)
+      var categoryChange = nextState.category !== this.state.category
+      var orderChange = nextState.order !== this.state.order
+      var pageChange = nextState.currentPage !== this.state.currentPage
+      return !formChange & (zipcodesChange | categoryChange | orderChange | pageChange) 
     }
 
     // Render Zipcode Components List and Pagination Button
@@ -74,13 +82,10 @@ class ZipcodesPage extends Component {
       return (
         <div>
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-12">
               <div className="row">
                 {this.renderList()}
               </div>
-            </div>
-            <div className="col-lg-4">
-                Google Map Here??? Fixed? <br/>
             </div>
           </div>
           <div className="row mt-3 mb-3">
@@ -134,9 +139,8 @@ class ZipcodesPage extends Component {
             <div className="mt-3">
               <ZipcodesMap zipcodes={this.props.zipcodes}/>
             </div>
-          Problems: 1. When user FIRST change filter form, the list will rerender with average order (even though already change the order category)
-          may caused by redux-form? => how to change that? 
-          2. Need more manually testing? => the implementation is messy, tbh
+          Problems: 
+          1. Need more manually testing? => the implementation is messy, tbh
           <div className="row mt-4">
               <div className="col-lg-4">
                   <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
@@ -159,8 +163,6 @@ class ZipcodesPage extends Component {
                       foodGt: "0",
                       trafficGt: "0",
                       educationGt: "0",
-                      // hospitals: false,
-                      // cinemas: false
                     }
                   }
                   />

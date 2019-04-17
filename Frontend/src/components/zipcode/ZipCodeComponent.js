@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 
+import { AddZipcodesToUser, RemoveZipcodesFromUser } from '../../actions';
 
 class ZipCodeComponent extends Component {
+  
+  state = {
+    clicked: [],
+    unclicked: []
+  }
 
-  renderIcon = (num) => {
+  renderExistIcon = (num) => {
     if(num === 0){
       return <i className="fas fa-times"></i>
     }else{
@@ -12,13 +19,47 @@ class ZipCodeComponent extends Component {
     }
   }
 
+  onHeartAddClick = (zipcode) => {
+    this.props.AddZipcodesToUser(this.props.userId, zipcode);
+    this.setState(prevState =>({
+      clicked: [...prevState.clicked, zipcode],
+      unclicked: this.state.unclicked.filter((_, i) => this.state.unclicked[i]!==zipcode)
+    }))
+  }
+
+  onHeartRemoveClick = (zipcode) => {
+    this.props.RemoveZipcodesFromUser(this.props.userId, zipcode);
+    this.setState(prevState =>({
+      unclicked: [...prevState.unclicked, zipcode],
+      clicked: this.state.clicked.filter((_, i) => this.state.clicked[i]!==zipcode)
+    }))
+  }
+
+  renderHeart = () => {
+    const { zipcode } = this.props.zipcode;
+    if(this.props.isSignedIn){
+      if(this.state.unclicked.includes(zipcode)){
+        return <button onClick={(e) => this.onHeartAddClick(this.props.zipcode.zipcode)}><i className="far fa-heart"></i></button>
+      }
+
+      if(this.props.userZipcodes.includes(zipcode) || this.state.clicked.includes(zipcode)){
+        return <button onClick={(e) => this.onHeartRemoveClick(zipcode)}><i className="fas fa-heart"></i></button>
+      } else {
+        return <button onClick={(e) => this.onHeartAddClick(this.props.zipcode.zipcode)}><i className="far fa-heart"></i></button>
+      }
+    }
+  }
 
   render() {
-    // console.log(this.props.zipcode)
     return(
       <div className="my-3 card">
         <div className="card-header">
-          <h4>{this.props.zipcode.region}: <Link to={`/zipcodes/${this.props.zipcode.zipcode}`}>{this.props.zipcode.zipcode}</Link></h4>
+          <h4>{this.props.zipcode.region}: 
+            <Link to={`/zipcodes/${this.props.zipcode.zipcode}`}>
+              {this.props.zipcode.zipcode}
+            </Link>
+            {this.renderHeart()}
+          </h4>
         </div>
       <div className="card-body" >
         <div className="row align-items-center">
@@ -33,7 +74,7 @@ class ZipCodeComponent extends Component {
               <li className="list-group-item">Food Rate: {this.props.zipcode.foodScore}</li>
               <li className="list-group-item">Traffic Rate: {this.props.zipcode.trafficScore}</li>
               <li className="list-group-item">Education Rate: {this.props.zipcode.educationScore}</li>
-              <li className="list-group-item">Hospitals: {this.renderIcon(this.props.zipcode.numOfHospitals)} Cinemas: {this.renderIcon(this.props.zipcode.numOfCinemas)}</li>
+              <li className="list-group-item">Hospitals: {this.renderExistIcon(this.props.zipcode.numOfHospitals)} Cinemas: {this.renderExistIcon(this.props.zipcode.numOfCinemas)}</li>
             </ul>
           </div>
         </div>
@@ -43,4 +84,14 @@ class ZipCodeComponent extends Component {
   }
 }
 
-export default ZipCodeComponent;
+const mapStateToProps = (state) => {
+  return {
+      isSignedIn: state.auth.isSignedIn,
+      userId: state.auth.userId,
+      userZipcodes: state.auth.userZipcodes
+  }
+}
+
+export default connect(mapStateToProps, {
+  AddZipcodesToUser, RemoveZipcodesFromUser
+})(ZipCodeComponent);
