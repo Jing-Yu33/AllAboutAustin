@@ -14,15 +14,15 @@ class BasicFilters extends Component {
             <div>
                 <label>
                     <Field name={name} value="8" component="input" type="radio"/>
-                    > 8
+                     &nbsp; > 8 &nbsp;
                 </label>
                 <label>
                     <Field name={name} value="5" component="input" type="radio"/>
-                    >5
+                    &nbsp; > 5 &nbsp;
                 </label>
                 <label>
                     <Field name={name} value="2" component="input" type="radio"/>
-                    >2
+                    &nbsp; > 2 &nbsp;
                 </label>
                 <br></br>
             </div>
@@ -41,20 +41,23 @@ class BasicFilters extends Component {
                     
                 </div>
                 <div>
-                    <label>Food Score</label>
+                    <label><strong>Food Score</strong></label>
                     {this.renderRatingRatioOptions("foodGt")}
-                    <label>Traffic Score</label>
+                    <label><strong>Traffic Score</strong></label>
                     {this.renderRatingRatioOptions("trafficGt")}
-                    <label>Education Score</label>
+                    <label><strong>Education Score</strong></label>
                     {this.renderRatingRatioOptions("educationGt")}
                 </div>
                     <br></br>
-                    <button type="submit" disabled={pristine || submitting}>
+                    <div>
+                    <button class="btn btn-primary" type="submit" disabled={pristine || submitting}>
                         Submit
                     </button>
-                    <button type="button" disabled={pristine || submitting} onClick={this.reset}>
+                    &nbsp;
+                    <button class="btn btn-primary"type="button" disabled={pristine || submitting} onClick={this.reset}>
                         Clear Values
                     </button>
+                    </div>
             </form>
             <br></br>
             </div>
