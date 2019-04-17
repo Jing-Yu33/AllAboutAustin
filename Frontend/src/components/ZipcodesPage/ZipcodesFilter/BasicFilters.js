@@ -24,7 +24,9 @@ class BasicFilters extends Component {
                     <Field name={name} value="2" component="input" type="radio"/>
                     >2
                 </label>
+                <br></br>
             </div>
+
         )
     }
 
