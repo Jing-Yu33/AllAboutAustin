@@ -34,15 +34,11 @@ class BasicFilters extends Component {
     render() {
         const { handleSubmit, pristine, submitting } = this.props
         return(
+            <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 Need Styling! in one row and modify the text
                 <div>
-                    <button type="submit" disabled={pristine || submitting}>
-                        Submit
-                    </button>
-                    <button type="button" disabled={pristine || submitting} onClick={this.reset}>
-                        Clear Values
-                    </button>
+                    
                 </div>
                 <div>
                     <label>Food Score</label>
@@ -52,8 +48,16 @@ class BasicFilters extends Component {
                     <label>Education Score</label>
                     {this.renderRatingRatioOptions("educationGt")}
                 </div>
-
+                    <br></br>
+                    <button type="submit" disabled={pristine || submitting}>
+                        Submit
+                    </button>
+                    <button type="button" disabled={pristine || submitting} onClick={this.reset}>
+                        Clear Values
+                    </button>
             </form>
+            <br></br>
+
 
         )
     }
