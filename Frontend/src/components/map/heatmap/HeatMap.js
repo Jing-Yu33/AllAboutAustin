@@ -61,10 +61,20 @@ class HeatMap extends Component {
     if(hoveredFeature){
         return (
             <div>
-                <div>Zipcode: {hoveredFeature.properties.zipcode}</div>
-                <div>Food Score: {hoveredFeature.properties.value}</div>
+                <div><p><strong>Zipcode:</strong> {hoveredFeature.properties.zipcode}</p></div>
+                <div><p><strong>Food Score:</strong> {hoveredFeature.properties.value}</p></div>
             </div>
         )
+    }
+    else{
+      return(
+            <div>
+                <div>
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
+                </div>
+            </div>
+      )
     }
   }
 
@@ -74,7 +84,7 @@ class HeatMap extends Component {
     return (
       <div className="row">
         <div className="col-lg-2">
-            <div>Hover on Specific Area</div>
+            <div><h4>Hover Over Area for More Details</h4></div>
             {this._renderTooltip()}
         </div>
         <div className="col-lg-10">
