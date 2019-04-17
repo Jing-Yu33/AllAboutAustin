@@ -57,6 +57,8 @@ class BasicFilters extends Component {
                     </button>
             </form>
             <br></br>
+            </div>
+
 
 
         )
