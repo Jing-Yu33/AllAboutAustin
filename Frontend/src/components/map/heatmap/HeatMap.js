@@ -60,20 +60,27 @@ class HeatMap extends Component {
     const {hoveredFeature} = this.state;
     if(hoveredFeature){
         return (
-            <div>
-                <div><p><strong>Zipcode:</strong> {hoveredFeature.properties.zipcode}</p></div>
-                <div><p><strong>Food Score:</strong> {hoveredFeature.properties.value}</p></div>
-            </div>
+          <div className="row-bl-2">
+                <ul className="list-unstyled">
+                  <li><strong>Zipcode:</strong> {hoveredFeature.properties.zipcode}</li>
+                  <li><strong>Food Score:</strong> {hoveredFeature.properties.value}</li>
+                  <li><strong>Traffic Score:</strong> {hoveredFeature.properties.value}</li>
+                  <li><strong>Education Score:</strong> {hoveredFeature.properties.value}</li>
+                </ul>
+          </div>
+
         )
     }
     else{
       return(
-            <div>
-                <div>
-                  <p>&nbsp;</p>
-                  <p>&nbsp;</p>
-                </div>
-            </div>
+            <div className="row-bl-2">
+                <ul className="list-unstyled">
+                  <li><strong>Zipcode:</strong> </li>
+                  <li><strong>Food Score:</strong> </li>
+                  <li><strong>Traffic Score:</strong></li>
+                  <li><strong>Education Score:</strong></li>
+                </ul>
+          </div>
       )
     }
   }
@@ -83,11 +90,11 @@ class HeatMap extends Component {
 
     return (
       <div className="row">
-        <div className="col-lg-2">
+        <div className="col-lg-3">
             <div><h4>Hover Over Area for More Details</h4></div>
             {this._renderTooltip()}
         </div>
-        <div className="col-lg-10">
+        <div className="col-lg-9">
             <MapGL
             {...viewport}
             width="100%"
