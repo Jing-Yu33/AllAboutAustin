@@ -164,6 +164,16 @@ public class MongoStorage {
 		else
 			return datapoints.get(0);
 	}
+
+	public static Zipcode getZipcodeData(String id) {
+		Query<Zipcode> query = datastore.createQuery(Zipcode.class).field("zipcode").equal(id);
+		List<Zipcode> datapoints = query.asList();
+		
+		if (datapoints.size() < 1)
+			return null;
+		else
+			return datapoints.get(0);
+	}
 	
 	
 	public static void saveCombinedZipcodeData() throws IOException {
