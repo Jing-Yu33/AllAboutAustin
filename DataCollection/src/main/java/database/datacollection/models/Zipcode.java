@@ -15,32 +15,32 @@ import org.mongodb.morphia.annotations.*;
 public class Zipcode {
 	@Id
 //	private ObjectId id;
-	private String zipcode;
+	public String zipcode;
 	
 	// calculated result entry	
-	private Double FoodScore;
-	private Double EducationScore;
-	private Double TrafficScore;
-	private Double AverageScore;
+	public Double FoodScore;
+	public Double EducationScore;
+	public Double TrafficScore;
+	public Double AverageScore;
 	
 	// already existed data collections
-	private FoodData FoodData;
-	private TrafficData TrafficData;
-	private SchoolData EducationData;
+	public FoodData FoodData;
+	public TrafficData TrafficData;
+	public SchoolData EducationData;
 	
 	// manually added entry, may need more
-	private List<String> images;
-	private String description;
-	private String region;
-	private int NumOfHospitals;
-	private List<String> ListOfHospitals;
-	private int NumOfCinemas;
-	private List<String> ListOfCinemas;
+	public List<String> images;
+	public String description;
+	public String region;
+	public int NumOfHospitals;
+	public List<String> ListOfHospitals;
+	public int NumOfCinemas;
+	public List<String> ListOfCinemas;
 	public List<String> SurroundingZip;
 	
 	// location
-	private Double latitude;
-	private Double longtitude;
+	public Double latitude;
+	public Double longtitude;
 	
 	// Required	
 	private Zipcode() {};
