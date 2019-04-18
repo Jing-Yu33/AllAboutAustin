@@ -36,7 +36,7 @@ public class Zipcode {
 	private List<String> ListOfHospitals;
 	private int NumOfCinemas;
 	private List<String> ListOfCinemas;
-	private List<String> SurroundingZip;
+	public List<String> SurroundingZip;
 	
 	// location
 	private Double latitude;

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.sun.tools.javac.util.List;
+import java.util.List;
 
 import database.datacollection.models.*;
 
@@ -36,11 +36,11 @@ public class Averaging {
     */
     
     public static double getSchoolAverage(String zip) {
-    	double score;
+    	double score = 0.0;
         SchoolRawData schoolFullData = MongoStorage.getSchoolRawData(zip);
         if (schoolFullData == null){
         	List<String> surroundList= MongoStorage.getZipcodeData(zip).SurroundingZip;
-        	for(int i = 0; i < surroundList.length(); i++) {
+        	for(int i = 0; i < surroundList.size(); i++) {
         		if(MongoStorage.getSchoolRawData(surroundList.get(i)) != null) {
         			score = .5 * runKeys(MongoStorage.getSchoolRawData(surroundList.get(i)).getPoints());
         			break;
