@@ -13,6 +13,67 @@ class IndividualZipcodePage extends Component {
         this.props.GetOneZipcode(this.props.match.params.zipcode);
     }
 
+    renderScoreList = () => {
+        return (
+            <ul className="list-group list-group-flush">
+                <li className="list-group-item">Holisic Score : {this.props.zipcode.averageScore}</li>
+                <li className="list-group-item">Food Score : {this.props.zipcode.foodScore}</li>
+                <li className="list-group-item">Traffic Score : {this.props.zipcode.trafficScore}</li>
+                <li className="list-group-item">Education Score : {this.props.zipcode.educationScore}</li>
+            </ul>
+        )
+    }
+
+    renderFacilitesList = () =>{
+        
+        const { numOfCinemas, numOfHospitals, listOfHospitals, listOfCinemas } = this.props.zipcode
+        
+        const cinemasList = () => {
+            if(numOfCinemas === 0){
+                return <div>No cinemas in this zipcode</div>
+            }
+            const list = listOfCinemas.map( c => {
+                return <div key={c}><i className="far fa-circle"></i> {c} </div>
+            })
+
+            return (
+                <div>
+                    {list}
+                </div>
+            )
+        }
+
+        const hospitalsList = () => {
+            if(numOfHospitals === 0){
+                return <div>No hospitals in this zipcode</div>
+            }
+            
+            const list = listOfHospitals.map( h => {
+                return <div key={h}><i className="far fa-circle"></i> {h} </div>
+            })
+
+            return (
+                <div>
+                    {list}
+                </div>
+            )
+        }
+
+        return (
+            <div className="mt-sm-2">
+                <strong>Facilities:</strong>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item">Cinemas: 
+                        {cinemasList()}
+                    </li>
+                    <li className="list-group-item">Hospitals: 
+                        {hospitalsList()}
+                    </li>
+                </ul>
+            </div>
+        )
+    }
+
     render(){
         if(!this.props.zipcode){
             return (
@@ -36,21 +97,19 @@ class IndividualZipcodePage extends Component {
             <p className="pt-2">{this.props.zipcode.description}</p>
             <div className="row">
                 <div className="col-lg-4">
-                    <ul className="list-group list-group-flush">
-                    <li className="list-group-item">Holisic Score : {this.props.zipcode.averageScore}</li>
-                    <li className="list-group-item">Food Score : {this.props.zipcode.foodScore}</li>
-                    <li className="list-group-item">Traffic Score : {this.props.zipcode.trafficScore}</li>
-                    <li className="list-group-item">Education Score : {this.props.zipcode.educationScore}</li>
-                    </ul>
+                    {this.renderScoreList()}
+                    {this.renderFacilitesList()}
                 </div>
-                <div className="col-lg-8">
+                <div className="col-lg-8 mt-sm-4 mt-md-0">
                     <IndividualZipcodeMap zipcode={this.props.zipcode.zipcode} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
                 </div>
             </div>
-            <CarouselComponent images={this.props.zipcode.images}/>
+            <div>
+                <CarouselComponent images={this.props.zipcode.images}/>
+            </div>
             <RowCards food={this.props.zipcode.foodData} education={this.props.zipcode.educationData} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
 
-          </div>
+            </div>
           </div>
         );
     }

@@ -109,20 +109,20 @@ class ZipCodeComponent extends Component {
                 <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
-                      Average Rate: <span className="text-info">{this.props.zipcode.averageScore}</span>
+                      Holisic Score: <span className="text-info">{this.props.zipcode.averageScore}</span>
                     </div>
                     <div className="col-6">
-                      Food Rate: <span className="text-info">{this.props.zipcode.foodScore}</span>
+                      Food Score: <span className="text-info">{this.props.zipcode.foodScore}</span>
                     </div>
                   </div>
                 </li>
                 <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
-                      Traffic Rate: <span className="text-info">{this.props.zipcode.trafficScore}</span>
+                      Traffic Score: <span className="text-info">{this.props.zipcode.trafficScore}</span>
                     </div>
                     <div className="col-6">
-                      Education Rate: <span className="text-info">{this.props.zipcode.educationScore}</span>
+                      Education Score: <span className="text-info">{this.props.zipcode.educationScore}</span>
                     </div>
                   </div>
                 </li>
