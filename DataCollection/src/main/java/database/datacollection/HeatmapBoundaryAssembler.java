@@ -55,7 +55,7 @@ public class HeatmapBoundaryAssembler {
 		if (!enabled) return;
 		
 		try {
-			if (!firstEntry) {
+			if (firstEntry) {
 				writer.write(",");
 				firstEntry = false;
 			}
