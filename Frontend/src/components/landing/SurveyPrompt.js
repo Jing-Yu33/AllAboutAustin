@@ -9,7 +9,7 @@ class SurveyPrompt extends Component {
         return(
             <div id="survey-prompt">
                 <div id="landing-header">
-                    <h1>All About Austin!</h1>
+                    <h1 className="display-4">All About Austin!</h1>
                     <Link to="/survey" className="btn btn-lg btn-success">Start</Link>
                 </div>
                 <ul className="slideshow">

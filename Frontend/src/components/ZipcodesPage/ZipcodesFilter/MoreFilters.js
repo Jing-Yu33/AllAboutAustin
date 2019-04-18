@@ -12,7 +12,7 @@ class MoreFilters extends Component {
     renderRegionCheckboxes = () => {
         return (
             <div className="row">
-                <div className="col-lg-6">
+                <div className="col-6">
                     <Field name="Central Austin" value="Central Austin" component="input"type="checkbox"/> 
                         Central Austin
                         <br></br>
@@ -25,7 +25,7 @@ class MoreFilters extends Component {
                     <Field name="South Austin" value="South Austin" component="input" type="checkbox"/> 
                         South Austin
                 </div>
-                <div className="col-lg-6">
+                <div className="col-6">
                     <Field name="North Austin" value="North Austin" component="input" type="checkbox"/> 
                         North Austin
                         <br></br>
@@ -38,9 +38,6 @@ class MoreFilters extends Component {
                     <Field name="Southwest Austin" value="Southwest  Austin" component="input" type="checkbox"/> 
                         Southwest Austin
                 </div>
-
-                    <br></br>
-                    <br></br>
             </div>
         )
     }

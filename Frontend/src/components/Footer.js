@@ -2,11 +2,11 @@ import React from "react";
 
 const Footer = () => {
     return (
-<footer class="footer mt-auto py-3">
-  <div class="container">
-    <span class="text-muted">Place sticky footer content here.</span>
-  </div>
-</footer>
+      <footer className="footer mt-auto py-3 bg-light">
+        <div className="container">
+          <span className="text-muted d-flex justify-content-center">Copyright © All About Austin 2019</span>
+        </div>
+      </footer>
     )
 }
 

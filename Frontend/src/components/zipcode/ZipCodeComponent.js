@@ -76,7 +76,7 @@ class ZipCodeComponent extends Component {
   render() {
     return(
       <div  onClick={this.onCardClick} className="CardLink">
-        <div className="my-3 card" 
+        <div className="my-3 card bg-light" 
             style={this.state.cardStyle} 
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}>
@@ -103,7 +103,7 @@ class ZipCodeComponent extends Component {
                 {this.props.zipcode.description.substring(0, Math.min(this.props.zipcode.description.length, 100))}...
               </div>
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">
+                <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
                       Average Rate: <span className="text-info">{this.props.zipcode.averageScore}</span>
@@ -113,7 +113,7 @@ class ZipCodeComponent extends Component {
                     </div>
                   </div>
                 </li>
-                <li className="list-group-item">
+                <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
                       Traffic Rate: <span className="text-info">{this.props.zipcode.trafficScore}</span>
@@ -123,7 +123,7 @@ class ZipCodeComponent extends Component {
                     </div>
                   </div>
                 </li>
-                <li className="list-group-item">
+                <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
                       Hospitals: {this.renderExistIcon(this.props.zipcode.numOfHospitals)}

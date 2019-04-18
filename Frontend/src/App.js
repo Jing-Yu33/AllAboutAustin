@@ -15,6 +15,7 @@ import IndividualZipcodePage from './components/ZipcodesPage/IndividualZipcodePa
 
 import PageNotExists from './components/PageNotExists'
 import Footer from './components/Footer';
+import ScrollUpButton from './components/ScrollUpButton';
 import history from './history';
 
 import './App.css'
@@ -28,6 +29,7 @@ class App extends Component {
         
           <div>
             <TopBar />
+            <ScrollUpButton />
             <div className="container" style={{marginTop: '70px'}}>
               <Switch>
               <Route path="/" exact component={Landing} />
@@ -42,7 +44,7 @@ class App extends Component {
               <Route path="/*" component={PageNotExists} />
               </Switch>
             </div>
-            {/* <Footer /> */}
+            <Footer />
           </div>
 
         </Router>

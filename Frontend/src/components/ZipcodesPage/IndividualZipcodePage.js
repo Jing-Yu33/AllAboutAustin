@@ -29,9 +29,6 @@ class IndividualZipcodePage extends Component {
         return(
           <div className="jumbotron jumbotron-fluid my-3">
             <div className="container">
-
-           
-
             <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
             <span className="text-secondary">
                 Region : {this.props.zipcode.region} 
@@ -51,7 +48,7 @@ class IndividualZipcodePage extends Component {
                 </div>
             </div>
             <CarouselComponent/>
-            <RowCards food={this.props.zipcode.foodData} education={this.props.zipcode.educationData}/>
+            <RowCards food={this.props.zipcode.foodData} education={this.props.zipcode.educationData} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
 
           </div>
           </div>
