@@ -25,7 +25,7 @@ class ZipcodeMap extends Component {
     const GoogleMapExample = withGoogleMap(props => (
         <GoogleMap 
           defaultCenter = { { lat: 30.2672, lng: -97.74306 } }
-          defaultZoom = { 12 }
+          defaultZoom = { 11 }
         >
           <TrafficLayer autoUpdate />
           <KmlLayer
@@ -42,7 +42,7 @@ class ZipcodeMap extends Component {
     return(
         <div>
             <GoogleMapExample
-                containerElement={ <div style={{ height: `500px`, width: '100%' }} /> }
+                containerElement={ <div style={{ height: `300px`, width: '100%' }} /> }
                 mapElement={ <div style={{ height: `100%` }} /> }
             />
         </div>

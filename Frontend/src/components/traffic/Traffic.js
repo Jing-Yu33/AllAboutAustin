@@ -14,13 +14,13 @@ class Traffic extends Component {
         this.props.GetTop10ZipcodeByCategory("traffic", "traffic");
     }
 
-    onSubmit = (value) => {
+    onSortDownSubmit = (value) => {
         this.props.GetTop10ZipcodeByCategory("traffic", value.sortByCategory, value.sortByOrder);
     }
 
     render(){
         return(
-            <div style={{marginTop: '30px'}}>
+           <div style={{marginTop: '30px'}}>
                 <h1>Traffic</h1>
                 <div className="row mt-4">
                     <div className="col-lg-3">
@@ -28,18 +28,14 @@ class Traffic extends Component {
                     </div>
                     <div className="col-lg-5"></div>
                     <div className="col-lg-4">
-                        <SortForm defaultCategory="traffic" onSubmit={this.onSubmit}/>
+                        <SortForm defaultCategory="traffic" onSubmit={this.onSortDownSubmit}/>
                     </div>
                 </div>
                 
-                <div className="row mt-5">
-                    <div className="col-lg-8">
-                        <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
-                    </div>
-                    <div className="col-lg-4">
+                <div className="mt-3">
                         <HeatMap />
-                    </div>
                 </div>
+                <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
             </div>
         );
     }

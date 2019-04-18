@@ -10,17 +10,18 @@ import SortForm from '../searchAndSort/SortForm'
 
 class Education extends Component {
 
+
     componentDidMount() {
         this.props.GetTop10ZipcodeByCategory("education", "education");
     }
 
-    onSubmit = (value) => {
+    onSortDownSubmit = (value) => {
         this.props.GetTop10ZipcodeByCategory("education", value.sortByCategory, value.sortByOrder);
     }
 
     render(){
         return(
-            <div style={{marginTop: '30px'}}>
+    <div style={{marginTop: '30px'}}>
                 <h1>Education</h1>
                 <div className="row mt-4">
                     <div className="col-lg-3">
@@ -28,18 +29,14 @@ class Education extends Component {
                     </div>
                     <div className="col-lg-5"></div>
                     <div className="col-lg-4">
-                        <SortForm defaultCategory="education" onSubmit={this.onSubmit}/>
+                        <SortForm defaultCategory="education" onSubmit={this.onSortDownSubmit}/>
                     </div>
                 </div>
                 
-                <div className="row mt-5">
-                    <div className="col-lg-8">
-                        <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
-                    </div>
-                    <div className="col-lg-4">
+                <div className="mt-3">
                         <HeatMap />
-                    </div>
                 </div>
+                <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
             </div>
         );
     }

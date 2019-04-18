@@ -1,4 +1,4 @@
-import { DataBase } from '../apis/DataBase';
+import { DataBase, UserDataBase } from '../apis/DataBase';
 
 export const foodWeight = (weight) => {
     return {
@@ -83,9 +83,40 @@ export const GetFilteredZipcodes = (foodGt, trafficGt, educationGt, regions, hos
     }    
 }
 
-export const SortZipcodes = (sort) => {
+export const SignIn = (id, name) => {
+    return async (dispatch) => {
+        const response = await UserDataBase.get(`/${id}`);
+        dispatch({
+            type: "SIGN_IN",
+            payload: {
+                id: id,
+                name: name,
+                zipcodes: response.data
+            }
+        })
+    }
+}
+
+export const CreateUser = (id) => {
+    return async () => {
+        await UserDataBase.post('', id);
+    }
+}
+
+export const AddZipcodesToUser = (userId, zipcode) => {
+    return async () => {
+        await UserDataBase.post(`/${userId}`, zipcode);
+    }
+}
+
+export const RemoveZipcodesFromUser = (userId, zipcode) => {
+    return async () => {
+        await UserDataBase.post(`/${userId}/delete`, zipcode);
+    }
+}
+
+export const SignOut = () => {
     return {
-        type: "SORT_ZIPCODES",
-        payload: sort
+        type: "SIGN_OUT"
     }
 }

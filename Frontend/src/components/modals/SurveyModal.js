@@ -7,7 +7,7 @@ class SurveyModal extends React.Component {
         return (
             <div>
                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Change Priority
+                    Change Priorities
                 </button>
                 {/* Modal */}
                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

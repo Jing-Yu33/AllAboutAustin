@@ -10,19 +10,30 @@ import { GetOneZipcode } from '../../actions/index';
 class IndividualZipcodePage extends Component {
 
     async componentDidMount(){
-        this.props.GetOneZipcode(this.props.match.params.zipcode); 
+        this.props.GetOneZipcode(this.props.match.params.zipcode);
     }
 
     render(){
         if(!this.props.zipcode){
-            return <div>Loading... / No such zipcode, please check</div>
+            return (
+                <div>
+                    <div className="spinner">
+                        <div className="dot1"></div>
+                        <div className="dot2"></div>
+                    </div>
+                    <span className="d-flex justify-content-center">Loading... or No such zipcode</span>
+                </div>
+            )
         }
 
         return(
           <div className="jumbotron jumbotron-fluid my-3">
             <div className="container">
             <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
-            <p>Other infomation here: region, description{this.props.zipcode.description}</p>
+            <span className="text-secondary">
+                Region : {this.props.zipcode.region} 
+            </span>
+            <p className="pt-2">{this.props.zipcode.description}</p>
             <div className="row">
                 <div className="col-lg-4">
                     <ul className="list-group list-group-flush">
@@ -37,7 +48,7 @@ class IndividualZipcodePage extends Component {
                 </div>
             </div>
             <CarouselComponent/>
-            <RowCards food={this.props.zipcode.foodData} education={this.props.zipcode.educationData}/>
+            <RowCards food={this.props.zipcode.foodData} education={this.props.zipcode.educationData} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
 
           </div>
           </div>

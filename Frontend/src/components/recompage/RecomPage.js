@@ -15,7 +15,6 @@ const RecomPage = (props) => {
             <div className="jumbotron jumbotron-fluid mt-5">
                 <div className="container">
                     <h1 className="display-4">Reccomendations</h1>
-                    <SurveyModal />
                     <div>
                     Top 3 with special Styling? 
                 </div>
@@ -26,7 +25,12 @@ const RecomPage = (props) => {
                             <div className="col-lg-4">Education Weight: {query.education || "50"}</div>
                         </div>
                     </ul>
-                    {result}
+                     <div>
+                        <SurveyModal />
+                    </div>
+                    <div className="row">
+                        {result}
+                    </div>
                 </div>
             </div>
         </React.Fragment>

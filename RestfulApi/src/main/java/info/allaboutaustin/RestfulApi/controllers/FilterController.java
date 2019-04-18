@@ -28,7 +28,7 @@ import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
 @CrossOrigin(origins = "*")	// change to host name
-@RequestMapping("/api/filter/zipcodes")
+@RequestMapping("/filter/zipcodes")
 public class FilterController {
 
 	@Autowired

@@ -14,17 +14,18 @@ class BasicFilters extends Component {
             <div>
                 <label>
                     <Field name={name} value="8" component="input" type="radio"/>
-                    > 8
+                     &nbsp; > 8 &nbsp;
                 </label>
                 <label>
                     <Field name={name} value="5" component="input" type="radio"/>
-                    >5
+                    &nbsp; > 5 &nbsp;
                 </label>
                 <label>
                     <Field name={name} value="2" component="input" type="radio"/>
-                    >2
+                    &nbsp; > 2 &nbsp;
                 </label>
             </div>
+
         )
     }
 
@@ -32,27 +33,31 @@ class BasicFilters extends Component {
     render() {
         const { handleSubmit, pristine, submitting } = this.props
         return(
-            <form onSubmit={(e) => handleSubmit(e)} >
-                Need Styling! in one row and modify the text
+            <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <button type="submit" disabled={pristine || submitting}>
-                        Submit
+                    <button class="btn btn-primary" type="submit" disabled={pristine || submitting}>
+                        <i className="fas fa-filter"></i>
                     </button>
-                    <button type="button" disabled={pristine || submitting} onClick={this.reset}>
-                        Clear Values
+                    &nbsp;
+                    <button class="btn btn-primary"type="button" disabled={pristine || submitting} onClick={this.reset}>
+                        <i className="fas fa-redo"></i>
                     </button>
                 </div>
-                <div>
-                    <label>Food Score</label>
-                    {this.renderRatingRatioOptions("foodGt")}
-                    <label>Traffic Score</label>
-                    {this.renderRatingRatioOptions("trafficGt")}
-                    <label>Education Score</label>
-                    {this.renderRatingRatioOptions("educationGt")}
+                <div className="row">
+                    <div className="col-lg-4">
+                        <label><strong>Food Score</strong></label>
+                        <div>{this.renderRatingRatioOptions("foodGt")}</div>
+                    </div>
+                    <div className="col-lg-4">
+                        <label><strong>Traffic Score</strong></label>
+                        <div>{this.renderRatingRatioOptions("trafficGt")}</div>
+                    </div>
+                    <div className="col-lg-4">
+                        <label><strong>Education Score</strong></label>
+                        <div>{this.renderRatingRatioOptions("educationGt")}</div>
+                    </div>
                 </div>
-
             </form>
-
         )
     }
 }

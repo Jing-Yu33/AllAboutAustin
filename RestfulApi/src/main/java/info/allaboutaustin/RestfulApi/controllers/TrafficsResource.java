@@ -18,7 +18,7 @@ import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
 @CrossOrigin(origins = "*")	// change to host name
-@RequestMapping("/api/traffic")
+@RequestMapping("/traffic")
 public class TrafficsResource {
 	
 	@Autowired

@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { SignIn, SignOut, CreateUser } from '../../actions';
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 
 class GoogleAuth extends Component{
-
-    state = {
-        isLoggedIn: null,
-        userName: null,
-        token: ''
-    }
-
+    GOOGLE_OAUTH_CLIENT_ID = "968348817815-22ovj0lj96d4kk7ut5st6k87sdip3r6g.apps.googleusercontent.com"
+    
     onSuccessResponse = (response) => {
-        this.setState({
-            isLoggedIn: true,
-            userName: response.profileObj.name,
-        })
+        this.props.SignIn(response.profileObj.googleId, response.profileObj.name)
+        this.props.CreateUser(response.profileObj.googleId);
     }
 
     onFailureResponse = (response) => {
@@ -21,23 +17,17 @@ class GoogleAuth extends Component{
     }
 
     logout = () => {
-        this.setState({
-            isLoggedIn: false,
-            userName: null
-        })
+        this.props.SignOut()
     }
 
     render(){
-        if(this.state.isLoggedIn) {
+        if(this.props.isSignedIn) {
             return(
                 <div>
-                {/* <span className="nav-link">
-                    {this.state.userName}
-                </span> */}
-                <GoogleLogout
-                    buttonText="Logout"
-                    onLogoutSuccess={this.logout}
-                />
+                    <GoogleLogout
+                        buttonText="Logout"
+                        onLogoutSuccess={this.logout}
+                    />
                </div>
             )
         }
@@ -47,7 +37,7 @@ class GoogleAuth extends Component{
                 <GoogleLogin 
                     onSuccess={(response) => this.onSuccessResponse(response)}
                     onFailure={(response) => this.onFailureResponse(response)}
-                    clientId={process.env.REACT_APP_LOCAL_GOOGLE_AUTH_CLIENT_ID}
+                    clientId={this.GOOGLE_OAUTH_CLIENT_ID}
                     buttonText="Login"
                 />
 
@@ -56,4 +46,14 @@ class GoogleAuth extends Component{
     }
 }
 
-export default GoogleAuth;
+const mapStateToProps = (state) => {
+    return {
+        isSignedIn: state.auth.isSignedIn,
+        userId: state.auth.userId,
+        userName: state.auth.name
+    }
+}
+
+export default connect(mapStateToProps, {
+    SignIn, SignOut, CreateUser
+})(GoogleAuth);

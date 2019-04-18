@@ -13,4 +13,23 @@
 # [START app_yaml]
 env: flex
 runtime: nodejs
+
+manual_scaling:
+  instances: 1
+  
+readiness_check:
+  check_interval_sec: 120
+  timeout_sec: 40
+  failure_threshold: 5
+  success_threshold: 5
+  app_start_timeout_sec: 2500
+  
+resources:
+  cpu: 1
+  memory_gb: 1
+  disk_size_gb: 10
+  volumes:
+  - name: ramdisk1
+    volume_type: tmpfs
+    size_gb: 0.5
 # [END app_yaml]
