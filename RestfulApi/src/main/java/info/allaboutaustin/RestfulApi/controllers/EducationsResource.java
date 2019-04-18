@@ -19,7 +19,7 @@ import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
 @CrossOrigin(origins = "*")	// change to host name
-@RequestMapping("/api/education")
+@RequestMapping("/education")
 public class EducationsResource {
 
 	@Autowired

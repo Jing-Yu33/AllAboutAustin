@@ -27,7 +27,7 @@ import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
 @CrossOrigin(origins = "*")	
-@RequestMapping("/api/zipcodes")
+@RequestMapping("/zipcodes")
 public class ZipcodesResource {
 	
 	@Autowired
