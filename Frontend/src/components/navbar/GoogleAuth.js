@@ -5,8 +5,7 @@ import { SignIn, SignOut, CreateUser } from '../../actions';
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 
 class GoogleAuth extends Component{
-    GOOGLE_OAUTH_CLIENT_ID = "776329759143-e09klcknlgfqfu2mp7jipe5qecg53v3u.apps.googleusercontent.com"
-    // GOOGLE_OAUTH_CLIENT_ID = "280689795193-ubapinqcg16ah7vlskd1oimoisf82bsm.apps.googleusercontent.com"
+    GOOGLE_OAUTH_CLIENT_ID = "968348817815-22ovj0lj96d4kk7ut5st6k87sdip3r6g.apps.googleusercontent.com"
     
     onSuccessResponse = (response) => {
         this.props.SignIn(response.profileObj.googleId, response.profileObj.name)
@@ -39,7 +38,6 @@ class GoogleAuth extends Component{
                     onSuccess={(response) => this.onSuccessResponse(response)}
                     onFailure={(response) => this.onFailureResponse(response)}
                     clientId={this.GOOGLE_OAUTH_CLIENT_ID}
-                    cookiePolicy={'http://localhost'}
                     buttonText="Login"
                 />
 
