@@ -71,7 +71,7 @@ public class Zipcode {
 				this.description = data.get(key);
 			}
 			if (key.equals("images")) {
-				this.images = Arrays.asList(data.get(key).split(","));;
+				this.images = Arrays.asList(data.get(key).split(", "));;
 			}
 			if (key.equals("NumOfHospitals")) {
 				try {
@@ -81,7 +81,7 @@ public class Zipcode {
 				}
 			}
 			if (key.equals("ListOfHospitals")) {
-				this.ListOfHospitals = Arrays.asList(data.get(key).split(","));;
+				this.ListOfHospitals = Arrays.asList(data.get(key).split(", "));;
 			}
 			if (key.equals("NumOfCinemas")) {
 				try {
@@ -91,10 +91,10 @@ public class Zipcode {
 				}
 			}
 			if (key.equals("ListOfCinemas")) {
-				this.ListOfCinemas = Arrays.asList(data.get(key).split(","));;
+				this.ListOfCinemas = Arrays.asList(data.get(key).split(", "));;
 			}
 			if (key.equals("SurroundingZipcodes")) {
-				this.SurroundingZip = Arrays.asList(data.get(key).split(","));;
+				this.SurroundingZip = Arrays.asList(data.get(key).split(", "));;
 			}
 		}
 	}
