@@ -96,7 +96,10 @@ class ZipCodeComponent extends Component {
           <div className="row align-items-center">
             <div>
               {/* <img className="card-img-top img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/> */}
-              <img className="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/>
+              <img className="card-img-top img-thumbnail"
+                    style={{height: '200px', width: '100%', objectFit: 'fill'}}
+                    src={this.props.zipcode.images[0]} 
+                    alt="zipcode"/>
             </div>
             <div>
               <div className="justify-content-center">

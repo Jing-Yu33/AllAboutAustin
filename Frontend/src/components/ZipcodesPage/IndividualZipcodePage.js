@@ -47,7 +47,7 @@ class IndividualZipcodePage extends Component {
                     <IndividualZipcodeMap zipcode={this.props.zipcode.zipcode} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
                 </div>
             </div>
-            <CarouselComponent/>
+            <CarouselComponent images={this.props.zipcode.images}/>
             <RowCards food={this.props.zipcode.foodData} education={this.props.zipcode.educationData} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
 
           </div>

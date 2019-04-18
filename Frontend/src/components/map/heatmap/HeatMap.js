@@ -6,7 +6,8 @@ import {updatePercentiles} from './utils';
 import {fromJS} from 'immutable';
 import {json as requestJson} from 'd3-request';
 
-import HeatMapGeojsonExample from './HeatMapGeojsonExample.geojson';
+import HeatMapGeojsonReal from './HeatmapGeojsonReal.geojson';
+// import HeatMapGeojsonExample from './HeatMapGeojsonExample.geojson';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoieWl4aW5nd2FuZyIsImEiOiJjanVlbHloenMwMTBlNDRucTRrNDI2Z3VyIn0.uD87F_upW33Ev21qNWnqSQ'; // Set your mapbox token here
 
@@ -19,23 +20,28 @@ class HeatMap extends Component {
     viewport: {
       latitude: 30.2672,
       longitude: -97.7431,
-      zoom: 11,
+      zoom: 9,
       bearing: 0,
       pitch: 0
     }
   };
 
   componentDidMount() {
-    requestJson(HeatMapGeojsonExample, (error, response) => {
+    requestJson(HeatMapGeojsonReal, (error, response) => {
       if (!error) {
         this._loadData(response);
+      } else {
+        console.log(error)
       }
     });
   }
 
   _loadData = data => {
 
-    updatePercentiles(data, f => f.properties.foodScore);
+
+
+    // updatePercentiles(data, f => f.properties.foodScore);
+    updatePercentiles(data, this.props.category);
 
     const mapStyle = defaultMapStyle
       // Add geojson source to map
@@ -63,9 +69,9 @@ class HeatMap extends Component {
           <div className="row-bl-2">
                 <ul className="list-unstyled">
                   <li><strong>Zipcode:</strong> {hoveredFeature.properties.zipcode}</li>
-                  <li><strong>Food Score:</strong> {hoveredFeature.properties.value}</li>
-                  <li><strong>Traffic Score:</strong> {hoveredFeature.properties.value}</li>
-                  <li><strong>Education Score:</strong> {hoveredFeature.properties.value}</li>
+                  <li><strong>Food Score:</strong> {hoveredFeature.properties.foodScore}</li>
+                  <li><strong>Traffic Score:</strong> {hoveredFeature.properties.trafficScore}</li>
+                  <li><strong>Education Score:</strong> {hoveredFeature.properties.educationScore}</li>
                 </ul>
 
                 <h4>Map Legend</h4>
