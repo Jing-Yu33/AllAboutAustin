@@ -67,6 +67,29 @@ class HeatMap extends Component {
                   <li><strong>Traffic Score:</strong> {hoveredFeature.properties.value}</li>
                   <li><strong>Education Score:</strong> {hoveredFeature.properties.value}</li>
                 </ul>
+
+                <h4>Map Legend</h4>
+                <div className="row">
+                <div className="col-5">
+                <ul className="list-unstyled">
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;10%</li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;20% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;30% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;40% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;50% </li>
+                </ul>
+                </div>
+                <div className="col-5">
+                <ul className="list-unstyled">
+                   <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;60% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;70% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;80% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;90% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;100%</li>
+                </ul>
+                </div>
+                </div>
+
           </div>
 
         )
@@ -80,6 +103,29 @@ class HeatMap extends Component {
                   <li><strong>Traffic Score:</strong></li>
                   <li><strong>Education Score:</strong></li>
                 </ul>
+
+                <h4>Map Legend</h4>
+                <div className="row">
+                <div className="col-5">
+                <ul className="list-unstyled">
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;10%</li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;20% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;30% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;40% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;50% </li>
+                </ul>
+                </div>
+                <div className="col-5">
+                <ul className="list-unstyled">
+                   <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;60% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;70% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;80% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;90% </li>
+                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png"/>&nbsp;100%</li>
+                </ul>
+                </div>
+                </div>
+
           </div>
       )
     }
