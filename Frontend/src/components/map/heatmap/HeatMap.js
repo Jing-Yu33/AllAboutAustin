@@ -146,11 +146,12 @@ class HeatMap extends Component {
 
     return (
       <div className="row">
-        <div className="col-lg-3">
+        <div className="col-lg-4">
             <div><h4>Hover Over Area for More Details</h4></div>
+            <p>This heatmap ranks based on relative performance in a given category.</p>
             {this._renderTooltip()}
         </div>
-        <div className="col-lg-9">
+        <div className="col-lg-8">
             <MapGL
             {...viewport}
             width="100%"

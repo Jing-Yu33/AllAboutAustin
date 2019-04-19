@@ -14,25 +14,37 @@ const RecomPage = (props) => {
         <React.Fragment>
             <div className="jumbotron jumbotron-fluid mt-5">
                 <div className="container">
-                    <h1 className="display-4">Reccomendations</h1>
-                    <div>
-                    Top 3 with special Styling? 
+                    <h1 className="display-4">Top 10 Reccomendations</h1>
+                    <div> 
                 </div>
-                    <ul className="list-group lead">
+                    <p className="pb-2 pt-2">Below are the Top 10 Zip Codes in Austin based on your preference towards the importance of food, education, and traffic.  See below for a detailed explanation of ranking methodology.</p>
+                    <ul className="list-group lead pb-2 pt-2">
                         <div className="row">
                             <div className="col-lg-4">Food Weight: {query.food || "50"}</div>
                             <div className="col-lg-4">Traffic Weight: {query.traffic || "50"}</div>
                             <div className="col-lg-4">Education Weight: {query.education || "50"}</div>
                         </div>
                     </ul>
-                     <div>
+                     <div className="pt-2">
                         <SurveyModal />
                     </div>
                     <div className="row">
                         {result}
                     </div>
+                    <div className="card-body" >
+                    <p><strong><u>Methodology:</u></strong></p>
+                    <p>The scores for each category were calculated in the following manner:</p>
+                    <ul>
+                        <li>Food: Food rankings were acquired from the Zomato API of customer ratings of eating establishments.  Ratings are averaged across a zip code</li>
+                        <li>Education: Education ratings were acquired from the Austin Govenernment School Database in regards to high school graduation rates.  Since primary and secondary schools feed into the high schools in these areas, this metric is seen to be representative of a Zip Code's educational performance.  Ratings are averaged across a zip code</li>
+                        <li>Traffic: </li>
+
+                    </ul>
+                    </div>
                 </div>
+
             </div>
+
         </React.Fragment>
     )
 
