@@ -53,7 +53,7 @@ class GithubInfo extends React.Component {
             desc:"Grad Student",
             techCores:"Integrated Circuit and System",
             responsibilities:"Front End / Back End API",
-            unittests: 0},
+            unittests: 10},
             Zach: {name: "Zach Wempe", img:"https://i.groupme.com/1600x1200.jpeg.7bf9bdf02dde4972b0d110ae50b78c81", 
             desc:"3rd Year",
             techCores:"Data Sciences / Academic Enrichment",

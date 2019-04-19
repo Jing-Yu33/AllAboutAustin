@@ -35,8 +35,10 @@ class Food extends Component {
                 <div className="mt-3">
                         <HeatMap category="food"/>
                 </div>
-                <h4>Top 10 Zipcodes with Best Food in Austin</h4>
-                <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
+                <div className="mt-3">
+                    <h4>Top 10 Zipcodes with Best Food in Austin</h4>
+                    <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
+                </div>
             </div>
         );
     }

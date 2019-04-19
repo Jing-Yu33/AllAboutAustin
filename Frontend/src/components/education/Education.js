@@ -10,7 +10,6 @@ import SortForm from '../searchAndSort/SortForm'
 
 class Education extends Component {
 
-
     componentDidMount() {
         this.props.GetTop10ZipcodeByCategory("education", "education");
     }
@@ -36,8 +35,10 @@ class Education extends Component {
                 <div className="mt-3">
                         <HeatMap category="education"/>
                 </div>
-                <h4>Top 10 Zipcodes with Best Education in Austin</h4>
-                <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
+                <div className="mt-3">
+                    <h4>Top 10 Zipcodes with Best Education in Austin</h4>
+                    <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
+                </div>
             </div>
         );
     }

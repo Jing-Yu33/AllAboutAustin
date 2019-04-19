@@ -158,7 +158,7 @@ class HeatMap extends Component {
             <MapGL
             {...viewport}
             width="100%"
-            height="400px"
+            height="500px"
             mapStyle={mapStyle}
             onViewportChange={this._onViewportChange}
             mapboxApiAccessToken={MAPBOX_TOKEN}
