@@ -35,6 +35,7 @@ class Traffic extends Component {
                 <div className="mt-3">
                         <HeatMap category="traffic"/>
                 </div>
+                <h4>Top 10 Zipcodes with Best Traffic in Austin</h4>
                 <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
             </div>
         );

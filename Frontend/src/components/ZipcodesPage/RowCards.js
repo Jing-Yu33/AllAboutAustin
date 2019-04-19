@@ -61,7 +61,7 @@ class RowCards extends Component {
                   <p className="card-text">{this.renderList(this.props.food.resturaunts)}</p>
                   <p className="text-muted font-weight-light">
                     <small>
-                      *Explanation
+                      *Food rankings were acquired from the Zomato API of customer ratings of eating establishments. Ratings are averaged across a zip code.
                     </small>
                   </p>
                 </div>
@@ -75,7 +75,7 @@ class RowCards extends Component {
                   <p className="text-muted font-weight-light">
                     <small>
                       *1. The current speed are <i>real time observed speeds</i> provided by <a href="https://developer.tomtom.com/traffic-api" target="_blank" rel="noopener noreferrer">tomtom traffic api</a>.&nbsp;
-                       2. score calculation
+                       2. 
                     </small>
                   </p>
                 </div>
@@ -88,7 +88,7 @@ class RowCards extends Component {
                   <p className="card-text">{this.renderList(this.props.education.schools)}</p>
                   <p className="text-muted font-weight-light">
                     <small>
-                      *Explanation
+                      *Education ratings were acquired from the Austin Govenernment School Database in regards to high school graduation rates. Since primary and secondary schools feed into the high schools in these areas, this metric is seen to be representative of a Zip Code's educational performance. Ratings are averaged across a zip code.
                     </small>
                   </p>
                 </div>

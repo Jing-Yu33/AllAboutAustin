@@ -77,7 +77,7 @@ class ZipCodeComponent extends Component {
                 <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
-                      Holisic Score: <span className="text-info">{this.props.zipcode.averageScore}</span>
+                      Holistic Score: <span className="text-info">{this.props.zipcode.averageScore}</span>
                     </div>
                     <div className="col-6">
                       Food Score: <span className="text-info">{this.props.zipcode.foodScore}</span>
