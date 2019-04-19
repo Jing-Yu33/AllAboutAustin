@@ -23,6 +23,10 @@ class SurveyFrom extends Component {
     render() {
         return(
             <div>
+                <h1>All About Austin Survey</h1>
+                <p className="pb-2">
+                Use the following sliders to indicate how important the following factors are during your search for an area in Austin.
+                </p>
                 <form id="survey-form">
                     <SliderBar category="Food" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
                     <SliderBar category="Education" onSliderBarFocusOut={this.onSliderBarFocusOut}/>
