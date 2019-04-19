@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { AddZipcodesToUser, RemoveZipcodesFromUser } from '../../actions/index';
+import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions/index';
 
 class Heart extends Component {
       
@@ -9,6 +9,16 @@ class Heart extends Component {
       clicked: [],
       unclicked: [],
     }
+
+    renderUserList = () => {
+      if(this.props.isSignedIn){
+          this.props.GetUserZipcodes(this.props.userId)
+      }
+    }
+
+    // shouldComponentUpdate = (nextState) => {
+
+    // }
 
     onHeartAddClick = (e, zipcode) => {
         e.stopPropagation();
@@ -29,13 +39,14 @@ class Heart extends Component {
       }
 
     render () {
+
       const { zipcode } = this.props;
       if(this.props.isSignedIn){
         if(this.state.unclicked.includes(zipcode)){
           return <div onClick={(e) => this.onHeartAddClick(e, zipcode)}><i className="far fa-heart"></i></div>
         }
   
-        if(this.props.userZipcodes.includes(zipcode) || this.state.clicked.includes(zipcode)){
+        if(this.props.userList.includes(zipcode) || this.state.clicked.includes(zipcode)){
           return <div onClick={(e) => this.onHeartRemoveClick(e, zipcode)}><i className="fas fa-heart"></i></div>
         } else {
           return <div onClick={(e) => this.onHeartAddClick(e, zipcode)}><i className="far fa-heart"></i></div>
@@ -54,5 +65,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    AddZipcodesToUser, RemoveZipcodesFromUser
+    AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes
 })(Heart)

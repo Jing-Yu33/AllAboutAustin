@@ -6,7 +6,7 @@ import Heart from '../heart/Heart';
 import CarouselComponent from './CarouselComponent'
 import RowCards from './RowCards'
 import IndividualZipcodeMap from '../map/IndividualZipcodeMap';
-import { GetOneZipcode, AddZipcodesToUser, RemoveZipcodesFromUser } from '../../actions/index';
+import { GetOneZipcode, AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions/index';
 
 class IndividualZipcodePage extends Component {
       
@@ -18,6 +18,17 @@ class IndividualZipcodePage extends Component {
 
     async componentDidMount(){
         this.props.GetOneZipcode(this.props.match.params.zipcode);
+        // this.props.GetUserZipcodes()
+    }
+
+    shouldComponentUpdate(nextProps) {
+        return (nextProps.isSignedIn !== this.props.isSignedIn || JSON.stringify(nextProps.userZipcodes) !== JSON.stringify(this.props.userZipcodes)|| nextProps.zipcode !== this.props.zipcode)
+    }
+
+    componentDidUpdate() {
+        if(this.props.isSignedIn){
+            this.props.GetUserZipcodes(this.props.userId);
+        }
     }
 
     renderScoreList = () => {
@@ -82,6 +93,7 @@ class IndividualZipcodePage extends Component {
     }
 
     render(){
+        
         if(!this.props.zipcode){
             return (
                 <div>
@@ -97,7 +109,7 @@ class IndividualZipcodePage extends Component {
           <div className="jumbotron jumbotron-fluid my-3">
             <div className="container">
                 <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode} 
-                    <span className="btn btn-lg text-danger"><Heart zipcode={this.props.zipcode.zipcode}/></span>
+                    <span className="btn btn-lg text-danger"><Heart userList={this.props.userZipcodes} zipcode={this.props.zipcode.zipcode}/></span>
                 </h1>
                 <span className="text-secondary">
                     Region : {this.props.zipcode.region} 
@@ -134,5 +146,5 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 export default connect(mapStateToProps, {
-    GetOneZipcode, AddZipcodesToUser, RemoveZipcodesFromUser
+    GetOneZipcode, GetUserZipcodes, AddZipcodesToUser, RemoveZipcodesFromUser
 })(IndividualZipcodePage)

@@ -45,9 +45,9 @@ class RowCards extends Component {
       if(this.state.currentSpeed < 80){
         return <i className="fas fa-car text-warning"></i>
       }
-      if(this.state.currentSpeed < 100){
-        return <i className="fas fa-car text-success"></i>
-      }
+      
+      return <i className="fas fa-car text-success"></i>
+      
     }
     
     
@@ -75,7 +75,7 @@ class RowCards extends Component {
                   <p className="text-muted font-weight-light">
                     <small>
                       *1. The current speed are <i>real time observed speeds</i> provided by <a href="https://developer.tomtom.com/traffic-api" target="_blank" rel="noopener noreferrer">tomtom traffic api</a>.&nbsp;
-                       2. 
+                       2. Traffic ratings were acquired from the Austin Government database of transit congestion. Traffic volume in an area equates to more noise and difficulty with commute, so areas in this category will receive a lower score.
                     </small>
                   </p>
                 </div>

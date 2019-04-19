@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Heart from '../heart/Heart';
 import history from '../../history';
-import { AddZipcodesToUser, RemoveZipcodesFromUser } from '../../actions';
+import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions';
 
 class ZipCodeComponent extends Component {
   
@@ -11,6 +11,16 @@ class ZipCodeComponent extends Component {
     clicked: [],
     unclicked: [],
     cardStyle: null
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return (nextProps.isSignedIn !== this.props.isSignedIn || JSON.stringify(nextProps.userZipcodes) !== JSON.stringify(this.props.userZipcodes) || nextProps.zipcodes !== this.props.zipcodes)
+  }
+
+  componentDidUpdate() {
+    if(this.props.isSignedIn){
+        this.props.GetUserZipcodes(this.props.userId);
+    }
   }
 
   renderExistIcon = (num) => {
@@ -57,7 +67,7 @@ class ZipCodeComponent extends Component {
                   {this.props.zipcode.zipcode}
                 
               </span>
-              <span className="btn text-danger"><Heart zipcode={this.props.zipcode.zipcode}/></span>
+              <span className="btn text-danger"><Heart userList={this.props.userZipcodes} zipcode={this.props.zipcode.zipcode}/></span>
             </h4>
           </div>
         <div className="card-body" >
@@ -116,6 +126,7 @@ class ZipCodeComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
+      zipcodes: state.zipcodes,
       isSignedIn: state.auth.isSignedIn,
       userId: state.auth.userId,
       userZipcodes: state.auth.userZipcodes
@@ -123,5 +134,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-  AddZipcodesToUser, RemoveZipcodesFromUser
+  GetUserZipcodes, AddZipcodesToUser, RemoveZipcodesFromUser
 })(ZipCodeComponent);
