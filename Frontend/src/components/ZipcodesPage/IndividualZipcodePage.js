@@ -90,25 +90,26 @@ class IndividualZipcodePage extends Component {
         return(
           <div className="jumbotron jumbotron-fluid my-3">
             <div className="container">
-            <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
-            <span className="text-secondary">
-                Region : {this.props.zipcode.region} 
-            </span>
-            <p className="pt-2">{this.props.zipcode.description}</p>
-            <div className="row">
-                <div className="col-lg-4">
-                    {this.renderScoreList()}
-                    {this.renderFacilitesList()}
+                <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
+                <span className="text-secondary">
+                    Region : {this.props.zipcode.region} 
+                </span>
+                <p className="pt-2">{this.props.zipcode.description}</p>
+                <div className="row">
+                    <div className="col-lg-4">
+                        {this.renderScoreList()}
+                        {this.renderFacilitesList()}
+                    </div>
+                    <div className="col-lg-8 mt-sm-4 mt-md-0">
+                        <IndividualZipcodeMap zipcode={this.props.zipcode.zipcode} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
+                    </div>
                 </div>
-                <div className="col-lg-8 mt-sm-4 mt-md-0">
-                    <IndividualZipcodeMap zipcode={this.props.zipcode.zipcode} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
+                <div className="mt-4">
+                    <CarouselComponent images={this.props.zipcode.images}/>
                 </div>
-            </div>
-            <div>
-                <CarouselComponent images={this.props.zipcode.images}/>
-            </div>
-            <RowCards food={this.props.zipcode.foodData} education={this.props.zipcode.educationData} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
-
+                <div className="mt-4">
+                    <RowCards zipcode={this.props.zipcode} food={this.props.zipcode.foodData} education={this.props.zipcode.educationData} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
+                </div>
             </div>
           </div>
         );

@@ -38,13 +38,26 @@ class RowCards extends Component {
       return "No data"
     }
 
+    renderCarIcon = () => {
+      if(this.state.currentSpeed < 50){
+        return <i className="fas fa-car text-danger"></i>
+      }
+      if(this.state.currentSpeed < 80){
+        return <i className="fas fa-car text-warning"></i>
+      }
+      if(this.state.currentSpeed < 100){
+        return <i className="fas fa-car text-success"></i>
+      }
+    }
+    
+    
     render() {
         return(
-          <div className="card-deck">
-            <div className="card-deck col-lg-4  mt-3 align-items-stretch">
+          <div className="row">
+            <div className="col-lg-4 ">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Food</h5>
+                  <h5 className="card-title">Food: <span className="text-info">{this.props.zipcode.foodScore}</span></h5>
                   <p className="card-text">{this.renderList(this.props.food.resturaunts)}</p>
                   <p className="text-muted font-weight-light">
                     <small>
@@ -54,23 +67,24 @@ class RowCards extends Component {
                 </div>
               </div>
             </div>
-            <div className="card-deck col-lg-4 mt-3 align-items-stretch">
+            <div className="col-lg-4 ">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Traffic</h5>
-                  <p className="card-text">Current Speed(get from tomtom api): {this.state.currentSpeed}</p>
+                  <h5 className="card-title">Traffic: <span className="text-info">{this.props.zipcode.trafficScore}</span></h5>
+                  <p className="card-text">Current Speed: {this.renderCarIcon()} {this.state.currentSpeed}</p>
                   <p className="text-muted font-weight-light">
                     <small>
-                      *Explanation
+                      *1. The current speed are <i>real time observed speeds</i> provided by <a href="https://developer.tomtom.com/traffic-api" target="_blank" rel="noopener noreferrer">tomtom traffic api</a>.&nbsp;
+                       2. score calculation
                     </small>
                   </p>
                 </div>
               </div>
             </div>
-            <div className="card-deck col-lg-4 mt-3 align-items-stretch">
+            <div className="col-lg-4 ">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Education</h5>
+                  <h5 className="card-title">Education: <span className="text-info">{this.props.zipcode.educationScore}</span></h5>
                   <p className="card-text">{this.renderList(this.props.education.schools)}</p>
                   <p className="text-muted font-weight-light">
                     <small>
