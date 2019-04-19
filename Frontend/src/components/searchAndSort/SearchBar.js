@@ -12,7 +12,7 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <form>
+            <form onSubmit={(e) => this.onSearchBarSubmit(e)}>
                 <div className="input-group mb-2">
                     <label htmlFor="search"></label>
                     <input type="text" className="form-control" aria-describedby="search" placeholder="Search By Zipcode" 
