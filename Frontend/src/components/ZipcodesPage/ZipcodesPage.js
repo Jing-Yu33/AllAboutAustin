@@ -140,6 +140,8 @@ class ZipcodesPage extends Component {
     render(){
       return(
         <div>
+          <h1>Zip Codes of Austin</h1>
+          <p>Explore the various areas in Austin by filtering zip codes based on certain metrics and even geo-location.</p>
           <div className="mt-3">
             <ZipcodesMap zipcodes={this.props.zipcodes}/>
           </div>
