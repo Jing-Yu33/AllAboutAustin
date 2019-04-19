@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Heart from '../heart/Heart';
 import history from '../../history';
 import { AddZipcodesToUser, RemoveZipcodesFromUser } from '../../actions';
 
@@ -17,39 +18,6 @@ class ZipCodeComponent extends Component {
       return <i className="fas fa-times text-danger"></i>
     }else{
       return <i className="fas fa-check text-success"></i>
-    }
-  }
-
-  onHeartAddClick = (e, zipcode) => {
-    e.stopPropagation();
-    this.props.AddZipcodesToUser(this.props.userId, zipcode);
-    this.setState(prevState =>({
-      clicked: [...prevState.clicked, zipcode],
-      unclicked: this.state.unclicked.filter((_, i) => this.state.unclicked[i]!==zipcode)
-    }))
-  }
-
-  onHeartRemoveClick = (e, zipcode) => {
-    e.stopPropagation();
-    this.props.RemoveZipcodesFromUser(this.props.userId, zipcode);
-    this.setState(prevState =>({
-      unclicked: [...prevState.unclicked, zipcode],
-      clicked: this.state.clicked.filter((_, i) => this.state.clicked[i]!==zipcode)
-    }))
-  }
-
-  renderHeart = () => {
-    const { zipcode } = this.props.zipcode;
-    if(this.props.isSignedIn){
-      if(this.state.unclicked.includes(zipcode)){
-        return <div onClick={(e) => this.onHeartAddClick(e, this.props.zipcode.zipcode)}><i className="far fa-heart"></i></div>
-      }
-
-      if(this.props.userZipcodes.includes(zipcode) || this.state.clicked.includes(zipcode)){
-        return <div onClick={(e) => this.onHeartRemoveClick(e, zipcode)}><i className="fas fa-heart"></i></div>
-      } else {
-        return <div onClick={(e) => this.onHeartAddClick(e, zipcode)}><i className="far fa-heart"></i></div>
-      }
     }
   }
 
@@ -89,7 +57,7 @@ class ZipCodeComponent extends Component {
                   {this.props.zipcode.zipcode}
                 
               </span>
-              <span className="btn text-danger">{this.renderHeart()}</span>
+              <span className="btn text-danger"><Heart zipcode={this.props.zipcode.zipcode}/></span>
             </h4>
           </div>
         <div className="card-body" >

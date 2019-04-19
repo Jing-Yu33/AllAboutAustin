@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './IndividualZipcodePage.css';
+import Heart from '../heart/Heart';
 import CarouselComponent from './CarouselComponent'
 import RowCards from './RowCards'
 import IndividualZipcodeMap from '../map/IndividualZipcodeMap';
-import { GetOneZipcode } from '../../actions/index';
+import { GetOneZipcode, AddZipcodesToUser, RemoveZipcodesFromUser } from '../../actions/index';
 
 class IndividualZipcodePage extends Component {
+      
+    state = {
+      clicked: [],
+      unclicked: [],
+      cardStyle: null
+    }
 
     async componentDidMount(){
         this.props.GetOneZipcode(this.props.match.params.zipcode);
@@ -86,11 +93,12 @@ class IndividualZipcodePage extends Component {
                 </div>
             )
         }
-
         return(
           <div className="jumbotron jumbotron-fluid my-3">
             <div className="container">
-                <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode}</h1>
+                <h1 className="display-4">Zip Code : {this.props.zipcode.zipcode} 
+                    <span className="btn btn-lg text-danger"><Heart zipcode={this.props.zipcode.zipcode}/></span>
+                </h1>
                 <span className="text-secondary">
                     Region : {this.props.zipcode.region} 
                 </span>
@@ -118,10 +126,13 @@ class IndividualZipcodePage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        zipcode: state.zipcodes[ownProps.match.params.zipcode]
+        zipcode: state.zipcodes[ownProps.match.params.zipcode],
+        isSignedIn: state.auth.isSignedIn,
+        userId: state.auth.userId,
+        userZipcodes: state.auth.userZipcodes
     }
 }
 
 export default connect(mapStateToProps, {
-    GetOneZipcode
+    GetOneZipcode, AddZipcodesToUser, RemoveZipcodesFromUser
 })(IndividualZipcodePage)
