@@ -96,7 +96,10 @@ class ZipCodeComponent extends Component {
           <div className="row align-items-center">
             <div>
               {/* <img className="card-img-top img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/> */}
-              <img className="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/>
+              <img className="card-img-top img-thumbnail"
+                    style={{height: '200px', width: '100%', objectFit: 'fill'}}
+                    src={this.props.zipcode.images[0]} 
+                    alt="zipcode"/>
             </div>
             <div>
               <div className="justify-content-center">
@@ -106,20 +109,20 @@ class ZipCodeComponent extends Component {
                 <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
-                      Average Rate: <span className="text-info">{this.props.zipcode.averageScore}</span>
+                      Holisic Score: <span className="text-info">{this.props.zipcode.averageScore}</span>
                     </div>
                     <div className="col-6">
-                      Food Rate: <span className="text-info">{this.props.zipcode.foodScore}</span>
+                      Food Score: <span className="text-info">{this.props.zipcode.foodScore}</span>
                     </div>
                   </div>
                 </li>
                 <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
-                      Traffic Rate: <span className="text-info">{this.props.zipcode.trafficScore}</span>
+                      Traffic Score: <span className="text-info">{this.props.zipcode.trafficScore}</span>
                     </div>
                     <div className="col-6">
-                      Education Rate: <span className="text-info">{this.props.zipcode.educationScore}</span>
+                      Education Score: <span className="text-info">{this.props.zipcode.educationScore}</span>
                     </div>
                   </div>
                 </li>

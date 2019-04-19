@@ -23,7 +23,7 @@ class IndividualZipcodeMap extends Component {
     return(
         <div>
             <GoogleMapExample
-                containerElement={ <div style={{ height: `200px`, width: '100%' }} /> }
+                containerElement={ <div style={{ height: `450px`, width: '100%' }} /> }
                 mapElement={ <div style={{ height: `100%` }} /> }
             />
         </div>

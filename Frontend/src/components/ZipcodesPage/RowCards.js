@@ -45,8 +45,11 @@ class RowCards extends Component {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Food</h5>
-                  <p className="card-text">
-                    {this.renderList(this.props.food.resturaunts)}
+                  <p className="card-text">{this.renderList(this.props.food.resturaunts)}</p>
+                  <p className="text-muted font-weight-light">
+                    <small>
+                      *Explanation
+                    </small>
                   </p>
                 </div>
               </div>
@@ -56,6 +59,11 @@ class RowCards extends Component {
                 <div className="card-body">
                   <h5 className="card-title">Traffic</h5>
                   <p className="card-text">Current Speed(get from tomtom api): {this.state.currentSpeed}</p>
+                  <p className="text-muted font-weight-light">
+                    <small>
+                      *Explanation
+                    </small>
+                  </p>
                 </div>
               </div>
             </div>
@@ -64,6 +72,11 @@ class RowCards extends Component {
                 <div className="card-body">
                   <h5 className="card-title">Education</h5>
                   <p className="card-text">{this.renderList(this.props.education.schools)}</p>
+                  <p className="text-muted font-weight-light">
+                    <small>
+                      *Explanation
+                    </small>
+                  </p>
                 </div>
               </div>
             </div>

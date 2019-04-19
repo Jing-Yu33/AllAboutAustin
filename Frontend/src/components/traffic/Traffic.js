@@ -33,7 +33,7 @@ class Traffic extends Component {
                 </div>
                 
                 <div className="mt-3">
-                        <HeatMap />
+                        <HeatMap category="traffic"/>
                 </div>
                 <RankingList data={this.props.zipcodes} category={this.props.category} order={this.props.order}/>
             </div>
