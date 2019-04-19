@@ -7,7 +7,7 @@ import fetchResult from './fetchResult'
 
 const RecomPage = (props) => {
 
-    const query = queryString.parse(props.location.search);
+    const query = queryString.parse(props.location.search);    
     const result = fetchResult(query)
 
     return (
