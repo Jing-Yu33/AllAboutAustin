@@ -67,14 +67,14 @@ class HeatMap extends Component {
     if(hoveredFeature){
         return (
           <div className="row-bl-2">
-                <ul className="list-unstyled">
-                  <li><strong>Zipcode:</strong> {hoveredFeature.properties.zipcode}</li>
-                  <li><strong>Food Score:</strong> {hoveredFeature.properties.foodScore}</li>
-                  <li><strong>Traffic Score:</strong> {hoveredFeature.properties.trafficScore}</li>
-                  <li><strong>Education Score:</strong> {hoveredFeature.properties.educationScore}</li>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item active"><strong>Zipcode:</strong> {hoveredFeature.properties.zipcode}</li>
+                  <li className="list-group-item "><strong>Food Score:</strong> {hoveredFeature.properties.foodScore}</li>
+                  <li className="list-group-item "><strong>Traffic Score:</strong> {hoveredFeature.properties.trafficScore}</li>
+                  <li className="list-group-item "><strong>Education Score:</strong> {hoveredFeature.properties.educationScore}</li>
                 </ul>
 
-                <h4>Map Legend</h4>
+                <h4 className="mt-2">Map Legend</h4>
                 <div className="row">
                 <div className="col-5">
                 <ul className="list-unstyled">
@@ -105,14 +105,14 @@ class HeatMap extends Component {
     else{
       return(
             <div className="row-bl-2">
-                <ul className="list-unstyled">
-                  <li><strong>Zipcode:</strong> </li>
-                  <li><strong>Food Score:</strong> </li>
-                  <li><strong>Traffic Score:</strong></li>
-                  <li><strong>Education Score:</strong></li>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item active"><strong>Zipcode:</strong> </li>
+                  <li className="list-group-item"><strong>Food Score:</strong> </li>
+                  <li className="list-group-item"><strong>Traffic Score:</strong></li>
+                  <li className="list-group-item"><strong>Education Score:</strong></li>
                 </ul>
 
-                <h4>Map Legend</h4>
+                <h4 className="mt-2">Map Legend</h4>
                 <div className="row">
                 <div className="col-5">
                 <ul className="list-unstyled">
@@ -126,6 +126,9 @@ class HeatMap extends Component {
                 </ul>
                 </div>
                 <div className="col-5">
+
+
+
                 <ul className="list-unstyled">
                   <li><img src="https://i.imgur.com/LpUYGQO.png" alt=""/>&nbsp;60% </li>
                   <li><img src="https://i.imgur.com/pY6qMwT.png" alt=""/>&nbsp;70% </li>
