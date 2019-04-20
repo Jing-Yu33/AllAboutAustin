@@ -8,7 +8,7 @@ class SortForm extends Component {
     }
 
     value = {
-        sortByCategory: null,
+        sortByCategory: this.props.defaultCategory,
         sortByOrder: null
     }
 
