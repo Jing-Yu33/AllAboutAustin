@@ -12,6 +12,16 @@ import MoreFilters from './ZipcodesFilter/MoreFilters';
 import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
 import { compareByFood, compareByTraffic, compareByEducation, compareByAverage } from '../searchAndSort/sortFunction';
 
+
+export const setCurrentPage = (page) => ({
+    currentPage: page
+});
+
+export const setSortValue = (category, order) => ({
+  category, order,
+  currentPage: 1
+});
+
 class ZipcodesPage extends Component {
    
     limit = 6; // # of zipcode components shown on a single page
@@ -51,10 +61,11 @@ class ZipcodesPage extends Component {
         this.props.zipcodes.reverse();
       }
 
-      this.setState({
-        category, order,
-        currentPage: 1
-      })
+      this.setState(setSortValue(category, order))
+      // this.setState({
+      //   category, order,
+      //   currentPage: 1
+      // })
     }
 
     renderList = () => {
@@ -103,9 +114,10 @@ class ZipcodesPage extends Component {
 
     // Handle Page changes
     handlePageChange = (page) => {
-      this.setState({
-        currentPage: page
-      });
+      this.setState(setCurrentPage(page))
+      // this.setState({
+      //   currentPage: page
+      // });
     };
 
     //Sort Down Form
@@ -121,9 +133,10 @@ class ZipcodesPage extends Component {
 
     handleSubmit = (event) => {
       event.preventDefault();
-      this.setState({
-        currentPage: 1
-      })
+      this.setState(setCurrentPage(1))
+      // this.setState({
+      //   currentPage: 1
+      // })
       const { values } = this.props.filterForm;
       const { foodGt, trafficGt, educationGt, hospitals, cinemas } = this.props.filterForm.values
       const { category, order } = this.state;

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+export const setCurrentSpeed = (currentSpeed) => ({
+  currentSpeed: currentSpeed
+})
+
 class RowCards extends Component {
 
     state = {
@@ -16,9 +20,10 @@ class RowCards extends Component {
           point: `${this.props.lat},${this.props.lng}`
         }
       })
-      this.setState({
-        currentSpeed: response.data.flowSegmentData.currentSpeed
-      })
+      this.setState(setCurrentSpeed(response.data.flowSegmentData.currentSpeed))
+      // this.setState({
+      //   currentSpeed: response.data.flowSegmentData.currentSpeed
+      // })
     }
 
     renderList = (data) => {
@@ -61,7 +66,7 @@ class RowCards extends Component {
                   <p className="card-text">{this.renderList(this.props.food.resturaunts)}</p>
                   <p className="text-muted font-weight-light">
                     <small>
-                      *Food rankings were acquired from the Zomato API of customer ratings of eating establishments. Ratings are averaged across a zip code.
+                      *Food ratings were acquired from the Zomato API of customer ratings of eating establishments. Ratings are averaged across a zip code.
                     </small>
                   </p>
                 </div>

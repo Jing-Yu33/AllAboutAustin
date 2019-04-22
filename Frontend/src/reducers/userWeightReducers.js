@@ -1,3 +1,5 @@
+import * as ActionTypes from '../constants/ActionTypes';
+
 const INITIAL_STATE = {
     "Food": "50",
     "Traffic": "50",
@@ -6,13 +8,13 @@ const INITIAL_STATE = {
 
 export const userWeightReducers = (state=INITIAL_STATE, action) => {
     switch(action.type){
-        case "FOOD_WEIGHT":
+        case ActionTypes.FOOD_WEIGHT:
             return { ...state, "Food": action.payload};
         
-        case "TRAFFIC_WEIGHT":
+        case ActionTypes.TRAFFIC_WEIGHT:
             return { ...state, "Traffic": action.payload};
         
-        case "EDUCATION_WEIGHT":
+        case ActionTypes.EDUCATION_WEIGHT:
             return { ...state, "Education": action.payload};
         
         default:

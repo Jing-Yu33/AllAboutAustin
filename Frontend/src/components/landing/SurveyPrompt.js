@@ -7,7 +7,7 @@ class SurveyPrompt extends Component {
     // Todo: high resolution pictures, stylize the text
     render(){
         return(
-            <div id="survey-prompt">
+            <div id="survey-prompt" style={{height: "100%"}}>
                 <div id="landing-header">
                     <h1 className="display-4">All About Austin!</h1>
                     <Link to="/survey" className="btn btn-lg btn-success">Start</Link>

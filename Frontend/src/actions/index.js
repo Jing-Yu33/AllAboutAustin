@@ -1,22 +1,23 @@
+import * as ActionTypes from '../constants/ActionTypes';
 import { DataBase, UserDataBase } from '../apis/DataBase';
 
 export const foodWeight = (weight) => {
     return {
-        type: "FOOD_WEIGHT",
+        type: ActionTypes.FOOD_WEIGHT,
         payload: weight
     }
 }
 
 export const trafficWeight = (weight) => {
     return {
-        type: "TRAFFIC_WEIGHT",
+        type: ActionTypes.TRAFFIC_WEIGHT,
         payload: weight
     }
 } 
 
 export const educationWeight = (weight) => {
     return {
-        type: "EDUCATION_WEIGHT",
+        type: ActionTypes.EDUCATION_WEIGHT,
         payload: weight
     }
 }
@@ -30,7 +31,7 @@ export const GetAllZipcodes = (sortBy, order) => {
             }
         });
         dispatch({
-            type: "GET_ALL_ZIPCODES",
+            type: ActionTypes.GET_ALL_ZIPCODES,
             payload: response.data
         })
     }
@@ -46,7 +47,7 @@ export const GetTop10ZipcodeByCategory = (category, sortBy, order) => {
             }
         });
         dispatch({
-            type: "GET_TOP_ZIPCODES_BY_CATEGORY",
+            type: ActionTypes.GET_TOP_ZIPCODES_BY_CATEGORY,
             payload: response.data
         })
     }
@@ -56,7 +57,7 @@ export const GetOneZipcode = (zipcode) => {
     return async (dispatch) => {
         const response = await DataBase.get(`/zipcodes/${zipcode}`);
         dispatch({
-            type: "GET_ONE_ZIPCODE",
+            type: ActionTypes.GET_ONE_ZIPCODE,
             payload: response.data
         })
     }
@@ -77,7 +78,7 @@ export const GetFilteredZipcodes = (foodGt, trafficGt, educationGt, regions, hos
             }
         });
         dispatch({
-            type: "GET_FILTERED_ZIPCODES",
+            type: ActionTypes.GET_FILTERED_ZIPCODES,
             payload: response.data
         })
     }    
@@ -86,7 +87,7 @@ export const GetFilteredZipcodes = (foodGt, trafficGt, educationGt, regions, hos
 export const SignIn = (id, name) => {
     return (
         {
-            type: "SIGN_IN",
+            type: ActionTypes.SIGN_IN,
             payload: {
                 id: id,
                 name: name
@@ -105,7 +106,7 @@ export const GetUserZipcodes = (id) => {
     return async (dispatch) => {
         const response = await UserDataBase.get(`/${id}`);
         dispatch({
-            type: "GET_USER_ZIPCODES",
+            type: ActionTypes.GET_USER_ZIPCODES,
             payload: {
                 id: id,
                 zipcodes: response.data
@@ -128,6 +129,6 @@ export const RemoveZipcodesFromUser = (userId, zipcode) => {
 
 export const SignOut = () => {
     return {
-        type: "SIGN_OUT"
+        type: ActionTypes.SIGN_OUT
     }
 }

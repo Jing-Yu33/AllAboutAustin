@@ -26,7 +26,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test:redux": "react-scripts test",
+    "test:unit": "mocha --require @babel/register --require ./test/mocha/helpers.js --require ./test/mocha/dom.js './test/mocha/*.spec.js'",
+    "test:unit:watch": "npm run test:unit -- --watch",
+    "test:snapshot:watch": "npm run test:snapshot -- --watch",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,5 +40,24 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/register": "^7.4.0",
+    "chai": "^4.2.0",
+    "fetch-mock": "^7.3.1",
+    "jsdom": "^15.0.0",
+    "mocha": "^6.1.4",
+    "react-test-renderer": "^16.8.6",
+    "redux-mock-store": "^1.5.3"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/transform-runtime"
+    ]
+  }
 }

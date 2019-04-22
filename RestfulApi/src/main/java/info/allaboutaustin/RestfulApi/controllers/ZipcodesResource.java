@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import info.allaboutaustin.RestfulApi.exception.ParameterNotValidException;
@@ -50,7 +51,6 @@ public class ZipcodesResource {
 		}
 	}
 	
-	
 	/*	Return zipcodes information
 	 *  sortBy: sorting by specific category
 	 *  order: ascending order or descending order
@@ -61,6 +61,7 @@ public class ZipcodesResource {
 			@RequestParam(name="order", required=false, defaultValue="desc") String order){
 		
 		List<Zipcode> list = ZipcodeRepo.findAll();
+			
 		sortByCategory(list, sortBy);
 		
 		if(!order.equals("asc") && !order.equals("desc")) {
@@ -123,13 +124,14 @@ public class ZipcodesResource {
 	@GetMapping("/top10")
 	public List<Zipcode> getTop10ZipcodesByCategory(
 			@RequestParam(name="category") String category,
-			@RequestParam(name="sortBy") String sortBy,
+			@RequestParam(name="sortBy", required=false, defaultValue="") String sortBy,
 			@RequestParam(name="order", required=false, defaultValue="desc") String order){
 		
 		List<Zipcode> list = ZipcodeRepo.findAll();
 		
 		sortByCategory(list, category);
 		list = list.subList(0, 10);
+		
 		sortByCategory(list, sortBy);
 		if(order.equals("asc"))	Collections.reverse(list);
 				

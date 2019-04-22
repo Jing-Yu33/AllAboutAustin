@@ -18,7 +18,7 @@ class CarouselComponent extends Component {
               </div>
               
               <div className="carousel-item">
-                <img className="d-block w-100" style={{height: '450px', width: '100%', objectFit: 'fill'}} src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg" alt="Second slide"/>
+                <img className="d-block w-100" style={{height: '450px', width: '100%', objectFit: 'fill'}} src={this.props.images[1]} alt="Second slide"/>
               </div>
               
             </div>

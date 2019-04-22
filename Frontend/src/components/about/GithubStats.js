@@ -6,20 +6,19 @@ class GithubStats extends React.Component {
     state={
         commits:    null,
         issues:     null,
-        Unittests:  null
+        unittests:  36
     }
 
     getData = async () => {
         var commitsNum = 0;
         for(var i=1; i<5; i++){
-            var commits = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/commits?per_page=100&page=${i}&${this.GITHUB_ACCESS_TOKEN}`);
+            var commits = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/commits?per_page=100&page=${i}&access_token=${this.GITHUB_ACCESS_TOKEN}`);
             commitsNum += commits.data.length;
         }
         var issues = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/issues?access_token=${this.GITHUB_ACCESS_TOKEN}`);
         this.setState({
             commits: commitsNum,
             issues:  issues.data.length,
-            unittests:  0
         })
 
     }
@@ -32,20 +31,20 @@ class GithubStats extends React.Component {
 
     render() {
         return (
-        <ul className="list-group">
-            <li className="list-group-item active">
+        <div className="list-group list-group-horizontal-md">
+            <div className="list-group-item active flex-fill">
                 Github Stats 
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
+            </div>
+            <li className="list-group-item d-flex justify-content-between align-items-center flex-fill">
                 Total Commits <span className="badge badge-primary badge-pill">{this.state.commits}</span>
             </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
+            <li className="list-group-item d-flex justify-content-between align-items-center flex-fill">
                 Total Issues <span className="badge badge-primary badge-pill">{this.state.issues}</span>
             </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
+            <li className="list-group-item d-flex justify-content-between align-items-center flex-fill">
                 Total Unittests <span className="badge badge-primary badge-pill">{this.state.unittests}</span>
             </li>
-        </ul>
+        </div>
         );
     }
 }
