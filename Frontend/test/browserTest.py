@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import Select
+import time
+
 
 def test(drvr):
     '''
@@ -111,9 +113,11 @@ def verifyMapFunctionality(driver):
     zipCodeEl = driver.find_element_by_class_name('list-group-item')
     ActionChains(driver).move_to_element_with_offset(gMap, 0, 0).perform()
     initialText = zipCodeEl.text
+    print(initialText)
     ActionChains(driver).move_by_offset(mapWidth/2, mapHeight/2).perform()
     finalText = zipCodeEl.text
-    assert initialText != finalText, 'Map Hover incorrect!'
+    print(finalText)
+    assert initialText != finalText, 'Map Hover incorrect at ' + driver.current_url + '!' 
 
 def verifySortFunctionality(driver):
     '''
@@ -127,5 +131,18 @@ def verifySortFunctionality(driver):
     categorySelector.select_by_visible_text('Food')
     directionSelector.select_by_visible_text('Ascending')
     cardsList = driver.find_elements_by_class_name('CardLink')
-    val = cardsList[0].find_elements_by_class_name('col-6')[1].find_element_by_class_name('text-info').text
+    val = getValueHelper(cardsList, 'food', 0)
     print(val)
+
+
+def getValueHelper(cardList, category, index):
+    cat = 0
+    if (category == 'food'):
+        cat = 1
+    elif (category == 'traffic'):
+        cat = 2
+    elif (category == 'education'):
+        cat = 3
+    parentEl = cardList[index].find_elements_by_class_name('col-6')[cat]
+    return parentEl.find_element_by_class_name('text-info').text
+
