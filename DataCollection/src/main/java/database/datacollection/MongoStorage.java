@@ -164,6 +164,16 @@ public class MongoStorage {
 		else
 			return datapoints.get(0);
 	}
+
+	public static Zipcode getZipcodeData(String id) {
+		Query<Zipcode> query = datastore.createQuery(Zipcode.class).field("zipcode").equal(id);
+		List<Zipcode> datapoints = query.asList();
+		
+		if (datapoints.size() < 1)
+			return null;
+		else
+			return datapoints.get(0);
+	}
 	
 	
 	public static void saveCombinedZipcodeData() throws IOException {
@@ -187,6 +197,7 @@ public class MongoStorage {
 	    }
 
 	    keys = csvReader.readNext();
+        HeatmapBoundaryAssembler.setup();
 
         // we are going to read data line by line
         while ((nextRecord = csvReader.readNext()) != null) {
@@ -233,10 +244,13 @@ public class MongoStorage {
 			
 			Zipcode zc = new Zipcode(zipcode, fs, ts, es, as, fd, td, ed, coords[0], coords[1]);
 			zc.setCSVProperties(data);
+			
 			datastore.save(zc);
+			HeatmapBoundaryAssembler.makeHeatmapOutput(zc);
 			System.out.println(zc.toString());
 		}
 
+        HeatmapBoundaryAssembler.teardown();
         csvReader.close();
 		
 	}

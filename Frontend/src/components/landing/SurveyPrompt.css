@@ -39,18 +39,18 @@
   }
   
   .slideshow li:nth-child(1) { 
-    background-image: url(https://source.unsplash.com/eby8F5oWEw4) /*https://adobe.ly/2Jr5SCD*/
+    background-image: url(https://i.ibb.co/xJLPNNz/fullsizeoutput-1545.jpg) /*https://adobe.ly/2Jr5SCD*/
   }
   .slideshow li:nth-child(2) { 
-    background-image: url(https://source.unsplash.com/AlBgcDfDG_s); /*https://adobe.ly/2JcHyny*/
+    background-image: url(https://i.ibb.co/JRQB7M0/DSC-0237.jpg); /*https://adobe.ly/2JcHyny*/
     animation-delay: 10s; 
   }
   .slideshow li:nth-child(3) { 
-    background-image: url(https://source.unsplash.com/NsnpZpek-f0); /*https://adobe.ly/2TQqs35*/
+    background-image: url(https://i.ibb.co/v3m1QMY/DSC-0323.jpg); /*https://adobe.ly/2TQqs35*/
     animation-delay: 20s; 
   }
   .slideshow li:nth-child(4) { 
-    background-image: url(https://source.unsplash.com/Ui_7PiqnNbs); /*https://adobe.ly/2JdlJo6*/
+    background-image: url(https://i.ibb.co/NmZjxn9/fullsizeoutput-141b.jpg); /*https://adobe.ly/2JdlJo6*/
     animation-delay: 30s; 
   }
   /* More pictures:

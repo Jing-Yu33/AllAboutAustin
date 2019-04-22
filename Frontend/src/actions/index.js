@@ -84,22 +84,33 @@ export const GetFilteredZipcodes = (foodGt, trafficGt, educationGt, regions, hos
 }
 
 export const SignIn = (id, name) => {
-    return async (dispatch) => {
-        const response = await UserDataBase.get(`/${id}`);
-        dispatch({
+    return (
+        {
             type: "SIGN_IN",
             payload: {
                 id: id,
-                name: name,
-                zipcodes: response.data
+                name: name
             }
-        })
-    }
+        }
+    )
 }
 
 export const CreateUser = (id) => {
     return async () => {
         await UserDataBase.post('', id);
+    }
+}
+
+export const GetUserZipcodes = (id) => {
+    return async (dispatch) => {
+        const response = await UserDataBase.get(`/${id}`);
+        dispatch({
+            type: "GET_USER_ZIPCODES",
+            payload: {
+                id: id,
+                zipcodes: response.data
+            }
+        })
     }
 }
 

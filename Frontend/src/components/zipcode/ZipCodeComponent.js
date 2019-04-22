@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Heart from '../heart/Heart';
 import history from '../../history';
-import { AddZipcodesToUser, RemoveZipcodesFromUser } from '../../actions';
+import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions';
 
 class ZipCodeComponent extends Component {
   
@@ -12,44 +13,21 @@ class ZipCodeComponent extends Component {
     cardStyle: null
   }
 
+  shouldComponentUpdate(nextProps) {
+    return (nextProps.isSignedIn !== this.props.isSignedIn || JSON.stringify(nextProps.userZipcodes) !== JSON.stringify(this.props.userZipcodes) || nextProps.zipcodes !== this.props.zipcodes)
+  }
+
+  componentDidUpdate() {
+    if(this.props.isSignedIn){
+        this.props.GetUserZipcodes(this.props.userId);
+    }
+  }
+
   renderExistIcon = (num) => {
     if(num === 0){
       return <i className="fas fa-times text-danger"></i>
     }else{
       return <i className="fas fa-check text-success"></i>
-    }
-  }
-
-  onHeartAddClick = (e, zipcode) => {
-    e.stopPropagation();
-    this.props.AddZipcodesToUser(this.props.userId, zipcode);
-    this.setState(prevState =>({
-      clicked: [...prevState.clicked, zipcode],
-      unclicked: this.state.unclicked.filter((_, i) => this.state.unclicked[i]!==zipcode)
-    }))
-  }
-
-  onHeartRemoveClick = (e, zipcode) => {
-    e.stopPropagation();
-    this.props.RemoveZipcodesFromUser(this.props.userId, zipcode);
-    this.setState(prevState =>({
-      unclicked: [...prevState.unclicked, zipcode],
-      clicked: this.state.clicked.filter((_, i) => this.state.clicked[i]!==zipcode)
-    }))
-  }
-
-  renderHeart = () => {
-    const { zipcode } = this.props.zipcode;
-    if(this.props.isSignedIn){
-      if(this.state.unclicked.includes(zipcode)){
-        return <div onClick={(e) => this.onHeartAddClick(e, this.props.zipcode.zipcode)}><i className="far fa-heart"></i></div>
-      }
-
-      if(this.props.userZipcodes.includes(zipcode) || this.state.clicked.includes(zipcode)){
-        return <div onClick={(e) => this.onHeartRemoveClick(e, zipcode)}><i className="fas fa-heart"></i></div>
-      } else {
-        return <div onClick={(e) => this.onHeartAddClick(e, zipcode)}><i className="far fa-heart"></i></div>
-      }
     }
   }
 
@@ -89,14 +67,17 @@ class ZipCodeComponent extends Component {
                   {this.props.zipcode.zipcode}
                 
               </span>
-              <span className="btn text-danger">{this.renderHeart()}</span>
+              <span className="btn text-danger"><Heart userList={this.props.userZipcodes} zipcode={this.props.zipcode.zipcode}/></span>
             </h4>
           </div>
         <div className="card-body" >
           <div className="row align-items-center">
             <div>
               {/* <img className="card-img-top img-thumbnail" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/> */}
-              <img className="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="zipcode"/>
+              <img className="card-img-top img-thumbnail"
+                    style={{height: '200px', width: '100%', objectFit: 'fill'}}
+                    src={this.props.zipcode.images[0]} 
+                    alt="zipcode"/>
             </div>
             <div>
               <div className="justify-content-center">
@@ -106,20 +87,20 @@ class ZipCodeComponent extends Component {
                 <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
-                      Average Rate: <span className="text-info">{this.props.zipcode.averageScore}</span>
+                      Holistic Score: <span className="text-info">{this.props.zipcode.averageScore}</span>
                     </div>
                     <div className="col-6">
-                      Food Rate: <span className="text-info">{this.props.zipcode.foodScore}</span>
+                      Food Score: <span className="text-info">{this.props.zipcode.foodScore}</span>
                     </div>
                   </div>
                 </li>
                 <li className="list-group-item bg-light">
                   <div className="row">
                     <div className="col-6">
-                      Traffic Rate: <span className="text-info">{this.props.zipcode.trafficScore}</span>
+                      Traffic Score: <span className="text-info">{this.props.zipcode.trafficScore}</span>
                     </div>
                     <div className="col-6">
-                      Education Rate: <span className="text-info">{this.props.zipcode.educationScore}</span>
+                      Education Score: <span className="text-info">{this.props.zipcode.educationScore}</span>
                     </div>
                   </div>
                 </li>
@@ -145,6 +126,7 @@ class ZipCodeComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
+      zipcodes: state.zipcodes,
       isSignedIn: state.auth.isSignedIn,
       userId: state.auth.userId,
       userZipcodes: state.auth.userZipcodes
@@ -152,5 +134,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-  AddZipcodesToUser, RemoveZipcodesFromUser
+  GetUserZipcodes, AddZipcodesToUser, RemoveZipcodesFromUser
 })(ZipCodeComponent);

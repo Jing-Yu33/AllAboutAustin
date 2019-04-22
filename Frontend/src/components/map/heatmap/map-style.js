@@ -19,7 +19,8 @@ export const dataLayer = fromJS({
         [5, '#fee08b'],
         [6, '#fdae61'],
         [7, '#f46d43'],
-        [8, '#d53e4f']
+        [8, '#d53e4f'],
+        [9, '#AA313F']
       ]
     },
     'fill-opacity': 0.6

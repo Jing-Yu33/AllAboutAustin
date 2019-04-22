@@ -12,11 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import info.allaboutaustin.RestfulApi.exception.ParameterNotValidException;
+import info.allaboutaustin.RestfulApi.exception.UserNotExistsException;
 import info.allaboutaustin.RestfulApi.models.User;
 import info.allaboutaustin.RestfulApi.repositories.UsersRepository;
 
 @RestController
-@CrossOrigin(origins = "*")	
+@CrossOrigin(origins = {
+						"http://allaboutaustin-236003.appspot.com",
+						"http://allaboutaustin.info",
+						"http://www.allaboutaustin.info", 
+						"http://localhost:3000"
+						} 
+			)	
 @RequestMapping("/user")
 public class UserController {
 
@@ -37,7 +44,7 @@ public class UserController {
 	public List<String> GetUserZipcodes(@PathVariable String googleId) {
 		User user = userRepo.findByGoogleId(googleId);
 		if(user==null) {
-			throw new ParameterNotValidException("change to user not exists exception");
+			throw new UserNotExistsException("Current User is not exists");
 		}
 		return user.getLikedZipcodes();
 	}
@@ -46,7 +53,7 @@ public class UserController {
 	public void addLikedZipcode(@RequestBody String zipcode, @PathVariable String googleId) {
 		User user = userRepo.findByGoogleId(googleId);
 		if(user==null) {
-			throw new ParameterNotValidException("change to user not exists exception");
+			throw new UserNotExistsException("Current User is not exists");
 		}
 		zipcode = zipcode.substring(0, zipcode.length()-1);
 		if(!user.containZipcode(zipcode)) {
@@ -59,7 +66,7 @@ public class UserController {
 	public void removeLikedZipcode(@RequestBody String zipcode, @PathVariable String googleId) {
 		User user = userRepo.findByGoogleId(googleId);
 		if(user==null) {
-			throw new ParameterNotValidException("change to user not exists exception");
+			throw new UserNotExistsException("Current User is not exists");
 		}
 		zipcode = zipcode.substring(0, zipcode.length()-1);
 		if(user.containZipcode(zipcode)) {

@@ -35,11 +35,11 @@ class BasicFilters extends Component {
         return(
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <button class="btn btn-primary" type="submit" disabled={pristine || submitting}>
+                    <button className="btn btn-primary" type="submit" disabled={pristine || submitting}>
                         <i className="fas fa-filter"></i>
                     </button>
                     &nbsp;
-                    <button class="btn btn-primary"type="button" disabled={pristine || submitting} onClick={this.reset}>
+                    <button className="btn btn-primary"type="button" disabled={pristine || submitting} onClick={this.reset}>
                         <i className="fas fa-redo"></i>
                     </button>
                 </div>

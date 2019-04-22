@@ -15,7 +15,7 @@ class About extends Component {
                 <div className="mt-4">
                     <WebsiteDesc />
                 </div>
-                <div className="mt-5">
+                <div className="mt-4">
                     <GithubInfo />
                 </div>
 
@@ -23,7 +23,7 @@ class About extends Component {
                     <div className="col-md-4">
                         <GithubStats />
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-md-8 mt-sm-4 mt-md-0">
                         <Datasource />
                     </div>
                 </div>

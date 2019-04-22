@@ -10,7 +10,8 @@ class WebsiteDesc extends Component {
             <div className="jumbotron">
                 <h1 className="display-4">All About Austin</h1>
                 <h3 className="display-6">Team Amber </h3>
-                <a className="btn btn-success btn-sm" href="https://github.com/Iucundus/AustinData" role="button">Github Repo</a> 
+                <a className="btn btn-success btn-sm" href="https://github.com/Iucundus/AustinData" role="button" target="_blank" rel="noopener noreferrer">Github Repo</a>
+                <a className="btn btn-info btn-sm ml-3" href="https://documenter.getpostman.com/view/6614125/S1ETQG2B" role="button" target="_blank" rel="noopener noreferrer">API documentation</a> 
                 <hr className="my-4" />
                 <p className="lead">
                     <strong>Goal: </strong>

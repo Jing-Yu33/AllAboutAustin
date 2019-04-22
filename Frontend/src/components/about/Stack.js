@@ -10,10 +10,11 @@ class Stack extends React.Component {
                     <div className="col-lg-4 my-sm-3">
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item active">Front End</li>
-                            <li className="list-group-item"><b>React</b>: JavaScript Library for design UI</li>
+                            <li className="list-group-item"><b>React</b>: JS Front-end Framework</li>
                             <li className="list-group-item"><b>Bootstrap</b>: CSS Library for styling</li>
-                            <li className="list-group-item"><b>Mocha</b>: A testing tool for JavaScript</li>
-                            <li className="list-group-item"><b>NPM</b>: Node Package Manager for JavaScript (React)</li>
+                            <li className="list-group-item"><b>Mocha</b>: A JavaScript testing tool </li>
+                            <li className="list-group-item"><b>Selenium</b>: A GUI testing tool</li>
+                            <li className="list-group-item"><b>NPM</b>: Node Package Manager for React</li>
                         </ul>
                     </div>
 
@@ -22,6 +23,7 @@ class Stack extends React.Component {
                             <li className="list-group-item active">Back End</li>
                             <li className="list-group-item"><b>Springboot</b>: A Java Framework for building RESTful API</li>
                             <li className="list-group-item"><b>Postman</b>: Testing and documentation tool for API</li>
+                            <li className="list-group-item"><b>GCP</b>: The remote server that host our website</li>
                         </ul>
                     </div>
 
