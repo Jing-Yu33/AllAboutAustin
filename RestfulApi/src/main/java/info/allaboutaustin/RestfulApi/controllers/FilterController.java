@@ -54,7 +54,7 @@ public class FilterController {
 	
 	// 
 	@GetMapping("")
-	public List<Zipcode> filterZipcodeByRating (
+	public List<Zipcode> filterZipcodeByParameters (
 							@RequestParam(name="foodGt", required=false, defaultValue="0") String foodGt,
 							@RequestParam(name="trafficGt", required=false, defaultValue="0") String trafficGt,
 							@RequestParam(name="educationGt", required=false, defaultValue="0") String educationGt,
