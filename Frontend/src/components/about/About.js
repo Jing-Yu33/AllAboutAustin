@@ -16,14 +16,14 @@ class About extends Component {
                     <WebsiteDesc />
                 </div>
                 <div className="mt-4">
+                    <GithubStats />
+                </div>
+                <div className="mt-4">
                     <GithubInfo />
                 </div>
 
                 <div className="row">
-                    <div className="col-md-4">
-                        <GithubStats />
-                    </div>
-                    <div className="col-md-8 mt-sm-4 mt-md-0">
+                    <div className="col-12">
                         <Datasource />
                     </div>
                 </div>

@@ -1,3 +1,5 @@
+import * as ActionTypes from '../constants/ActionTypes';
+
 const INITIAL_STATE = {
     isSignedIn: null,
     userId: null,
@@ -7,11 +9,11 @@ const INITIAL_STATE = {
 
 const AuthReducer = (state = INITIAL_STATE, action) => {
     switch (action.type){
-        case "SIGN_IN": 
+        case ActionTypes.SIGN_IN: 
             return { ...state, isSignedIn: true, userId: action.payload.id, userName: action.payload.name}
-        case "SIGN_OUT": 
+        case ActionTypes.SIGN_OUT: 
             return { ...state, isSignedIn: false, userId: null, userName: null, userZipcodes:[]}
-        case "GET_USER_ZIPCODES":
+        case ActionTypes.GET_USER_ZIPCODES:
             return { ...state, userZipcodes:action.payload.zipcodes }
         default: 
             return state;

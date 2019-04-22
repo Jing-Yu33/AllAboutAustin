@@ -13,8 +13,8 @@ class ZipCodeComponent extends Component {
     cardStyle: null
   }
 
-  shouldComponentUpdate(nextProps) {
-    return (nextProps.isSignedIn !== this.props.isSignedIn || JSON.stringify(nextProps.userZipcodes) !== JSON.stringify(this.props.userZipcodes) || nextProps.zipcodes !== this.props.zipcodes)
+  shouldComponentUpdate(nextProps, nextState) {
+    return (nextProps.isSignedIn !== this.props.isSignedIn || JSON.stringify(nextProps.userZipcodes) !== JSON.stringify(this.props.userZipcodes) || nextProps.zipcodes !== this.props.zipcodes || nextState.cardStyle !== this.state.cardStyle)
   }
 
   componentDidUpdate() {
@@ -53,8 +53,8 @@ class ZipCodeComponent extends Component {
 
   render() {
     return(
-      <div  onClick={this.onCardClick} className="CardLink">
-        <div className="my-3 card bg-light" 
+      <div onClick={this.onCardClick} className="CardLink">
+        <div className="my-3 card bg-light zipcodeComponent" 
             style={this.state.cardStyle} 
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}>
