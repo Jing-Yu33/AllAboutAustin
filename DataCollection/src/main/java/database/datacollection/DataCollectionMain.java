@@ -1,6 +1,6 @@
 package database.datacollection;
 import java.io.IOException;
-/*
+/* // Servlet version of this class
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,19 +11,21 @@ import javax.servlet.http.HttpServletResponse;
  * Head of the data collection program. This calls all other classes.
  */
 
-//public class DataCollectionMain extends HttpServlet {
+//public class DataCollectionMain extends HttpServlet { //Servlet version of this class
 public class DataCollectionMain {
+	
+	private static MongoStorage ms;
 
 	public static void main(String[] args) throws IOException {
-		MongoStorage.setUp();
+		ms = MongoStorage.getInstance();
 		//demoSodaCollector();
 		//demoZomatoCollector();
 		//demoSchoolCollector();
 		//demoSensorDataCollector();
-		MongoStorage.saveCombinedZipcodeData();
+		ms.saveCombinedZipcodeData();
 	}
 	
-	/*
+	/* // Servlet version of this class
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		MongoStorage.setUp();
 		demoSodaCollector();
@@ -39,7 +41,7 @@ public class DataCollectionMain {
 		try {
 			DataSet ds = demo.getNewData();
 			ds.printDataSet();
-			MongoStorage.saveData(ds, MongoStorage.DataTypes.TRAFFIC_RAW_DATA);
+			ms.saveData(ds, MongoStorage.DataTypes.TRAFFIC_RAW_DATA);
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
@@ -50,7 +52,7 @@ public class DataCollectionMain {
 		try {
 			DataSet ds = demo.getNewData(0);
 			ds.printDataSet();
-			MongoStorage.saveData(ds, MongoStorage.DataTypes.FOOD_RAW_DATA);
+			ms.saveData(ds, MongoStorage.DataTypes.FOOD_RAW_DATA);
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
@@ -61,7 +63,7 @@ public class DataCollectionMain {
 		try {
 			DataSet ds = demo.getNewData();
 			ds.printDataSet();
-			MongoStorage.saveData(ds, MongoStorage.DataTypes.EDUCATION_RAW_DATA);
+			ms.saveData(ds, MongoStorage.DataTypes.EDUCATION_RAW_DATA);
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
@@ -72,7 +74,7 @@ public class DataCollectionMain {
 		try {
 			DataSet ds = demo.getSensorInfoData();
 			ds.printDataSet();
-			MongoStorage.saveData(ds, MongoStorage.DataTypes.TRAFFIC_SENSOR_DATA);
+			ms.saveData(ds, MongoStorage.DataTypes.TRAFFIC_SENSOR_DATA);
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
