@@ -3,7 +3,6 @@ import axios from 'axios';
 import GithubUser from './GithubUser'
 
 class GithubInfo extends React.Component {
-    GITHUB_ACCESS_TOKEN =  "29141c907671b2c7b85ae8bfa45b1c16f7e864a7";
     state = {
         Iucundus:   {commits: 0, issues: 0},
         AlienEdith: {commits: 0, issues: 0},
@@ -29,7 +28,7 @@ class GithubInfo extends React.Component {
                 });
                 commitsNum += commits.data.length;
             }
-            var issues = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/issues?creator=${members[i]}&access_token=${this.GITHUB_ACCESS_TOKEN}`);
+            var issues = await axios.get(`https://api.github.com/repos/Iucundus/AustinData/issues?creator=${members[i]}&access_token=${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`);
             this.setState({[username]: {
                 commits: commitsNum,
                 issues: issues.data.length

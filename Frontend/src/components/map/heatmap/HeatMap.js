@@ -9,7 +9,6 @@ import {json as requestJson} from 'd3-request';
 import HeatMapGeojsonReal from './HeatmapGeojsonReal.geojson';
 // import HeatMapGeojsonExample from './HeatMapGeojsonExample.geojson';
 
-const MAPBOX_TOKEN = 'pk.eyJ1IjoieWl4aW5nd2FuZyIsImEiOiJjanVlbHloenMwMTBlNDRucTRrNDI2Z3VyIn0.uD87F_upW33Ev21qNWnqSQ'; // Set your mapbox token here
 
 class HeatMap extends Component {
 
@@ -161,7 +160,7 @@ class HeatMap extends Component {
             height="500px"
             mapStyle={mapStyle}
             onViewportChange={this._onViewportChange}
-            mapboxApiAccessToken={MAPBOX_TOKEN}
+            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             onHover={this._onClick} >
             </MapGL>
         </div>

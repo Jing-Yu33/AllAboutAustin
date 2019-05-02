@@ -12,11 +12,10 @@ class RowCards extends Component {
     }
 
     async componentDidMount(){
-      const TOMTOMKEY = "eUdNPoH8tlYdgwAjuCSu3VAtxVAA2OJG"
 
       const response = await axios.get("https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json",{
         params: {
-          key: TOMTOMKEY,
+          key: process.env.REACT_APP_TOMTOMKEY,
           point: `${this.props.lat},${this.props.lng}`
         }
       })
