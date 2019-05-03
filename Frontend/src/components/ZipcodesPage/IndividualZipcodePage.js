@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import './IndividualZipcodePage.css';
 import Heart from '../heart/Heart';
-import CarouselComponent from './CarouselComponent'
+import PictureCarouselComponent from './PictureCarouselComponent'
 import RowCards from './RowCards'
 import IndividualZipcodeMap from '../map/IndividualZipcodeMap';
 import { GetOneZipcode, AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions/index';
@@ -125,7 +125,7 @@ class IndividualZipcodePage extends Component {
                     </div>
                 </div>
                 <div className="mt-4">
-                    <CarouselComponent images={this.props.zipcode.images}/>
+                    <PictureCarouselComponent images={this.props.zipcode.images}/>
                 </div>
                 <div className="mt-4">
                     <RowCards zipcode={this.props.zipcode} food={this.props.zipcode.foodData} education={this.props.zipcode.educationData} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>

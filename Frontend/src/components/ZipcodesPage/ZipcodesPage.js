@@ -6,9 +6,9 @@ import AllZipcodesMap from '../map/AllZipcodesMap';
 import SearchBar from '../searchAndSort/SearchBar';
 import SortForm from '../searchAndSort/SortForm';
 import ZipCodeCardComponent from '../zipcode/ZipCodeCardComponent';
-import PaginationButton from './PaginationButton';
+import ZipCodePageChangeButton from './ZipCodePageChangeButton';
 import BasicFilters from './ZipcodesFilter/BasicFilters';
-import MoreFilters from './ZipcodesFilter/MoreFilters';
+import AdvancedFilters from './ZipcodesFilter/AdvancedFilters';
 import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
 import { compareByFood, compareByTraffic, compareByEducation, compareByAverage } from '../searchAndSort/sortFunction';
 
@@ -105,7 +105,7 @@ class ZipcodesPage extends Component {
           </div>
           <div className="mt-3 mb-3">
             <div className="text-center">
-              <PaginationButton total={total} currentPage={this.state.currentPage} handlePageChange={this.handlePageChange}/>
+              <ZipCodePageChangeButton total={total} currentPage={this.state.currentPage} handlePageChange={this.handlePageChange}/>
             </div>
           </div>
         </div>
@@ -189,7 +189,7 @@ class ZipcodesPage extends Component {
                 </a>
              
               <div className="collapse" id="collapseExample">
-                <MoreFilters 
+                <AdvancedFilters 
                   handleSubmit={this.handleSubmit}
                   handleReset={this.handleReset}
                 />

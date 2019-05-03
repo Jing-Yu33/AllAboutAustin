@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-class MoreFilters extends Component {
+class AdvancedFilters extends Component {
 
     reset = () => {
         this.props.reset();
@@ -71,5 +71,4 @@ class MoreFilters extends Component {
 }
 export default reduxForm({
     form: 'ZipcodesFilter' // a unique identifier for this form
-  })(MoreFilters)
-
+  })(AdvancedFilters)

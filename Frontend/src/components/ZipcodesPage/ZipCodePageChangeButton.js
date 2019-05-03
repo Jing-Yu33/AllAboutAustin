@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Pagination from "react-paginating";
+import ZipCodePageChangeButton from "react-paginating";
 
 
 class PaginationButton extends Component {
@@ -11,7 +11,7 @@ class PaginationButton extends Component {
         const { handlePageChange, currentPage } = this.props;
         
         return(
-            <Pagination
+            <ZipCodePageChangeButton
                 total={total}
                 limit={limit}
                 pageCount={pageCount}
@@ -91,7 +91,7 @@ class PaginationButton extends Component {
                 
                 )}
             
-            </Pagination>
+            </ZipCodePageChangeButton>
 
         )
     }

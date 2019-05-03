@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CarouselComponent extends Component {
+class PictureCarouselComponent extends Component {
 
     render() {
         return(
@@ -38,4 +38,4 @@ class CarouselComponent extends Component {
   }
 }
 
-export default CarouselComponent;
+export default PictureCarouselComponent;
