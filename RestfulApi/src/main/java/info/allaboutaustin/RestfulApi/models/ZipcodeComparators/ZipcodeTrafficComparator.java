@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import info.allaboutaustin.RestfulApi.models.Zipcode;
 
-public class ZipcodeTrafficComparator implements Comparator<Zipcode>{
+public class ZipcodeTrafficComparator extends ZipcodesComparator{
 
 	@Override
 	public int compare(Zipcode z1, Zipcode z2) {

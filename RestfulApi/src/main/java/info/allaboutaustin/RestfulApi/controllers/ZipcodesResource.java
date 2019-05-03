@@ -24,6 +24,7 @@ import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeEducation
 import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeFoodComparator;
 import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeTotalScoreComparator;
 import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodeTrafficComparator;
+import info.allaboutaustin.RestfulApi.models.ZipcodeComparators.ZipcodesCamparatorFactory;
 import info.allaboutaustin.RestfulApi.repositories.ZipcodesRepository;
 
 @RestController
@@ -34,21 +35,12 @@ public class ZipcodesResource {
 	@Autowired
 	ZipcodesRepository ZipcodeRepo;
 
+	ZipcodesCamparatorFactory zcf = new ZipcodesCamparatorFactory();
 	ZipcodeTotalScoreComparator tsc = new ZipcodeTotalScoreComparator();
-	ZipcodeAverageScoreComparator ac = new ZipcodeAverageScoreComparator();
-	ZipcodeFoodComparator fc = new ZipcodeFoodComparator();
-	ZipcodeEducationComparator ec = new ZipcodeEducationComparator();
-	ZipcodeTrafficComparator tc = new ZipcodeTrafficComparator();
 	
 	//Helper Method: sorting list by specific category order
 	private void sortByCategory(List<Zipcode> list, String category){
-		switch(category) {
-			case "food": Collections.sort(list, fc);		break;
-			case "traffic": Collections.sort(list, tc);		break;
-			case "education": Collections.sort(list, ec);	break;
-			case "average": Collections.sort(list, ac);		break;
-			default: throw new ParameterNotValidException("Category should be food, traffic, eudcation, or average, please verify your input URL");
-		}
+		Collections.sort(list, zcf.createComparator(category));
 	}
 	
 	/*	Return zipcodes information
