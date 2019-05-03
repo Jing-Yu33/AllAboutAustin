@@ -24,7 +24,3 @@ resources:
     size_gb: 0.5
 
 service: api
-
-handlers:
-    - url: /api
-      script: auto
