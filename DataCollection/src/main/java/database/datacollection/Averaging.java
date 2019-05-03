@@ -10,7 +10,7 @@ import database.datacollection.models.*;
 
 public class Averaging {
     public static double getFoodAverage(String zip){
-        FoodRawData foodFullData = MongoStorage.getFoodRawData(zip);
+        FoodRawData foodFullData = MongoStorage.getInstance().getFoodRawData(zip);
         if (foodFullData == null)
             return 0;
         HashMap<String, Double> foodData = foodFullData.getPoints();
@@ -18,31 +18,22 @@ public class Averaging {
     }
 
     public static double getTrafficAverage(String zip) {	//MongoStorage.getZipcode.surroundingdata
-        TrafficRawData trafficFullData = MongoStorage.getTrafficRawData(zip);
+        TrafficRawData trafficFullData = MongoStorage.getInstance().getTrafficRawData(zip);
         if (trafficFullData == null)
             return 0;
         HashMap<String, Double> trafficData = trafficFullData.getPoints();
         return runKeys(trafficData);
     }
-
-    /*
-    public static double getSchoolAverage(String zip) {
-        SchoolRawData schoolFullData = MongoStorage.getSchoolRawData(zip);
-        if (schoolFullData == null)
-            return 0;
-        HashMap<String, Double> trafficData = schoolFullData.getPoints();
-        return runKeys(trafficData);
-    }
-    */
     
     public static double getSchoolAverage(String zip) {
     	double score = 0.0;
-        SchoolRawData schoolFullData = MongoStorage.getSchoolRawData(zip);
+    	MongoStorage ms = MongoStorage.getInstance();
+        SchoolRawData schoolFullData = ms.getSchoolRawData(zip);
         if (schoolFullData == null){
-        	List<String> surroundList= MongoStorage.getZipcodeData(zip).SurroundingZip;
+        	List<String> surroundList= ms.getZipcodeData(zip).SurroundingZip;
         	for(int i = 0; i < surroundList.size(); i++) {
-        		if(MongoStorage.getSchoolRawData(surroundList.get(i)) != null) {
-        			score = .5 * runKeys(MongoStorage.getSchoolRawData(surroundList.get(i)).getPoints());
+        		if(ms.getSchoolRawData(surroundList.get(i)) != null) {
+        			score = .5 * runKeys(ms.getSchoolRawData(surroundList.get(i)).getPoints());
         			break;
         		}
         	}

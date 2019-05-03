@@ -23,19 +23,20 @@ import database.datacollection.models.*;
  */
 
 public class MongoStorage {
-	static MongoClient mongoClient;
-	static MongoDatabase db;
+	static MongoStorage instance = null;
 	
-	static Morphia morphia;
-	static Datastore datastore;
+	MongoClient mongoClient;
+	MongoDatabase db;
+	
+	Morphia morphia;
+	Datastore datastore;
 	
 	enum DataTypes {TRAFFIC_DATA, EDUCATION_DATA, FOOD_DATA, TRAFFIC_SENSOR_DATA,
 						TRAFFIC_RAW_DATA, EDUCATION_RAW_DATA, FOOD_RAW_DATA};
 						
-	private static final String CSV_FILENAME = "manual_data.csv";
+	private final String CSV_FILENAME = "manual_data.csv";
 	
-	public static void setUp() {
-		
+	public MongoStorage() {
 		// Connect to Mongo DB
 		MongoClientURI uri = new MongoClientURI("mongodb://aaa:allaboutaustin@allaboutaustin-shard-00-00-hptoi.mongodb.net:27017,allaboutaustin-shard-00-01-hptoi.mongodb.net:27017,allaboutaustin-shard-00-02-hptoi.mongodb.net:27017/test?ssl=true&replicaSet=AllAboutAustin-shard-0&authSource=admin&retryWrites=true");
 		mongoClient = new MongoClient(uri);
@@ -47,9 +48,19 @@ public class MongoStorage {
 		datastore.ensureIndexes();
 	}
 	
+	public static MongoStorage getInstance() {
+		if (instance == null) {
+			synchronized (MongoStorage.class) {
+				if (instance == null) {
+					instance = new MongoStorage();
+				}
+			}
+		}
+		return instance;
+	}
 	
 	// Recieve List<DataSet> from Collectors	
-	public static void saveData(DataSet ds, DataTypes datatype) {
+	public void saveData(DataSet ds, DataTypes datatype) {
 
 		switch(datatype) {
 		    // code block
@@ -98,14 +109,14 @@ public class MongoStorage {
 	}
 	
 
-	public static ArrayList<FoodData> getFoodData()
+	public ArrayList<FoodData> getFoodData()
 	{
 		Query<FoodData> query = datastore.createQuery(FoodData.class);
 		List<FoodData> datapoints = query.asList();
 		return new ArrayList<FoodData>(datapoints);
 	}
 
-	public static FoodRawData getFoodRawData(String zipcode)
+	public FoodRawData getFoodRawData(String zipcode)
 	{
 		Query<FoodRawData> query = datastore.createQuery(FoodRawData.class).field("zipcode").equal(zipcode);
 		List<FoodRawData> datapoints = query.asList();
@@ -115,14 +126,14 @@ public class MongoStorage {
 			return null;
 	}
 
-	public static ArrayList<TrafficData> getTrafficData()
+	public ArrayList<TrafficData> getTrafficData()
 	{
 		Query<TrafficData> query = datastore.createQuery(TrafficData.class);
 		List<TrafficData> datapoints = query.asList();
 		return new ArrayList<TrafficData>(datapoints);
 	}
 
-	public static TrafficRawData getTrafficRawData(String zipcode)
+	public TrafficRawData getTrafficRawData(String zipcode)
 	{
 		Query<TrafficRawData> query = datastore.createQuery(TrafficRawData.class).field("zipcode").equal(zipcode);
 		List<TrafficRawData> datapoints = query.asList();
@@ -132,14 +143,14 @@ public class MongoStorage {
 			return null;
 	}
 
-	public static ArrayList<SchoolData> getSchoolData()
+	public ArrayList<SchoolData> getSchoolData()
 	{
 		Query<SchoolData> query = datastore.createQuery(SchoolData.class);
 		List<SchoolData> datapoints = query.asList();
 		return new ArrayList<SchoolData>(datapoints);
 	}
 
-	public static SchoolRawData getSchoolRawData(String zipcode)
+	public SchoolRawData getSchoolRawData(String zipcode)
 	{
 		Query<SchoolRawData> query = datastore.createQuery(SchoolRawData.class).field("zipcode").equal(zipcode);
 		List<SchoolRawData> datapoints = query.asList();
@@ -149,13 +160,13 @@ public class MongoStorage {
 			return null;
 	}
 	
-	public static ArrayList<TrafficSensorData> getSensorData() {
+	public ArrayList<TrafficSensorData> getSensorData() {
 		Query<TrafficSensorData> query = datastore.createQuery(TrafficSensorData.class);
 		List<TrafficSensorData> datapoints = query.asList();
 		return new ArrayList<TrafficSensorData>(datapoints);
 	}
 	
-	public static TrafficSensorData getSensorData(String id) {
+	public TrafficSensorData getSensorData(String id) {
 		Query<TrafficSensorData> query = datastore.createQuery(TrafficSensorData.class).field("kits_id").equal(id);
 		List<TrafficSensorData> datapoints = query.asList();
 		
@@ -165,7 +176,7 @@ public class MongoStorage {
 			return datapoints.get(0);
 	}
 
-	public static Zipcode getZipcodeData(String id) {
+	public Zipcode getZipcodeData(String id) {
 		Query<Zipcode> query = datastore.createQuery(Zipcode.class).field("zipcode").equal(id);
 		List<Zipcode> datapoints = query.asList();
 		
@@ -176,7 +187,7 @@ public class MongoStorage {
 	}
 	
 	
-	public static void saveCombinedZipcodeData() throws IOException {
+	public void saveCombinedZipcodeData() throws IOException {
 		FileReader filereader;
 		CSVReader csvReader;
         String[] nextRecord;
@@ -255,7 +266,7 @@ public class MongoStorage {
 		
 	}
 	
-	private static Double truncateDecimal(Double arg) {
+	private Double truncateDecimal(Double arg) {
 		return ((float) Math.round(arg * 100.0)) / 100.0;
 	}
 }
