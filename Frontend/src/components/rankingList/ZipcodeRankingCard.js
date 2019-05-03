@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-class RankingCard extends Component {
+class ZipcodeRankingCard extends Component {
 
     
     render() {
@@ -25,4 +25,4 @@ class RankingCard extends Component {
   }
 }
 
-export default RankingCard;
+export default ZipcodeRankingCard;

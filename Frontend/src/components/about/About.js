@@ -4,7 +4,7 @@ import WebsiteDesc from './WebsiteDesc';
 import GithubInfo from './GithubInfo';
 import GithubStats from './GithubStats';
 import Datasource from './Datasource';
-import Stack from './Stack';
+import DevelopmentStack from './DevelopmentStack';
 
 
 class About extends Component {
@@ -29,7 +29,7 @@ class About extends Component {
                 </div>
 
                 <div className="mt-5">
-                        <Stack />                   
+                        <DevelopmentStack />                   
                 </div>
             </div>
         )

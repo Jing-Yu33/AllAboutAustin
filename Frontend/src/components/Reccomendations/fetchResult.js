@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataBase } from '../../apis/DataBase';
-import ZipCodeComponent from '../zipcode/ZipCodeComponent'
+import ZipCodeCardComponent from '../zipcode/ZipCodeCardComponent'
 
 const fetchResult = (weight) => {
     const [result, setResult] = useState([])
@@ -18,7 +18,7 @@ const fetchResult = (weight) => {
         const resultList = response.data.map((zipcode) => {
             return(
                 <div key={zipcode.zipcode} className="col-lg-6">
-                    <ZipCodeComponent zipcode={zipcode}/>
+                    <ZipCodeCardComponent zipcode={zipcode}/>
                 </div>
             )
         })

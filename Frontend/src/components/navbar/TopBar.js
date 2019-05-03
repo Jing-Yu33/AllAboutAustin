@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import CategorySwitch from "./CategorySwitch";
+import ChangeCategory from "./ChangeCategory";
 import BasicControls from "./BasicControls";
 
 class TopBar extends Component {
@@ -14,7 +14,7 @@ class TopBar extends Component {
                         <span className="navbar-toggler-icon" />
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <CategorySwitch />
+                        <ChangeCategory />
                         <BasicControls />
                     </div>
                 </div>

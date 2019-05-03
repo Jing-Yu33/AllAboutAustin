@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import ZipcodesMap from '../map/ZipcodesMap';
+import AllZipcodesMap from '../map/AllZipcodesMap';
 import SearchBar from '../searchAndSort/SearchBar';
 import SortForm from '../searchAndSort/SortForm';
-import ZipcodeComponent from '../zipcode/ZipCodeComponent';
+import ZipCodeCardComponent from '../zipcode/ZipCodeCardComponent';
 import PaginationButton from './PaginationButton';
 import BasicFilters from './ZipcodesFilter/BasicFilters';
 import MoreFilters from './ZipcodesFilter/MoreFilters';
@@ -73,7 +73,7 @@ class ZipcodesPage extends Component {
       return zipcodes[this.state.currentPage-1].map(zipcode => {
               return (
                 <div className="col-lg-6" key={zipcode.zipcode}>
-                  <ZipcodeComponent zipcode={zipcode} /> 
+                  <ZipCodeCardComponent zipcode={zipcode} /> 
                 </div>
               )
       })
@@ -156,7 +156,7 @@ class ZipcodesPage extends Component {
           <h1>Zip Codes of Austin</h1>
           <p>Explore the various areas in Austin by filtering zip codes based on certain metrics and even geo-location.</p>
           <div className="mt-3">
-            <ZipcodesMap zipcodes={this.props.zipcodes}/>
+            <AllZipcodesMap zipcodes={this.props.zipcodes}/>
           </div>
           <div className="row mt-4">
               <div className="col-lg-4">

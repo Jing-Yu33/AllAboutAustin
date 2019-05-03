@@ -5,7 +5,7 @@ import Heart from '../heart/Heart';
 import history from '../../history';
 import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions';
 
-class ZipCodeComponent extends Component {
+class ZipCodeCardComponent extends Component {
   
   state = {
     clicked: [],
@@ -54,7 +54,7 @@ class ZipCodeComponent extends Component {
   render() {
     return(
       <div onClick={this.onCardClick} className="CardLink">
-        <div className="my-3 card bg-light zipcodeComponent" 
+        <div className="my-3 card bg-light ZipCodeCardComponent" 
             style={this.state.cardStyle} 
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}>
@@ -135,4 +135,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   GetUserZipcodes, AddZipcodesToUser, RemoveZipcodesFromUser
-})(ZipCodeComponent);
+})(ZipCodeCardComponent);

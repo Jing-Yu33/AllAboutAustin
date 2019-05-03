@@ -2,7 +2,7 @@ import React from 'react';
 
 import SurveyForm from '../survey/SurveyForm';
 
-class SurveyModal extends React.Component {
+class SurveyPopup extends React.Component {
     render() {
         return (
             <div>
@@ -31,4 +31,4 @@ class SurveyModal extends React.Component {
     }
 }
 
-export default SurveyModal;
+export default SurveyPopup;

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ZipCodeComponent from '../zipcode/ZipCodeComponent'
+import ZipCodeCardComponent from '../zipcode/ZipCodeCardComponent'
 class RankingList extends Component {
 
     getRankingCard = () => {
         return this.props.data.map( (zipcode) => {
             return (
                 <div className="col-lg-6" key={zipcode.zipcode}>
-                    <ZipCodeComponent zipcode={zipcode}/>
+                    <ZipCodeCardComponent zipcode={zipcode}/>
                 </div>
             )
         })

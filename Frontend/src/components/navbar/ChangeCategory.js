@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class CategorySwitch extends Component {
+class ChangeCategory extends Component {
     render(){
         return(
             <ul className="navbar-nav mr-auto">
@@ -22,4 +22,4 @@ class CategorySwitch extends Component {
     }
 }
 
-export default CategorySwitch;
+export default ChangeCategory;

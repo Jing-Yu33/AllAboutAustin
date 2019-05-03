@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
-import SurveyModal from '../modals/SurveyModal';
+import SurveyPopup from '../modals/SurveyPopup';
 import fetchResult from './fetchResult'
 
-const RecomPage = (props) => {
+const Reccomendations = (props) => {
 
     const query = queryString.parse(props.location.search);    
     const result = fetchResult(query)
@@ -29,7 +29,7 @@ const RecomPage = (props) => {
                         </div>
                     </ul>
                      <div className="pt-2">
-                        <SurveyModal />
+                        <SurveyPopup />
                     </div>
                     <div className="row">
                         {result}
@@ -60,4 +60,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps)(RecomPage)
+export default connect(mapStateToProps)(Reccomendations)
