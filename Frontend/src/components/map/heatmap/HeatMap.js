@@ -6,6 +6,8 @@ import {updatePercentiles} from './utils';
 import {fromJS} from 'immutable';
 import {json as requestJson} from 'd3-request';
 
+import NonHoveredZipCode from './NonHoveredZipCode';
+import MapLegend from './MapLegend';
 import HeatMapGeojsonReal from './HeatmapGeojsonReal.geojson';
 // import HeatMapGeojsonExample from './HeatMapGeojsonExample.geojson';
 
@@ -65,79 +67,24 @@ class HeatMap extends Component {
     const {hoveredFeature} = this.state;
     if(hoveredFeature){
         return (
-          <div className="row-bl-2">
+        		<div className="row-bl-2">
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item active"><strong>Zipcode:</strong> {hoveredFeature.properties.zipcode}</li>
                   <li className="list-group-item "><strong>Food Score:</strong> {hoveredFeature.properties.foodScore}</li>
                   <li className="list-group-item "><strong>Traffic Score:</strong> {hoveredFeature.properties.trafficScore}</li>
                   <li className="list-group-item "><strong>Education Score:</strong> {hoveredFeature.properties.educationScore}</li>
                 </ul>
-
-                <h4 className="mt-2">Map Legend</h4>
-                <div className="row">
-                <div className="col-5">
-                <ul className="list-unstyled">
-                  
-                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png" alt=""/>&nbsp;10%</li>
-                  <li><img src="https://i.imgur.com/lSMtmKA.png" alt=""/>&nbsp;20%</li>
-                  <li><img src="https://i.imgur.com/xx72TDD.png" alt=""/>&nbsp;30% </li>
-                  <li><img src="https://i.imgur.com/sIlIoNX.png" alt=""/>&nbsp;40% </li>
-                  <li><img src="https://i.imgur.com/Wrac0Mc.png" alt=""/>&nbsp;50% </li>
-                   
-                </ul>
-                </div>
-                <div className="col-5">
-                <ul className="list-unstyled">
-                  <li><img src="https://i.imgur.com/LpUYGQO.png" alt=""/>&nbsp;60% </li>
-                  <li><img src="https://i.imgur.com/pY6qMwT.png" alt=""/>&nbsp;70% </li>
-                  <li><img src="https://i.ibb.co/Sm5c0mG/col9.png" alt=""/>&nbsp;80% </li>
-                  <li><img src="https://i.imgur.com/uFyOFkC.png" alt=""/>&nbsp;90%</li>
-                  <li><img src="https://i.ibb.co/txKQTK1/col11.png" alt=""/>&nbsp;100%</li>
-                </ul>
-                </div>
-                </div>
-
+                <MapLegend/>
           </div>
-
+        		
         )
     }
     else{
       return(
-            <div className="row-bl-2">
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item active"><strong>Zipcode:</strong> </li>
-                  <li className="list-group-item"><strong>Food Score:</strong> </li>
-                  <li className="list-group-item"><strong>Traffic Score:</strong></li>
-                  <li className="list-group-item"><strong>Education Score:</strong></li>
-                </ul>
-
-                <h4 className="mt-2">Map Legend</h4>
-                <div className="row">
-                <div className="col-5">
-                <ul className="list-unstyled">
+      	  <div>
+      	 		  <NonHoveredZipCode/>
+                  <MapLegend/>
                   
-                  <li><img src="https://i.ibb.co/WHH8fHc/3288bd.png" alt=""/>&nbsp;10%</li>
-                  <li><img src="https://i.imgur.com/lSMtmKA.png" alt=""/>&nbsp;20%</li>
-                  <li><img src="https://i.imgur.com/xx72TDD.png" alt=""/>&nbsp;30% </li>
-                  <li><img src="https://i.imgur.com/sIlIoNX.png" alt=""/>&nbsp;40% </li>
-                  <li><img src="https://i.imgur.com/Wrac0Mc.png" alt=""/>&nbsp;50% </li>
-                   
-                </ul>
-                </div>
-                <div className="col-5">
-
-
-
-                <ul className="list-unstyled">
-                  <li><img src="https://i.imgur.com/LpUYGQO.png" alt=""/>&nbsp;60% </li>
-                  <li><img src="https://i.imgur.com/pY6qMwT.png" alt=""/>&nbsp;70% </li>
-                  <li><img src="https://i.ibb.co/Sm5c0mG/col9.png" alt=""/>&nbsp;80% </li>
-                  <li><img src="https://i.imgur.com/uFyOFkC.png" alt=""/>&nbsp;90%</li>
-                  <li><img src="https://i.ibb.co/txKQTK1/col11.png" alt=""/>&nbsp;100%</li>
-                </ul>
-                </div>
-                </div>
-
           </div>
       )
     }
