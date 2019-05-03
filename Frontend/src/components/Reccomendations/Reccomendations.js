@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
-import SurveyPopup from '../modals/SurveyPopup';
+import SurveyPopup from '../SurveyPopup/SurveyPopup';
 import fetchResult from './fetchResult'
 
 const Reccomendations = (props) => {
