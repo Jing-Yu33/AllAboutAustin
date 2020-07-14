@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Rating } from 'semantic-ui-react';
 import Heart from '../heart/Heart';
 import history from '../../history';
 import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions';
@@ -85,6 +85,13 @@ class ZipCodeCardComponent extends Component {
               </div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item bg-light">
+                  <div className="row">
+                    <Rating defaultRating={this.props.zipcode.averageScore / 10 * 5} maxRating={5} disabled /> 
+                    xx Reviews
+                  </div>
+                  <div className="row">
+                   
+                  </div>
                   <div className="row">
                     <div className="col-6">
                       Holistic Score: <span className="text-info">{this.props.zipcode.averageScore}</span>

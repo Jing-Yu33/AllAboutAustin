@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-RestfulApiApplication<RestfulApi>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "info.allaboutaustin.RestfulApi.RestfulApiApplication",
+            "projectName": "RestfulApi",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<demo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.restfulapi.demo.DemoApplication",
+            "projectName": "demo",
+            "args": ""
+        }
+    ]
+}

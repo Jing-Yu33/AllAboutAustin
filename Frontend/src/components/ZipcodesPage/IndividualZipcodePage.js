@@ -7,7 +7,7 @@ import PictureCarouselComponent from './PictureCarouselComponent'
 import RowCards from './RowCards'
 import IndividualZipcodeMap from '../map/IndividualZipcodeMap';
 import { GetOneZipcode, AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions/index';
-
+import Review from './Review'
 class IndividualZipcodePage extends Component {
       
     state = {
@@ -105,6 +105,7 @@ class IndividualZipcodePage extends Component {
                 </div>
             )
         }
+        console.log(this.props);
         return(
           <div className="jumbotron jumbotron-fluid my-3">
             <div className="container">
@@ -131,6 +132,10 @@ class IndividualZipcodePage extends Component {
                     <RowCards zipcode={this.props.zipcode} food={this.props.zipcode.foodData} education={this.props.zipcode.educationData} lat={this.props.zipcode.latitude} lng={this.props.zipcode.longtitude}/>
                 </div>
             </div>
+            <Review isSignedIn={this.props.isSignedIn}
+              userId = {this.props.userId}
+              zipcode = {this.props.zipcode}
+            />
           </div>
         );
     }
