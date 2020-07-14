@@ -35,10 +35,7 @@ public class UserController {
 		
 		String googleId = userInfo.getGoogleId();
 		String userName = userInfo.getUserName();
-		
-		System.out.println(googleId);
-		
-		googleId = googleId.substring(0, googleId.length()-1);
+
 		User user = userRepo.findByGoogleId(googleId);
 		if(user==null) {
 			User newUser = new User(googleId, userName);

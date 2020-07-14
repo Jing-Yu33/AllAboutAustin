@@ -24,3 +24,8 @@ HELP.md
 /nbdist/
 /.nb-gradle/
 /build/
+
+.metadata
+.apt_generated_tests
+.mvn
+.settings
