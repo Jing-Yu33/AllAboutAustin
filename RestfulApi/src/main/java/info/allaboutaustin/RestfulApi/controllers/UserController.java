@@ -26,16 +26,22 @@ import info.allaboutaustin.RestfulApi.repositories.UsersRepository;
 			)	
 @RequestMapping("/user")
 public class UserController {
-
+	
 	@Autowired
 	UsersRepository userRepo;
 	
 	@PostMapping("")
-	public void createUser(@RequestBody String googleId) {
+	public void createUser(@RequestBody UserInfo userInfo) {
+		
+		String googleId = userInfo.getGoogleId();
+		String userName = userInfo.getUserName();
+		
+		System.out.println(googleId);
+		
 		googleId = googleId.substring(0, googleId.length()-1);
 		User user = userRepo.findByGoogleId(googleId);
 		if(user==null) {
-			User newUser = new User(googleId);
+			User newUser = new User(googleId, userName);
 			userRepo.save(newUser);
 		}
 	}

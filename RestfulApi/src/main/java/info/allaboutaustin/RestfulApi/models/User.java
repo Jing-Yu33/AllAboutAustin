@@ -13,12 +13,14 @@ import lombok.Getter;
 public class User {
 	@Id
 	String googleId;
+	String userName;
 	List<String> likedZipcodes;
 	
 	protected User() {}
 
-	public User(String googleId) {
+	public User(String googleId, String userName) {
 		this.googleId = googleId;
+		this.userName = userName;
 		likedZipcodes = new ArrayList<String>();
 	}
 	
