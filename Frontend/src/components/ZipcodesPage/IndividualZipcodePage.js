@@ -105,7 +105,6 @@ class IndividualZipcodePage extends Component {
                 </div>
             )
         }
-        console.log(this.props);
         return(
           <div className="jumbotron jumbotron-fluid my-3">
             <div className="container">
@@ -134,7 +133,8 @@ class IndividualZipcodePage extends Component {
             </div>
             <Review isSignedIn={this.props.isSignedIn}
               userId = {this.props.userId}
-              zipcode = {this.props.zipcode}
+              zipcode = {this.props.match.params.zipcode}
+              userName = {this.props.userName}
             />
           </div>
         );
@@ -146,7 +146,8 @@ const mapStateToProps = (state, ownProps) => {
         zipcode: state.zipcodes[ownProps.match.params.zipcode],
         isSignedIn: state.auth.isSignedIn,
         userId: state.auth.userId,
-        userZipcodes: state.auth.userZipcodes
+        userZipcodes: state.auth.userZipcodes,
+        userName: state.auth.userName
     }
 }
 

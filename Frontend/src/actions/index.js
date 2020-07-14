@@ -83,7 +83,15 @@ export const GetFilteredZipcodes = (foodGt, trafficGt, educationGt, regions, hos
         })
     }    
 }
-
+// export const GetUserZipcodesObject = (zipcodes) => {
+//   return async (dispatch) => {
+//       const response = await DataBase.get(`/zipcodes/${zipcode}`);
+//       dispatch({
+//           type: ActionTypes.GET_USER_ZIPCODES_OBJECTS,
+//           payload: response.data
+//       })
+//   }
+// }
 export const SignIn = (id, name) => {
     return (
         {
@@ -96,9 +104,13 @@ export const SignIn = (id, name) => {
     )
 }
 
-export const CreateUser = (id) => {
+export const CreateUser = (googleId,userName) => {
     return async () => {
-        await UserDataBase.post('', id);
+        const User = {
+          googleId: googleId,
+          userName: userName
+        }
+        await UserDataBase.post('', User); // {googleId, userName}
     }
 }
 

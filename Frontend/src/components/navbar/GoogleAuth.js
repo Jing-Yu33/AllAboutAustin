@@ -8,7 +8,7 @@ class GoogleAuth extends Component{
     
     onSuccessResponse = (response) => {
         this.props.SignIn(response.profileObj.googleId, response.profileObj.name)
-        this.props.CreateUser(response.profileObj.googleId);
+        this.props.CreateUser(response.profileObj.googleId,response.profileObj.name); // add name
 
     }
 

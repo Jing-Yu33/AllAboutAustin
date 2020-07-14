@@ -16,6 +16,9 @@ class BasicControls extends Component {
                         <Link className="nav-link" to="/about">About</Link>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link" to="/profile">Profile</Link>
+                    </li>
+                    <li className="nav-item">
                         <GoogleAuth />
                     </li>
                 </ul>

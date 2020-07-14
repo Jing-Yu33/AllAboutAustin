@@ -15,7 +15,8 @@ const DatabaseReducers = (state={}, action) => {
         case ActionTypes.GET_FILTERED_ZIPCODES:
             return {...action.payload}
         // return { ...state, ..._.mapKeys(action.payload, 'zipcode')};
-
+        case ActionTypes.GET_USER_ZIPCODES_OBJECTS:
+            return {...action.payload}
         default: return state;
     }
 }

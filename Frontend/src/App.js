@@ -4,6 +4,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import TopBar from "./components/navbar/TopBar";
 import Landing from './components/landing/Landing'
 import About from './components/about/About'
+import Profile from './components/profile/Profile'
 import Survey from './components/survey/Survey'
 import Food from './components/food/Food'
 import Education from './components/education/Education'
@@ -34,6 +35,7 @@ class App extends Component {
               <Switch>
               <Route path="/" exact component={Landing} />
               <Route path="/about" exact component={About} />
+              <Route path="/profile" exact component={Profile} />
               <Route path="/survey" exact component={Survey} />
               <Route path="/food" exact component={Food} />
               <Route path="/education" exact component={Education} />

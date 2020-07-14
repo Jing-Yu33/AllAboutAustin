@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions/index';
-
+import { Icon } from 'semantic-ui-react'
 class Heart extends Component {
       
     state = {
@@ -43,13 +43,13 @@ class Heart extends Component {
       const { zipcode } = this.props;
       if(this.props.isSignedIn){
         if(this.state.unclicked.includes(zipcode)){
-          return <div onClick={(e) => this.onHeartAddClick(e, zipcode)}><i className="far fa-heart"></i></div>
+          return <Icon className="heart" toggle onClick={(e) => this.onHeartAddClick(e, zipcode)}></Icon>
         }
   
         if(this.props.userList.includes(zipcode) || this.state.clicked.includes(zipcode)){
-          return <div onClick={(e) => this.onHeartRemoveClick(e, zipcode)}><i className="fas fa-heart"></i></div>
+          return <Icon className="heart" toggle onClick={(e) => this.onHeartRemoveClick(e, zipcode)}></Icon>
         } else {
-          return <div onClick={(e) => this.onHeartAddClick(e, zipcode)}><i className="far fa-heart"></i></div>
+          return <Icon className="heart" toggle onClick={(e) => this.onHeartAddClick(e, zipcode)}></Icon>
         }
       }
       return <div></div>
