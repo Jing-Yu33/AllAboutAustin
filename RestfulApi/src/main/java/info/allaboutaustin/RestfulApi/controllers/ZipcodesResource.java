@@ -65,6 +65,15 @@ public class ZipcodesResource {
 		return list;
 	}
 	
+	@PostMapping("")
+	public List<Zipcode> getListOfZipcodesDetail(@RequestBody List<String> zipcodes) {
+		List<Zipcode> list = new ArrayList<>();
+		for(String zipcode : zipcodes) {
+			list.add(ZipcodeRepo.findByZipcode(zipcode));
+		}
+		return list;
+	}
+	
 	// /{zipcode}: Return a specific zipcode information by 5-digits zipcode
 	@GetMapping("/{zipcode}")
 	public Zipcode getZipcode(@PathVariable String zipcode) {
@@ -74,7 +83,6 @@ public class ZipcodesResource {
 		}
 		return zc;
 	}
-	
 		
 	// ?food=&traffic=&education=: Return a ranking list of 10 top zipcodes based on user-assigned weight
 	@GetMapping("/ranking")

@@ -23,8 +23,8 @@ public class CommentController {
 	CommentsRepository commentRepo;
 	
 	@PostMapping("/{zipcode}/{userId}")
-	public void createComment(@PathVariable String zipcode, @PathVariable String userId, @RequestBody String content) {
-		Comment comment = new Comment(userId, zipcode, content);
+	public void createComment(@PathVariable String zipcode, @PathVariable String userId, @RequestBody CommentInfo commentInfo) {
+		Comment comment = new Comment(userId, zipcode, commentInfo.getUserName(), commentInfo.getContent());
 		commentRepo.save(comment);
 	}
 	
