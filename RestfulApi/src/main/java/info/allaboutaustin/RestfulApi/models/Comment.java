@@ -22,14 +22,15 @@ public class Comment {
 	private ObjectId id = new ObjectId();
 	private String userId;
 	private String zipcode;
+	private String userName;
 	private String content;
 //	private String date;
 	
-	public Comment(String userId, String zipcode, String content) {
+	public Comment(String userId, String zipcode, String userName, String content) {
 		this.userId = userId;
 		this.zipcode = zipcode;
 		this.content = content;
-//		this.date = date;
+		this.userName = userName;
 	}
 	
 
