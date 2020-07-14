@@ -5,8 +5,8 @@ import browserTest
 def main():
     driver = webdriver.Chrome(executable_path = "./chromedriver")
     browserTest.test(driver)
-    #driver = webdriver.Firefox(executable_path = "./geckodriver")
-    #browserTest.test(driver)
+    driver = webdriver.Firefox(executable_path = "./geckodriver")
+    browserTest.test(driver)
     #options = webdriver.ChromeOptions()
     #options.binary_location = "./operadriver"
     #driver = webdriver.Opera(options=options, executable_path = "./operadriver")
