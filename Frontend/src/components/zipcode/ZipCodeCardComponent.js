@@ -4,15 +4,20 @@ import { Rating } from 'semantic-ui-react';
 import Heart from '../heart/Heart';
 import history from '../../history';
 import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions';
+import { DataBase } from '../../apis/DataBase'
 
 class ZipCodeCardComponent extends Component {
   
   state = {
     clicked: [],
     unclicked: [],
-    cardStyle: null
+    cardStyle: null,
+    reviewsNumber: 0
   }
-
+  async componentDidMount() {
+    const response = await DataBase.get(`/comments/${this.props.zipcode.zipcode}`) 
+    if(response.data !== null) this.setState({reviewsNumber: response.data.length})
+  }
   shouldComponentUpdate(nextProps, nextState) {
     return (nextProps.isSignedIn !== this.props.isSignedIn || JSON.stringify(nextProps.userZipcodes) !== JSON.stringify(this.props.userZipcodes) || nextProps.zipcodes !== this.props.zipcodes || nextState.cardStyle !== this.state.cardStyle)
   }
@@ -86,8 +91,13 @@ class ZipCodeCardComponent extends Component {
               <ul className="list-group list-group-flush">
                 <li className="list-group-item bg-light">
                   <div className="row">
-                    <Rating defaultRating={this.props.zipcode.averageScore / 10 * 5} maxRating={5} disabled /> 
-                    xx Reviews
+                    <div className="col-6">
+                      <Rating icon='star' defaultRating={this.props.zipcode.averageScore / 10 * 5} maxRating={5} disabled /> 
+                    </div>
+                    <div className="col-6">
+                      <p> {this.state.reviewsNumber} Reviews </p>
+                    </div>
+                    
                   </div>
                   <div className="row">
                    

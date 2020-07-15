@@ -23,7 +23,13 @@ body {
     -webkit-animation: sk-rotate 2.0s infinite linear;
     animation: sk-rotate 2.0s infinite linear;
   }
-  
+  .modal {
+    height: auto;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    right: auto;
+  }
   .dot1, .dot2 {
     width: 60%;
     height: 60%;

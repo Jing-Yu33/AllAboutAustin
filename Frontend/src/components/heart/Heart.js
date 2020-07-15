@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions/index';
-import { Icon } from 'semantic-ui-react'
+import { Icon, Button } from 'semantic-ui-react'
 class Heart extends Component {
       
     state = {
@@ -13,6 +13,7 @@ class Heart extends Component {
     renderUserList = () => {
       if(this.props.isSignedIn){
           this.props.GetUserZipcodes(this.props.userId)
+          console.log(this.props.userZipcodes)
       }
     }
 
@@ -41,15 +42,16 @@ class Heart extends Component {
     render () {
 
       const { zipcode } = this.props;
+      
       if(this.props.isSignedIn){
         if(this.state.unclicked.includes(zipcode)){
-          return <Icon className="heart" toggle onClick={(e) => this.onHeartAddClick(e, zipcode)}></Icon>
+          return <div onClick={(e) => this.onHeartAddClick(e, zipcode)}><i className="far fa-heart"></i></div>
         }
   
         if(this.props.userList.includes(zipcode) || this.state.clicked.includes(zipcode)){
-          return <Icon className="heart" toggle onClick={(e) => this.onHeartRemoveClick(e, zipcode)}></Icon>
+          return <div onClick={(e) => this.onHeartRemoveClick(e, zipcode)}><i className="fas fa-heart"></i></div>
         } else {
-          return <Icon className="heart" toggle onClick={(e) => this.onHeartAddClick(e, zipcode)}></Icon>
+          return <div onClick={(e) => this.onHeartAddClick(e, zipcode)}><i className="far fa-heart"></i></div>
         }
       }
       return <div></div>

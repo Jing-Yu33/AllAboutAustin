@@ -12,7 +12,6 @@ class Review extends React.Component{
       modalOpen: false,
       content: null,
       reviewList: null,
-      shouldUpdate: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -103,6 +102,7 @@ class Review extends React.Component{
             open={this.state.modalOpen}
             onClose={this.handleClose}
             size = 'small'
+            centered = 'true'
           >
         {/* <Header icon='browser' content='Cookies policy' /> */}
             <Modal.Content>

@@ -4,7 +4,7 @@ import { DataBase } from '../../apis/DataBase'
 
 import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions/index';
 
-import { Icon } from 'semantic-ui-react'
+import { Grid, Icon } from 'semantic-ui-react'
 import ZipCodeCardComponent from '../zipcode/ZipCodeCardComponent'
 class Profile extends Component {
       
@@ -28,7 +28,26 @@ class Profile extends Component {
         
       }
     }
-    
+    // shouldComponentUpdate(nextProps) {
+    //   return (nextProps.isSignedIn !== this.props.isSignedIn || JSON.stringify(nextProps.userZipcodes) !== JSON.stringify(this.props.userZipcodes))
+
+    // }
+    async componentDidUpdate() {
+      if(this.props.isSignedIn){
+          this.props.GetUserZipcodes(this.props.userId);
+          const userZipcodes = this.props.userZipcodes;
+          console.log(userZipcodes)
+        if (userZipcodes.length > 0) {
+          const response = await DataBase.post('/zipcodes',userZipcodes) 
+          this.setState({likedZipcodesList: response.data})
+          console.log(this.state.likedZipcodesList);
+          // this.setState({reviewsNumber: this.state.reviewList.length})
+          // this.props.GetUserZipcodes(this.props.userId)
+        }
+        
+      }
+      }
+  
     renderList = () => {
       if(this.props.isSignedIn){
         // const userZipcodes = this.props.userZipcodes
@@ -37,10 +56,9 @@ class Profile extends Component {
       if (this.state.likedZipcodesList!== null) {
         return this.state.likedZipcodesList.map(likedZipcode => {
                 return (
-                  <div className="col-lg-6" key={likedZipcode.zipcode}>
-                    <Icon trash alternate outline></Icon>
+                  <Grid.Column key={likedZipcode.zipcode}>
                     <ZipCodeCardComponent zipcode={likedZipcode} /> 
-                  </div>
+                  </Grid.Column>
                 )
         })
         }
@@ -49,9 +67,9 @@ class Profile extends Component {
 
     render() {
       return (
-        <div className="container">
+        <Grid columns={2}>
           {this.renderList()}
-        </div>
+        </Grid>
 
       )
     }
