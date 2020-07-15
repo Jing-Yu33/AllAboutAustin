@@ -20,6 +20,7 @@ import lombok.Setter;
 public class Comment {
 	@Id
 	private ObjectId id = new ObjectId();
+	private String commentId;
 	private String userId;
 	private String zipcode;
 	private String userName;
@@ -31,6 +32,7 @@ public class Comment {
 		this.zipcode = zipcode;
 		this.content = content;
 		this.userName = userName;
+		this.commentId = id.toString();
 	}
 	
 

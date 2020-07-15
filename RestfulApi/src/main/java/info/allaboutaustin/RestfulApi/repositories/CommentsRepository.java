@@ -8,5 +8,5 @@ import info.allaboutaustin.RestfulApi.models.Comment;
 
 public interface CommentsRepository extends MongoRepository<Comment, String>{
 	List<Comment> findByZipcode(String zipcode);
-//	List<Comment> findByUserId(String userId);
+	List<Comment> findByUserId(String userId);
 }
