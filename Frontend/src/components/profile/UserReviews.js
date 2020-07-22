@@ -33,26 +33,21 @@ class UserReviews extends Component {
     // const zipcodes = _.chunk(this.props.zipcodes, this.limit);
       return this.state.userReviews.map(userReview => {
               return (
-                  <Comment>
-                    <Comment.Content>
-                    <Comment.Author> 
+                  <Item>
+                    <Item.Content>
+                    <Item.Header as='a' style={{fontSize:'1.2em'}}> 
                       You Commented on 
                       <Icon className="pin" color='red' link='true' onClick= {()=> this.onZipcodeClick(userReview.zipcode)}></Icon>
                       {userReview.zipcode}
-                    </Comment.Author>
-                      <Comment.Metadata>
-                        <div>{userReview.id.date}</div>
-                      </Comment.Metadata>
-                      <Comment.Text><p> {userReview.content}</p></Comment.Text>
-                      <Comment.Actions>
-                        <Comment.Action>
-                          <Icon style={ {marginLeft:'auto',marginRight:'0'} } 
-                          className='trash alternate outline' 
-                          onClick={() => this.handleDeleteReview(userReview.commentId)}></Icon>
-                        </Comment.Action>
-                      </Comment.Actions>
-                    </Comment.Content>
-                  </Comment>
+                    </Item.Header>
+                      <Item.Extra>
+                        <div>{userReview.id.date}
+                          <span style={{float:'right'}}> <Icon  className='trash alternate outline' onClick={() => this.handleDeleteReview(userReview.commentId)}></Icon> </span>
+                        </div>
+                      </Item.Extra>
+                      <Item.Description><p> {userReview.content}</p></Item.Description>
+                    </Item.Content>
+                  </Item>
               )
       })
     }
@@ -62,24 +57,9 @@ class UserReviews extends Component {
     return (
       // <Container fluid style={{paddingBottom: '20px'}}>
         // <Header>All Your Commented Zipcodes</Header>
-        <Comment.Group style={{width:'2000px'}}>
-          <Comment>
-          <Comment.Avatar src='https://react.semantic-ui.comhttps://react.semantic-ui.com/images/avatar/small/matt.jpg' />
-          <Comment.Content>
-            <Comment.Author as='a'>Matt</Comment.Author>
-            <Comment.Metadata>
-              <div>Today at 5:42PM</div>
-            </Comment.Metadata>
-            <Comment.Text>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-
-</Comment.Text>
-            <Comment.Actions>
-              <Comment.Action>Reply</Comment.Action>
-            </Comment.Actions>
-          </Comment.Content>
-          </Comment>
-          {/* {this.renderList()} */}
-        </Comment.Group>
+        <Item.Group >
+          {this.renderList()}
+        </Item.Group>
       // </Container>
 
     )
