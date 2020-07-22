@@ -17,7 +17,7 @@ const fetchResult = (weight) => {
             })
         const resultList = response.data.map((zipcode) => {
             return(
-                <div key={zipcode.zipcode} className="col-lg-6">
+                <div key={zipcode.zipcode} className="col-lg-3">
                     <ZipCodeCardComponent zipcode={zipcode}/>
                 </div>
             )

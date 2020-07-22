@@ -6,7 +6,7 @@ class PaginationButton extends Component {
 
     render() {
         const total = this.props.total;
-        const limit = 6;
+        const limit = this.props.limit;
         const pageCount = Math.ceil(total / limit);
         const { handlePageChange, currentPage } = this.props;
         

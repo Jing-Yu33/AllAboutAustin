@@ -48,19 +48,17 @@ class AdvancedFilters extends Component {
         return(
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="row">
-                    <div className="col-lg-8">
-                        <label><strong>Region</strong></label>
+                    <div className="col-lg-9">
+                        <b>Region</b>
                         {this.renderRegionCheckboxes()}
                     </div>
-                    <div className="col-lg-4">
-                        <label><strong>Facilities</strong></label>
+                    <div className="col-3">
+                        <p><strong>Facilities</strong></p>
                         <div>
-                            <Field name="hospitals" component="input" type="checkbox"/>
-                                Hospitals
-                        </div>
-                        <div>
-                            <Field name="cinemas" component="input" type="checkbox"/>
-                                Cinemas
+                          <Field name="Hospitals" value="hospitals"component="input" type="checkbox"/>
+                            Hospitals
+                          <Field name="Cinemas" value="cinemas"component="input" type="checkbox"/>
+                            Cinemas
                         </div>
                     </div>
                 </div>

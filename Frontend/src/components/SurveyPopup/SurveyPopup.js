@@ -2,13 +2,15 @@ import React from 'react';
 
 import SurveyForm from '../survey/SurveyForm';
 
+import { Button } from 'semantic-ui-react';
+
 class SurveyPopup extends React.Component {
     render() {
         return (
             <div>
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <Button basic color='blue' data-toggle="modal" data-target="#exampleModal">
                     Change Priorities
-                </button>
+                </Button>
                 {/* Modal */}
                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">

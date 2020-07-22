@@ -7,9 +7,9 @@ import SearchBar from '../searchAndSort/SearchBar';
 import SortForm from '../searchAndSort/SortForm';
 import ZipCodeCardComponent from '../zipcode/ZipCodeCardComponent';
 import ZipCodePageChangeButton from './ZipCodePageChangeButton';
-import BasicFilters from './ZipcodesFilter/BasicFilters';
+import BasicFilters from '../ZipcodesFilter/BasicFilters';
 import AdvancedFilters from './ZipcodesFilter/AdvancedFilters';
-import { GetAllZipcodes, GetFilteredZipcodes, AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions';
+import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
 import { compareByFood, compareByTraffic, compareByEducation, compareByAverage } from '../searchAndSort/sortFunction';
 
 
@@ -22,9 +22,9 @@ export const setSortValue = (category, order) => ({
   currentPage: 1
 });
 
-class ZipcodesPage extends Component {
+class Find extends Component {
    
-    limit = 8; // # of zipcode components shown on a single page
+    limit = 6; // # of zipcode components shown on a single page
 
     state = {
         currentPage: 1,
@@ -67,17 +67,13 @@ class ZipcodesPage extends Component {
       //   currentPage: 1
       // })
     }
-    componentDidUpdate() {
-      if (this.props.isSignedIn) {
-        this.props.GetUserZipcodes(this.props.userId)
-      }
-    }
+
     renderList = () => {
       const zipcodes = _.chunk(this.props.zipcodes, this.limit);
       return zipcodes[this.state.currentPage-1].map(zipcode => {
               return (
-                <div className="col-lg-3" key={zipcode.zipcode}>
-                  <ZipCodeCardComponent zipcode={zipcode} userZipcodes={this.props.userZipcodes}/> 
+                <div className="col-lg-6" key={zipcode.zipcode}>
+                  <ZipCodeCardComponent zipcode={zipcode} /> 
                 </div>
               )
       })
@@ -109,7 +105,7 @@ class ZipcodesPage extends Component {
           </div>
           <div className="mt-3 mb-3">
             <div className="text-center">
-              <ZipCodePageChangeButton total={total} currentPage={this.state.currentPage} handlePageChange={this.handlePageChange} limit={this.limit}/>
+              <ZipCodePageChangeButton total={total} currentPage={this.state.currentPage} handlePageChange={this.handlePageChange}/>
             </div>
           </div>
         </div>
@@ -135,24 +131,24 @@ class ZipcodesPage extends Component {
       this.props.GetAllZipcodes(this.state.category, this.state.order);
     }
 
-    // handleSubmit = (event) => {
-    //   event.preventDefault();
-    //   this.setState(setCurrentPage(1))
-    //   // this.setState({
-    //   //   currentPage: 1
-    //   // })
-    //   const { values } = this.props.filterForm;
-    //   const { foodGt, trafficGt, educationGt, hospitals, cinemas } = this.props.filterForm.values
-    //   const { category, order } = this.state;
-    //   var regions = "";
-    //   for(var property in values){
-    //     if(property.includes("Austin") && values[property]){
-    //         regions = regions.concat(property).concat(",")
-    //     }
-    //   }
-    //   regions = regions.substring(0, regions.length-1);
-    //   this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt, regions, hospitals, cinemas, category, order);  
-    // }
+    handleSubmit = (event) => {
+      event.preventDefault();
+      this.setState(setCurrentPage(1))
+      // this.setState({
+      //   currentPage: 1
+      // })
+      const { values } = this.props.filterForm;
+      const { foodGt, trafficGt, educationGt, hospitals, cinemas } = this.props.filterForm.values
+      const { category, order } = this.state;
+      var regions = "";
+      for(var property in values){
+        if(property.includes("Austin") && values[property]){
+            regions = regions.concat(property).concat(",")
+        }
+      }
+      regions = regions.substring(0, regions.length-1);
+      this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt, regions, hospitals, cinemas, category, order);  
+    }
 
     render(){
       return(
@@ -176,7 +172,7 @@ class ZipcodesPage extends Component {
           </div>
 
           <div> 
-            {/* <div className="mt-2">
+            <div className="mt-2">
                 <BasicFilters 
                   handleSubmit={this.handleSubmit}
                   handleReset={this.handleReset}
@@ -198,7 +194,7 @@ class ZipcodesPage extends Component {
                   handleReset={this.handleReset}
                 />
               </div>
-            </div> */}
+            </div>
           </div>
 
           {this.renderZipcodes()}        
@@ -212,13 +208,10 @@ const mapStateToProps = (state) => {
     return {
         zipcodes: Object.values(state.zipcodes),
         filterForm: state.form.ZipcodesFilter,
-        sortForm: state.form.ZipcodesSort,
-        isSignedIn: state.auth.isSignedIn,
-        userZipcodes: state.auth.userZipcodes,
-        userId: state.auth.userId
+        sortForm: state.form.ZipcodesSort
     }
 }
 
 export default connect(mapStateToProps, {
-    GetAllZipcodes, GetFilteredZipcodes, GetUserZipcodes
+    GetAllZipcodes, GetFilteredZipcodes
 })(ZipcodesPage)

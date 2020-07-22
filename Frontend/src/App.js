@@ -12,6 +12,7 @@ import Traffic from './components/traffic/Traffic'
 import Reccomendations from './components/Reccomendations/Reccomendations';
 
 import ZipcodePage from './components/ZipcodesPage/ZipcodesPage';
+import Find from './components/ZipcodesPage/Find';
 import IndividualZipcodePage from './components/ZipcodesPage/IndividualZipcodePage';
 
 import PageNotExists from './components/PageNotExists'
@@ -19,19 +20,21 @@ import Footer from './components/Footer';
 import ScrollUpButton from './components/ScrollUpButton';
 import history from './history';
 
+import { Container } from 'semantic-ui-react'
 import './App.css'
+import ZipcodesPage from './components/ZipcodesPage/ZipcodesPage';
 
 class App extends Component {
 
   render() {
     return (
-      <div>
+      <Container fluid>
         <Router history={history}>
         
-          <div>
+          <div >
             <TopBar />
             <ScrollUpButton />
-            <div className="container" style={{marginTop: '70px'}}>
+            <div style={{marginTop: '70px'}}>
               <Switch>
               <Route path="/" exact component={Landing} />
               <Route path="/about" exact component={About} />
@@ -41,7 +44,8 @@ class App extends Component {
               <Route path="/education" exact component={Education} />
               <Route path="/traffic" exact component={Traffic} />
               <Route path="/recommendation" exact component={Reccomendations} />
-              <Route path="/zipcodes" exact component={ZipcodePage} />
+              <Route path="/zipcodes" exact component={ZipcodesPage} />
+              <Route path="/find" exact component={Find} />
               <Route path="/zipcodes/:zipcode" exact component={IndividualZipcodePage} />
               <Route path="/*" component={PageNotExists} />
               </Switch>
@@ -50,7 +54,7 @@ class App extends Component {
           </div>
 
         </Router>
-      </div>
+      </Container>
     );
   }
 }

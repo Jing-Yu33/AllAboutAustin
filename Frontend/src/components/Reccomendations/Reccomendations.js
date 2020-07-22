@@ -4,6 +4,7 @@ import queryString from 'query-string';
 
 import SurveyPopup from '../SurveyPopup/SurveyPopup';
 import fetchResult from './fetchResult'
+import { Container, Grid } from 'semantic-ui-react';
 
 const Reccomendations = (props) => {
 
@@ -11,14 +12,14 @@ const Reccomendations = (props) => {
     const result = fetchResult(query)
 
     return (
-        <React.Fragment>
-            <div className="jumbotron jumbotron-fluid mt-5">
-                <div className="container">
-                    <h1 className="display-4">Top 10 Reccomendations</h1>
+        // <React.Fragment>
+        //     <div className="jumbotron jumbotron-fluid mt-5">
+              <Container fluid>
+                    <h1 className="display-4">Top Reccomendations</h1>
                     <div> 
                 </div>
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">Below are the Top 10 Zip Codes in Austin based on your preference towards the importance of food, education, and traffic.  See below for a detailed explanation of ranking methodology.</li>
+                        <li className="list-group-item">Below are the Top Zip Codes in Austin based on your preference towards the importance of food, education, and traffic.  See below for a detailed explanation of ranking methodology.</li>
 
                     </ul>
                     <ul className="list-group lead pb-2 pt-2">
@@ -31,9 +32,9 @@ const Reccomendations = (props) => {
                      <div className="pt-2">
                         <SurveyPopup />
                     </div>
-                    <div className="row">
+                    <Grid columns={4}>
                         {result}
-                    </div>
+                    </Grid>
                     <div className="card-body" >
 
                         <ul className="list-group list-group-flush">
@@ -43,11 +44,10 @@ const Reccomendations = (props) => {
                             <li className="list-group-item"><b>Traffic</b>: Traffic ratings were acquired from the Austin Government database of transit congestion.  Traffic volume in an area equates to more noise and difficulty with commute, so areas in this category will receive a lower score. </li>
                         </ul>
                     </div>
-                </div>
+              </Container>
+        //     </div>
 
-            </div>
-
-        </React.Fragment>
+        // </React.Fragment>
     )
 
 }

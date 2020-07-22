@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withGoogleMap, GoogleMap, KmlLayer, TrafficLayer } from 'react-google-maps';
+import { withGoogleMap, GoogleMap, KmlLayer, TrafficLayer, InfoWindow } from 'react-google-maps';
 
 import ZipcodeMarker from './ZipcodeMarker'; 
 
 class ZipcodeMap extends Component {
   
   url = "https://sites.google.com/site/allaboutaustinzipcodeskml/test/AustinZipcodes.kml"
-
+ 
   renderMarkers = (zipcode) =>{
     return (
         <ZipcodeMarker
             key={zipcode.zipcode}
             zipcode={zipcode.zipcode}
             position={{ lat: +zipcode.latitude, lng: zipcode.longtitude }}
-        >
-        </ZipcodeMarker>
+        />
+        // </ZipcodeMarker>
     )
   }
-
+  
   render(){
     
-
     const GoogleMapExample = withGoogleMap(props => (
         <GoogleMap 
           defaultCenter = { { lat: 30.2672, lng: -97.74306 } }
@@ -36,6 +35,7 @@ class ZipcodeMap extends Component {
                 return this.renderMarkers(zipcode)
             })
             }
+         
         </GoogleMap>
      ));
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { SignIn, SignOut, CreateUser } from '../../actions';
 import { GoogleLogin, GoogleLogout } from "react-google-login";
-
+import { Button, Icon } from 'semantic-ui-react';
 class GoogleAuth extends Component{
     
     onSuccessResponse = (response) => {
@@ -25,6 +25,10 @@ class GoogleAuth extends Component{
             return(
                 <div>
                     <GoogleLogout
+                      render={renderProps => (
+                        <Button circular color='google plus'onClick={renderProps.onClick} disabled={renderProps.disabled} icon='google'>
+                        </Button>
+                      )}
                         buttonText="Logout"
                         onLogoutSuccess={this.logout}
                     />
@@ -38,7 +42,12 @@ class GoogleAuth extends Component{
                     onSuccess={(response) => this.onSuccessResponse(response)}
                     onFailure={(response) => this.onFailureResponse(response)}
                     clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
-                    buttonText="Login"
+                    render={renderProps => (
+                      <Button basic onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                        <Icon name='google' color='red'/>Sign in
+                      </Button>
+                    )}
+                    // buttonText="Login"
                 />
 
             </div>

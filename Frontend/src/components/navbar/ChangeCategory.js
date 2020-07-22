@@ -6,14 +6,14 @@ class ChangeCategory extends Component {
         return(
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/food">Food</Link>
+                    <Link className="nav-link" to="/find">Find</Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <Link className="nav-link" to="/education">Education</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="/traffic">Traffic</Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                     <Link className="nav-link" to="/zipcodes">Zipcodes</Link>
                 </li>

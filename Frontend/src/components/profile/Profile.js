@@ -4,72 +4,56 @@ import { DataBase } from '../../apis/DataBase'
 
 import { AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions/index';
 
-import { Grid, Icon } from 'semantic-ui-react'
+import { Grid, Icon, Header, Container, Card, Button } from 'semantic-ui-react'
 import ZipCodeCardComponent from '../zipcode/ZipCodeCardComponent'
+import UserReviews from './UserReviews';
+import UserLiked from './UserLiked';
 class Profile extends Component {
       
     state = {
-      likedZipcodesList:null
+      showUserLiked: false,
+      showUserReviews: false
     }
 
-    async componentDidMount(){
-      if(this.props.isSignedIn){
-        console.log(this.props.userId)
-        this.props.GetUserZipcodes(this.props.userId);
-        const userZipcodes = this.props.userZipcodes;
-        console.log(userZipcodes)
-        if (userZipcodes.length > 0) {
-          const response = await DataBase.post('/zipcodes',userZipcodes) 
-          this.setState({likedZipcodesList: response.data})
-          console.log(this.state.likedZipcodesList);
-          // this.setState({reviewsNumber: this.state.reviewList.length})
-          // this.props.GetUserZipcodes(this.props.userId)
-        }
+    // async componentDidMount(){
+    //   if(this.props.isSignedIn){
+    //     console.log(this.props.userId)
+    //     this.props.GetUserZipcodes(this.props.userId);
+    //     const userZipcodes = this.props.userZipcodes;
+    //     console.log(userZipcodes)
+    //     if (userZipcodes.length > 0) {
+    //       const response = await DataBase.post('/zipcodes',userZipcodes) 
+    //       this.setState({likedZipcodesList: response.data})
+    //       console.log(this.state.likedZipcodesList);
+    //       // this.setState({reviewsNumber: this.state.reviewList.length})
+    //       // this.props.GetUserZipcodes(this.props.userId)
+    //     }
         
-      }
-    }
-    // shouldComponentUpdate(nextProps) {
-    //   return (nextProps.isSignedIn !== this.props.isSignedIn || JSON.stringify(nextProps.userZipcodes) !== JSON.stringify(this.props.userZipcodes))
-
+    //   }
     // }
-    async componentDidUpdate() {
-      if(this.props.isSignedIn){
-          this.props.GetUserZipcodes(this.props.userId);
-          const userZipcodes = this.props.userZipcodes;
-          console.log(userZipcodes)
-        if (userZipcodes.length > 0) {
-          const response = await DataBase.post('/zipcodes',userZipcodes) 
-          this.setState({likedZipcodesList: response.data})
-          console.log(this.state.likedZipcodesList);
-          // this.setState({reviewsNumber: this.state.reviewList.length})
-          // this.props.GetUserZipcodes(this.props.userId)
-        }
-        
-      }
-      }
-  
-    renderList = () => {
-      if(this.props.isSignedIn){
-        // const userZipcodes = this.props.userZipcodes
-        // console.log(userZipcodes);
-      // const zipcodes = _.chunk(this.props.zipcodes, this.limit);
-      if (this.state.likedZipcodesList!== null) {
-        return this.state.likedZipcodesList.map(likedZipcode => {
-                return (
-                  <Grid.Column key={likedZipcode.zipcode}>
-                    <ZipCodeCardComponent zipcode={likedZipcode} /> 
-                  </Grid.Column>
-                )
-        })
-        }
+    handleUserLikedButton = () => {
+      this.setState({showUserLiked: true})
+      this.setState({showUserReviews: false})
     }
-    }
+    handleUserReviewsButton = () => {
+      this.setState({showUserReviews: true})
+      this.setState({showUserLiked: false})
 
+    }
     render() {
       return (
-        <Grid columns={2}>
-          {this.renderList()}
-        </Grid>
+        <Container fluid style={{paddingBottom: '20px'}}>
+          <Container fluid style={{paddingBottom: '20px'}}>
+            <Button basic blue onClick={this.handleUserLikedButton} disabled={!this.props.isSignedIn}>Liked Zipcodes</Button>
+            <Button basic blue onClick={this.handleUserReviewsButton} disabled={!this.props.isSignedIn}>Commented Zipcodes</Button>
+          </Container>
+          {this.state.showUserLiked? <UserLiked/> : null}
+          {this.state.showUserReviews? <UserReviews 
+          isSignedIn={this.props.isSignedIn}
+          userId={this.props.userId}
+          />:null}
+        </Container>
+        
 
       )
     }

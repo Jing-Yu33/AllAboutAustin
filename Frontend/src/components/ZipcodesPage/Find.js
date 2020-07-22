@@ -9,9 +9,10 @@ import ZipCodeCardComponent from '../zipcode/ZipCodeCardComponent';
 import ZipCodePageChangeButton from './ZipCodePageChangeButton';
 import BasicFilters from './ZipcodesFilter/BasicFilters';
 import AdvancedFilters from './ZipcodesFilter/AdvancedFilters';
-import { GetAllZipcodes, GetFilteredZipcodes, AddZipcodesToUser, RemoveZipcodesFromUser, GetUserZipcodes } from '../../actions';
+import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
 import { compareByFood, compareByTraffic, compareByEducation, compareByAverage } from '../searchAndSort/sortFunction';
-
+import { Header, Grid, GridColumn } from 'semantic-ui-react';
+import Overview from './Overview'
 
 export const setCurrentPage = (page) => ({
     currentPage: page
@@ -22,19 +23,21 @@ export const setSortValue = (category, order) => ({
   currentPage: 1
 });
 
-class ZipcodesPage extends Component {
+class Find extends Component {
    
-    limit = 8; // # of zipcode components shown on a single page
+    limit = 6; // # of zipcode components shown on a single page
 
     state = {
         currentPage: 1,
         category: null,
-        order: null
+        order: null,
+        shouldShowFilterResult: false
     }
 
     // Intitialize
     async componentDidMount(){
-      this.props.GetAllZipcodes();
+      await this.props.GetAllZipcodes();
+      console.log(this.props.zipcodes)
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -67,17 +70,13 @@ class ZipcodesPage extends Component {
       //   currentPage: 1
       // })
     }
-    componentDidUpdate() {
-      if (this.props.isSignedIn) {
-        this.props.GetUserZipcodes(this.props.userId)
-      }
-    }
+
     renderList = () => {
       const zipcodes = _.chunk(this.props.zipcodes, this.limit);
       return zipcodes[this.state.currentPage-1].map(zipcode => {
               return (
-                <div className="col-lg-3" key={zipcode.zipcode}>
-                  <ZipCodeCardComponent zipcode={zipcode} userZipcodes={this.props.userZipcodes}/> 
+                <div className="col-lg-6" key={zipcode.zipcode}>
+                  <ZipCodeCardComponent zipcode={zipcode} /> 
                 </div>
               )
       })
@@ -109,7 +108,7 @@ class ZipcodesPage extends Component {
           </div>
           <div className="mt-3 mb-3">
             <div className="text-center">
-              <ZipCodePageChangeButton total={total} currentPage={this.state.currentPage} handlePageChange={this.handlePageChange} limit={this.limit}/>
+              <ZipCodePageChangeButton limit={this.limit} total={total} currentPage={this.state.currentPage} handlePageChange={this.handlePageChange}/>
             </div>
           </div>
         </div>
@@ -135,48 +134,47 @@ class ZipcodesPage extends Component {
       this.props.GetAllZipcodes(this.state.category, this.state.order);
     }
 
-    // handleSubmit = (event) => {
-    //   event.preventDefault();
-    //   this.setState(setCurrentPage(1))
-    //   // this.setState({
-    //   //   currentPage: 1
-    //   // })
-    //   const { values } = this.props.filterForm;
-    //   const { foodGt, trafficGt, educationGt, hospitals, cinemas } = this.props.filterForm.values
-    //   const { category, order } = this.state;
-    //   var regions = "";
-    //   for(var property in values){
-    //     if(property.includes("Austin") && values[property]){
-    //         regions = regions.concat(property).concat(",")
-    //     }
-    //   }
-    //   regions = regions.substring(0, regions.length-1);
-    //   this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt, regions, hospitals, cinemas, category, order);  
-    // }
+    handleSubmit = (event) => {
+      event.preventDefault();
+      this.setState(setCurrentPage(1))
+      // this.setState({
+      //   currentPage: 1
+      // })
+      const { values } = this.props.filterForm;
+      const { foodGt, trafficGt, educationGt, hospitals, cinemas } = this.props.filterForm.values
+      const { category, order } = this.state;
+      var regions = "";
+      for(var property in values){
+        if(property.includes("Austin") && values[property]){
+            regions = regions.concat(property).concat(",")
+        }
+      }
+      regions = regions.substring(0, regions.length-1);
+      this.props.GetFilteredZipcodes(foodGt, trafficGt, educationGt, regions, hospitals, cinemas, category, order);  
+      this.setState({shouldShowFilterResult:true})
+    }
 
     render(){
       return(
         <div>
-          <h1>Zip Codes of Austin</h1>
-          <p>Explore the various areas in Austin by filtering zip codes based on certain metrics and even geo-location.</p>
-          <div className="mt-3">
-            <AllZipcodesMap zipcodes={this.props.zipcodes}/>
+          <div>
+            <h1>Find Interested Zip Codes of Austin</h1>
+            <p >Explore the various areas in Austin by filtering zip codes based on certain metrics and even geo-location.</p>
           </div>
-          <div className="row mt-4">
-              <div className="col-lg-4">
-                  <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+          <Grid columns={2} divided>
+            <Grid.Column width={4}>
+              {/* map */}
+              <div  style={{marginTop: '40px'}}>
+                <AllZipcodesMap zipcodes={this.props.zipcodes}/>
               </div>
-              <div className="col-lg-4"></div>
-              <div className="col-lg-4">
-                  <SortForm 
+              <Grid.Row style={{marginTop: '20px'}}>
+                <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+                <SortForm 
                     onSubmit={this.onSortDownSubmit} 
                     defaultCategory="average"
                   />
-              </div>
-          </div>
-
-          <div> 
-            {/* <div className="mt-2">
+              </Grid.Row>
+              <Grid.Row>
                 <BasicFilters 
                   handleSubmit={this.handleSubmit}
                   handleReset={this.handleReset}
@@ -188,21 +186,28 @@ class ZipcodesPage extends Component {
                     }
                   }
                   />
-                <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                {/* <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                   More Options
-                </a>
-             
-              <div className="collapse" id="collapseExample">
-                <AdvancedFilters 
-                  handleSubmit={this.handleSubmit}
-                  handleReset={this.handleReset}
-                />
-              </div>
-            </div> */}
-          </div>
-
-          {this.renderZipcodes()}        
-
+                </a> */}
+              </Grid.Row>
+              <Grid.Row>
+                {/* <div className="collapse" id="collapseExample"> */}
+                  <AdvancedFilters 
+                    handleSubmit={this.handleSubmit}
+                    handleReset={this.handleReset}
+                  />
+                {/* </div> */}
+              </Grid.Row>
+          </Grid.Column>
+         
+          <Grid.Column width={12}>
+            {this.state.shouldShowFilterResult? this.renderZipcodes() : <Overview/>}
+            {/* <Grid.Row>
+              {this.renderZipcodes()}        
+            </Grid.Row> */}
+          </Grid.Column>
+        </Grid>
+         
         </div>
       )
     }
@@ -212,13 +217,10 @@ const mapStateToProps = (state) => {
     return {
         zipcodes: Object.values(state.zipcodes),
         filterForm: state.form.ZipcodesFilter,
-        sortForm: state.form.ZipcodesSort,
-        isSignedIn: state.auth.isSignedIn,
-        userZipcodes: state.auth.userZipcodes,
-        userId: state.auth.userId
+        sortForm: state.form.ZipcodesSort
     }
 }
 
 export default connect(mapStateToProps, {
-    GetAllZipcodes, GetFilteredZipcodes, GetUserZipcodes
-})(ZipcodesPage)
+    GetAllZipcodes, GetFilteredZipcodes
+})(Find)
