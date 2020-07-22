@@ -33,7 +33,7 @@ class Heart extends Component {
       onHeartRemoveClick = (e, zipcode) => {
         e.stopPropagation();
         this.props.RemoveZipcodesFromUser(this.props.userId, zipcode);
-        this.setState(prevState =>({
+        this.setState(prevState =>({          
           unclicked: [...prevState.unclicked, zipcode],
           clicked: this.state.clicked.filter((_, i) => this.state.clicked[i]!==zipcode)
         }))

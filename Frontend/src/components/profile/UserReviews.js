@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DataBase } from '../../apis/DataBase'
 import { Grid, Icon, Comment, Container, Item, Header, Button } from 'semantic-ui-react';
-import history from '/Users/yvonne/Documents/Projects/AustinData/Frontend/src/history.js'
+import history from '../../history'
 class UserReviews extends Component {
       
   state = {
