@@ -11,7 +11,7 @@ import UserLiked from './UserLiked';
 class Profile extends Component {
       
     state = {
-      showUserLiked: false,
+      showUserLiked: true,
       showUserReviews: false
     }
 

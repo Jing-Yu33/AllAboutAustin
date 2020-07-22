@@ -2,9 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SearchBar from '../searchAndSort/SearchBar';
 import RankingList from '../rankingList/RankingList';
-import { Grid } from 'semantic-ui-react';
 import { GetTop10ZipcodeByCategory } from '../../actions';
 import { Link } from 'react-router-dom'
 class TopTrafficOverview extends Component {
