@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DataBase } from '../../apis/DataBase'
-import { Grid, Icon, Comment, Container, Item, Header, Button } from 'semantic-ui-react';
+import { Icon, Item } from 'semantic-ui-react';
 import history from '../../history'
 class UserReviews extends Component {
       
