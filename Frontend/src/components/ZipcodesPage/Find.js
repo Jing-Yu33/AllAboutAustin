@@ -11,7 +11,7 @@ import BasicFilters from './ZipcodesFilter/BasicFilters';
 import AdvancedFilters from './ZipcodesFilter/AdvancedFilters';
 import { GetAllZipcodes, GetFilteredZipcodes } from '../../actions';
 import { compareByFood, compareByTraffic, compareByEducation, compareByAverage } from '../searchAndSort/sortFunction';
-import { Header, Grid, GridColumn } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import Overview from './Overview'
 
 export const setCurrentPage = (page) => ({

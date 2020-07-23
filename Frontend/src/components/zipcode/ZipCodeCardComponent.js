@@ -23,10 +23,9 @@ class ZipCodeCardComponent extends Component {
     return (nextProps.isSignedIn !== this.props.isSignedIn || JSON.stringify(nextProps.userZipcodes) !== JSON.stringify(this.props.userZipcodes) || nextProps.zipcodes !== this.props.zipcodes || nextState.cardStyle !== this.state.cardStyle
     || nextState.hearted !== this.state.hearted)
   }
-  componentDidUpdate() {
-    if (this.props.isSignedIn) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.isSignedIn !== this.props.isSignedIn) {
       this.props.GetUserZipcodes(this.props.userId);
-      // this.setState({hearted: this.props.userZipcodes.includes(this.props.zipcode.zipcode)? true: false})
     }
   }
   renderExistIcon = (num) => {

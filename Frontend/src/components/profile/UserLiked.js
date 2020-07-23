@@ -20,8 +20,6 @@ class UserLiked extends Component {
         const response = await DataBase.post('/zipcodes',userZipcodes) 
         this.setState({likedZipcodesList: response.data})
         console.log(this.state.likedZipcodesList);
-        // this.setState({reviewsNumber: this.state.reviewList.length})
-        // this.props.GetUserZipcodes(this.props.userId)
       }
       
     }

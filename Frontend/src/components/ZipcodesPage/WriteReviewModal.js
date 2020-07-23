@@ -1,6 +1,5 @@
 import React from 'react';
-import { Card } from 'semantic-ui-react';
-import { Button, Comment, Modal, Icon} from 'semantic-ui-react';
+import { Button, Modal, Icon} from 'semantic-ui-react';
 class WriteReviewModal extends React.Component{
     
   state = { modalOpen: false }
@@ -18,7 +17,6 @@ class WriteReviewModal extends React.Component{
         basic
         size='small'
       >
-        {/* <Header icon='browser' content='Cookies policy' /> */}
         <Modal.Content>
           <h3>This website uses cookies to ensure the best user experience.</h3>
         </Modal.Content>

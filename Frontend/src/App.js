@@ -10,8 +10,6 @@ import Food from './components/food/Food'
 import Education from './components/education/Education'
 import Traffic from './components/traffic/Traffic'
 import Reccomendations from './components/Reccomendations/Reccomendations';
-
-import ZipcodePage from './components/ZipcodesPage/ZipcodesPage';
 import Find from './components/ZipcodesPage/Find';
 import IndividualZipcodePage from './components/ZipcodesPage/IndividualZipcodePage';
 
@@ -19,7 +17,6 @@ import PageNotExists from './components/PageNotExists'
 import Footer from './components/Footer';
 import ScrollUpButton from './components/ScrollUpButton';
 import history from './history';
-
 import { Container } from 'semantic-ui-react'
 import './App.css'
 import ZipcodesPage from './components/ZipcodesPage/ZipcodesPage';

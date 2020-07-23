@@ -1,99 +1,26 @@
 import React, { Component } from 'react';
-import ZipCodePageChangeButton from "react-paginating";
-
+import { Icon, Pagination } from 'semantic-ui-react'
 
 class PaginationButton extends Component {
 
-    render() {
-        const total = this.props.total;
-        const limit = this.props.limit;
-        const pageCount = Math.ceil(total / limit);
-        const { handlePageChange, currentPage } = this.props;
-        
-        return(
-            <ZipCodePageChangeButton
-                total={total}
-                limit={limit}
-                pageCount={pageCount}
-                currentPage={currentPage}
-            >
-                {({
-                pages,
-                currentPage,
-                hasNextPage,
-                hasPreviousPage,
-                previousPage,
-                nextPage,
-                totalPages,
-                getPageItemProps
-                }) => (
-                
-                <div className="btn-group mx-auto">
-                    <button className="btn btn-outline-primary"
-                    {...getPageItemProps({
-                        pageValue: 1,
-                        onPageChange: handlePageChange
-                    })}
-                    >
-                    first
-                    </button>
-    
-                    {hasPreviousPage && (
-                    <button className="btn btn-outline-primary"
-                        {...getPageItemProps({
-                        pageValue: previousPage,
-                        onPageChange: handlePageChange
-                        })}
-                    >
-                        {"<"}
-                    </button>
-                    )}
-    
-                    {pages.map(page => {
-                    let activePage = null;
-                    if (currentPage === page) {
-                        activePage = { backgroundColor: "#fdce09" };
-                    }
-                    return (
-                        <button className="btn btn-outline-primary"
-                        {...getPageItemProps({
-                            pageValue: page,
-                            key: page,
-                            style: activePage,
-                            onPageChange: handlePageChange
-                        })}
-                        >
-                        {page}
-                        </button>
-                    );
-                    })}
-    
-                    {hasNextPage && (
-                    <button className="btn btn-outline-primary"
-                        {...getPageItemProps({
-                        pageValue: nextPage,
-                        onPageChange: handlePageChange
-                        })}
-                    >
-                        {">"}
-                    </button>
-                    )}
-    
-                    <button className="btn btn-outline-primary"
-                    {...getPageItemProps({
-                        pageValue: totalPages,
-                        onPageChange: handlePageChange
-                    })}
-                    >
-                    last
-                    </button>
-                </div>
-                
-                )}
-            
-            </ZipCodePageChangeButton>
-
-        )
+  render() {
+    const total = this.props.total;
+    const limit = this.props.limit;
+    const pageCount = Math.ceil(total / limit);
+    const { handlePageChange, currentPage } = this.props;
+    return(
+      <Pagination
+        defaultActivePage={3}
+        activePage={currentPage}
+        ellipsisItem={{ content: <Icon name='ellipsis horizontal' />, icon: true }}
+        firstItem={{ content: <Icon name='angle double left' />, icon: true }}
+        lastItem={{ content: <Icon name='angle double right' />, icon: true }}
+        prevItem={{ content: <Icon name='angle left' />, icon: true }}
+        nextItem={{ content: <Icon name='angle right' />, icon: true }}
+        totalPages={pageCount}
+        onPageChange={handlePageChange}
+    />
+    )
     }
 }
 export default PaginationButton;
