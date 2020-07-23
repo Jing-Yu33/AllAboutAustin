@@ -6,7 +6,6 @@ import Tooltip from 'rc-tooltip';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 const { createSliderWithTooltip } = Slider;
-const Range = createSliderWithTooltip(Slider.Range);
 const { Handle } = Slider;
 const wrapperStyle = { width: 400, margin: 50 };
 class SliderBarT extends Component {

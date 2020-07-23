@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import { Card } from 'semantic-ui-react';
-import { Button, Item, Modal, Form,Icon, Header} from 'semantic-ui-react';
+import { Button, Item, Modal, Form,Icon} from 'semantic-ui-react';
 import WriteReviewModal from './WriteReviewModal';
 import { DataBase } from '../../apis/DataBase'
 import ZipCodePageChangeButton from './ZipCodePageChangeButton'
@@ -74,35 +74,30 @@ class Review extends React.Component{
       return (
         reviews[this.state.currentPage - 1].map((review) => {
         return(
-            <Item >
-              <Item.Content>
-                <Item.Header as='a' style={{fontSize:'1.2em'}}>
-                {review.userName}
-                </Item.Header>
-                <Item.Extra>
-                {review.userId == this.props.userId  ? 
-                 <span style={{float:'right'}}> <Icon  className='trash alternate outline' onClick={() => this.handleDeleteReview(review.commentId)}></Icon> </span>
-                : null}
-                  {review.id.date}
-                </Item.Extra>
-                <Item.Description>
-                  <p>{review.content}</p>
-                  </Item.Description>
-              </Item.Content>
-            </Item>
+          <Item >
+            <Item.Content>
+              <Item.Header as='a' style={{fontSize:'1.2em'}}>
+              {review.userName}
+              </Item.Header>
+              <Item.Extra>
+              {review.userId === this.props.userId  ? 
+                <span style={{float:'right'}}> <Icon  className='trash alternate outline' onClick={() => this.handleDeleteReview(review.commentId)}></Icon> </span>
+              : null}
+                {review.id.date}
+              </Item.Extra>
+              <Item.Description>
+                <p>{review.content}</p>
+                </Item.Description>
+            </Item.Content>
+          </Item>
         )}
-      )
-      )
+      ))
         }
   }
-  handlePageChange = (page) => {
-    this.setState(setCurrentPage(page))
-    // this.setState({
-    //   currentPage: page
-    // });
+  handlePageChange = (e,{activePage}) => {
+    this.setState(setCurrentPage(activePage))
   };
   render() {
-    
     return (
       <Card fluid>
         <Card.Content>
@@ -110,39 +105,37 @@ class Review extends React.Component{
             Reviews
             <span className='date'>  ({this.state.reviewsNumber})</span>
            {/* {this.renderWriteModal(this.state.triggerOpen)} */}
-           <Modal
-            trigger={ <Button basic color = 'blue' content = 'blue' 
-            disabled = {!this.props.isSignedIn}
-            onClick = {this.handleOpen}
-            floated = 'right'
+            <Modal
+              trigger={ <Button basic color = 'blue' content = 'blue' 
+              disabled = {!this.props.isSignedIn}
+              onClick = {this.handleOpen}
+              floated = 'right'
+              >
+                Write a review
+              </Button>}
+              open={this.state.modalOpen}
+              onClose={this.handleClose}
+              size = 'small'
+              centered = 'true'
             >
-              Write a review
-            </Button>}
-            open={this.state.modalOpen}
-            onClose={this.handleClose}
-            size = 'small'
-            centered = 'true'
-          >
-        {/* <Header icon='browser' content='Cookies policy' /> */}
-            <Modal.Content>
-              <h3>Write your review</h3>
-              <Form>
-                <Form.Field>
-                  <label>Your Review</label>
-                  <input placeholder="Tell people about your review about this place"  type="text" value={this.state.content} onChange={this.handleChange}/>
-                </Form.Field>
-              </Form>
-            </Modal.Content>
-            <Modal.Actions>
-     
-              <Button color='green' onClick={this.handleSubmit} disabled={this.state.content == null || this.state.content.length == 0}>
-                Submit Your Review
-              </Button>
-              <Button color='standard' onClick={this.handleCancel} >
-                Cancel
-              </Button>
-            </Modal.Actions>
-          </Modal>
+              <Modal.Content>
+                <h3>Write your review</h3>
+                <Form>
+                  <Form.Field>
+                    <label>Your Review</label>
+                    <input placeholder="Tell people about your review about this place"  type="text" value={this.state.content} onChange={this.handleChange}/>
+                  </Form.Field>
+                </Form>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button color='green' onClick={this.handleSubmit} disabled={this.state.content === null || this.state.content.length === 0}>
+                  Submit Your Review
+                </Button>
+                <Button color='standard' onClick={this.handleCancel} >
+                  Cancel
+                </Button>
+              </Modal.Actions>
+            </Modal>
           </Card.Header>
         </Card.Content>
         <Card.Content extra>

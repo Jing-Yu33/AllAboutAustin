@@ -13,14 +13,13 @@ class RankingList extends Component {
     }
     
     render() {
-
-        return(
-            <div>
-                <div className="row">
-                    {this.getRankingCard()}
-                </div>
-            </div>
-        )
+      return(
+        <div>
+          <div className="row">
+            {this.getRankingCard()}
+          </div>
+        </div>
+      )
   }
 }
 

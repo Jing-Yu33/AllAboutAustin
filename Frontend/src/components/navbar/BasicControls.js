@@ -10,13 +10,13 @@ class BasicControls extends Component {
             return(
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <Link className="nav-link" to={recomUrl}>Recommendation</Link>
+                        <Link className="nav-link" to={recomUrl}><span style={{fontSize:'1.2em'}}>Recommendation</span></Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/about">About</Link>
+                        <Link className="nav-link" to="/about"><span style={{fontSize:'1.2em'}}>About</span></Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/profile">Profile</Link>
+                        <Link className="nav-link" to="/profile"><span style={{fontSize:'1.2em'}}>Profile</span></Link>
                     </li>
                     <li className="nav-item">
                         <GoogleAuth />

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './IndividualZipcodePage.css';
-import Heart from '../heart/Heart';
 import PictureCarouselComponent from './PictureCarouselComponent'
 import RowCards from './RowCards'
 import IndividualZipcodeMap from '../map/IndividualZipcodeMap';
@@ -46,11 +45,9 @@ class IndividualZipcodePage extends Component {
   onHeartClick = async () => {
     if (this.state.hearted !== true) {
       this.props.AddZipcodesToUser(this.props.userId,this.props.match.params.zipcode)
-      console.log(this.props.zipcode.zipcode)
     }
     else {
       this.props.RemoveZipcodesFromUser(this.props.userId,this.props.match.params.zipcode)
-      console.log(this.props.zipcode.zipcode)
     }
     await this.setState({hearted:!this.state.hearted})
   }
