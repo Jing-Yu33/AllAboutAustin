@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "d3-request": "^1.0.6",
-    "d3-scale": "^3.0.0",
+    "d3-scale": "^4.0.2",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.11",
     "query-string": "^6.4.0",
